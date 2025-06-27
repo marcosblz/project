@@ -92,16 +92,16 @@ const Projects: React.FC = () => {
 
   useEffect(() => {
     gsap.fromTo('.project-card',
-      { y: 50, opacity: 0 },
+      { y: 30, opacity: 0 },
       {
         y: 0,
         opacity: 1,
-        duration: 0.8,
-        stagger: 0.2,
+        duration: 0.5,
+        stagger: 0.1,
         ease: 'power3.out',
         scrollTrigger: {
           trigger: '.projects-grid',
-          start: 'top 70%',
+          start: 'top 80%',
           toggleActions: 'play none none reverse'
         }
       }
@@ -109,17 +109,17 @@ const Projects: React.FC = () => {
   }, []);
 
   return (
-    <section id="proyectos" className="projects-section py-20 bg-muted/30">
+    <section id="proyectos" className="projects-section py-12 sm:py-20 bg-muted/30">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold text-foreground mb-4">Proyectos</h2>
-          <p className="text-xl text-muted-foreground">Una selección de mis trabajos más destacados</p>
+        <div className="text-center mb-12 sm:mb-16">
+          <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-4">Proyectos</h2>
+          <p className="text-lg sm:text-xl text-muted-foreground">Una selección de mis trabajos más destacados</p>
         </div>
 
         {/* Featured Projects */}
-        <div className="mb-16">
-          <h3 className="text-2xl font-bold text-foreground mb-8">Proyectos Destacados</h3>
-          <div className="projects-grid grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <div className="mb-12 sm:mb-16">
+          <h3 className="text-xl sm:text-2xl font-bold text-foreground mb-6 sm:mb-8">Proyectos Destacados</h3>
+          <div className="projects-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
             {featuredProjects.map((project) => (
               <div
                 key={project.id}
@@ -129,7 +129,7 @@ const Projects: React.FC = () => {
                   <img
                     src={project.image}
                     alt={project.title}
-                    className="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-105"
+                    className="w-full h-40 sm:h-48 object-cover transition-transform duration-500 group-hover:scale-105"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                   
@@ -164,15 +164,15 @@ const Projects: React.FC = () => {
                   )}
                 </div>
 
-                <div className="p-6">
-                  <h4 className="text-xl font-bold text-foreground mb-3">{project.title}</h4>
-                  <p className="text-muted-foreground mb-4 leading-relaxed">{project.description}</p>
+                <div className="p-4 sm:p-6">
+                  <h4 className="text-lg sm:text-xl font-bold text-foreground mb-3">{project.title}</h4>
+                  <p className="text-muted-foreground mb-4 leading-relaxed text-sm sm:text-base">{project.description}</p>
                   
                   <div className="flex flex-wrap gap-2">
                     {project.technologies.map((tech, index) => (
                       <span
                         key={index}
-                        className="px-3 py-1 bg-accent/10 text-accent rounded-full text-sm font-medium hover:bg-accent hover:text-white transition-colors duration-300"
+                        className="px-2 sm:px-3 py-1 bg-accent/10 text-accent rounded-full text-xs sm:text-sm font-medium hover:bg-accent hover:text-white transition-colors duration-300"
                       >
                         {tech}
                       </span>
@@ -186,16 +186,16 @@ const Projects: React.FC = () => {
 
         {/* Other Projects */}
         <div>
-          <h3 className="text-2xl font-bold text-foreground mb-8">Otros Proyectos</h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <h3 className="text-xl sm:text-2xl font-bold text-foreground mb-6 sm:mb-8">Otros Proyectos</h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
             {otherProjects.map((project) => (
               <div
                 key={project.id}
-                className="project-card bg-background/80 backdrop-blur-sm border border-border rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
+                className="project-card bg-background/80 backdrop-blur-sm border border-border rounded-xl p-4 sm:p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
               >
                 <div className="flex justify-between items-start mb-4">
-                  <h4 className="text-lg font-bold text-foreground">{project.title}</h4>
-                  <div className="flex space-x-2">
+                  <h4 className="text-base sm:text-lg font-bold text-foreground pr-2">{project.title}</h4>
+                  <div className="flex space-x-2 flex-shrink-0">
                     <a
                       href={project.demoUrl}
                       className="p-1 text-muted-foreground hover:text-accent transition-colors duration-300"

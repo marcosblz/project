@@ -44,7 +44,7 @@ const About: React.FC = () => {
       { 
         height: 'auto', 
         opacity: 1, 
-        duration: 1, 
+        duration: 0.8, 
         ease: 'power3.out',
         scrollTrigger: {
           trigger: '.about-section',
@@ -114,35 +114,35 @@ const About: React.FC = () => {
   const currentOptions = availableOptions.filter(option => !usedOptions.includes(option.id));
 
   return (
-    <section id="sobre-mi" className="about-section min-h-screen flex items-center py-20">
+    <section id="sobre-mi" className="about-section min-h-screen flex items-center py-12 sm:py-20">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-        <div className="text-center mb-12">
-          <h2 className="text-4xl font-bold text-foreground mb-4">Sobre Mí</h2>
-          <p className="text-xl text-muted-foreground">Conoce más sobre mi experiencia y pasión por el desarrollo</p>
+        <div className="text-center mb-8 sm:mb-12">
+          <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-4">Sobre Mí</h2>
+          <p className="text-lg sm:text-xl text-muted-foreground">Conoce más sobre mi experiencia y pasión por el desarrollo</p>
         </div>
 
-        <div className="chat-container bg-background/80 backdrop-blur-md rounded-2xl border border-border shadow-2xl overflow-hidden" style={{ height: 'calc(100vh - 12rem)' }}>
+        <div className="chat-container bg-background/80 backdrop-blur-md rounded-2xl border border-border shadow-2xl overflow-hidden" 
+             style={{ height: 'min(calc(100vh - 8rem), 600px)' }}>
           {/* Chat Header */}
-          <div className="bg-accent/10 px-6 py-4 border-b border-border">
+          <div className="bg-accent/10 px-4 sm:px-6 py-4 border-b border-border">
             <div className="flex items-center justify-between">
               <div className="flex items-center space-x-3">
                 <div className="relative">
                   <img
                     src="https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&w=100"
                     alt="Marcos"
-                    className="w-12 h-12 rounded-full border-2 border-accent/20"
+                    className="w-10 sm:w-12 h-10 sm:h-12 rounded-full border-2 border-accent/20"
                   />
-                  <div className="absolute -bottom-1 -right-1 w-4 h-4 bg-green-500 rounded-full border-2 border-background"></div>
                 </div>
                 <div>
-                  <h3 className="font-semibold text-foreground text-lg">Marcos</h3>
-                  <p className="text-sm text-green-500 flex items-center font-medium">
+                  <h3 className="font-semibold text-foreground text-base sm:text-lg">Marcos</h3>
+                  <p className="text-xs sm:text-sm text-green-500 flex items-center font-medium">
                     <span className="w-2 h-2 bg-green-500 rounded-full mr-2 animate-pulse"></span>
                     Disponible
                   </p>
                 </div>
               </div>
-              <div className="text-right">
+              <div className="text-right hidden sm:block">
                 <p className="text-xs text-muted-foreground">Desarrollador Front-End</p>
                 <p className="text-xs text-muted-foreground">Madrid, España</p>
               </div>
@@ -150,14 +150,15 @@ const About: React.FC = () => {
           </div>
 
           {/* Chat Messages */}
-          <div id="chat-messages" className="flex-1 overflow-y-auto p-6 space-y-4" style={{ height: 'calc(100% - 8rem)' }}>
+          <div id="chat-messages" className="flex-1 overflow-y-auto p-4 sm:p-6 space-y-4" 
+               style={{ height: 'calc(100% - 8rem)' }}>
             {messages.map((message) => (
               <div
                 key={message.id}
                 className={`flex ${message.isBot ? 'justify-start' : 'justify-end'}`}
               >
                 <div
-                  className={`max-w-xs lg:max-w-md px-4 py-3 rounded-2xl shadow-sm ${
+                  className={`max-w-[85%] sm:max-w-xs lg:max-w-md px-3 sm:px-4 py-2 sm:py-3 rounded-2xl shadow-sm ${
                     message.isBot
                       ? 'bg-card text-foreground border border-border'
                       : 'bg-accent text-white'
@@ -174,14 +175,14 @@ const About: React.FC = () => {
 
           {/* Chat Options */}
           {currentOptions.length > 0 && (
-            <div className="p-6 border-t border-border bg-muted/20">
+            <div className="p-4 sm:p-6 border-t border-border bg-muted/20">
               <p className="text-sm text-muted-foreground mb-3">Pregúntame sobre:</p>
-              <div className="flex flex-wrap gap-2">
+              <div className="flex flex-col sm:flex-row flex-wrap gap-2">
                 {currentOptions.slice(0, 3).map((option) => (
                   <button
                     key={option.id}
                     onClick={() => handleOptionClick(option)}
-                    className="chat-option px-4 py-2 bg-accent/10 hover:bg-accent hover:text-white text-accent rounded-full text-sm font-medium transition-all duration-300 hover:scale-105 border border-accent/20"
+                    className="chat-option px-3 sm:px-4 py-2 bg-accent/10 hover:bg-accent hover:text-white text-accent rounded-full text-xs sm:text-sm font-medium transition-all duration-300 hover:scale-105 border border-accent/20 text-left sm:text-center"
                   >
                     {option.text}
                   </button>

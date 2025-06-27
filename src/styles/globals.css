@@ -1,30 +1,147 @@
-/* Dynamic Background */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 210 40% 98%;
+    --foreground: 222.2 84% 4.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+    --primary: 221.2 83.2% 53.3%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 210 40% 96%;
+    --secondary-foreground: 222.2 84% 4.9%;
+    --muted: 210 40% 96%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --accent: 221.2 83.2% 53.3%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 221.2 83.2% 53.3%;
+    --radius: 0.75rem;
+    
+    /* Dynamic background variables */
+    --mouse-x: 50%;
+    --mouse-y: 50%;
+    --particle1-x: 50%;
+    --particle1-y: 50%;
+    --particle2-x: 30%;
+    --particle2-y: 70%;
+    --particle3-x: 70%;
+    --particle3-y: 30%;
+  }
+
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 217.2 91.2% 59.8%;
+    --primary-foreground: 222.2 84% 4.9%;
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+    --accent: 217.2 91.2% 59.8%;
+    --accent-foreground: 222.2 84% 4.9%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 224.3 76.3% 94.1%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans;
+    font-feature-settings: "rlig" 1, "calt" 1;
+    line-height: 1.6;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    line-height: 1.2;
+    font-weight: 600;
+  }
+
+  p {
+    line-height: 1.7;
+  }
+}
+
+/* Dynamic Background with Floating Particles */
 .dynamic-bg {
-  --x: 50%;
-  --y: 50%;
   background: 
+    /* Base gradient */
     linear-gradient(135deg, 
       hsl(var(--background)) 0%, 
-      hsl(var(--muted)/0.5) 50%,
+      hsl(var(--muted)/0.3) 50%,
       hsl(var(--background)) 100%
     ),
-    radial-gradient(circle at var(--x) var(--y), 
+    /* Mouse-following gradient */
+    radial-gradient(circle at var(--mouse-x) var(--mouse-y), 
+      hsl(var(--accent)/0.12) 0%, 
+      transparent 50%
+    ),
+    /* Floating particles */
+    radial-gradient(circle at var(--particle1-x) var(--particle1-y), 
       hsl(var(--accent)/0.08) 0%, 
+      transparent 30%
+    ),
+    radial-gradient(circle at var(--particle2-x) var(--particle2-y), 
+      hsl(var(--secondary)/0.06) 0%, 
+      transparent 35%
+    ),
+    radial-gradient(circle at var(--particle3-x) var(--particle3-y), 
+      hsl(var(--primary)/0.05) 0%, 
       transparent 40%
     ),
-    radial-gradient(circle at calc(var(--x) + 30%) calc(var(--y) - 30%), 
-      hsl(var(--secondary)/0.06) 0%, 
-      transparent 50%
+    /* Subtle noise texture */
+    linear-gradient(45deg, 
+      transparent 48%, 
+      hsl(var(--accent)/0.02) 49%, 
+      hsl(var(--accent)/0.02) 51%, 
+      transparent 52%
     );
+  background-size: 
+    100% 100%, 
+    800px 800px, 
+    400px 400px, 
+    300px 300px, 
+    500px 500px,
+    20px 20px;
   background-attachment: fixed;
-  background-size: 100% 100%, 600px 600px, 400px 400px;
-  transition: background 0.5s ease;
+  transition: all 0.3s ease;
   min-height: 100vh;
 }
 
-/* Smooth Scrolling */
+/* Enhanced Smooth Scrolling */
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 80px;
+}
+
+/* Custom Selection */
+::selection {
+  background: hsl(var(--accent) / 0.2);
+  color: hsl(var(--accent));
+}
+
+/* Enhanced Focus States */
+.focus-visible {
+  @apply outline-none ring-2 ring-accent ring-offset-2 ring-offset-background;
 }
 
 /* Custom Scrollbar */
@@ -188,6 +305,13 @@ html {
 @media (max-width: 768px) {
   .dynamic-bg {
     background-attachment: scroll;
+    background-size: 
+      100% 100%, 
+      400px 400px, 
+      200px 200px, 
+      150px 150px, 
+      250px 250px,
+      10px 10px;
   }
 }
 

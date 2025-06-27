@@ -24,16 +24,16 @@ const Contact: React.FC = () => {
 
   useEffect(() => {
     gsap.fromTo('.contact-card',
-      { y: 50, opacity: 0 },
+      { y: 30, opacity: 0 },
       {
         y: 0,
         opacity: 1,
-        duration: 0.8,
-        stagger: 0.2,
+        duration: 0.6,
+        stagger: 0.1,
         ease: 'power3.out',
         scrollTrigger: {
           trigger: '.contact-section',
-          start: 'top 70%',
+          start: 'top 80%',
           toggleActions: 'play none none reverse'
         }
       }
@@ -65,19 +65,19 @@ const Contact: React.FC = () => {
 
   const contactInfo = [
     {
-      icon: <Mail className="w-6 h-6" />,
+      icon: <Mail className="w-5 sm:w-6 h-5 sm:h-6" />,
       label: "Email",
       value: "marcos.dev@email.com",
       href: "mailto:marcos.dev@email.com"
     },
     {
-      icon: <Phone className="w-6 h-6" />,
+      icon: <Phone className="w-5 sm:w-6 h-5 sm:h-6" />,
       label: "Teléfono",
       value: "+34 123 456 789",
       href: "tel:+34123456789"
     },
     {
-      icon: <MapPin className="w-6 h-6" />,
+      icon: <MapPin className="w-5 sm:w-6 h-5 sm:h-6" />,
       label: "Ubicación",
       value: "Madrid, España",
       href: "#"
@@ -86,19 +86,19 @@ const Contact: React.FC = () => {
 
   const socialLinks = [
     {
-      icon: <Github className="w-6 h-6" />,
+      icon: <Github className="w-5 sm:w-6 h-5 sm:h-6" />,
       label: "GitHub",
       href: "https://github.com",
       color: "hover:bg-gray-700"
     },
     {
-      icon: <Linkedin className="w-6 h-6" />,
+      icon: <Linkedin className="w-5 sm:w-6 h-5 sm:h-6" />,
       label: "LinkedIn",
       href: "https://linkedin.com",
       color: "hover:bg-blue-600"
     },
     {
-      icon: <Twitter className="w-6 h-6" />,
+      icon: <Twitter className="w-5 sm:w-6 h-5 sm:h-6" />,
       label: "Twitter",
       href: "https://twitter.com",
       color: "hover:bg-blue-400"
@@ -106,18 +106,18 @@ const Contact: React.FC = () => {
   ];
 
   return (
-    <section id="contacto" className="contact-section py-20">
+    <section id="contacto" className="contact-section py-12 sm:py-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold text-foreground mb-4">Contacto</h2>
-          <p className="text-xl text-muted-foreground">¿Listo para trabajar juntos? ¡Hablemos!</p>
+        <div className="text-center mb-12 sm:mb-16">
+          <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-4">Contacto</h2>
+          <p className="text-lg sm:text-xl text-muted-foreground">¿Listo para trabajar juntos? ¡Hablemos!</p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8">
           {/* Contact Form */}
           <div className="lg:col-span-2">
-            <div className="contact-card bg-background/80 backdrop-blur-sm border border-border rounded-xl p-8 shadow-lg h-full flex flex-col">
-              <h3 className="text-2xl font-bold text-foreground mb-6">Envíame un mensaje</h3>
+            <div className="contact-card bg-background/80 backdrop-blur-sm border border-border rounded-xl p-6 sm:p-8 shadow-lg h-full flex flex-col">
+              <h3 className="text-xl sm:text-2xl font-bold text-foreground mb-6">Envíame un mensaje</h3>
               
               {isSubmitted && (
                 <div className="mb-6 p-4 bg-green-50 border border-green-200 rounded-lg flex items-center text-green-800">
@@ -126,8 +126,8 @@ const Contact: React.FC = () => {
                 </div>
               )}
 
-              <form onSubmit={handleSubmit} className="space-y-6 flex-1 flex flex-col">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+              <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6 flex-1 flex flex-col">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
                   <div>
                     <label htmlFor="name" className="block text-sm font-medium text-foreground mb-2">
                       Nombre *
@@ -139,7 +139,7 @@ const Contact: React.FC = () => {
                       value={formData.name}
                       onChange={handleInputChange}
                       required
-                      className="w-full px-4 py-3 bg-background border border-border rounded-lg focus:ring-2 focus:ring-accent focus:border-transparent transition-all duration-300"
+                      className="w-full px-3 sm:px-4 py-2 sm:py-3 bg-background border border-border rounded-lg focus:ring-2 focus:ring-accent focus:border-transparent transition-all duration-300 text-sm sm:text-base"
                       placeholder="Tu nombre completo"
                     />
                   </div>
@@ -154,7 +154,7 @@ const Contact: React.FC = () => {
                       value={formData.email}
                       onChange={handleInputChange}
                       required
-                      className="w-full px-4 py-3 bg-background border border-border rounded-lg focus:ring-2 focus:ring-accent focus:border-transparent transition-all duration-300"
+                      className="w-full px-3 sm:px-4 py-2 sm:py-3 bg-background border border-border rounded-lg focus:ring-2 focus:ring-accent focus:border-transparent transition-all duration-300 text-sm sm:text-base"
                       placeholder="tu@email.com"
                     />
                   </div>
@@ -171,7 +171,7 @@ const Contact: React.FC = () => {
                     value={formData.subject}
                     onChange={handleInputChange}
                     required
-                    className="w-full px-4 py-3 bg-background border border-border rounded-lg focus:ring-2 focus:ring-accent focus:border-transparent transition-all duration-300"
+                    className="w-full px-3 sm:px-4 py-2 sm:py-3 bg-background border border-border rounded-lg focus:ring-2 focus:ring-accent focus:border-transparent transition-all duration-300 text-sm sm:text-base"
                     placeholder="¿De qué quieres hablar?"
                   />
                 </div>
@@ -186,16 +186,16 @@ const Contact: React.FC = () => {
                     value={formData.message}
                     onChange={handleInputChange}
                     required
-                    className="w-full px-4 py-3 bg-background border border-border rounded-lg focus:ring-2 focus:ring-accent focus:border-transparent transition-all duration-300 resize-none flex-1"
+                    className="w-full px-3 sm:px-4 py-2 sm:py-3 bg-background border border-border rounded-lg focus:ring-2 focus:ring-accent focus:border-transparent transition-all duration-300 resize-none flex-1 text-sm sm:text-base"
                     placeholder="Cuéntame sobre tu proyecto o idea..."
-                    style={{ minHeight: '200px' }}
+                    style={{ minHeight: '150px' }}
                   ></textarea>
                 </div>
                 
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full bg-accent hover:bg-accent/90 disabled:bg-accent/50 text-white font-medium py-3 px-6 rounded-lg transition-all duration-300 hover:scale-105 hover:shadow-lg flex items-center justify-center mt-auto"
+                  className="w-full bg-accent hover:bg-accent/90 disabled:bg-accent/50 text-white font-medium py-3 px-6 rounded-lg transition-all duration-300 hover:scale-105 hover:shadow-lg flex items-center justify-center mt-auto text-sm sm:text-base"
                 >
                   {isSubmitting ? (
                     <>
@@ -214,23 +214,23 @@ const Contact: React.FC = () => {
           </div>
 
           {/* Contact Info & Social */}
-          <div className="space-y-8">
+          <div className="space-y-6 sm:space-y-8">
             {/* Contact Information */}
-            <div className="contact-card bg-background/80 backdrop-blur-sm border border-border rounded-xl p-6 shadow-lg">
-              <h3 className="text-xl font-bold text-foreground mb-6">Información de Contacto</h3>
-              <div className="space-y-4">
+            <div className="contact-card bg-background/80 backdrop-blur-sm border border-border rounded-xl p-4 sm:p-6 shadow-lg">
+              <h3 className="text-lg sm:text-xl font-bold text-foreground mb-4 sm:mb-6">Información de Contacto</h3>
+              <div className="space-y-3 sm:space-y-4">
                 {contactInfo.map((item, index) => (
                   <a
                     key={index}
                     href={item.href}
                     className="flex items-center p-3 rounded-lg hover:bg-accent/10 transition-colors duration-300 group"
                   >
-                    <div className="w-12 h-12 bg-accent/10 rounded-lg flex items-center justify-center mr-4 group-hover:bg-accent group-hover:text-white transition-all duration-300">
+                    <div className="w-10 sm:w-12 h-10 sm:h-12 bg-accent/10 rounded-lg flex items-center justify-center mr-3 sm:mr-4 group-hover:bg-accent group-hover:text-white transition-all duration-300">
                       {item.icon}
                     </div>
                     <div>
-                      <p className="text-sm text-muted-foreground">{item.label}</p>
-                      <p className="font-medium text-foreground">{item.value}</p>
+                      <p className="text-xs sm:text-sm text-muted-foreground">{item.label}</p>
+                      <p className="font-medium text-foreground text-sm sm:text-base">{item.value}</p>
                     </div>
                   </a>
                 ))}
@@ -238,34 +238,34 @@ const Contact: React.FC = () => {
             </div>
 
             {/* Social Media */}
-            <div className="contact-card bg-background/80 backdrop-blur-sm border border-border rounded-xl p-6 shadow-lg">
-              <h3 className="text-xl font-bold text-foreground mb-6">Redes Sociales</h3>
-              <div className="flex space-x-4">
+            <div className="contact-card bg-background/80 backdrop-blur-sm border border-border rounded-xl p-4 sm:p-6 shadow-lg">
+              <h3 className="text-lg sm:text-xl font-bold text-foreground mb-4 sm:mb-6">Redes Sociales</h3>
+              <div className="flex space-x-3 sm:space-x-4">
                 {socialLinks.map((social, index) => (
                   <a
                     key={index}
                     href={social.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className={`w-12 h-12 bg-muted rounded-full flex items-center justify-center text-muted-foreground hover:text-white transition-all duration-300 hover:scale-110 ${social.color}`}
+                    className={`w-10 sm:w-12 h-10 sm:h-12 bg-muted rounded-full flex items-center justify-center text-muted-foreground hover:text-white transition-all duration-300 hover:scale-110 ${social.color}`}
                     title={social.label}
                   >
                     {social.icon}
                   </a>
                 ))}
               </div>
-              <p className="text-sm text-muted-foreground mt-4">
+              <p className="text-xs sm:text-sm text-muted-foreground mt-4">
                 Sígueme para ver mis últimos proyectos y actualizaciones sobre tecnología.
               </p>
             </div>
 
             {/* Availability */}
-            <div className="contact-card bg-gradient-to-br from-accent/10 to-secondary/10 border border-accent/20 rounded-xl p-6">
-              <h3 className="text-xl font-bold text-foreground mb-4 flex items-center">
+            <div className="contact-card bg-gradient-to-br from-accent/10 to-secondary/10 border border-accent/20 rounded-xl p-4 sm:p-6">
+              <h3 className="text-lg sm:text-xl font-bold text-foreground mb-4 flex items-center">
                 <div className="w-3 h-3 bg-green-500 rounded-full mr-2 animate-pulse"></div>
                 Disponible para proyectos
               </h3>
-              <p className="text-sm text-muted-foreground leading-relaxed">
+              <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
                 Actualmente estoy disponible para nuevos proyectos freelance y oportunidades de colaboración. 
                 ¡No dudes en contactarme!
               </p>

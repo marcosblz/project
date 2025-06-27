@@ -95,31 +95,31 @@ const Education: React.FC = () => {
 
   useEffect(() => {
     gsap.fromTo('.education-card',
-      { y: 50, opacity: 0 },
+      { y: 30, opacity: 0 },
       {
         y: 0,
         opacity: 1,
-        duration: 0.8,
-        stagger: 0.2,
+        duration: 0.5,
+        stagger: 0.1,
         ease: 'power3.out',
         scrollTrigger: {
           trigger: '.education-grid',
-          start: 'top 70%',
+          start: 'top 80%',
           toggleActions: 'play none none reverse'
         }
       }
     );
 
     gsap.fromTo('.sidebar-content',
-      { x: 50, opacity: 0 },
+      { x: 30, opacity: 0 },
       {
         x: 0,
         opacity: 1,
-        duration: 1,
+        duration: 0.6,
         ease: 'power3.out',
         scrollTrigger: {
           trigger: '.education-section',
-          start: 'top 60%',
+          start: 'top 70%',
           toggleActions: 'play none none reverse'
         }
       }
@@ -127,7 +127,7 @@ const Education: React.FC = () => {
   }, []);
 
   const EducationCard = ({ item, isPreview = false }: { item: EducationItem; isPreview?: boolean }) => (
-    <div className={`education-card bg-background/80 backdrop-blur-sm border border-border rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 ${isPreview ? 'border-accent/20' : ''}`}>
+    <div className={`education-card bg-background/80 backdrop-blur-sm border border-border rounded-xl p-4 sm:p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 ${isPreview ? 'border-accent/20' : ''}`}>
       <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between mb-4">
         <div className="flex-1">
           <h4 className={`${isPreview ? 'text-lg' : 'text-xl'} font-bold text-foreground mb-2`}>{item.title}</h4>
@@ -138,7 +138,7 @@ const Education: React.FC = () => {
           </div>
         </div>
         {item.grade && (
-          <div className="flex items-center bg-accent/10 text-accent px-3 py-1 rounded-full text-sm font-medium">
+          <div className="flex items-center bg-accent/10 text-accent px-3 py-1 rounded-full text-sm font-medium mt-2 sm:mt-0 w-fit">
             <Award className="w-4 h-4 mr-1" />
             {item.grade}
           </div>
@@ -149,23 +149,23 @@ const Education: React.FC = () => {
   );
 
   return (
-    <section id="estudios" className="education-section py-20 bg-muted/30">
+    <section id="estudios" className="education-section py-12 sm:py-20 bg-muted/30">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold text-foreground mb-4">Formación Académica</h2>
-          <p className="text-xl text-muted-foreground">Mi trayectoria educativa y crecimiento profesional</p>
+        <div className="text-center mb-12 sm:mb-16">
+          <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-4">Formación Académica</h2>
+          <p className="text-lg sm:text-xl text-muted-foreground">Mi trayectoria educativa y crecimiento profesional</p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8">
           {/* Education and Certifications */}
           <div className="lg:col-span-2">
-            <div className="education-grid space-y-8">
+            <div className="education-grid space-y-6 sm:space-y-8">
               {/* Education Section */}
               <div>
                 <div className="flex items-center justify-between mb-6">
                   <div className="flex items-center">
-                    <GraduationCap className="w-6 h-6 text-accent mr-2" />
-                    <h3 className="text-2xl font-bold text-foreground">Estudios</h3>
+                    <GraduationCap className="w-5 sm:w-6 h-5 sm:h-6 text-accent mr-2" />
+                    <h3 className="text-xl sm:text-2xl font-bold text-foreground">Estudios</h3>
                   </div>
                 </div>
                 
@@ -185,7 +185,7 @@ const Education: React.FC = () => {
 
                 <button
                   onClick={() => setShowAllEducation(!showAllEducation)}
-                  className="flex items-center text-accent hover:text-accent/80 font-medium transition-colors duration-300"
+                  className="flex items-center text-accent hover:text-accent/80 font-medium transition-colors duration-300 text-sm sm:text-base"
                 >
                   {showAllEducation ? 'Ver menos' : `Ver todos los estudios (${educationItems.length})`}
                   <ChevronRight className={`w-4 h-4 ml-1 transition-transform duration-300 ${showAllEducation ? 'rotate-90' : ''}`} />
@@ -196,8 +196,8 @@ const Education: React.FC = () => {
               <div>
                 <div className="flex items-center justify-between mb-6">
                   <div className="flex items-center">
-                    <FileText className="w-6 h-6 text-accent mr-2" />
-                    <h3 className="text-2xl font-bold text-foreground">Certificaciones</h3>
+                    <FileText className="w-5 sm:w-6 h-5 sm:h-6 text-accent mr-2" />
+                    <h3 className="text-xl sm:text-2xl font-bold text-foreground">Certificaciones</h3>
                   </div>
                 </div>
                 
@@ -217,7 +217,7 @@ const Education: React.FC = () => {
 
                 <button
                   onClick={() => setShowAllCertifications(!showAllCertifications)}
-                  className="flex items-center text-accent hover:text-accent/80 font-medium transition-colors duration-300"
+                  className="flex items-center text-accent hover:text-accent/80 font-medium transition-colors duration-300 text-sm sm:text-base"
                 >
                   {showAllCertifications ? 'Ver menos' : `Ver todas las certificaciones (${certificationItems.length})`}
                   <ChevronRight className={`w-4 h-4 ml-1 transition-transform duration-300 ${showAllCertifications ? 'rotate-90' : ''}`} />
@@ -230,10 +230,10 @@ const Education: React.FC = () => {
           <div className="lg:col-span-1">
             <div className="sidebar-content sticky top-24 space-y-6">
               {/* Key Competencies */}
-              <div className="bg-background/80 backdrop-blur-sm border border-border rounded-xl p-6 shadow-lg">
+              <div className="bg-background/80 backdrop-blur-sm border border-border rounded-xl p-4 sm:p-6 shadow-lg">
                 <div className="flex items-center mb-4">
-                  <Target className="w-6 h-6 text-accent mr-2" />
-                  <h3 className="text-lg font-bold text-foreground">Competencias Clave</h3>
+                  <Target className="w-5 sm:w-6 h-5 sm:h-6 text-accent mr-2" />
+                  <h3 className="text-base sm:text-lg font-bold text-foreground">Competencias Clave</h3>
                 </div>
                 <div className="space-y-2">
                   {skills.map((skill, index) => (
@@ -241,7 +241,7 @@ const Education: React.FC = () => {
                       key={index}
                       className="flex items-center p-2 rounded-lg hover:bg-accent/10 transition-colors duration-300"
                     >
-                      <div className="w-2 h-2 bg-accent rounded-full mr-3"></div>
+                      <div className="w-2 h-2 bg-accent rounded-full mr-3 flex-shrink-0"></div>
                       <span className="text-muted-foreground text-sm">{skill}</span>
                     </div>
                   ))}
@@ -249,10 +249,10 @@ const Education: React.FC = () => {
               </div>
 
               {/* Continuous Learning */}
-              <div className="bg-gradient-to-br from-accent/10 to-secondary/10 border border-accent/20 rounded-xl p-6">
+              <div className="bg-gradient-to-br from-accent/10 to-secondary/10 border border-accent/20 rounded-xl p-4 sm:p-6">
                 <div className="flex items-center mb-4">
-                  <BookOpen className="w-6 h-6 text-accent mr-2" />
-                  <h3 className="text-lg font-bold text-foreground">Aprendizaje Continuo</h3>
+                  <BookOpen className="w-5 sm:w-6 h-5 sm:h-6 text-accent mr-2" />
+                  <h3 className="text-base sm:text-lg font-bold text-foreground">Aprendizaje Continuo</h3>
                 </div>
                 <p className="text-muted-foreground text-sm leading-relaxed">
                   Me mantengo actualizado con las últimas tendencias y tecnologías del desarrollo web. 
