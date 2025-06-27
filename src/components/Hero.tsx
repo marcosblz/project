@@ -42,13 +42,13 @@ const Hero: React.FC = () => {
   };
 
   return (
-    <section id="inicio" className="hero-section min-h-screen flex items-center justify-start pt-16">
-      <div className="max-w-7xl mx-auto px-0">
-        <div className="grid grid-cols-1 lg:grid-cols-[auto_auto] gap-16 items-center">
+    <section id="inicio" className="hero-section min-h-screen flex items-center justify-center pt-16 px-4">
+      <div className="max-w-7xl mx-auto w-full">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           {/* Profile Image */}
-          <div className="flex justify-start lg:justify-end px-0 w-fit">
-            <div className="relative">
-              <div className="w-96 h-auto rounded-2xl border-4 border-accent/30 shadow-2xl overflow-hidden 
+          <div className="flex justify-center lg:justify-end order-1 lg:order-1">
+            <div className="relative hero-image">
+              <div className="w-72 sm:w-80 md:w-96 h-auto rounded-2xl border-4 border-accent/30 shadow-2xl overflow-hidden 
                       bg-gradient-to-br from-accent/20 to-secondary/20 p-4">
                 <img
                   src="/marcos.jpg"
@@ -60,31 +60,28 @@ const Hero: React.FC = () => {
           </div>
 
           {/* Content */}
-          <div className="text-center lg:text-left px-4 lg:px-0 space-y-6">
-            <h1 className="text-6xl lg:text-8xl font-bold text-foreground">
+          <div className="text-center lg:text-left space-y-6 hero-content order-2 lg:order-2">
+            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold text-foreground leading-tight">
               Hola, soy
-              <span className="block text-transparent bg-clip-text bg-gradient-to-r from-accent to-secondary">
+              <span className="block text-accent font-bold">
                 Marcos
               </span>
             </h1>
 
-            <h2 className="text-3xl lg:text-4xl text-muted-foreground">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl text-muted-foreground">
               Desarrollador Front-End
             </h2>
 
-            <div className="inline-block bg-card/80 backdrop-blur-sm border border-border rounded-lg px-6 py-4">
-              <p className="text-xl text-muted-foreground italic whitespace-pre-line">
-                {"La programación no es solo escribir código,\nes crear soluciones que mejoren la vida de las personas."}
+            <div className="inline-block bg-card/80 backdrop-blur-sm border border-border rounded-lg px-6 py-4 max-w-md">
+              <p className="text-lg sm:text-xl text-muted-foreground italic leading-relaxed">
+                La programación no es solo escribir código, es crear soluciones que mejoren la vida de las personas.
               </p>
             </div>
 
-
-
-
-            <div className="flex flex-col sm:flex-row gap-6 justify-center lg:justify-start">
+            <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center lg:justify-start pt-4">
               <button
                 onClick={downloadCV}
-                className="inline-flex items-center px-8 py-4 bg-accent hover:bg-accent/90 text-white text-lg 
+                className="inline-flex items-center justify-center px-8 py-4 bg-accent hover:bg-accent/90 text-white text-lg 
                    font-medium rounded-lg transition-all duration-300 hover:scale-105 hover:shadow-lg group"
               >
                 <Download className="w-6 h-6 mr-3 group-hover:animate-bounce" />
@@ -93,8 +90,8 @@ const Hero: React.FC = () => {
 
               <button
                 onClick={scrollToProjects}
-                className="inline-flex items-center px-8 py-4 bg-transparent border-2 border-accent text-accent text-lg 
-                   font-medium rounded-lg transition-all duration-300 hover:bg-accent hover:text-white hover:scale-105 group"
+                className="inline-flex items-center justify-center px-8 py-4 bg-accent hover:bg-accent/90 text-white text-lg 
+                   font-medium rounded-lg transition-all duration-300 hover:scale-105 hover:shadow-lg group"
               >
                 Ver Proyectos
                 <ArrowDown className="w-6 h-6 ml-3 group-hover:animate-bounce" />
@@ -102,7 +99,6 @@ const Hero: React.FC = () => {
             </div>
           </div>
         </div>
-
 
         {/* Scroll Indicator */}
         <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">

@@ -132,7 +132,7 @@ const Skills: React.FC = () => {
                       </div>
                       <div className="w-full bg-muted rounded-full h-2 overflow-hidden">
                         <div
-                          className="skill-bar h-full bg-accent rounded-full transition-all duration-300"
+                          className="skill-bar h-full rounded-full transition-all duration-300"
                           data-width={skill.level}
                           style={{ width: 0 }}
                         ></div>

@@ -124,21 +124,27 @@ const About: React.FC = () => {
         <div className="chat-container bg-background/80 backdrop-blur-md rounded-2xl border border-border shadow-2xl overflow-hidden" style={{ height: 'calc(100vh - 12rem)' }}>
           {/* Chat Header */}
           <div className="bg-accent/10 px-6 py-4 border-b border-border">
-            <div className="flex items-center space-x-3">
-              <div className="relative">
-                <img
-                  src="https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&w=100"
-                  alt="Marcos"
-                  className="w-10 h-10 rounded-full"
-                />
-                <div className="absolute -bottom-1 -right-1 w-4 h-4 bg-green-500 rounded-full border-2 border-background animate-ping"></div>
+            <div className="flex items-center justify-between">
+              <div className="flex items-center space-x-3">
+                <div className="relative">
+                  <img
+                    src="https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&w=100"
+                    alt="Marcos"
+                    className="w-12 h-12 rounded-full border-2 border-accent/20"
+                  />
+                  <div className="absolute -bottom-1 -right-1 w-4 h-4 bg-green-500 rounded-full border-2 border-background"></div>
+                </div>
+                <div>
+                  <h3 className="font-semibold text-foreground text-lg">Marcos</h3>
+                  <p className="text-sm text-green-500 flex items-center font-medium">
+                    <span className="w-2 h-2 bg-green-500 rounded-full mr-2 animate-pulse"></span>
+                    Disponible
+                  </p>
+                </div>
               </div>
-              <div>
-                <h3 className="font-semibold text-foreground">Marcos</h3>
-                <p className="text-sm text-green-500 flex items-center">
-                  <span className="w-2 h-2 bg-green-500 rounded-full mr-2 animate-pulse"></span>
-                  Disponible
-                </p>
+              <div className="text-right">
+                <p className="text-xs text-muted-foreground">Desarrollador Front-End</p>
+                <p className="text-xs text-muted-foreground">Madrid, España</p>
               </div>
             </div>
           </div>
@@ -151,14 +157,14 @@ const About: React.FC = () => {
                 className={`flex ${message.isBot ? 'justify-start' : 'justify-end'}`}
               >
                 <div
-                  className={`max-w-xs lg:max-w-md px-4 py-2 rounded-2xl ${
+                  className={`max-w-xs lg:max-w-md px-4 py-3 rounded-2xl shadow-sm ${
                     message.isBot
-                      ? 'bg-card text-foreground'
+                      ? 'bg-card text-foreground border border-border'
                       : 'bg-accent text-white'
                   }`}
                 >
-                  <p className="text-sm">{message.text}</p>
-                  <p className={`text-xs mt-1 ${message.isBot ? 'text-muted-foreground' : 'text-white/70'}`}>
+                  <p className="text-sm leading-relaxed">{message.text}</p>
+                  <p className={`text-xs mt-2 ${message.isBot ? 'text-muted-foreground' : 'text-white/70'}`}>
                     {message.timestamp}
                   </p>
                 </div>
@@ -168,13 +174,14 @@ const About: React.FC = () => {
 
           {/* Chat Options */}
           {currentOptions.length > 0 && (
-            <div className="p-4 border-t border-border">
+            <div className="p-6 border-t border-border bg-muted/20">
+              <p className="text-sm text-muted-foreground mb-3">Pregúntame sobre:</p>
               <div className="flex flex-wrap gap-2">
                 {currentOptions.slice(0, 3).map((option) => (
                   <button
                     key={option.id}
                     onClick={() => handleOptionClick(option)}
-                    className="chat-option px-4 py-2 bg-accent/10 hover:bg-accent hover:text-white text-accent rounded-full text-sm transition-all duration-300 hover:scale-105"
+                    className="chat-option px-4 py-2 bg-accent/10 hover:bg-accent hover:text-white text-accent rounded-full text-sm font-medium transition-all duration-300 hover:scale-105 border border-accent/20"
                   >
                     {option.text}
                   </button>

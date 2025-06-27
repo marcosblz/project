@@ -90,14 +90,14 @@ const Experience: React.FC = () => {
         </div>
 
         <div className="experience-grid relative">
-          {/* Timeline Line */}
-          <div className="absolute left-4 top-0 w-0.5 bg-accent/30 timeline-line" style={{ height: 0 }}></div>
+          {/* Timeline Line - Fixed positioning */}
+          <div className="absolute left-8 top-0 w-0.5 bg-accent/30 timeline-line" style={{ height: 0 }}></div>
 
           <div className="space-y-12">
             {experiences.map((exp, index) => (
               <div key={exp.id} className="experience-item relative flex items-start space-x-8">
-                {/* Timeline Dot */}
-                <div className="experience-dot relative z-10 flex-shrink-0">
+                {/* Timeline Dot - Fixed positioning */}
+                <div className="experience-dot relative z-10 flex-shrink-0 ml-6">
                   <div className="w-4 h-4 bg-accent rounded-full border-4 border-background shadow-lg transition-all duration-300 hover:scale-125"></div>
                 </div>
 

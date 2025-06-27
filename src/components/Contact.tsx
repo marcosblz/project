@@ -116,7 +116,7 @@ const Contact: React.FC = () => {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Contact Form */}
           <div className="lg:col-span-2">
-            <div className="contact-card bg-background/80 backdrop-blur-sm border border-border rounded-xl p-8 shadow-lg">
+            <div className="contact-card bg-background/80 backdrop-blur-sm border border-border rounded-xl p-8 shadow-lg h-full flex flex-col">
               <h3 className="text-2xl font-bold text-foreground mb-6">Envíame un mensaje</h3>
               
               {isSubmitted && (
@@ -126,7 +126,7 @@ const Contact: React.FC = () => {
                 </div>
               )}
 
-              <form onSubmit={handleSubmit} className="space-y-6">
+              <form onSubmit={handleSubmit} className="space-y-6 flex-1 flex flex-col">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                   <div>
                     <label htmlFor="name" className="block text-sm font-medium text-foreground mb-2">
@@ -176,7 +176,7 @@ const Contact: React.FC = () => {
                   />
                 </div>
                 
-                <div>
+                <div className="flex-1 flex flex-col">
                   <label htmlFor="message" className="block text-sm font-medium text-foreground mb-2">
                     Mensaje *
                   </label>
@@ -186,16 +186,16 @@ const Contact: React.FC = () => {
                     value={formData.message}
                     onChange={handleInputChange}
                     required
-                    rows={6}
-                    className="w-full px-4 py-3 bg-background border border-border rounded-lg focus:ring-2 focus:ring-accent focus:border-transparent transition-all duration-300 resize-none"
+                    className="w-full px-4 py-3 bg-background border border-border rounded-lg focus:ring-2 focus:ring-accent focus:border-transparent transition-all duration-300 resize-none flex-1"
                     placeholder="Cuéntame sobre tu proyecto o idea..."
+                    style={{ minHeight: '200px' }}
                   ></textarea>
                 </div>
                 
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full bg-accent hover:bg-accent/90 disabled:bg-accent/50 text-white font-medium py-3 px-6 rounded-lg transition-all duration-300 hover:scale-105 hover:shadow-lg flex items-center justify-center"
+                  className="w-full bg-accent hover:bg-accent/90 disabled:bg-accent/50 text-white font-medium py-3 px-6 rounded-lg transition-all duration-300 hover:scale-105 hover:shadow-lg flex items-center justify-center mt-auto"
                 >
                   {isSubmitting ? (
                     <>
