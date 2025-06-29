@@ -72,7 +72,7 @@
   }
 }
 
-/* Remove old dynamic background styles */
+/* Dynamic background handled by canvas */
 .dynamic-bg {
   position: relative;
   min-height: 100vh;
@@ -97,7 +97,7 @@ html {
 
 /* Custom Scrollbar */
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 6px;
 }
 
 ::-webkit-scrollbar-track {
@@ -106,7 +106,7 @@ html {
 
 ::-webkit-scrollbar-thumb {
   background: hsl(var(--accent));
-  border-radius: 4px;
+  border-radius: 3px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
@@ -190,7 +190,7 @@ html {
 }
 
 .project-card:hover {
-  transform: translateY(-8px);
+  transform: translateY(-4px);
 }
 
 /* Glass Effect */
@@ -253,11 +253,59 @@ html {
   100% { transform: translate(6px, 0); }
 }
 
-/* Responsive Design Utilities */
+/* Mobile Optimizations */
 @media (max-width: 768px) {
-  /* Hide scroll indicator on mobile */
+  /* Hide scroll indicator on mobile and tablets */
   .scroll-indicator {
     display: none !important;
+  }
+  
+  /* Optimize touch targets */
+  button, a {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  
+  /* Better spacing for mobile */
+  .space-y-3 > * + * {
+    margin-top: 0.75rem;
+  }
+  
+  .space-y-4 > * + * {
+    margin-top: 1rem;
+  }
+}
+
+@media (max-width: 640px) {
+  /* Smaller text on very small screens */
+  h1 {
+    @apply text-2xl;
+  }
+  
+  h2 {
+    @apply text-xl;
+  }
+  
+  h3 {
+    @apply text-lg;
+  }
+  
+  /* Reduce padding on small screens */
+  .p-6 {
+    @apply p-4;
+  }
+  
+  .p-8 {
+    @apply p-4;
+  }
+  
+  /* Optimize grid gaps */
+  .gap-8 {
+    @apply gap-4;
+  }
+  
+  .gap-6 {
+    @apply gap-3;
   }
 }
 
@@ -285,5 +333,28 @@ select:focus {
   .navbar,
   .contact-section {
     display: none !important;
+  }
+}
+
+/* High contrast mode */
+@media (prefers-contrast: high) {
+  :root {
+    --border: 0 0% 20%;
+    --accent: 221 83% 40%;
+  }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  
+  html {
+    scroll-behavior: auto;
   }
 }

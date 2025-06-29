@@ -127,56 +127,56 @@ const Education: React.FC = () => {
   }, []);
 
   const EducationCard = ({ item, isPreview = false }: { item: EducationItem; isPreview?: boolean }) => (
-    <div className={`education-card bg-background/80 backdrop-blur-sm border border-border rounded-xl p-4 sm:p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 ${isPreview ? 'border-accent/20' : ''}`}>
-      <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between mb-4">
+    <div className={`education-card bg-background/80 backdrop-blur-sm border border-border rounded-xl p-3 sm:p-4 lg:p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 ${isPreview ? 'border-accent/20' : ''}`}>
+      <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between mb-3 sm:mb-4">
         <div className="flex-1">
-          <h4 className={`${isPreview ? 'text-lg' : 'text-xl'} font-bold text-foreground mb-2`}>{item.title}</h4>
-          <p className="text-accent font-semibold mb-2">{item.institution}</p>
-          <div className="flex items-center text-muted-foreground mb-3">
-            <Calendar className="w-4 h-4 mr-2" />
-            {item.date}
+          <h4 className={`${isPreview ? 'text-base sm:text-lg' : 'text-lg sm:text-xl'} font-bold text-foreground mb-1 sm:mb-2`}>{item.title}</h4>
+          <p className="text-accent font-semibold mb-1 sm:mb-2 text-sm sm:text-base">{item.institution}</p>
+          <div className="flex items-center text-muted-foreground mb-2 sm:mb-3">
+            <Calendar className="w-3 sm:w-4 h-3 sm:h-4 mr-1 sm:mr-2" />
+            <span className="text-xs sm:text-sm">{item.date}</span>
           </div>
         </div>
         {item.grade && (
-          <div className="flex items-center bg-accent/10 text-accent px-3 py-1 rounded-full text-sm font-medium mt-2 sm:mt-0 w-fit">
-            <Award className="w-4 h-4 mr-1" />
+          <div className="flex items-center bg-accent/10 text-accent px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm font-medium mt-2 sm:mt-0 w-fit">
+            <Award className="w-3 sm:w-4 h-3 sm:h-4 mr-1" />
             {item.grade}
           </div>
         )}
       </div>
-      <p className="text-muted-foreground leading-relaxed text-sm">{item.description}</p>
+      <p className="text-muted-foreground leading-relaxed text-xs sm:text-sm">{item.description}</p>
     </div>
   );
 
   return (
-    <section id="estudios" className="education-section py-12 sm:py-20">
+    <section id="estudios" className="education-section py-8 sm:py-12 lg:py-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-12 sm:mb-16">
-          <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-4">Formación Académica</h2>
-          <p className="text-lg sm:text-xl text-muted-foreground">Mi trayectoria educativa y crecimiento profesional</p>
+        <div className="text-center mb-8 sm:mb-12 lg:mb-16">
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-foreground mb-2 sm:mb-4">Formación Académica</h2>
+          <p className="text-base sm:text-lg lg:text-xl text-muted-foreground">Mi trayectoria educativa y crecimiento profesional</p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
           {/* Education and Certifications */}
           <div className="lg:col-span-2">
-            <div className="education-grid space-y-6 sm:space-y-8">
+            <div className="education-grid space-y-4 sm:space-y-6 lg:space-y-8">
               {/* Education Section */}
               <div>
-                <div className="flex items-center justify-between mb-6">
+                <div className="flex items-center justify-between mb-4 sm:mb-6">
                   <div className="flex items-center">
-                    <GraduationCap className="w-5 sm:w-6 h-5 sm:h-6 text-accent mr-2" />
-                    <h3 className="text-xl sm:text-2xl font-bold text-foreground">Estudios</h3>
+                    <GraduationCap className="w-4 sm:w-5 lg:w-6 h-4 sm:h-5 lg:h-6 text-accent mr-2" />
+                    <h3 className="text-lg sm:text-xl lg:text-2xl font-bold text-foreground">Estudios</h3>
                   </div>
                 </div>
                 
                 {/* Latest Education Preview */}
-                <div className="mb-4">
+                <div className="mb-3 sm:mb-4">
                   <EducationCard item={latestEducation} isPreview={true} />
                 </div>
 
                 {/* Show All Education */}
                 {showAllEducation && (
-                  <div className="space-y-4 mb-4">
+                  <div className="space-y-3 sm:space-y-4 mb-3 sm:mb-4">
                     {educationItems.filter(item => item.id !== latestEducation.id).map((item) => (
                       <EducationCard key={item.id} item={item} />
                     ))}
@@ -185,30 +185,30 @@ const Education: React.FC = () => {
 
                 <button
                   onClick={() => setShowAllEducation(!showAllEducation)}
-                  className="flex items-center text-accent hover:text-accent/80 font-medium transition-colors duration-300 text-sm sm:text-base"
+                  className="flex items-center text-accent hover:text-accent/80 font-medium transition-colors duration-300 text-xs sm:text-sm lg:text-base"
                 >
                   {showAllEducation ? 'Ver menos' : `Ver todos los estudios (${educationItems.length})`}
-                  <ChevronRight className={`w-4 h-4 ml-1 transition-transform duration-300 ${showAllEducation ? 'rotate-90' : ''}`} />
+                  <ChevronRight className={`w-3 sm:w-4 h-3 sm:h-4 ml-1 transition-transform duration-300 ${showAllEducation ? 'rotate-90' : ''}`} />
                 </button>
               </div>
 
               {/* Certifications Section */}
               <div>
-                <div className="flex items-center justify-between mb-6">
+                <div className="flex items-center justify-between mb-4 sm:mb-6">
                   <div className="flex items-center">
-                    <FileText className="w-5 sm:w-6 h-5 sm:h-6 text-accent mr-2" />
-                    <h3 className="text-xl sm:text-2xl font-bold text-foreground">Certificaciones</h3>
+                    <FileText className="w-4 sm:w-5 lg:w-6 h-4 sm:h-5 lg:h-6 text-accent mr-2" />
+                    <h3 className="text-lg sm:text-xl lg:text-2xl font-bold text-foreground">Certificaciones</h3>
                   </div>
                 </div>
                 
                 {/* Latest Certification Preview */}
-                <div className="mb-4">
+                <div className="mb-3 sm:mb-4">
                   <EducationCard item={latestCertification} isPreview={true} />
                 </div>
 
                 {/* Show All Certifications */}
                 {showAllCertifications && (
-                  <div className="space-y-4 mb-4">
+                  <div className="space-y-3 sm:space-y-4 mb-3 sm:mb-4">
                     {certificationItems.filter(item => item.id !== latestCertification.id).map((item) => (
                       <EducationCard key={item.id} item={item} />
                     ))}
@@ -217,10 +217,10 @@ const Education: React.FC = () => {
 
                 <button
                   onClick={() => setShowAllCertifications(!showAllCertifications)}
-                  className="flex items-center text-accent hover:text-accent/80 font-medium transition-colors duration-300 text-sm sm:text-base"
+                  className="flex items-center text-accent hover:text-accent/80 font-medium transition-colors duration-300 text-xs sm:text-sm lg:text-base"
                 >
                   {showAllCertifications ? 'Ver menos' : `Ver todas las certificaciones (${certificationItems.length})`}
-                  <ChevronRight className={`w-4 h-4 ml-1 transition-transform duration-300 ${showAllCertifications ? 'rotate-90' : ''}`} />
+                  <ChevronRight className={`w-3 sm:w-4 h-3 sm:h-4 ml-1 transition-transform duration-300 ${showAllCertifications ? 'rotate-90' : ''}`} />
                 </button>
               </div>
             </div>
@@ -228,38 +228,38 @@ const Education: React.FC = () => {
 
           {/* Sidebar */}
           <div className="lg:col-span-1">
-            <div className="sidebar-content sticky top-24 space-y-6">
+            <div className="sidebar-content lg:sticky lg:top-24 space-y-4 sm:space-y-6">
               {/* Key Competencies */}
-              <div className="bg-background/80 backdrop-blur-sm border border-border rounded-xl p-4 sm:p-6 shadow-lg">
-                <div className="flex items-center mb-4">
-                  <Target className="w-5 sm:w-6 h-5 sm:h-6 text-accent mr-2" />
-                  <h3 className="text-base sm:text-lg font-bold text-foreground">Competencias Clave</h3>
+              <div className="bg-background/80 backdrop-blur-sm border border-border rounded-xl p-3 sm:p-4 lg:p-6 shadow-lg">
+                <div className="flex items-center mb-3 sm:mb-4">
+                  <Target className="w-4 sm:w-5 lg:w-6 h-4 sm:h-5 lg:h-6 text-accent mr-2" />
+                  <h3 className="text-sm sm:text-base lg:text-lg font-bold text-foreground">Competencias Clave</h3>
                 </div>
-                <div className="space-y-2">
+                <div className="space-y-1 sm:space-y-2">
                   {skills.map((skill, index) => (
                     <div
                       key={index}
-                      className="flex items-center p-2 rounded-lg hover:bg-accent/10 transition-colors duration-300"
+                      className="flex items-center p-1.5 sm:p-2 rounded-lg hover:bg-accent/10 transition-colors duration-300"
                     >
-                      <div className="w-2 h-2 bg-accent rounded-full mr-3 flex-shrink-0"></div>
-                      <span className="text-muted-foreground text-sm">{skill}</span>
+                      <div className="w-1.5 sm:w-2 h-1.5 sm:h-2 bg-accent rounded-full mr-2 sm:mr-3 flex-shrink-0"></div>
+                      <span className="text-muted-foreground text-xs sm:text-sm">{skill}</span>
                     </div>
                   ))}
                 </div>
               </div>
 
               {/* Continuous Learning */}
-              <div className="bg-gradient-to-br from-accent/10 to-secondary/10 border border-accent/20 rounded-xl p-4 sm:p-6">
-                <div className="flex items-center mb-4">
-                  <BookOpen className="w-5 sm:w-6 h-5 sm:h-6 text-accent mr-2" />
-                  <h3 className="text-base sm:text-lg font-bold text-foreground">Aprendizaje Continuo</h3>
+              <div className="bg-gradient-to-br from-accent/10 to-secondary/10 border border-accent/20 rounded-xl p-3 sm:p-4 lg:p-6">
+                <div className="flex items-center mb-3 sm:mb-4">
+                  <BookOpen className="w-4 sm:w-5 lg:w-6 h-4 sm:h-5 lg:h-6 text-accent mr-2" />
+                  <h3 className="text-sm sm:text-base lg:text-lg font-bold text-foreground">Aprendizaje Continuo</h3>
                 </div>
-                <p className="text-muted-foreground text-sm leading-relaxed">
+                <p className="text-muted-foreground text-xs sm:text-sm leading-relaxed">
                   Me mantengo actualizado con las últimas tendencias y tecnologías del desarrollo web. 
                   Actualmente estudiando Web3 y arquitecturas de microservicios.
                 </p>
-                <div className="mt-4 p-3 bg-accent/20 rounded-lg">
-                  <p className="text-accent text-sm font-medium">
+                <div className="mt-3 sm:mt-4 p-2 sm:p-3 bg-accent/20 rounded-lg">
+                  <p className="text-accent text-xs sm:text-sm font-medium">
                     🎯 Próximo objetivo: Certificación AWS Solutions Architect
                   </p>
                 </div>
