@@ -92,16 +92,16 @@ const Projects: React.FC = () => {
 
   useEffect(() => {
     gsap.fromTo('.project-card',
-      { y: 30, opacity: 0 },
+      { y: 20, opacity: 0 },
       {
         y: 0,
         opacity: 1,
-        duration: 0.5,
-        stagger: 0.1,
+        duration: 0.4,
+        stagger: 0.08,
         ease: 'power3.out',
         scrollTrigger: {
           trigger: '.projects-grid',
-          start: 'top 80%',
+          start: 'top 85%',
           toggleActions: 'play none none reverse'
         }
       }
