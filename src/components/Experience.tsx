@@ -82,11 +82,11 @@ const Experience: React.FC = () => {
   }, []);
 
   return (
-    <section id="experiencia" className="experience-section py-20">
+    <section id="experiencia" className="experience-section py-12 sm:py-20">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold text-foreground mb-4">Experiencia Profesional</h2>
-          <p className="text-xl text-muted-foreground">Mi trayectoria en el desarrollo front-end</p>
+        <div className="text-center mb-12 sm:mb-16">
+          <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-4">Experiencia Profesional</h2>
+          <p className="text-lg sm:text-xl text-muted-foreground">Mi trayectoria en el desarrollo front-end</p>
         </div>
 
         <div className="experience-grid relative">

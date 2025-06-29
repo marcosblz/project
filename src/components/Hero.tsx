@@ -42,7 +42,7 @@ const Hero: React.FC = () => {
   };
 
   return (
-    <section id="inicio" className="hero-section min-h-screen flex items-center justify-center pt-16 px-4">
+    <section id="inicio" className="hero-section min-h-screen flex items-center justify-center pt-16 px-4 relative">
       <div className="max-w-7xl mx-auto w-full">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 items-center">
           {/* Profile Image */}
@@ -100,7 +100,7 @@ const Hero: React.FC = () => {
           </div>
         </div>
 
-        {/* Scroll Indicator - Hidden on mobile */}
+        {/* Scroll Indicator - Only in Hero section and hidden on mobile */}
         <div className="scroll-indicator absolute bottom-6 sm:bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce hidden sm:block">
           <div className="w-5 sm:w-6 h-8 sm:h-10 border-2 border-accent rounded-full flex justify-center">
             <div className="w-1 h-2 sm:h-3 bg-accent rounded-full mt-2 animate-pulse"></div>
