@@ -115,14 +115,14 @@ const About: React.FC = () => {
 
   return (
     <section id="sobre-mi" className="about-section min-h-screen flex items-center py-8 sm:py-12 lg:py-20">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+      <div className="max-w-4xl mx-auto px-3 sm:px-6 lg:px-8 w-full">
         <div className="text-center mb-6 sm:mb-8 lg:mb-12">
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-foreground mb-2 sm:mb-4">Sobre Mí</h2>
-          <p className="text-base sm:text-lg lg:text-xl text-muted-foreground">Conoce más sobre mi experiencia y pasión por el desarrollo</p>
+          <p className="text-base sm:text-lg lg:text-xl text-muted-foreground px-4 sm:px-0">Conoce más sobre mi experiencia y pasión por el desarrollo</p>
         </div>
 
-        <div className="chat-container bg-background/80 backdrop-blur-md rounded-2xl border border-border shadow-2xl overflow-hidden" 
-             style={{ height: 'min(calc(100vh - 6rem), 500px)' }}>
+        <div className="chat-container bg-background/80 backdrop-blur-md rounded-2xl border border-border shadow-2xl overflow-hidden mx-2 sm:mx-0" 
+             style={{ height: 'min(calc(100vh - 8rem), 500px)' }}>
           {/* Chat Header */}
           <div className="bg-accent/10 px-3 sm:px-4 lg:px-6 py-3 sm:py-4 border-b border-border">
             <div className="flex items-center justify-between">
@@ -151,14 +151,14 @@ const About: React.FC = () => {
 
           {/* Chat Messages */}
           <div id="chat-messages" className="flex-1 overflow-y-auto p-3 sm:p-4 lg:p-6 space-y-3 sm:space-y-4" 
-               style={{ height: 'calc(100% - 7rem)' }}>
+               style={{ height: 'calc(100% - 8rem)' }}>
             {messages.map((message) => (
               <div
                 key={message.id}
                 className={`flex ${message.isBot ? 'justify-start' : 'justify-end'}`}
               >
                 <div
-                  className={`max-w-[90%] sm:max-w-[85%] lg:max-w-xs xl:max-w-md px-2 sm:px-3 lg:px-4 py-2 sm:py-3 rounded-2xl shadow-sm ${
+                  className={`max-w-[85%] sm:max-w-[80%] lg:max-w-xs xl:max-w-md px-3 sm:px-4 py-2 sm:py-3 rounded-2xl shadow-sm ${
                     message.isBot
                       ? 'bg-card text-foreground border border-border'
                       : 'bg-accent text-white'
@@ -182,7 +182,7 @@ const About: React.FC = () => {
                   <button
                     key={option.id}
                     onClick={() => handleOptionClick(option)}
-                    className="chat-option px-2 sm:px-3 lg:px-4 py-1.5 sm:py-2 bg-accent/10 hover:bg-accent hover:text-white text-accent rounded-full text-xs sm:text-sm font-medium transition-all duration-300 hover:scale-105 border border-accent/20 text-left"
+                    className="chat-option w-full px-3 sm:px-4 py-2 sm:py-2.5 bg-accent/10 hover:bg-accent hover:text-white text-accent rounded-full text-xs sm:text-sm font-medium transition-all duration-300 hover:scale-[1.02] border border-accent/20 text-left"
                   >
                     {option.text}
                   </button>

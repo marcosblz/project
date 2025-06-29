@@ -92,12 +92,12 @@ const Projects: React.FC = () => {
 
   useEffect(() => {
     gsap.fromTo('.project-card',
-      { y: 20, opacity: 0 },
+      { y: 15, opacity: 0 },
       {
         y: 0,
         opacity: 1,
         duration: 0.4,
-        stagger: 0.08,
+        stagger: 0.06,
         ease: 'power3.out',
         scrollTrigger: {
           trigger: '.projects-grid',
@@ -110,69 +110,69 @@ const Projects: React.FC = () => {
 
   return (
     <section id="proyectos" className="projects-section py-8 sm:py-12 lg:py-20">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
         <div className="text-center mb-8 sm:mb-12 lg:mb-16">
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-foreground mb-2 sm:mb-4">Proyectos</h2>
-          <p className="text-base sm:text-lg lg:text-xl text-muted-foreground">Una selección de mis trabajos más destacados</p>
+          <p className="text-base sm:text-lg lg:text-xl text-muted-foreground px-4 sm:px-0">Una selección de mis trabajos más destacados</p>
         </div>
 
         {/* Featured Projects */}
-        <div className="mb-8 sm:mb-12 lg:mb-16">
-          <h3 className="text-lg sm:text-xl lg:text-2xl font-bold text-foreground mb-4 sm:mb-6 lg:mb-8">Proyectos Destacados</h3>
-          <div className="projects-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
+        <div className="mb-10 sm:mb-12 lg:mb-16">
+          <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-foreground mb-6 sm:mb-8 text-center">Proyectos Destacados</h3>
+          <div className="projects-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8 max-w-6xl mx-auto">
             {featuredProjects.map((project) => (
               <div
                 key={project.id}
-                className="project-card group bg-background/80 backdrop-blur-sm border border-border rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500"
+                className="project-card group bg-background/80 backdrop-blur-sm border border-border rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 mx-2 sm:mx-0"
               >
                 <div className="relative overflow-hidden">
                   <img
                     src={project.image}
                     alt={project.title}
-                    className="w-full h-32 sm:h-40 lg:h-48 object-cover transition-transform duration-500 group-hover:scale-105"
+                    className="w-full h-36 sm:h-44 lg:h-52 object-cover transition-transform duration-500 group-hover:scale-105"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                   
                   {/* Project Links */}
-                  <div className="absolute top-2 sm:top-4 right-2 sm:right-4 flex space-x-1 sm:space-x-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <div className="absolute top-3 right-3 flex space-x-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                     <a
                       href={project.demoUrl}
-                      className="p-1.5 sm:p-2 bg-white/20 backdrop-blur-sm rounded-full hover:bg-accent hover:text-white transition-all duration-300"
+                      className="p-2 bg-white/20 backdrop-blur-sm rounded-full hover:bg-accent hover:text-white transition-all duration-300"
                     >
-                      <ExternalLink className="w-3 sm:w-4 h-3 sm:h-4" />
+                      <ExternalLink className="w-4 h-4" />
                     </a>
                     <a
                       href={project.githubUrl}
-                      className="p-1.5 sm:p-2 bg-white/20 backdrop-blur-sm rounded-full hover:bg-accent hover:text-white transition-all duration-300"
+                      className="p-2 bg-white/20 backdrop-blur-sm rounded-full hover:bg-accent hover:text-white transition-all duration-300"
                     >
-                      <Github className="w-3 sm:w-4 h-3 sm:h-4" />
+                      <Github className="w-4 h-4" />
                     </a>
                   </div>
 
                   {/* Project Stats */}
                   {project.stats && (
-                    <div className="absolute bottom-2 sm:bottom-4 left-2 sm:left-4 flex space-x-2 sm:space-x-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                      <div className="flex items-center text-white text-xs sm:text-sm">
-                        <Star className="w-3 sm:w-4 h-3 sm:h-4 mr-1" />
+                    <div className="absolute bottom-3 left-3 flex space-x-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                      <div className="flex items-center text-white text-sm">
+                        <Star className="w-4 h-4 mr-1" />
                         {project.stats.stars}
                       </div>
-                      <div className="flex items-center text-white text-xs sm:text-sm">
-                        <Eye className="w-3 sm:w-4 h-3 sm:h-4 mr-1" />
+                      <div className="flex items-center text-white text-sm">
+                        <Eye className="w-4 h-4 mr-1" />
                         {project.stats.views}
                       </div>
                     </div>
                   )}
                 </div>
 
-                <div className="p-3 sm:p-4 lg:p-6">
-                  <h4 className="text-base sm:text-lg lg:text-xl font-bold text-foreground mb-2 sm:mb-3">{project.title}</h4>
-                  <p className="text-muted-foreground mb-3 sm:mb-4 leading-relaxed text-xs sm:text-sm lg:text-base">{project.description}</p>
+                <div className="p-4 sm:p-5 lg:p-6">
+                  <h4 className="text-lg sm:text-xl lg:text-2xl font-bold text-foreground mb-2 sm:mb-3">{project.title}</h4>
+                  <p className="text-muted-foreground mb-3 sm:mb-4 leading-relaxed text-sm sm:text-base">{project.description}</p>
                   
-                  <div className="flex flex-wrap gap-1 sm:gap-2">
+                  <div className="flex flex-wrap gap-1.5 sm:gap-2">
                     {project.technologies.map((tech, index) => (
                       <span
                         key={index}
-                        className="px-1.5 sm:px-2 lg:px-3 py-0.5 sm:py-1 bg-accent/10 text-accent rounded-full text-xs sm:text-sm font-medium hover:bg-accent hover:text-white transition-colors duration-300"
+                        className="px-2 sm:px-3 py-1 bg-accent/10 text-accent rounded-full text-xs sm:text-sm font-medium hover:bg-accent hover:text-white transition-colors duration-300"
                       >
                         {tech}
                       </span>
@@ -186,44 +186,44 @@ const Projects: React.FC = () => {
 
         {/* Other Projects */}
         <div>
-          <h3 className="text-lg sm:text-xl lg:text-2xl font-bold text-foreground mb-4 sm:mb-6 lg:mb-8">Otros Proyectos</h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 lg:gap-6">
+          <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-foreground mb-6 sm:mb-8 text-center">Otros Proyectos</h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 lg:gap-6 max-w-6xl mx-auto">
             {otherProjects.map((project) => (
               <div
                 key={project.id}
-                className="project-card bg-background/80 backdrop-blur-sm border border-border rounded-xl p-3 sm:p-4 lg:p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
+                className="project-card bg-background/80 backdrop-blur-sm border border-border rounded-xl p-4 sm:p-5 lg:p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 mx-2 sm:mx-0"
               >
                 <div className="flex justify-between items-start mb-3 sm:mb-4">
-                  <h4 className="text-sm sm:text-base lg:text-lg font-bold text-foreground pr-2">{project.title}</h4>
-                  <div className="flex space-x-1 sm:space-x-2 flex-shrink-0">
+                  <h4 className="text-base sm:text-lg lg:text-xl font-bold text-foreground pr-2">{project.title}</h4>
+                  <div className="flex space-x-2 flex-shrink-0">
                     <a
                       href={project.demoUrl}
                       className="p-1 text-muted-foreground hover:text-accent transition-colors duration-300"
                     >
-                      <ExternalLink className="w-3 sm:w-4 h-3 sm:h-4" />
+                      <ExternalLink className="w-4 h-4" />
                     </a>
                     <a
                       href={project.githubUrl}
                       className="p-1 text-muted-foreground hover:text-accent transition-colors duration-300"
                     >
-                      <Github className="w-3 sm:w-4 h-3 sm:h-4" />
+                      <Github className="w-4 h-4" />
                     </a>
                   </div>
                 </div>
                 
-                <p className="text-muted-foreground text-xs sm:text-sm mb-3 sm:mb-4 leading-relaxed">{project.description}</p>
+                <p className="text-muted-foreground text-sm sm:text-base mb-3 sm:mb-4 leading-relaxed">{project.description}</p>
                 
-                <div className="flex flex-wrap gap-1 sm:gap-2">
+                <div className="flex flex-wrap gap-1.5 sm:gap-2">
                   {project.technologies.slice(0, 3).map((tech, index) => (
                     <span
                       key={index}
-                      className="px-1.5 sm:px-2 py-0.5 sm:py-1 bg-accent/10 text-accent rounded text-xs font-medium"
+                      className="px-2 py-1 bg-accent/10 text-accent rounded text-xs font-medium"
                     >
                       {tech}
                     </span>
                   ))}
                   {project.technologies.length > 3 && (
-                    <span className="px-1.5 sm:px-2 py-0.5 sm:py-1 bg-muted text-muted-foreground rounded text-xs">
+                    <span className="px-2 py-1 bg-muted text-muted-foreground rounded text-xs">
                       +{project.technologies.length - 3}
                     </span>
                   )}
