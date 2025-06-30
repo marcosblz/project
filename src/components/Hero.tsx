@@ -52,7 +52,7 @@ const Hero: React.FC = () => {
                       bg-gradient-to-br from-accent/20 to-secondary/20 p-2 sm:p-3 lg:p-4">
                 <img
                   src="/marcos.jpg"
-                  alt="Marcos - Desarrollador Front-End"
+                  alt="Marcos - Desarrollador Back-End"
                   className="w-full h-full object-cover object-center rounded-2xl"
                 />
               </div>
@@ -69,12 +69,12 @@ const Hero: React.FC = () => {
             </h1>
 
             <h2 className="text-lg sm:text-xl md:text-2xl lg:text-3xl text-muted-foreground">
-              Desarrollador Front-End
+              Desarrollador Back-End
             </h2>
 
             <div className="inline-block bg-card/80 backdrop-blur-sm border border-border rounded-lg px-3 sm:px-4 lg:px-6 py-2 sm:py-3 lg:py-4 max-w-xs sm:max-w-sm lg:max-w-md mx-auto lg:mx-0">
               <p className="text-sm sm:text-base lg:text-lg text-muted-foreground italic leading-relaxed">
-                La programación no es solo escribir código, es crear soluciones que mejoren la vida de las personas.
+                Me gusta pensar y pasarlo a código. Siempre enfocado en hacerlo mejor y aprender algo nuevo cada día.
               </p>
             </div>
 
