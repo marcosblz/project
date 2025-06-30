@@ -274,6 +274,23 @@ html {
   .space-y-4 > * + * {
     margin-top: 1rem;
   }
+  
+  /* Prevent horizontal overflow */
+  body {
+    overflow-x: hidden;
+  }
+  
+  /* Better text wrapping */
+  h1, h2, h3, h4, h5, h6 {
+    word-wrap: break-word;
+    hyphens: auto;
+  }
+  
+  /* Optimize container spacing */
+  .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
 }
 
 @media (max-width: 640px) {
@@ -306,6 +323,41 @@ html {
   
   .gap-6 {
     @apply gap-3;
+  }
+  
+  /* Better button sizing */
+  button {
+    min-height: 48px;
+    padding: 0.75rem 1rem;
+  }
+  
+  /* Optimize form inputs */
+  input, textarea {
+    font-size: 16px; /* Prevents zoom on iOS */
+  }
+}
+
+/* Ultra small screens */
+@media (max-width: 375px) {
+  /* Even more compact spacing */
+  .px-4 {
+    @apply px-3;
+  }
+  
+  .py-4 {
+    @apply py-3;
+  }
+  
+  /* Smaller buttons */
+  button {
+    min-height: 44px;
+    padding: 0.625rem 0.875rem;
+    font-size: 0.875rem;
+  }
+  
+  /* Compact cards */
+  .rounded-xl {
+    @apply rounded-lg;
   }
 }
 
@@ -356,5 +408,33 @@ select:focus {
   
   html {
     scroll-behavior: auto;
+  }
+}
+
+/* Better mobile viewport handling */
+@supports (-webkit-touch-callout: none) {
+  /* iOS Safari specific styles */
+  .min-h-screen {
+    min-height: -webkit-fill-available;
+  }
+}
+
+/* Landscape mobile optimization */
+@media (max-height: 500px) and (orientation: landscape) {
+  .min-h-screen {
+    min-height: 100vh;
+  }
+  
+  /* Reduce vertical spacing in landscape */
+  .py-8 {
+    @apply py-4;
+  }
+  
+  .py-12 {
+    @apply py-6;
+  }
+  
+  .py-20 {
+    @apply py-8;
   }
 }

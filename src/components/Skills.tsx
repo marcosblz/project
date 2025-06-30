@@ -36,30 +36,30 @@ const Skills: React.FC = () => {
   const softSkills: SoftSkill[] = [
     {
       name: "Trabajo en Equipo",
-      icon: <Users className="w-4 sm:w-5 lg:w-6 h-4 sm:h-5 lg:h-6" />,
+      icon: <Users className="w-5 sm:w-6 lg:w-7 h-5 sm:h-6 lg:h-7" />,
       description: "Colaboración efectiva y comunicación clara con equipos multidisciplinarios"
     },
     {
       name: "Comunicación",
-      icon: <MessageCircle className="w-4 sm:w-5 lg:w-6 h-4 sm:h-5 lg:h-6" />,
+      icon: <MessageCircle className="w-5 sm:w-6 lg:w-7 h-5 sm:h-6 lg:h-7" />,
       description: "Habilidad para explicar conceptos técnicos de manera comprensible"
     },
     {
       name: "Resolución de Problemas",
-      icon: <Lightbulb className="w-4 sm:w-5 lg:w-6 h-4 sm:h-5 lg:h-6" />,
+      icon: <Lightbulb className="w-5 sm:w-6 lg:w-7 h-5 sm:h-6 lg:h-7" />,
       description: "Enfoque analítico y creativo para encontrar soluciones eficientes"
     },
     {
       name: "Orientación a Objetivos",
-      icon: <Target className="w-4 sm:w-5 lg:w-6 h-4 sm:h-5 lg:h-6" />,
+      icon: <Target className="w-5 sm:w-6 lg:w-7 h-5 sm:h-6 lg:h-7" />,
       description: "Foco en resultados y cumplimiento de deadlines de forma consistente"
     }
   ];
 
   const skillCategories = [
-    { name: "Frontend", icon: <Code className="w-4 sm:w-5 lg:w-6 h-4 sm:h-5 lg:h-6" />, color: "text-blue-500" },
-    { name: "Backend", icon: <Database className="w-4 sm:w-5 lg:w-6 h-4 sm:h-5 lg:h-6" />, color: "text-green-500" },
-    { name: "Tools", icon: <Globe className="w-4 sm:w-5 lg:w-6 h-4 sm:h-5 lg:h-6" />, color: "text-purple-500" }
+    { name: "Frontend", icon: <Code className="w-5 sm:w-6 lg:w-7 h-5 sm:h-6 lg:h-7" />, color: "text-blue-500" },
+    { name: "Backend", icon: <Database className="w-5 sm:w-6 lg:w-7 h-5 sm:h-6 lg:h-7" />, color: "text-green-500" },
+    { name: "Tools", icon: <Globe className="w-5 sm:w-6 lg:w-7 h-5 sm:h-6 lg:h-7" />, color: "text-purple-500" }
   ];
 
   useEffect(() => {
@@ -68,9 +68,9 @@ const Skills: React.FC = () => {
       { width: 0 },
       {
         width: (i, target) => target.getAttribute('data-width') + '%',
-        duration: 1.2,
+        duration: 1,
         ease: 'power2.out',
-        stagger: 0.05,
+        stagger: 0.04,
         scrollTrigger: {
           trigger: '.technical-skills',
           start: 'top 80%',
@@ -81,12 +81,12 @@ const Skills: React.FC = () => {
 
     // Animate soft skills
     gsap.fromTo('.soft-skill-card',
-      { scale: 0.8, opacity: 0 },
+      { scale: 0.9, opacity: 0 },
       {
         scale: 1,
         opacity: 1,
         duration: 0.4,
-        stagger: 0.1,
+        stagger: 0.08,
         ease: 'back.out(1.7)',
         scrollTrigger: {
           trigger: '.soft-skills',
@@ -103,34 +103,34 @@ const Skills: React.FC = () => {
 
   return (
     <section id="habilidades" className="skills-section py-8 sm:py-12 lg:py-20">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
         <div className="text-center mb-8 sm:mb-12 lg:mb-16">
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-foreground mb-2 sm:mb-4">Habilidades</h2>
-          <p className="text-base sm:text-lg lg:text-xl text-muted-foreground">Competencias técnicas y blandas que aporto a cada proyecto</p>
+          <p className="text-base sm:text-lg lg:text-xl text-muted-foreground px-4 sm:px-0">Competencias técnicas y blandas que aporto a cada proyecto</p>
         </div>
 
         {/* Technical Skills */}
         <div className="technical-skills mb-10 sm:mb-12 lg:mb-20">
-          <h3 className="text-lg sm:text-xl lg:text-2xl font-bold text-foreground mb-4 sm:mb-6 lg:mb-8 text-center">Habilidades Técnicas</h3>
+          <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-foreground mb-6 sm:mb-8 text-center">Habilidades Técnicas</h3>
           
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8 max-w-6xl mx-auto">
             {skillCategories.map((category) => (
-              <div key={category.name} className="bg-card/80 backdrop-blur-sm border border-border rounded-xl p-3 sm:p-4 lg:p-6 shadow-lg">
-                <div className="flex items-center mb-3 sm:mb-4 lg:mb-6">
-                  <div className={`${category.color} mr-2 sm:mr-3`}>
+              <div key={category.name} className="bg-card/80 backdrop-blur-sm border border-border rounded-xl p-4 sm:p-5 lg:p-6 shadow-lg mx-2 sm:mx-0">
+                <div className="flex items-center mb-4 sm:mb-5 lg:mb-6">
+                  <div className={`${category.color} mr-3`}>
                     {category.icon}
                   </div>
-                  <h4 className="text-base sm:text-lg lg:text-xl font-bold text-foreground">{category.name}</h4>
+                  <h4 className="text-lg sm:text-xl lg:text-2xl font-bold text-foreground">{category.name}</h4>
                 </div>
                 
-                <div className="space-y-2 sm:space-y-3 lg:space-y-4">
+                <div className="space-y-3 sm:space-y-4">
                   {getSkillsByCategory(category.name).map((skill, index) => (
                     <div key={index} className="skill-item">
-                      <div className="flex justify-between items-center mb-1 sm:mb-2">
-                        <span className="text-xs sm:text-sm font-medium text-foreground">{skill.name}</span>
-                        <span className="text-xs sm:text-sm text-muted-foreground">{skill.level}%</span>
+                      <div className="flex justify-between items-center mb-2">
+                        <span className="text-sm sm:text-base font-medium text-foreground">{skill.name}</span>
+                        <span className="text-sm text-muted-foreground">{skill.level}%</span>
                       </div>
-                      <div className="w-full bg-muted rounded-full h-1.5 sm:h-2 overflow-hidden">
+                      <div className="w-full bg-muted rounded-full h-2 overflow-hidden">
                         <div
                           className="skill-bar h-full rounded-full transition-all duration-300"
                           data-width={skill.level}
@@ -147,18 +147,18 @@ const Skills: React.FC = () => {
 
         {/* Soft Skills */}
         <div className="soft-skills">
-          <h3 className="text-lg sm:text-xl lg:text-2xl font-bold text-foreground mb-4 sm:mb-6 lg:mb-8 text-center">Habilidades Blandas</h3>
+          <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-foreground mb-6 sm:mb-8 text-center">Habilidades Blandas</h3>
           
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 lg:gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5 lg:gap-6 max-w-6xl mx-auto">
             {softSkills.map((skill, index) => (
               <div
                 key={index}
-                className="soft-skill-card bg-card/80 backdrop-blur-sm border border-border rounded-xl p-3 sm:p-4 lg:p-6 text-center shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 hover:bg-accent/5 group"
+                className="soft-skill-card bg-card/80 backdrop-blur-sm border border-border rounded-xl p-4 sm:p-5 lg:p-6 text-center shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 hover:bg-accent/5 group mx-2 sm:mx-0"
               >
-                <div className="w-10 sm:w-12 lg:w-16 h-10 sm:h-12 lg:h-16 bg-accent/10 rounded-full flex items-center justify-center mx-auto mb-2 sm:mb-3 lg:mb-4 group-hover:bg-accent group-hover:text-white transition-all duration-300">
+                <div className="w-12 sm:w-14 lg:w-16 h-12 sm:h-14 lg:h-16 bg-accent/10 rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4 group-hover:bg-accent group-hover:text-white transition-all duration-300">
                   {skill.icon}
                 </div>
-                <h4 className="text-sm sm:text-base lg:text-lg font-bold text-foreground mb-1 sm:mb-2 lg:mb-3">{skill.name}</h4>
+                <h4 className="text-base sm:text-lg lg:text-xl font-bold text-foreground mb-2 sm:mb-3">{skill.name}</h4>
                 <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">{skill.description}</p>
               </div>
             ))}
@@ -166,9 +166,9 @@ const Skills: React.FC = () => {
         </div>
 
         {/* Skills Summary */}
-        <div className="mt-8 sm:mt-12 lg:mt-16 bg-gradient-to-r from-accent/10 to-secondary/10 rounded-2xl p-4 sm:p-6 lg:p-8 text-center">
-          <h3 className="text-lg sm:text-xl lg:text-2xl font-bold text-foreground mb-2 sm:mb-4">Enfoque de Desarrollo</h3>
-          <p className="text-sm sm:text-base lg:text-lg text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+        <div className="mt-10 sm:mt-12 lg:mt-16 bg-gradient-to-r from-accent/10 to-secondary/10 rounded-2xl p-5 sm:p-6 lg:p-8 text-center mx-2 sm:mx-0">
+          <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-foreground mb-3 sm:mb-4">Enfoque de Desarrollo</h3>
+          <p className="text-sm sm:text-base lg:text-lg text-muted-foreground max-w-4xl mx-auto leading-relaxed">
             Mi enfoque se centra en crear código limpio, mantenible y escalable. Aplico principios SOLID, 
             patrones de diseño y mejores prácticas de la industria para entregar soluciones robustas que 
             impulsen el crecimiento del negocio.

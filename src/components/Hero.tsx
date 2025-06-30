@@ -42,13 +42,13 @@ const Hero: React.FC = () => {
   };
 
   return (
-    <section id="inicio" className="hero-section min-h-screen flex items-center justify-center pt-16 px-4 relative">
+    <section id="inicio" className="hero-section min-h-screen flex items-center justify-center pt-16 px-3 sm:px-4 lg:px-8 relative">
       <div className="max-w-7xl mx-auto w-full">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-16 items-center">
           {/* Profile Image */}
           <div className="flex justify-center lg:justify-end order-1 lg:order-1">
             <div className="relative hero-image">
-              <div className="w-48 sm:w-64 md:w-72 lg:w-80 xl:w-96 h-auto rounded-2xl border-4 border-accent/30 shadow-2xl overflow-hidden 
+              <div className="w-40 sm:w-52 md:w-64 lg:w-80 xl:w-96 h-auto rounded-2xl border-4 border-accent/30 shadow-2xl overflow-hidden 
                       bg-gradient-to-br from-accent/20 to-secondary/20 p-2 sm:p-3 lg:p-4">
                 <img
                   src="/marcos.jpg"
@@ -60,29 +60,31 @@ const Hero: React.FC = () => {
           </div>
 
           {/* Content */}
-          <div className="text-center lg:text-left space-y-3 sm:space-y-4 lg:space-y-6 hero-content order-2 lg:order-2">
-            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl 2xl:text-7xl font-bold text-foreground leading-tight">
-              Hola, soy
-              <span className="block text-accent font-bold mt-1">
+          <div className="text-center lg:text-left space-y-4 sm:space-y-5 lg:space-y-6 hero-content order-2 lg:order-2 px-2 sm:px-0">
+            <div className="space-y-2 sm:space-y-3">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-foreground leading-tight">
+                Hola, soy
+              </h1>
+              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-black text-accent leading-none">
                 Marcos
-              </span>
-            </h1>
+              </h1>
+            </div>
 
             <h2 className="text-lg sm:text-xl md:text-2xl lg:text-3xl text-muted-foreground">
               Desarrollador Back-End
             </h2>
 
-            <div className="inline-block bg-card/80 backdrop-blur-sm border border-border rounded-lg px-3 sm:px-4 lg:px-6 py-2 sm:py-3 lg:py-4 max-w-xs sm:max-w-sm lg:max-w-md mx-auto lg:mx-0">
+            <div className="bg-card/80 backdrop-blur-sm border border-border rounded-lg px-4 sm:px-5 lg:px-6 py-3 sm:py-4 lg:py-5 mx-auto lg:mx-0 max-w-sm sm:max-w-md lg:max-w-lg">
               <p className="text-sm sm:text-base lg:text-lg text-muted-foreground italic leading-relaxed">
                 Me gusta pensar y pasarlo a código. Siempre enfocado en hacerlo mejor y aprender algo nuevo cada día.
               </p>
             </div>
 
-            <div className="flex flex-col sm:flex-row gap-3 lg:gap-4 justify-center lg:justify-start pt-2 sm:pt-4">
+            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center lg:justify-start pt-2 sm:pt-4 max-w-sm sm:max-w-none mx-auto lg:mx-0">
               <button
                 onClick={downloadCV}
-                className="inline-flex items-center justify-center px-4 sm:px-6 lg:px-8 py-2.5 sm:py-3 lg:py-4 bg-accent hover:bg-accent/90 text-white text-sm sm:text-base lg:text-lg 
-                   font-medium rounded-lg transition-all duration-300 hover:scale-105 hover:shadow-lg group"
+                className="flex items-center justify-center px-5 sm:px-6 lg:px-8 py-3 sm:py-3.5 lg:py-4 bg-accent hover:bg-accent/90 text-white text-sm sm:text-base lg:text-lg 
+                   font-medium rounded-lg transition-all duration-300 hover:scale-105 hover:shadow-lg group min-h-[48px]"
               >
                 <Download className="w-4 sm:w-5 lg:w-6 h-4 sm:h-5 lg:h-6 mr-2 group-hover:animate-bounce" />
                 Descargar CV
@@ -90,8 +92,8 @@ const Hero: React.FC = () => {
 
               <button
                 onClick={scrollToProjects}
-                className="inline-flex items-center justify-center px-4 sm:px-6 lg:px-8 py-2.5 sm:py-3 lg:py-4 bg-accent hover:bg-accent/90 text-white text-sm sm:text-base lg:text-lg 
-                   font-medium rounded-lg transition-all duration-300 hover:scale-105 hover:shadow-lg group"
+                className="flex items-center justify-center px-5 sm:px-6 lg:px-8 py-3 sm:py-3.5 lg:py-4 bg-secondary hover:bg-secondary/80 text-secondary-foreground text-sm sm:text-base lg:text-lg 
+                   font-medium rounded-lg transition-all duration-300 hover:scale-105 hover:shadow-lg group border border-border min-h-[48px]"
               >
                 Ver Proyectos
                 <ArrowDown className="w-4 sm:w-5 lg:w-6 h-4 sm:h-5 lg:h-6 ml-2 group-hover:animate-bounce" />
@@ -100,7 +102,7 @@ const Hero: React.FC = () => {
           </div>
         </div>
 
-        {/* Scroll Indicator - Only in Hero section and hidden on mobile */}
+        {/* Scroll Indicator - Only on desktop */}
         <div className="scroll-indicator absolute bottom-6 sm:bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce hidden lg:block">
           <div className="w-5 sm:w-6 h-8 sm:h-10 border-2 border-accent rounded-full flex justify-center">
             <div className="w-1 h-2 sm:h-3 bg-accent rounded-full mt-2 animate-pulse"></div>
