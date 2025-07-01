@@ -19,12 +19,12 @@ const Experience: React.FC = () => {
   const experiences: ExperienceItem[] = [
     {
       id: 1,
-      date: "2022 - Presente",
-      position: "Senior Front-End Developer",
-      company: "TechInnovate Solutions",
+      date: "Junio 2024 - Presente",
+      position: "Programador Groovy",
+      company: "Servinform",
       location: "Madrid, España",
-      description: "Lidero el desarrollo de aplicaciones web complejas usando React y TypeScript. Mentorizo a desarrolladores junior y colaboro estrechamente con el equipo de UX/UI para crear experiencias de usuario excepcionales.",
-      technologies: ["React", "TypeScript", "Next.js", "Tailwind CSS", "GraphQL"]
+      description: "Desarrollé una aplicación web a medida que simplifica los procesos internos. Con Groovy y JavaScript implementé justo lo que el cliente necesitaba, mejorando la productividad de todos los departamentos. Me encargué tanto del front-end como del back-end e incluso añadí funcionalidades de IA. ¿El resultado? Entre un 30% y un 50% de ahorro en tiempo de trabajo para el cliente.",
+      technologies: ["Groovy", "JavaScript", "HTML", "CSS", "Python"]
     },
     {
       id: 2,
@@ -86,7 +86,7 @@ const Experience: React.FC = () => {
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-8 sm:mb-12 lg:mb-16">
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-foreground mb-2 sm:mb-4">Experiencia Profesional</h2>
-          <p className="text-base sm:text-lg lg:text-xl text-muted-foreground">Mi trayectoria en el desarrollo front-end</p>
+          <p className="text-base sm:text-lg lg:text-xl text-muted-foreground">Mi trayectoria en el desarrollo de software</p>
         </div>
 
         <div className="experience-grid relative">
