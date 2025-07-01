@@ -177,12 +177,12 @@ const About: React.FC = () => {
           {currentOptions.length > 0 && (
             <div className="p-3 sm:p-4 lg:p-6 border-t border-border bg-muted/20">
               <p className="text-xs sm:text-sm text-muted-foreground mb-2 sm:mb-3">Pregúntame sobre:</p>
-              <div className="flex flex-col gap-2">
+              <div className="flex flex-wrap gap-2">
                 {currentOptions.slice(0, 3).map((option) => (
                   <button
                     key={option.id}
                     onClick={() => handleOptionClick(option)}
-                    className="chat-option px-2 sm:px-3 lg:px-4 py-1.5 sm:py-2 bg-accent/10 hover:bg-accent hover:text-white text-accent rounded-full text-xs sm:text-sm font-medium transition-all duration-300 hover:scale-105 border border-accent/20 text-left"
+                    className="chat-option inline-flex items-center px-2 sm:px-3 lg:px-4 py-1.5 sm:py-2 bg-accent/10 hover:bg-accent hover:text-white text-accent rounded-full text-xs sm:text-sm font-medium transition-all duration-300 hover:scale-105 border border-accent/20"
                   >
                     {option.text}
                   </button>
