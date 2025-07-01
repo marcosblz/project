@@ -40,7 +40,7 @@ const Navbar: React.FC = () => {
     const waveInterval = setInterval(logoWave, 3000);
 
     // Animate name letters on load
-    gsap.fromTo('.name-letter',
+    gsap.fromTo('.letter-wrap',
       { y: 20, opacity: 0 },
       { 
         y: 0, 
@@ -52,40 +52,50 @@ const Navbar: React.FC = () => {
       }
     );
 
-    // Wave animation for name letters every 3 seconds
-    const nameWave = () => {
-      gsap.to('.name-letter', {
-        y: -10,
+    // Ola "bounce" cada 3 segundos sobre los wrappers de las letras
+    const wraps = document.querySelectorAll(".letter-wrap");
+    gsap.timeline({
+      repeat: -1,
+      repeatDelay: 3,
+    })
+      .to(wraps, {
+        y: -15,
         duration: 0.3,
+        ease: "power1.out",
         stagger: 0.1,
-        ease: 'power2.out',
-        yoyo: true,
-        repeat: 1
-      });
-    };
+      })
+      .to(
+        wraps,
+        {
+          y: 0,
+          duration: 0.6,
+          ease: "bounce.out",
+          stagger: 0.1,
+        },
+        "-=0.3"
+      );
 
-    const nameWaveInterval = setInterval(nameWave, 3000);
-
-    // Individual letter bounce on hover
-    const letters = document.querySelectorAll('.name-letter');
-    letters.forEach(letter => {
-      const letterElement = letter as HTMLElement;
-      
-      letterElement.addEventListener('mouseenter', () => {
-        gsap.to(letterElement, {
-          y: -15,
-          duration: 0.3,
-          ease: 'power2.out',
-          yoyo: true,
-          repeat: 1
-        });
+    // Rebote individual al hover de cada letra interna
+    const letters = document.querySelectorAll(".logo-letter");
+    letters.forEach((letter) => {
+      letter.addEventListener("mouseenter", () => {
+        gsap.killTweensOf(letter);
+        gsap
+          .timeline()
+          .to(letter, {
+            y: -15,
+            duration: 0.15,
+            ease: "power1.out",
+          })
+          .to(letter, {
+            y: 0,
+            duration: 0.4,
+            ease: "bounce.out",
+          });
       });
     });
 
-    return () => {
-      clearInterval(waveInterval);
-      clearInterval(nameWaveInterval);
-    };
+    return () => clearInterval(waveInterval);
   }, []);
 
   const toggleTheme = () => {
@@ -132,12 +142,16 @@ const Navbar: React.FC = () => {
             </div>
             <div className="flex items-center">
               {['M', 'a', 'r', 'c', 'o', 's'].map((letter, index) => (
-                <span
+                <div
                   key={index}
-                  className="name-letter text-xl font-bold text-foreground transition-colors duration-300 cursor-pointer select-none"
+                  className="letter-wrap"
                 >
-                  {letter}
-                </span>
+                  <span
+                    className="logo-letter text-xl font-bold text-foreground hover:text-accent transition-colors duration-300 cursor-pointer select-none block"
+                  >
+                    {letter}
+                  </span>
+                </div>
               ))}
             </div>
           </div>
