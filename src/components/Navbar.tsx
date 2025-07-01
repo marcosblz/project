@@ -52,28 +52,34 @@ const Navbar: React.FC = () => {
       }
     );
 
-    // Ola "bounce" cada 3 segundos sobre los wrappers de las letras
-    const wraps = document.querySelectorAll(".letter-wrap");
-    gsap.timeline({
-      repeat: -1,
-      repeatDelay: 3,
-    })
-      .to(wraps, {
-        y: -15,
-        duration: 0.3,
-        ease: "power1.out",
-        stagger: 0.1,
+    // Esperar a que termine la animación inicial antes de empezar la ola
+    gsap.delayedCall(1.5, () => {
+      // Asegurar posición inicial
+      const wraps = document.querySelectorAll(".letter-wrap");
+      gsap.set(wraps, { y: 0 });
+      
+      // Ola "bounce" cada 3 segundos sobre los wrappers de las letras
+      gsap.timeline({
+        repeat: -1,
+        repeatDelay: 3,
       })
-      .to(
-        wraps,
-        {
-          y: 0,
-          duration: 0.6,
-          ease: "bounce.out",
+        .to(wraps, {
+          y: -15,
+          duration: 0.3,
+          ease: "power1.out",
           stagger: 0.1,
-        },
-        "-=0.3"
-      );
+        })
+        .to(
+          wraps,
+          {
+            y: 0,
+            duration: 0.6,
+            ease: "bounce.out",
+            stagger: 0.1,
+          },
+          "-=0.3"
+        );
+    });
 
     // Rebote individual al hover de cada letra interna
     const letters = document.querySelectorAll(".logo-letter");
@@ -95,7 +101,14 @@ const Navbar: React.FC = () => {
       });
     });
 
-    return () => clearInterval(waveInterval);
+    return () => {
+      clearInterval(waveInterval);
+      // Cleanup event listeners
+      const letters = document.querySelectorAll(".logo-letter");
+      letters.forEach((letter) => {
+        letter.removeEventListener("mouseenter", () => {});
+      });
+    };
   }, []);
 
   const toggleTheme = () => {
