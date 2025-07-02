@@ -24,7 +24,7 @@ const Experience: React.FC = () => {
       company: "Servinform",
       location: "Madrid, España",
       description: "Desarrollé en un SaaS procesos internos, hechos con Groovy y JavaScript justo como el cliente necesitaba para mejorar la productividad de sus departamentos. Me encargué tanto del front-end como del back-end e incluso añadí funcionalidades de IA. ¿El resultado? Entre un 30% y un 50% de ahorro en tiempo de trabajo.",
-      technologies: ["Groovy", "JavaScript", "HTML", "CSS", "Python", "API"]
+      technologies: ["Groovy", "JavaScript", "HTML", "CSS", "Python", "API", "IA"]
     },
     {
       id: 2,
