@@ -89,7 +89,6 @@ const Education: React.FC = () => {
   "Aprendizaje autodidacta",
   "Exigencia y calidad",
   "Mentalidad de mejora continua",
-  "Conexión entre áreas técnicas"
 ];
 
 
