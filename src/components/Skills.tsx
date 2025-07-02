@@ -1,5 +1,5 @@
-import React, { useEffect, useRef } from 'react';
-import { Server, Database, Code, Cloud, Shield, Zap, GitBranch, Terminal, Cpu, Network } from 'lucide-react';
+import React, { useEffect } from 'react';
+import { Server, Database, Code, Cloud, Shield, Zap, GitBranch, Terminal, Cpu } from 'lucide-react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
@@ -20,8 +20,6 @@ interface SoftSkill {
 }
 
 const Skills: React.FC = () => {
-  const svgRef = useRef<SVGSVGElement>(null);
-
   // Backend-focused tech stack based on experience and studies
   const techStacks: TechStack[] = [
     {
@@ -58,13 +56,6 @@ const Skills: React.FC = () => {
       color: "#EF4444",
       technologies: ["Git", "GitHub", "IntelliJ IDEA", "VS Code", "Postman", "Maven"],
       description: "Herramientas esenciales para desarrollo y colaboración"
-    },
-    {
-      category: "Architecture & Design",
-      icon: <Network className="w-6 h-6" />,
-      color: "#06B6D4",
-      technologies: ["Microservices", "Design Patterns", "SOLID Principles", "Clean Architecture"],
-      description: "Diseño de sistemas escalables y mantenibles"
     }
   ];
 
@@ -109,30 +100,6 @@ const Skills: React.FC = () => {
         }
       }
     );
-
-    // Animate SVG paths
-    if (svgRef.current) {
-      const paths = svgRef.current.querySelectorAll('path');
-      paths.forEach((path, index) => {
-        const length = (path as SVGPathElement).getTotalLength();
-        gsap.set(path, {
-          strokeDasharray: length,
-          strokeDashoffset: length
-        });
-        
-        gsap.to(path, {
-          strokeDashoffset: 0,
-          duration: 2,
-          delay: index * 0.2,
-          ease: 'power2.out',
-          scrollTrigger: {
-            trigger: '.skills-visualization',
-            start: 'top 70%',
-            toggleActions: 'play none none reverse'
-          }
-        });
-      });
-    }
 
     // Animate soft skills
     gsap.fromTo('.soft-skill-item',
@@ -198,58 +165,6 @@ const Skills: React.FC = () => {
               </div>
             </div>
           ))}
-        </div>
-
-        {/* Skills Visualization */}
-        <div className="skills-visualization mb-12 lg:mb-20">
-          <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-foreground mb-8 text-center">
-            Arquitectura de Desarrollo
-          </h3>
-          
-          <div className="bg-card/50 backdrop-blur-sm border border-border rounded-2xl p-6 sm:p-8 lg:p-12 overflow-hidden">
-            <svg
-              ref={svgRef}
-              viewBox="0 0 800 400"
-              className="w-full h-auto max-h-96"
-              style={{ filter: 'drop-shadow(0 4px 8px rgba(0,0,0,0.1))' }}
-            >
-              {/* Backend Core */}
-              <circle cx="400" cy="200" r="60" fill="none" stroke="#10B981" strokeWidth="3" opacity="0.8" />
-              <text x="400" y="205" textAnchor="middle" className="fill-foreground text-sm font-bold">Backend Core</text>
-              
-              {/* Database Layer */}
-              <circle cx="200" cy="150" r="40" fill="none" stroke="#3B82F6" strokeWidth="2" opacity="0.7" />
-              <text x="200" y="155" textAnchor="middle" className="fill-foreground text-xs">Database</text>
-              
-              {/* API Layer */}
-              <circle cx="600" cy="150" r="40" fill="none" stroke="#F59E0B" strokeWidth="2" opacity="0.7" />
-              <text x="600" y="155" textAnchor="middle" className="fill-foreground text-xs">APIs</text>
-              
-              {/* DevOps */}
-              <circle cx="300" cy="300" r="35" fill="none" stroke="#8B5CF6" strokeWidth="2" opacity="0.7" />
-              <text x="300" y="305" textAnchor="middle" className="fill-foreground text-xs">DevOps</text>
-              
-              {/* Architecture */}
-              <circle cx="500" cy="300" r="35" fill="none" stroke="#06B6D4" strokeWidth="2" opacity="0.7" />
-              <text x="500" y="305" textAnchor="middle" className="fill-foreground text-xs">Architecture</text>
-              
-              {/* Connections */}
-              <path d="M 240 150 L 360 180" stroke="#10B981" strokeWidth="2" fill="none" opacity="0.6" />
-              <path d="M 560 150 L 440 180" stroke="#10B981" strokeWidth="2" fill="none" opacity="0.6" />
-              <path d="M 335 285 L 375 230" stroke="#10B981" strokeWidth="2" fill="none" opacity="0.6" />
-              <path d="M 465 285 L 425 230" stroke="#10B981" strokeWidth="2" fill="none" opacity="0.6" />
-              
-              {/* Data Flow Arrows */}
-              <defs>
-                <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
-                  <polygon points="0 0, 10 3.5, 0 7" fill="#10B981" opacity="0.8" />
-                </marker>
-              </defs>
-              
-              <path d="M 240 170 Q 320 220 360 200" stroke="#10B981" strokeWidth="1.5" fill="none" opacity="0.5" markerEnd="url(#arrowhead)" />
-              <path d="M 440 200 Q 520 220 560 170" stroke="#10B981" strokeWidth="1.5" fill="none" opacity="0.5" markerEnd="url(#arrowhead)" />
-            </svg>
-          </div>
         </div>
 
         {/* Soft Skills */}
