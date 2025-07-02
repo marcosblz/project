@@ -32,7 +32,7 @@ const Experience: React.FC = () => {
       position: "Desarrollador Backend Python Django",
       company: "Zener",
       location: "Madrid, España",
-      description: "Tras una formación en Django y Android, me encomendaban tareas para mejorar la página web interna",
+      description: "Prácticas de GFGS - DAM: Tras una formación en Django y Android, me encomendaban tareas para mejorar la página web interna.",
       technologies: ["Python", "Django", "Webpack", "REST APIs", "Docker", "MySQL", "Android Studio"]
     },
     {
@@ -41,7 +41,7 @@ const Experience: React.FC = () => {
       position: "Gestor de contenido WEB",
       company: "SuperParts",
       location: "Madrid, España",
-      description: "Comencé mi carrera profesional despienzando portátiles y equipos informáticos varios para posteriormente añadirlas a la web de venta y ubicarlas en el almacén.",
+      description: "Prácticas de GFGM - SMR: Comencé mi carrera profesional despienzando portátiles y equipos informáticos varios para posteriormente añadirlas a la web de venta y ubicarlas en el almacén.",
       technologies: ["Hardware", "PhotoShop"]
     }
   ];
