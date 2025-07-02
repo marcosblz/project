@@ -23,8 +23,8 @@ const Experience: React.FC = () => {
       position: "Programador Groovy",
       company: "Servinform",
       location: "Madrid, España",
-      description: "Desarrollé una aplicación web a medida que simplifica los procesos internos. Con Groovy y JavaScript implementé justo lo que el cliente necesitaba, mejorando la productividad de todos los departamentos. Me encargué tanto del front-end como del back-end e incluso añadí funcionalidades de IA. ¿El resultado? Entre un 30% y un 50% de ahorro en tiempo de trabajo para el cliente.",
-      technologies: ["Groovy", "JavaScript", "HTML", "CSS", "Python"]
+      description: "Desarrollé en un SaaS procesos internos, hechos con Groovy y JavaScript justo como el cliente necesitaba para mejorar la productividad de sus departamentos. Me encargué tanto del front-end como del back-end e incluso añadí funcionalidades de IA. ¿El resultado? Entre un 30% y un 50% de ahorro en tiempo de trabajo.",
+      technologies: ["Groovy", "JavaScript", "HTML", "CSS", "Python", "API"]
     },
     {
       id: 2,
