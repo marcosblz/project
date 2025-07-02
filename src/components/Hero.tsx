@@ -246,7 +246,7 @@ const Hero: React.FC = () => {
                   }}
                 >
                   <img
-                    src="/marcos.jpg"
+                    src="/marcos2.jpg"
                     alt="Marcos - Desarrollador Back-End"
                     className="w-full h-full object-cover object-center rounded-2xl"
                     style={{
