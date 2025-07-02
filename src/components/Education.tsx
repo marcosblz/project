@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Calendar, Award, BookOpen, Target, GraduationCap, FileText, ChevronRight } from 'lucide-react';
+import { Calendar, Award, BookOpen, Target, GraduationCap, FileText, ChevronRight, ChevronDown } from 'lucide-react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
@@ -18,6 +18,7 @@ interface EducationItem {
 const Education: React.FC = () => {
   const [showAllEducation, setShowAllEducation] = useState(false);
   const [showAllCertifications, setShowAllCertifications] = useState(false);
+  const [showAllCompetencies, setShowAllCompetencies] = useState(false);
 
   const educationItems: EducationItem[] = [
     {
@@ -80,19 +81,24 @@ const Education: React.FC = () => {
   ];
 
   const skills = [
-  "Razonamiento lógico",
-  "Comprensión profunda",
-  "Rápida adaptación",
-  "Flexibilidad técnica",
-  "Comunicación clara",
-  "Trabajo en equipo",
-  "Aprendizaje autodidacta",
-  "Exigencia y calidad",
-  "Mentalidad de mejora continua",
-];
+    "Razonamiento lógico",
+    "Comprensión profunda",
+    "Rápida adaptación",
+    "Flexibilidad técnica",
+    "Comunicación clara",
+    "Trabajo en equipo",
+    "Aprendizaje autodidacta",
+    "Exigencia y calidad",
+    "Mentalidad de mejora continua",
+    "Resolución de problemas",
+    "Pensamiento crítico",
+    "Gestión del tiempo",
+    "Liderazgo técnico",
+    "Orientación a resultados",
+    "Creatividad e innovación"
+  ];
 
-
-  const latestEducation = educationItems[1]; // Máster más reciente
+  const latestEducation = educationItems[0]; // Más reciente
   const latestCertification = certificationItems[0]; // Certificación más reciente
 
   useEffect(() => {
@@ -233,12 +239,26 @@ const Education: React.FC = () => {
             <div className="sidebar-content lg:sticky lg:top-24 space-y-4 sm:space-y-6">
               {/* Key Competencies */}
               <div className="bg-background/80 backdrop-blur-sm border border-border rounded-xl p-3 sm:p-4 lg:p-6 shadow-lg">
-                <div className="flex items-center mb-3 sm:mb-4">
-                  <Target className="w-4 sm:w-5 lg:w-6 h-4 sm:h-5 lg:h-6 text-accent mr-2" />
-                  <h3 className="text-sm sm:text-base lg:text-lg font-bold text-foreground">Competencias Clave</h3>
+                <div className="flex items-center justify-between mb-3 sm:mb-4">
+                  <div className="flex items-center">
+                    <Target className="w-4 sm:w-5 lg:w-6 h-4 sm:h-5 lg:h-6 text-accent mr-2" />
+                    <h3 className="text-sm sm:text-base lg:text-lg font-bold text-foreground">Competencias Clave</h3>
+                  </div>
+                  <button
+                    onClick={() => setShowAllCompetencies(!showAllCompetencies)}
+                    className="text-accent hover:text-accent/80 transition-colors duration-300"
+                  >
+                    {showAllCompetencies ? (
+                      <ChevronDown className="w-4 h-4" />
+                    ) : (
+                      <ChevronRight className="w-4 h-4" />
+                    )}
+                  </button>
                 </div>
-                <div className="space-y-1 sm:space-y-2">
-                  {skills.map((skill, index) => (
+
+                {/* Preview - First 6 competencies */}
+                <div className="space-y-1 sm:space-y-2 mb-3">
+                  {skills.slice(0, 6).map((skill, index) => (
                     <div
                       key={index}
                       className="flex items-center p-1.5 sm:p-2 rounded-lg hover:bg-accent/10 transition-colors duration-300"
@@ -248,6 +268,38 @@ const Education: React.FC = () => {
                     </div>
                   ))}
                 </div>
+
+                {/* Show All Competencies */}
+                {showAllCompetencies && (
+                  <div className="space-y-1 sm:space-y-2 mb-3 border-t border-border pt-3">
+                    {skills.slice(6).map((skill, index) => (
+                      <div
+                        key={index + 6}
+                        className="flex items-center p-1.5 sm:p-2 rounded-lg hover:bg-accent/10 transition-colors duration-300"
+                      >
+                        <div className="w-1.5 sm:w-2 h-1.5 sm:h-2 bg-accent rounded-full mr-2 sm:mr-3 flex-shrink-0"></div>
+                        <span className="text-muted-foreground text-xs sm:text-sm">{skill}</span>
+                      </div>
+                    ))}
+                  </div>
+                )}
+
+                <button
+                  onClick={() => setShowAllCompetencies(!showAllCompetencies)}
+                  className="flex items-center text-accent hover:text-accent/80 font-medium transition-colors duration-300 text-xs sm:text-sm w-full justify-center"
+                >
+                  {showAllCompetencies ? (
+                    <>
+                      Ver menos
+                      <ChevronDown className="w-3 sm:w-4 h-3 sm:h-4 ml-1" />
+                    </>
+                  ) : (
+                    <>
+                      Ver todas ({skills.length})
+                      <ChevronRight className="w-3 sm:w-4 h-3 sm:h-4 ml-1" />
+                    </>
+                  )}
+                </button>
               </div>
 
               {/* Continuous Learning */}
