@@ -24,25 +24,25 @@ const Experience: React.FC = () => {
       company: "Servinform",
       location: "Madrid, España",
       description: "Desarrollé en un SaaS procesos internos, hechos con Groovy y JavaScript justo como el cliente necesitaba para mejorar la productividad de sus departamentos. Me encargué tanto del front-end como del back-end e incluso añadí funcionalidades de IA. ¿El resultado? Entre un 30% y un 50% de ahorro en tiempo de trabajo.",
-      technologies: ["Groovy", "JavaScript", "HTML", "CSS", "Python", "API", "IA"]
+      technologies: ["Groovy", "JavaScript", "HTML", "CSS", "Python", "REST APIs", "IA"]
     },
     {
       id: 2,
-      date: "2021 - 2022",
-      position: "Front-End Developer",
-      company: "Digital Agency Pro",
-      location: "Barcelona, España",
-      description: "Desarrollé sitios web responsivos y aplicaciones web para clientes de diversos sectores. Implementé mejoras de rendimiento que resultaron en un aumento del 40% en la velocidad de carga.",
-      technologies: ["React", "JavaScript", "Sass", "Webpack", "REST APIs"]
+      date: "Abril 2023 - Junio 2023",
+      position: "Desarrollador Backend Python Django",
+      company: "Zener",
+      location: "Madrid, España",
+      description: "Tras una formación en Django y Android, me encomendaban tareas para mejorar la página web interna",
+      technologies: ["Python", "Django", "Webpack", "REST APIs", "Docker", "MySQL", "Android Studio"]
     },
     {
       id: 3,
-      date: "2020 - 2021",
-      position: "Junior Front-End Developer",
-      company: "StartupTech",
-      location: "Valencia, España",
-      description: "Comencé mi carrera profesional desarrollando componentes reutilizables y colaborando en la creación de la plataforma principal de la empresa. Aprendí las mejores prácticas de desarrollo ágil.",
-      technologies: ["HTML5", "CSS3", "JavaScript", "Vue.js", "Bootstrap"]
+      date: "Abril 2021 - Junio 2021",
+      position: "Gestor de contenido WEB",
+      company: "SuperParts",
+      location: "Madrid, España",
+      description: "Comencé mi carrera profesional despienzando portátiles y equipos informáticos varios para posteriormente añadirlas a la web de venta y ubicarlas en el almacén.",
+      technologies: ["Hardware", "PhotoShop"]
     }
   ];
 
