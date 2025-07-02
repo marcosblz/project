@@ -90,12 +90,7 @@ const Education: React.FC = () => {
     "Aprendizaje autodidacta",
     "Exigencia y calidad",
     "Mentalidad de mejora continua",
-    "Resolución de problemas",
-    "Pensamiento crítico",
-    "Gestión del tiempo",
-    "Liderazgo técnico",
-    "Orientación a resultados",
-    "Creatividad e innovación"
+    "Conexión entre áreas técnicas"
   ];
 
   const latestEducation = educationItems[0]; // Más reciente
@@ -239,26 +234,14 @@ const Education: React.FC = () => {
             <div className="sidebar-content lg:sticky lg:top-24 space-y-4 sm:space-y-6">
               {/* Key Competencies */}
               <div className="bg-background/80 backdrop-blur-sm border border-border rounded-xl p-3 sm:p-4 lg:p-6 shadow-lg">
-                <div className="flex items-center justify-between mb-3 sm:mb-4">
-                  <div className="flex items-center">
-                    <Target className="w-4 sm:w-5 lg:w-6 h-4 sm:h-5 lg:h-6 text-accent mr-2" />
-                    <h3 className="text-sm sm:text-base lg:text-lg font-bold text-foreground">Competencias Clave</h3>
-                  </div>
-                  <button
-                    onClick={() => setShowAllCompetencies(!showAllCompetencies)}
-                    className="text-accent hover:text-accent/80 transition-colors duration-300"
-                  >
-                    {showAllCompetencies ? (
-                      <ChevronDown className="w-4 h-4" />
-                    ) : (
-                      <ChevronRight className="w-4 h-4" />
-                    )}
-                  </button>
+                <div className="flex items-center mb-3 sm:mb-4">
+                  <Target className="w-4 sm:w-5 lg:w-6 h-4 sm:h-5 lg:h-6 text-accent mr-2" />
+                  <h3 className="text-sm sm:text-base lg:text-lg font-bold text-foreground">Competencias Clave</h3>
                 </div>
 
-                {/* Preview - First 6 competencies */}
-                <div className="space-y-1 sm:space-y-2 mb-3">
-                  {skills.slice(0, 6).map((skill, index) => (
+                {/* Show first 6 competencies by default */}
+                <div className="space-y-1 sm:space-y-2">
+                  {skills.slice(0, showAllCompetencies ? skills.length : 6).map((skill, index) => (
                     <div
                       key={index}
                       className="flex items-center p-1.5 sm:p-2 rounded-lg hover:bg-accent/10 transition-colors duration-300"
@@ -269,24 +252,10 @@ const Education: React.FC = () => {
                   ))}
                 </div>
 
-                {/* Show All Competencies */}
-                {showAllCompetencies && (
-                  <div className="space-y-1 sm:space-y-2 mb-3 border-t border-border pt-3">
-                    {skills.slice(6).map((skill, index) => (
-                      <div
-                        key={index + 6}
-                        className="flex items-center p-1.5 sm:p-2 rounded-lg hover:bg-accent/10 transition-colors duration-300"
-                      >
-                        <div className="w-1.5 sm:w-2 h-1.5 sm:h-2 bg-accent rounded-full mr-2 sm:mr-3 flex-shrink-0"></div>
-                        <span className="text-muted-foreground text-xs sm:text-sm">{skill}</span>
-                      </div>
-                    ))}
-                  </div>
-                )}
-
+                {/* Show/Hide button */}
                 <button
                   onClick={() => setShowAllCompetencies(!showAllCompetencies)}
-                  className="flex items-center text-accent hover:text-accent/80 font-medium transition-colors duration-300 text-xs sm:text-sm w-full justify-center"
+                  className="flex items-center text-accent hover:text-accent/80 font-medium transition-colors duration-300 text-xs sm:text-sm w-full justify-center mt-3 sm:mt-4"
                 >
                   {showAllCompetencies ? (
                     <>
