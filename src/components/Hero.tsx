@@ -202,35 +202,45 @@ const Hero: React.FC = () => {
               {/* Glow Effect */}
               <div
                 ref={glowRef}
-                className="absolute inset-0 rounded-2xl bg-gradient-to-r from-accent/30 to-secondary/30 blur-xl opacity-60 -z-10 scale-110"
+                className="absolute inset-0 rounded-2xl bg-gradient-to-r from-accent/20 to-secondary/20 blur-xl opacity-40 -z-10 scale-110"
               ></div>
               
               {/* Main Card Container */}
               <div
                 ref={cardRef}
-                className="relative w-48 sm:w-64 md:w-72 lg:w-80 xl:w-96 h-48 sm:h-64 md:h-72 lg:h-80 xl:h-96 rounded-2xl overflow-hidden cursor-pointer"
+                className="relative w-64 sm:w-72 md:w-80 lg:w-88 xl:w-96 h-80 sm:h-88 md:h-96 lg:h-[22rem] xl:h-[24rem] rounded-2xl overflow-hidden cursor-pointer"
                 style={{
                   transformStyle: 'preserve-3d',
                   transition: 'transform 0.1s ease-out'
                 }}
               >
-                {/* Background Layer */}
+                {/* Background Layer - Subtle geometric pattern */}
                 <div
                   ref={backgroundRef}
                   className="absolute inset-0 rounded-2xl"
                   style={{
-                    background: 'linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%)',
+                    background: 'linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(147, 51, 234, 0.1) 50%, rgba(236, 72, 153, 0.1) 100%)',
                     transform: 'translateZ(-30px) scale(1.1)',
-                    filter: 'blur(2px)'
+                    filter: 'blur(1px)'
                   }}
                 >
-                  <div className="absolute inset-0 bg-[url('https://images.pexels.com/photos/1103970/pexels-photo-1103970.jpeg?auto=compress&cs=tinysrgb&w=800')] bg-cover bg-center opacity-30 mix-blend-overlay"></div>
+                  {/* Geometric pattern overlay */}
+                  <div 
+                    className="absolute inset-0 opacity-20"
+                    style={{
+                      backgroundImage: `
+                        radial-gradient(circle at 25% 25%, rgba(59, 130, 246, 0.3) 0%, transparent 50%),
+                        radial-gradient(circle at 75% 75%, rgba(147, 51, 234, 0.3) 0%, transparent 50%),
+                        linear-gradient(45deg, transparent 40%, rgba(236, 72, 153, 0.1) 50%, transparent 60%)
+                      `
+                    }}
+                  ></div>
                 </div>
 
                 {/* Foreground Layer - Main Photo */}
                 <div
                   ref={foregroundRef}
-                  className="relative z-10 w-full h-full rounded-2xl border-4 border-accent/30 shadow-2xl overflow-hidden bg-gradient-to-br from-accent/20 to-secondary/20 p-2 sm:p-3 lg:p-4"
+                  className="relative z-10 w-full h-full rounded-2xl border-2 border-accent/20 shadow-2xl overflow-hidden"
                   style={{
                     transform: 'translateZ(0px)'
                   }}
@@ -240,8 +250,12 @@ const Hero: React.FC = () => {
                     alt="Marcos - Desarrollador Back-End"
                     className="w-full h-full object-cover object-center rounded-2xl"
                     style={{
-                      filter: 'contrast(1.1) saturate(1.1) brightness(1.05)'
+                      filter: 'contrast(1.05) saturate(1.05) brightness(1.02)',
+                      imageRendering: 'crisp-edges',
+                      WebkitImageRendering: 'crisp-edges'
                     }}
+                    loading="eager"
+                    decoding="sync"
                   />
                 </div>
 
@@ -250,23 +264,23 @@ const Hero: React.FC = () => {
                   ref={overlayRef}
                   className="absolute inset-0 rounded-2xl pointer-events-none z-20"
                   style={{
-                    background: 'linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 50%, rgba(0,0,0,0.1) 100%)',
+                    background: 'linear-gradient(135deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0) 50%, rgba(0,0,0,0.05) 100%)',
                     mixBlendMode: 'overlay'
                   }}
                 ></div>
 
                 {/* Floating particles */}
                 <div className="absolute -inset-4 pointer-events-none z-30">
-                  {[...Array(8)].map((_, i) => (
+                  {[...Array(6)].map((_, i) => (
                     <div
                       key={i}
-                      className="absolute w-1 h-1 bg-accent/60 rounded-full"
+                      className="absolute w-1 h-1 bg-accent/40 rounded-full"
                       style={{
-                        left: `${Math.random() * 100}%`,
-                        top: `${Math.random() * 100}%`,
+                        left: `${20 + Math.random() * 60}%`,
+                        top: `${20 + Math.random() * 60}%`,
                         animation: `pulse ${2 + Math.random() * 3}s infinite`,
-                        animationDelay: `${i * 0.3}s`,
-                        transform: `translateZ(${Math.random() * 20 + 10}px)`
+                        animationDelay: `${i * 0.5}s`,
+                        transform: `translateZ(${Math.random() * 15 + 5}px)`
                       }}
                     ></div>
                   ))}
