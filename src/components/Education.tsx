@@ -34,8 +34,7 @@ const Education: React.FC = () => {
       title: "Desarrollo de Aplicaciones Multiplataforma",
       institution: "IES Enrique Tierno Galván",
       date: "Septiembre 2021 - Marzo 2023",
-      description: "Formación técnica en Java, especializada en programación Backend, Bases de Datos relacionales y no relacionales, diseño y arquitectura de software, así como implementación eficiente de procesos multihilo. Capacidad demostrada para adaptarme a diversos lenguajes y tecnologías, gestionar proyectos de forma integral y desarrollar soluciones escalables, robustas y optimizadas.
-",
+      description: "Formación técnica en Java, especializada en programación Backend, Bases de Datos relacionales y no relacionales, diseño y arquitectura de software, así como implementación eficiente de procesos multihilo. Capacidad demostrada para adaptarme a diversos lenguajes y tecnologías, gestionar proyectos de forma integral y desarrollar soluciones escalables, robustas y optimizadas.",
       grade: "Notable Alto",
       type: "education"
     },
