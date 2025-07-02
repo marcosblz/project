@@ -1,14 +1,16 @@
-import React, { useEffect } from 'react';
-import { Code, Palette, Database, Globe, Users, MessageCircle, Lightbulb, Target } from 'lucide-react';
+import React, { useEffect, useRef } from 'react';
+import { Server, Database, Code, Cloud, Shield, Zap, GitBranch, Terminal, Cpu, Network } from 'lucide-react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
 
-interface TechnicalSkill {
-  name: string;
-  level: number;
+interface TechStack {
   category: string;
+  icon: React.ReactNode;
+  color: string;
+  technologies: string[];
+  description: string;
 }
 
 interface SoftSkill {
@@ -18,78 +20,131 @@ interface SoftSkill {
 }
 
 const Skills: React.FC = () => {
-  const technicalSkills: TechnicalSkill[] = [
-    { name: "React & Next.js", level: 95, category: "Frontend" },
-    { name: "TypeScript", level: 90, category: "Frontend" },
-    { name: "Tailwind CSS", level: 85, category: "Frontend" },
-    { name: "JavaScript ES6+", level: 92, category: "Frontend" },
-    { name: "Node.js", level: 80, category: "Backend" },
-    { name: "Express.js", level: 75, category: "Backend" },
-    { name: "PostgreSQL", level: 70, category: "Backend" },
-    { name: "MongoDB", level: 65, category: "Backend" },
-    { name: "Git & GitHub", level: 88, category: "Tools" },
-    { name: "Docker", level: 60, category: "Tools" },
-    { name: "Jest & Testing", level: 78, category: "Tools" },
-    { name: "Figma", level: 72, category: "Tools" }
+  const svgRef = useRef<SVGSVGElement>(null);
+
+  // Backend-focused tech stack based on experience and studies
+  const techStacks: TechStack[] = [
+    {
+      category: "Backend Development",
+      icon: <Server className="w-6 h-6" />,
+      color: "#10B981",
+      technologies: ["Groovy", "Python", "Django", "Node.js", "Express.js", "REST APIs"],
+      description: "Desarrollo de APIs robustas y servicios backend escalables"
+    },
+    {
+      category: "Databases",
+      icon: <Database className="w-6 h-6" />,
+      color: "#3B82F6",
+      technologies: ["PostgreSQL", "MySQL", "MongoDB", "Database Design", "Query Optimization"],
+      description: "Diseño y optimización de bases de datos relacionales y NoSQL"
+    },
+    {
+      category: "DevOps & Infrastructure",
+      icon: <Cloud className="w-6 h-6" />,
+      color: "#8B5CF6",
+      technologies: ["Docker", "Kubernetes", "Jenkins", "CI/CD", "Linux", "Bash"],
+      description: "Automatización de despliegues y gestión de infraestructura"
+    },
+    {
+      category: "Programming Languages",
+      icon: <Code className="w-6 h-6" />,
+      color: "#F59E0B",
+      technologies: ["Java", "Python", "JavaScript", "TypeScript", "Groovy", "SQL"],
+      description: "Dominio de múltiples lenguajes para diferentes contextos"
+    },
+    {
+      category: "Development Tools",
+      icon: <Terminal className="w-6 h-6" />,
+      color: "#EF4444",
+      technologies: ["Git", "GitHub", "IntelliJ IDEA", "VS Code", "Postman", "Maven"],
+      description: "Herramientas esenciales para desarrollo y colaboración"
+    },
+    {
+      category: "Architecture & Design",
+      icon: <Network className="w-6 h-6" />,
+      color: "#06B6D4",
+      technologies: ["Microservices", "Design Patterns", "SOLID Principles", "Clean Architecture"],
+      description: "Diseño de sistemas escalables y mantenibles"
+    }
   ];
 
   const softSkills: SoftSkill[] = [
     {
-      name: "Trabajo en Equipo",
-      icon: <Users className="w-4 sm:w-5 lg:w-6 h-4 sm:h-5 lg:h-6" />,
-      description: "Colaboración efectiva y comunicación clara con equipos multidisciplinarios"
-    },
-    {
-      name: "Comunicación",
-      icon: <MessageCircle className="w-4 sm:w-5 lg:w-6 h-4 sm:h-5 lg:h-6" />,
-      description: "Habilidad para explicar conceptos técnicos de manera comprensible"
-    },
-    {
       name: "Resolución de Problemas",
-      icon: <Lightbulb className="w-4 sm:w-5 lg:w-6 h-4 sm:h-5 lg:h-6" />,
-      description: "Enfoque analítico y creativo para encontrar soluciones eficientes"
+      icon: <Zap className="w-5 h-5" />,
+      description: "Análisis lógico y soluciones eficientes para desafíos técnicos complejos"
     },
     {
-      name: "Orientación a Objetivos",
-      icon: <Target className="w-4 sm:w-5 lg:w-6 h-4 sm:h-5 lg:h-6" />,
-      description: "Foco en resultados y cumplimiento de deadlines de forma consistente"
+      name: "Adaptabilidad",
+      icon: <GitBranch className="w-5 h-5" />,
+      description: "Rápida adaptación a nuevas tecnologías y metodologías de trabajo"
+    },
+    {
+      name: "Trabajo en Equipo",
+      icon: <Shield className="w-5 h-5" />,
+      description: "Colaboración efectiva en equipos multidisciplinarios y ágiles"
+    },
+    {
+      name: "Mejora Continua",
+      icon: <Cpu className="w-5 h-5" />,
+      description: "Enfoque constante en optimización y aprendizaje de nuevas tecnologías"
     }
   ];
 
-  const skillCategories = [
-    { name: "Frontend", icon: <Code className="w-4 sm:w-5 lg:w-6 h-4 sm:h-5 lg:h-6" />, color: "text-blue-500" },
-    { name: "Backend", icon: <Database className="w-4 sm:w-5 lg:w-6 h-4 sm:h-5 lg:h-6" />, color: "text-green-500" },
-    { name: "Tools", icon: <Globe className="w-4 sm:w-5 lg:w-6 h-4 sm:h-5 lg:h-6" />, color: "text-purple-500" }
-  ];
-
   useEffect(() => {
-    // Animate progress bars
-    gsap.fromTo('.skill-bar',
-      { width: 0 },
+    // Animate tech stack cards
+    gsap.fromTo('.tech-card',
+      { y: 30, opacity: 0, scale: 0.9 },
       {
-        width: (i, target) => target.getAttribute('data-width') + '%',
-        duration: 1.2,
-        ease: 'power2.out',
-        stagger: 0.05,
+        y: 0,
+        opacity: 1,
+        scale: 1,
+        duration: 0.6,
+        stagger: 0.1,
+        ease: 'back.out(1.7)',
         scrollTrigger: {
-          trigger: '.technical-skills',
+          trigger: '.tech-grid',
           start: 'top 80%',
           toggleActions: 'play none none reverse'
         }
       }
     );
 
+    // Animate SVG paths
+    if (svgRef.current) {
+      const paths = svgRef.current.querySelectorAll('path');
+      paths.forEach((path, index) => {
+        const length = (path as SVGPathElement).getTotalLength();
+        gsap.set(path, {
+          strokeDasharray: length,
+          strokeDashoffset: length
+        });
+        
+        gsap.to(path, {
+          strokeDashoffset: 0,
+          duration: 2,
+          delay: index * 0.2,
+          ease: 'power2.out',
+          scrollTrigger: {
+            trigger: '.skills-visualization',
+            start: 'top 70%',
+            toggleActions: 'play none none reverse'
+          }
+        });
+      });
+    }
+
     // Animate soft skills
-    gsap.fromTo('.soft-skill-card',
-      { scale: 0.8, opacity: 0 },
+    gsap.fromTo('.soft-skill-item',
+      { x: -20, opacity: 0 },
       {
-        scale: 1,
+        x: 0,
         opacity: 1,
-        duration: 0.4,
+        duration: 0.5,
         stagger: 0.1,
-        ease: 'back.out(1.7)',
+        ease: 'power3.out',
         scrollTrigger: {
-          trigger: '.soft-skills',
+          trigger: '.soft-skills-section',
           start: 'top 80%',
           toggleActions: 'play none none reverse'
         }
@@ -97,82 +152,153 @@ const Skills: React.FC = () => {
     );
   }, []);
 
-  const getSkillsByCategory = (category: string) => {
-    return technicalSkills.filter(skill => skill.category === category);
-  };
-
   return (
     <section id="habilidades" className="skills-section py-8 sm:py-12 lg:py-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-8 sm:mb-12 lg:mb-16">
-          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-foreground mb-2 sm:mb-4">Habilidades</h2>
-          <p className="text-base sm:text-lg lg:text-xl text-muted-foreground">Competencias técnicas y blandas que aporto a cada proyecto</p>
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-foreground mb-2 sm:mb-4">Stack Tecnológico</h2>
+          <p className="text-base sm:text-lg lg:text-xl text-muted-foreground">Herramientas y tecnologías que domino como desarrollador backend</p>
         </div>
 
-        {/* Technical Skills */}
-        <div className="technical-skills mb-10 sm:mb-12 lg:mb-20">
-          <h3 className="text-lg sm:text-xl lg:text-2xl font-bold text-foreground mb-4 sm:mb-6 lg:mb-8 text-center">Habilidades Técnicas</h3>
-          
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
-            {skillCategories.map((category) => (
-              <div key={category.name} className="bg-card/80 backdrop-blur-sm border border-border rounded-xl p-3 sm:p-4 lg:p-6 shadow-lg">
-                <div className="flex items-center mb-3 sm:mb-4 lg:mb-6">
-                  <div className={`${category.color} mr-2 sm:mr-3`}>
-                    {category.icon}
-                  </div>
-                  <h4 className="text-base sm:text-lg lg:text-xl font-bold text-foreground">{category.name}</h4>
+        {/* Tech Stack Grid */}
+        <div className="tech-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8 mb-12 lg:mb-20">
+          {techStacks.map((stack, index) => (
+            <div
+              key={index}
+              className="tech-card group bg-card/80 backdrop-blur-sm border border-border rounded-xl p-4 sm:p-6 shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 hover:border-accent/30"
+            >
+              <div className="flex items-center mb-4">
+                <div 
+                  className="p-3 rounded-lg mr-4 group-hover:scale-110 transition-transform duration-300"
+                  style={{ backgroundColor: `${stack.color}20`, color: stack.color }}
+                >
+                  {stack.icon}
                 </div>
-                
-                <div className="space-y-2 sm:space-y-3 lg:space-y-4">
-                  {getSkillsByCategory(category.name).map((skill, index) => (
-                    <div key={index} className="skill-item">
-                      <div className="flex justify-between items-center mb-1 sm:mb-2">
-                        <span className="text-xs sm:text-sm font-medium text-foreground">{skill.name}</span>
-                        <span className="text-xs sm:text-sm text-muted-foreground">{skill.level}%</span>
-                      </div>
-                      <div className="w-full bg-muted rounded-full h-1.5 sm:h-2 overflow-hidden">
-                        <div
-                          className="skill-bar h-full rounded-full transition-all duration-300"
-                          data-width={skill.level}
-                          style={{ width: 0 }}
-                        ></div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
+                <h3 className="text-lg font-bold text-foreground group-hover:text-accent transition-colors duration-300">
+                  {stack.category}
+                </h3>
               </div>
-            ))}
+              
+              <p className="text-sm text-muted-foreground mb-4 leading-relaxed">
+                {stack.description}
+              </p>
+              
+              <div className="flex flex-wrap gap-2">
+                {stack.technologies.map((tech, techIndex) => (
+                  <span
+                    key={techIndex}
+                    className="px-3 py-1 bg-muted text-muted-foreground rounded-full text-xs font-medium hover:bg-accent hover:text-white transition-all duration-300 cursor-default"
+                    style={{ 
+                      borderLeft: `3px solid ${stack.color}`,
+                    }}
+                  >
+                    {tech}
+                  </span>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Skills Visualization */}
+        <div className="skills-visualization mb-12 lg:mb-20">
+          <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-foreground mb-8 text-center">
+            Arquitectura de Desarrollo
+          </h3>
+          
+          <div className="bg-card/50 backdrop-blur-sm border border-border rounded-2xl p-6 sm:p-8 lg:p-12 overflow-hidden">
+            <svg
+              ref={svgRef}
+              viewBox="0 0 800 400"
+              className="w-full h-auto max-h-96"
+              style={{ filter: 'drop-shadow(0 4px 8px rgba(0,0,0,0.1))' }}
+            >
+              {/* Backend Core */}
+              <circle cx="400" cy="200" r="60" fill="none" stroke="#10B981" strokeWidth="3" opacity="0.8" />
+              <text x="400" y="205" textAnchor="middle" className="fill-foreground text-sm font-bold">Backend Core</text>
+              
+              {/* Database Layer */}
+              <circle cx="200" cy="150" r="40" fill="none" stroke="#3B82F6" strokeWidth="2" opacity="0.7" />
+              <text x="200" y="155" textAnchor="middle" className="fill-foreground text-xs">Database</text>
+              
+              {/* API Layer */}
+              <circle cx="600" cy="150" r="40" fill="none" stroke="#F59E0B" strokeWidth="2" opacity="0.7" />
+              <text x="600" y="155" textAnchor="middle" className="fill-foreground text-xs">APIs</text>
+              
+              {/* DevOps */}
+              <circle cx="300" cy="300" r="35" fill="none" stroke="#8B5CF6" strokeWidth="2" opacity="0.7" />
+              <text x="300" y="305" textAnchor="middle" className="fill-foreground text-xs">DevOps</text>
+              
+              {/* Architecture */}
+              <circle cx="500" cy="300" r="35" fill="none" stroke="#06B6D4" strokeWidth="2" opacity="0.7" />
+              <text x="500" y="305" textAnchor="middle" className="fill-foreground text-xs">Architecture</text>
+              
+              {/* Connections */}
+              <path d="M 240 150 L 360 180" stroke="#10B981" strokeWidth="2" fill="none" opacity="0.6" />
+              <path d="M 560 150 L 440 180" stroke="#10B981" strokeWidth="2" fill="none" opacity="0.6" />
+              <path d="M 335 285 L 375 230" stroke="#10B981" strokeWidth="2" fill="none" opacity="0.6" />
+              <path d="M 465 285 L 425 230" stroke="#10B981" strokeWidth="2" fill="none" opacity="0.6" />
+              
+              {/* Data Flow Arrows */}
+              <defs>
+                <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+                  <polygon points="0 0, 10 3.5, 0 7" fill="#10B981" opacity="0.8" />
+                </marker>
+              </defs>
+              
+              <path d="M 240 170 Q 320 220 360 200" stroke="#10B981" strokeWidth="1.5" fill="none" opacity="0.5" markerEnd="url(#arrowhead)" />
+              <path d="M 440 200 Q 520 220 560 170" stroke="#10B981" strokeWidth="1.5" fill="none" opacity="0.5" markerEnd="url(#arrowhead)" />
+            </svg>
           </div>
         </div>
 
         {/* Soft Skills */}
-        <div className="soft-skills">
-          <h3 className="text-lg sm:text-xl lg:text-2xl font-bold text-foreground mb-4 sm:mb-6 lg:mb-8 text-center">Habilidades Blandas</h3>
+        <div className="soft-skills-section">
+          <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-foreground mb-8 text-center">
+            Competencias Profesionales
+          </h3>
           
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 lg:gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
             {softSkills.map((skill, index) => (
               <div
                 key={index}
-                className="soft-skill-card bg-card/80 backdrop-blur-sm border border-border rounded-xl p-3 sm:p-4 lg:p-6 text-center shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 hover:bg-accent/5 group"
+                className="soft-skill-item bg-gradient-to-br from-card/80 to-card/60 backdrop-blur-sm border border-border rounded-xl p-4 sm:p-6 text-center hover:shadow-xl transition-all duration-300 hover:-translate-y-1 group"
               >
-                <div className="w-10 sm:w-12 lg:w-16 h-10 sm:h-12 lg:h-16 bg-accent/10 rounded-full flex items-center justify-center mx-auto mb-2 sm:mb-3 lg:mb-4 group-hover:bg-accent group-hover:text-white transition-all duration-300">
+                <div className="w-12 h-12 bg-accent/10 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-accent group-hover:text-white transition-all duration-300">
                   {skill.icon}
                 </div>
-                <h4 className="text-sm sm:text-base lg:text-lg font-bold text-foreground mb-1 sm:mb-2 lg:mb-3">{skill.name}</h4>
-                <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">{skill.description}</p>
+                <h4 className="text-base sm:text-lg font-bold text-foreground mb-3 group-hover:text-accent transition-colors duration-300">
+                  {skill.name}
+                </h4>
+                <p className="text-sm text-muted-foreground leading-relaxed">
+                  {skill.description}
+                </p>
               </div>
             ))}
           </div>
         </div>
 
-        {/* Skills Summary */}
-        <div className="mt-8 sm:mt-12 lg:mt-16 bg-gradient-to-r from-accent/10 to-secondary/10 rounded-2xl p-4 sm:p-6 lg:p-8 text-center">
-          <h3 className="text-lg sm:text-xl lg:text-2xl font-bold text-foreground mb-2 sm:mb-4">Enfoque de Desarrollo</h3>
-          <p className="text-sm sm:text-base lg:text-lg text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-            Mi enfoque se centra en crear código limpio, mantenible y escalable. Aplico principios SOLID, 
-            patrones de diseño y mejores prácticas de la industria para entregar soluciones robustas que 
-            impulsen el crecimiento del negocio.
+        {/* Professional Focus */}
+        <div className="mt-12 lg:mt-20 bg-gradient-to-r from-accent/10 via-secondary/10 to-accent/10 rounded-2xl p-6 sm:p-8 lg:p-12 text-center">
+          <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-foreground mb-4">
+            Enfoque Backend Especializado
+          </h3>
+          <p className="text-base sm:text-lg text-muted-foreground max-w-4xl mx-auto leading-relaxed">
+            Mi experiencia se centra en el desarrollo backend robusto, desde la creación de APIs escalables 
+            hasta la implementación de arquitecturas de microservicios. Combino conocimientos sólidos en 
+            bases de datos, DevOps y patrones de diseño para crear soluciones que impulsen el crecimiento empresarial.
           </p>
+          <div className="flex flex-wrap justify-center gap-4 mt-6">
+            <span className="px-4 py-2 bg-accent/20 text-accent rounded-full text-sm font-medium">
+              3+ años de experiencia
+            </span>
+            <span className="px-4 py-2 bg-accent/20 text-accent rounded-full text-sm font-medium">
+              Formación DevOps
+            </span>
+            <span className="px-4 py-2 bg-accent/20 text-accent rounded-full text-sm font-medium">
+              Desarrollo Multiplataforma
+            </span>
+          </div>
         </div>
       </div>
     </section>
