@@ -22,29 +22,30 @@ const Education: React.FC = () => {
   const educationItems: EducationItem[] = [
     {
       id: 1,
-      title: "Grado en Ingeniería Informática",
-      institution: "Universidad Politécnica de Madrid",
-      date: "2016 - 2020",
-      description: "Especialización en Ingeniería del Software con enfoque en desarrollo web y arquitectura de sistemas distribuidos.",
+      title: "BootCamp DevOps",
+      institution: "Qualentum",
+      date: "Septiembre 2023 - Abril 2024",
+      description: "Formación intensiva en DevOps con enfoque práctico en automatización, implementación de metodologías ágiles (Scrum/Kanban), pipelines CI/CD y manejo de herramientas colaborativas (Git, Jenkins, Docker, Kubernetes), orientada a optimizar flujos de trabajo, mejorar la eficiencia del desarrollo y acelerar el despliegue continuo de software.",
       grade: "Sobresaliente",
       type: "education"
     },
     {
       id: 2,
-      title: "Máster en Desarrollo Full Stack",
-      institution: "Keepcoding Academy",
-      date: "2020 - 2021",
-      description: "Programa intensivo de 12 meses enfocado en tecnologías modernas de desarrollo web, metodologías ágiles y DevOps.",
-      grade: "Excelente",
+      title: "Desarrollo de Aplicaciones Multiplataforma",
+      institution: "IES Enrique Tierno Galván",
+      date: "Septiembre 2021 - Marzo 2023",
+      description: "Formación técnica en Java, especializada en programación Backend, Bases de Datos relacionales y no relacionales, diseño y arquitectura de software, así como implementación eficiente de procesos multihilo. Capacidad demostrada para adaptarme a diversos lenguajes y tecnologías, gestionar proyectos de forma integral y desarrollar soluciones escalables, robustas y optimizadas.
+",
+      grade: "Notable Alto",
       type: "education"
     },
     {
       id: 3,
-      title: "Bachillerato Científico-Tecnológico",
-      institution: "IES San Patricio",
-      date: "2014 - 2016",
-      description: "Especialización en Matemáticas, Física y Tecnología Industrial con mención honorífica.",
-      grade: "Sobresaliente",
+      title: "Sistemas Microinformáticos y Redes",
+      institution: "Hease",
+      date: "Septiembre 2019 - Marzo 2021",
+      description: "Formación enfocada en la instalación, configuración y mantenimiento de sistemas operativos, virtualización. redes y equipos informáticos. Capacidad para adaptarme a entornos tecnológicos diversos y resolver eficazmente problemas técnicos en infraestructuras tanto físicas como virtuales.",
+      grade: "Notable Alto",
       type: "education"
     }
   ];
@@ -80,15 +81,18 @@ const Education: React.FC = () => {
   ];
 
   const skills = [
-    "Arquitectura de Software",
-    "Metodologías Ágiles",
-    "Testing & QA",
-    "Performance Optimization",
-    "Diseño Responsive",
-    "Accesibilidad Web",
-    "SEO Técnico",
-    "DevOps Básico"
-  ];
+  "Razonamiento lógico",
+  "Comprensión profunda",
+  "Rápida adaptación",
+  "Flexibilidad técnica",
+  "Comunicación clara",
+  "Trabajo en equipo",
+  "Aprendizaje autodidacta",
+  "Exigencia y calidad",
+  "Mentalidad de mejora continua",
+  "Conexión entre áreas técnicas"
+];
+
 
   const latestEducation = educationItems[1]; // Máster más reciente
   const latestCertification = certificationItems[0]; // Certificación más reciente
