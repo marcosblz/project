@@ -278,8 +278,7 @@ const Education: React.FC = () => {
                   <h3 className="text-sm sm:text-base lg:text-lg font-bold text-foreground">Aprendizaje Continuo</h3>
                 </div>
                 <p className="text-muted-foreground text-xs sm:text-sm leading-relaxed">
-                  Me mantengo actualizado con las últimas tendencias y tecnologías del desarrollo web. 
-                  Actualmente estudiando Web3 y arquitecturas de microservicios.
+                  Me mantengo actualizado con las últimas tendencias y tecnologías de desarrollo. 
                 </p>
                 <div className="mt-3 sm:mt-4 p-2 sm:p-3 bg-accent/20 rounded-lg">
                   <p className="text-accent text-xs sm:text-sm font-medium">
