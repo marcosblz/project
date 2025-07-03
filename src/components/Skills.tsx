@@ -67,9 +67,9 @@ const Skills: React.FC = () => {
       onComplete: () => setIsAnimating(false)
     });
 
-    // Animar tarjeta seleccionada a la izquierda (75% ancho)
+    // Animar tarjeta seleccionada a la izquierda (CON MARGEN DERECHO)
     tl.to(selectedCard, {
-      width: '75%',
+      width: 'calc(75% - 10px)', // MARGEN DERECHO AGREGADO
       height: '400px',
       x: 0,
       y: 0,
@@ -106,19 +106,11 @@ const Skills: React.FC = () => {
       const row = Math.floor(index / 2);
       const col = index % 2;
       
-      // Calcular posición con márgenes
-      const marginX = 10; // 10px de margen horizontal
-      const marginY = 10; // 10px de margen vertical
-      const cardWidth = `calc(50% - ${marginX}px)`;
-      const cardHeight = `calc(50% - ${marginY}px)`;
-      const xPos = col * (50 + marginX / 2); // 50% + mitad del margen
-      const yPos = row * (50 + marginY / 2); // 50% + mitad del margen
-      
       tl.to(card, {
-        width: cardWidth,
-        height: cardHeight,
-        x: xPos + '%',
-        y: yPos + '%',
+        width: 'calc(50% - 10px)',
+        height: 'calc(50% - 10px)',
+        x: col * 50 + '%',
+        y: row * 50 + '%',
         duration: 0.8,
         ease: 'power3.inOut'
       }, 0);
@@ -131,44 +123,37 @@ const Skills: React.FC = () => {
     if (!container) return;
 
     const cards = container.querySelectorAll('.skill-card');
+    
+    // CONFIGURACIÓN INICIAL CORRECTA
     cards.forEach((card, index) => {
       const row = Math.floor(index / 2);
       const col = index % 2;
       
-      // Configurar posición inicial con márgenes
-      const marginX = 10; // 10px de margen horizontal
-      const marginY = 10; // 10px de margen vertical
-      const cardWidth = `calc(50% - ${marginX}px)`;
-      const cardHeight = `calc(50% - ${marginY}px)`;
-      const xPos = col * (50 + marginX / 2); // 50% + mitad del margen
-      const yPos = row * (50 + marginY / 2); // 50% + mitad del margen
-      
       gsap.set(card, {
         position: 'absolute',
-        width: cardWidth,
-        height: cardHeight,
-        x: xPos + '%',
-        y: yPos + '%',
-        transformOrigin: 'center center'
+        width: 'calc(50% - 10px)',
+        height: 'calc(50% - 10px)',
+        x: col * 50 + '%',
+        y: row * 50 + '%',
+        transformOrigin: 'center center',
+        opacity: 0, // EMPEZAR INVISIBLE PARA EVITAR SUPERPOSICIÓN
+        scale: 0.8
       });
     });
 
-    // Animación de entrada
-    gsap.fromTo('.skill-card',
-      { opacity: 0, scale: 0.8 },
-      {
-        opacity: 1,
-        scale: 1,
-        duration: 0.6,
-        stagger: 0.1,
-        ease: 'back.out(1.7)',
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: 'top 80%',
-          toggleActions: 'play none none reverse'
-        }
+    // Animación de entrada DESPUÉS de configurar posiciones
+    gsap.to('.skill-card', {
+      opacity: 1,
+      scale: 1,
+      duration: 0.6,
+      stagger: 0.1,
+      ease: 'back.out(1.7)',
+      scrollTrigger: {
+        trigger: sectionRef.current,
+        start: 'top 80%',
+        toggleActions: 'play none none reverse'
       }
-    );
+    });
   }, []);
 
   return (
@@ -190,9 +175,7 @@ const Skills: React.FC = () => {
               <div
                 key={category.id}
                 data-id={category.id}
-                className={`skill-card cursor-pointer rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-shadow duration-300 group relative ${
-                  selectedTab === category.id ? 'ring-4 ring-white/50 z-10' : 'z-0'
-                }`}
+                className="skill-card cursor-pointer rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-shadow duration-300 group relative"
                 onClick={() => handleTabClick(category.id)}
                 style={{
                   background: 'linear-gradient(135deg, hsl(221, 83%, 53%) 0%, hsl(217, 91%, 60%) 50%, hsl(221, 83%, 45%) 100%)',
