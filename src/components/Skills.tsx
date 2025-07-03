@@ -15,7 +15,7 @@ interface SkillCategory {
 const Skills: React.FC = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
-  const [selectedTab, setSelectedTab] = useState<string | null>(null);
+  const [selectedTab, setSelectedTab] = useState<string>('backend'); // Default selected
 
   const skillCategories: SkillCategory[] = [
     {
@@ -50,151 +50,94 @@ const Skills: React.FC = () => {
     const container = containerRef.current;
     if (!container) return;
 
-    const cards = container.querySelectorAll('.skill-card');
+    const currentMainCard = container.querySelector(`[data-id="${selectedTab}"]`);
     const clickedCard = container.querySelector(`[data-id="${tabId}"]`);
     
-    if (!clickedCard) return;
+    if (!currentMainCard || !clickedCard) return;
 
-    // Get all cards as array
-    const cardsArray = Array.from(cards);
-    const clickedIndex = cardsArray.indexOf(clickedCard);
-    
-    if (clickedIndex === -1) return;
+    // Get current transforms
+    const currentTransform = gsap.getProperty(currentMainCard, "transform");
+    const clickedTransform = gsap.getProperty(clickedCard, "transform");
 
-    // Create timeline
+    // Create timeline for swap animation
     const tl = gsap.timeline();
 
-    // If no tab selected, animate from grid to expanded
-    if (selectedTab === null) {
-      // Move clicked card to main position (left side)
-      tl.to(clickedCard, {
-        x: 0,
-        y: 0,
-        width: "75%",
-        height: "400px",
-        duration: 0.8,
-        ease: "power2.inOut"
-      });
-
-      // Move other cards to sidebar (right side, stacked)
-      cardsArray.forEach((card, index) => {
-        if (card !== clickedCard) {
-          const stackIndex = index > clickedIndex ? index - 1 : index;
-          tl.to(card, {
-            x: "300%", // Move to right
-            y: stackIndex * 135, // Stack vertically
-            width: "25%",
-            height: "130px",
-            duration: 0.8,
-            ease: "power2.inOut"
-          }, 0); // Start at same time
-        }
-      });
-    } else {
-      // Swap animation between current and clicked
-      const currentMainCard = container.querySelector(`[data-id="${selectedTab}"]`);
-      
-      if (currentMainCard && currentMainCard !== clickedCard) {
-        // Get current positions
-        const currentRect = currentMainCard.getBoundingClientRect();
-        const clickedRect = clickedCard.getBoundingClientRect();
-        
-        // Calculate deltas
-        const deltaX = clickedRect.left - currentRect.left;
-        const deltaY = clickedRect.top - currentRect.top;
-        
-        // Animate swap
-        tl.to(currentMainCard, {
-          x: deltaX,
-          y: deltaY,
-          width: "25%",
-          height: "130px",
-          duration: 0.8,
-          ease: "power2.inOut"
-        })
-        .to(clickedCard, {
-          x: -deltaX,
-          y: -deltaY,
-          width: "75%",
-          height: "400px",
-          duration: 0.8,
-          ease: "power2.inOut"
-        }, 0);
-      }
-    }
+    // Animate the swap
+    tl.to(currentMainCard, {
+      x: gsap.getProperty(clickedCard, "x"),
+      y: gsap.getProperty(clickedCard, "y"),
+      width: "25%",
+      height: "130px",
+      duration: 0.8,
+      ease: "power2.inOut"
+    })
+    .to(clickedCard, {
+      x: 0,
+      y: 0,
+      width: "75%",
+      height: "400px",
+      duration: 0.8,
+      ease: "power2.inOut"
+    }, 0); // Start at same time
 
     // Update state after animation
-    tl.call(() => {
-      setSelectedTab(tabId);
-      // Reset transforms after state change
-      gsap.set(cards, { x: 0, y: 0, width: "", height: "" });
-    });
+    setSelectedTab(tabId);
   };
 
   useEffect(() => {
-    // Set initial positions for 2x2 grid
     const container = containerRef.current;
     if (!container) return;
 
     const cards = container.querySelectorAll('.skill-card');
     
-    if (selectedTab === null) {
-      // 2x2 grid layout
-      cards.forEach((card, index) => {
-        const row = Math.floor(index / 2);
-        const col = index % 2;
-        
+    // Set up 1x1 1x3 layout
+    cards.forEach((card, index) => {
+      const cardId = card.getAttribute('data-id');
+      
+      if (cardId === selectedTab) {
+        // Main card (left side, 75% width)
         gsap.set(card, {
           position: 'absolute',
-          width: '50%',
-          height: '50%',
-          x: col * 100 + '%',
-          y: row * 100 + '%',
+          width: '75%',
+          height: '400px',
+          x: 0,
+          y: 0,
           transformOrigin: 'top left'
         });
-      });
-    } else {
-      // Expanded layout
-      const mainCard = container.querySelector(`[data-id="${selectedTab}"]`);
-      const otherCards = Array.from(cards).filter(card => card.getAttribute('data-id') !== selectedTab);
-      
-      // Main card (left, 75% width)
-      gsap.set(mainCard, {
-        position: 'absolute',
-        width: '75%',
-        height: '400px',
-        x: 0,
-        y: 0
-      });
-      
-      // Other cards (right, stacked, 25% width)
-      otherCards.forEach((card, index) => {
+      } else {
+        // Sidebar cards (right side, stacked, 25% width)
+        const otherCards = skillCategories.filter(cat => cat.id !== selectedTab);
+        const stackIndex = otherCards.findIndex(cat => cat.id === cardId);
+        
         gsap.set(card, {
           position: 'absolute',
           width: '25%',
           height: '130px',
-          x: '300%',
-          y: index * 135
+          x: '300%', // Move to right side
+          y: stackIndex * 135, // Stack vertically with gap
+          transformOrigin: 'top left'
         });
-      });
-    }
-
-    // Initial entrance animation
-    gsap.fromTo('.skill-card',
-      { opacity: 0, scale: 0.8 },
-      {
-        opacity: 1,
-        scale: 1,
-        duration: 0.6,
-        stagger: 0.1,
-        ease: 'back.out(1.7)',
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: 'top 80%',
-          toggleActions: 'play none none reverse'
-        }
       }
-    );
+    });
+
+    // Initial entrance animation only on first load
+    if (sectionRef.current) {
+      gsap.fromTo('.skill-card',
+        { opacity: 0, scale: 0.8 },
+        {
+          opacity: 1,
+          scale: 1,
+          duration: 0.6,
+          stagger: 0.1,
+          ease: 'back.out(1.7)',
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: 'top 80%',
+            toggleActions: 'play none none reverse'
+          }
+        }
+      );
+    }
   }, [selectedTab]);
 
   return (
@@ -205,7 +148,7 @@ const Skills: React.FC = () => {
           <p className="text-xl text-muted-foreground">Especialización técnica por áreas</p>
         </div>
 
-        {/* Container with fixed aspect ratio */}
+        {/* Container with fixed height for 1x1 1x3 layout */}
         <div className="max-w-6xl mx-auto">
           <div 
             ref={containerRef}
@@ -216,7 +159,9 @@ const Skills: React.FC = () => {
               <div
                 key={category.id}
                 data-id={category.id}
-                className="skill-card cursor-pointer rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-shadow duration-300 group relative"
+                className={`skill-card cursor-pointer rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-shadow duration-300 group relative ${
+                  selectedTab === category.id ? 'ring-4 ring-white/50 z-10' : 'z-0'
+                }`}
                 onClick={() => handleTabClick(category.id)}
               >
                 {/* Background Gradient */}
@@ -253,10 +198,7 @@ const Skills: React.FC = () => {
         {/* Selected Category Info */}
         <div className="mt-12 text-center">
           <div className="inline-flex items-center px-6 py-3 bg-accent/10 text-accent rounded-full text-lg font-medium">
-            {selectedTab 
-              ? `Categoría seleccionada: ${skillCategories.find(cat => cat.id === selectedTab)?.title}`
-              : 'Haz click en una categoría para expandir'
-            }
+            Categoría seleccionada: {skillCategories.find(cat => cat.id === selectedTab)?.title}
           </div>
         </div>
       </div>
