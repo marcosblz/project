@@ -26,24 +26,7 @@ const Contact: React.FC = () => {
     );
   }, []);
 
-  const copyEmailToClipboard = async () => {
-    try {
-      await navigator.clipboard.writeText('marcosbaezalopez@gmail.com');
-      setCopiedEmail(true);
-      setTimeout(() => setCopiedEmail(false), 3000);
-    } catch (err) {
-      const textArea = document.createElement('textarea');
-      textArea.value = 'marcosbaezalopez@gmail.com';
-      document.body.appendChild(textArea);
-      textArea.select();
-      document.execCommand('copy');
-      document.body.removeChild(textArea);
-      setCopiedEmail(true);
-      setTimeout(() => setCopiedEmail(false), 3000);
-    }
-  };
-
-  const openGmail = () => {
+  const handleEmailClick = async () => {
     const subject = encodeURIComponent('Oportunidad de Colaboración');
     const body = encodeURIComponent(`Hola Marcos,
 
@@ -58,19 +41,8 @@ Saludos,
     window.open(gmailUrl, '_blank');
   };
 
-  const openOutlook = () => {
-    const subject = encodeURIComponent('Oportunidad de Colaboración');
-    const body = encodeURIComponent(`Hola Marcos,
-
-He visto tu portfolio y me gustaría hablar contigo sobre una oportunidad.
-
-¿Tienes disponibilidad para una llamada?
-
-Saludos,
-[Tu nombre]`);
-    
-    const outlookUrl = `https://outlook.live.com/mail/0/deeplink/compose?to=marcosbaezalopez@gmail.com&subject=${subject}&body=${body}`;
-    window.open(outlookUrl, '_blank');
+  const handlePhoneClick = () => {
+    window.open('tel:+34717705991', '_self');
   };
 
   return (
@@ -86,72 +58,41 @@ Saludos,
         <div className="space-y-6 sm:space-y-8">
           
           {/* Email Card */}
-          <div className="contact-card bg-background/80 backdrop-blur-sm border border-border rounded-xl p-6 sm:p-8 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
-            <div className="flex items-center mb-6">
-              <div className="w-12 h-12 bg-accent rounded-xl flex items-center justify-center mr-4">
+          <div 
+            onClick={handleEmailClick}
+            className="contact-card bg-background/80 backdrop-blur-sm border border-border rounded-xl p-6 sm:p-8 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 cursor-pointer group"
+          >
+            <div className="flex items-center">
+              <div className="w-12 h-12 bg-accent rounded-xl flex items-center justify-center mr-4 group-hover:scale-110 transition-transform duration-300">
                 <Mail className="w-6 h-6 text-white" />
               </div>
-              <div>
-                <h3 className="text-xl font-bold text-foreground">Email</h3>
+              <div className="flex-1">
+                <h3 className="text-xl font-bold text-foreground group-hover:text-accent transition-colors duration-300">Email</h3>
                 <p className="text-muted-foreground">marcosbaezalopez@gmail.com</p>
               </div>
-            </div>
-            
-            <div className="flex flex-wrap gap-3">
-              <button
-                onClick={openGmail}
-                className="flex items-center px-4 py-2 bg-red-500 hover:bg-red-600 text-white rounded-lg transition-colors duration-300 font-medium"
-              >
-                Gmail
-              </button>
-              <button
-                onClick={openOutlook}
-                className="flex items-center px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-lg transition-colors duration-300 font-medium"
-              >
-                Outlook
-              </button>
-              <button
-                onClick={copyEmailToClipboard}
-                className={`flex items-center px-4 py-2 rounded-lg transition-colors duration-300 font-medium ${
-                  copiedEmail 
-                    ? 'bg-green-500 text-white' 
-                    : 'bg-muted hover:bg-muted/80 text-foreground'
-                }`}
-              >
-                {copiedEmail ? (
-                  <>
-                    <CheckCircle className="w-4 h-4 mr-2" />
-                    ¡Copiado!
-                  </>
-                ) : (
-                  <>
-                    <Copy className="w-4 h-4 mr-2" />
-                    Copiar
-                  </>
-                )}
-              </button>
+              <div className="text-muted-foreground group-hover:text-accent transition-colors duration-300">
+                <span className="text-sm">Click para enviar →</span>
+              </div>
             </div>
           </div>
 
           {/* Phone Card */}
-          <div className="contact-card bg-background/80 backdrop-blur-sm border border-border rounded-xl p-6 sm:p-8 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
-            <div className="flex items-center mb-6">
-              <div className="w-12 h-12 bg-green-500 rounded-xl flex items-center justify-center mr-4">
+          <div 
+            onClick={handlePhoneClick}
+            className="contact-card bg-background/80 backdrop-blur-sm border border-border rounded-xl p-6 sm:p-8 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 cursor-pointer group"
+          >
+            <div className="flex items-center">
+              <div className="w-12 h-12 bg-green-500 rounded-xl flex items-center justify-center mr-4 group-hover:scale-110 transition-transform duration-300">
                 <Phone className="w-6 h-6 text-white" />
               </div>
-              <div>
-                <h3 className="text-xl font-bold text-foreground">Teléfono</h3>
+              <div className="flex-1">
+                <h3 className="text-xl font-bold text-foreground group-hover:text-green-500 transition-colors duration-300">Teléfono</h3>
                 <p className="text-muted-foreground">+34 717 705 991</p>
               </div>
+              <div className="text-muted-foreground group-hover:text-green-500 transition-colors duration-300">
+                <span className="text-sm">Click para llamar →</span>
+              </div>
             </div>
-            
-            <button
-              onClick={() => window.open('tel:+34717705991', '_self')}
-              className="flex items-center px-4 py-2 bg-green-500 hover:bg-green-600 text-white rounded-lg transition-colors duration-300 font-medium"
-            >
-              <Phone className="w-4 h-4 mr-2" />
-              Llamar Ahora
-            </button>
           </div>
 
           {/* Info Grid */}
