@@ -30,10 +30,48 @@ const About: React.FC = () => {
   ]);
   
   const [availableOptions, setAvailableOptions] = useState<ChatOption[]>([
-    { id: 1, text: "¿Cuál es tu experiencia?", response: "Tengo más de 3 años desarrollando aplicaciones web modernas con React, TypeScript y tecnologías de vanguardia. He trabajado en proyectos desde startups hasta empresas Fortune 500." },
-    { id: 2, text: "¿Qué tecnologías dominas?", response: "Me especializo en React, TypeScript, Next.js, Tailwind CSS, Node.js y bases de datos como PostgreSQL. También trabajo con herramientas de diseño como Figma y tengo experiencia en DevOps básico." },
-    { id: 3, text: "¿Cuáles son tus proyectos favoritos?", response: "He desarrollado desde e-commerce completos hasta dashboards empresariales. Mi proyecto más reciente es una plataforma de gestión educativa que sirve a más de 1000 usuarios activos diariamente." }
-  ]);
+  {
+    id: 1,
+    text: "¿Cómo abordas un problema de programación complejo que no entiendes de inmediato?",
+    response: "El reclutador quiere ver que descompones el problema en partes, investigas, aplicas estrategias de debugging y perseveras, demostrando resiliencia y un enfoque estructurado."
+  },
+  {
+    id: 2,
+    text: "Cuéntame de un bug especialmente difícil que resolviste. ¿Cómo lo solucionaste y cómo te sentiste?",
+    response: "El reclutador quiere conocer tu proceso de diagnóstico (logs, breakpoints, documentación) y tu capacidad de mantener la motivación y aprender del reto."
+  },
+  {
+    id: 3,
+    text: "Describe una ocasión en la que cometiste un error de programación importante. ¿Cómo lo detectaste y qué aprendiste?",
+    response: "El reclutador busca honestidad y autocrítica, tu método de detección (tests, revisión) y las lecciones concretas que incorporaste para evitarlo en el futuro."
+  },
+  {
+    id: 4,
+    text: "¿Cómo manejas la presión de plazos ajustados o cambios inesperados en los requisitos del proyecto?",
+    response: "El reclutador quiere evaluar tu capacidad para priorizar tareas, comunicarte proactivamente y adaptarte con calma y eficacia ante imprevistos."
+  },
+  {
+    id: 5,
+    text: "¿Qué haces cuando alguien critica duramente tu código en una revisión?",
+    response: "El reclutador desea ver tu apertura al feedback, humildad al debatir mejoras y tu disposición a colaborar para elevar la calidad del código."
+  },
+  {
+    id: 6,
+    text: "¿Cómo decides cuándo tu código está listo para producción en lugar de seguir mejorándolo?",
+    response: "El reclutador busca entender tu equilibrio entre calidad y pragmatismo: uso de pruebas, criterios de riesgo y respeto a los plazos."
+  },
+  {
+    id: 7,
+    text: "¿Cómo explicas conceptos técnicos complejos a alguien sin conocimientos técnicos?",
+    response: "El reclutador quiere ver tu habilidad para simplificar ideas, usar analogías claras y adaptar el lenguaje al interlocutor."
+  },
+  {
+    id: 8,
+    text: "¿Qué haces para mantener tus conocimientos y habilidades de programación actualizadas?",
+    response: "El reclutador espera conocer tu iniciativa de aprendizaje continuo: cursos, proyectos personales, participación en comunidades y lectura de documentación."
+  }
+]);
+
 
   const [usedOptions, setUsedOptions] = useState<number[]>([]);
 
