@@ -23,29 +23,29 @@ const Skills: React.FC = () => {
     {
       id: 'backend',
       title: "BACK-END",
-      gradient: "from-blue-600 via-cyan-500 to-teal-400",
-      icon: <Server className="w-8 h-8" />,
+      gradient: "from-accent/90 via-accent to-accent/80",
+      icon: <Server className="w-10 h-10" />,
       skills: ["Java", "Python", "Groovy", "Node.js", "Spring Boot", "Django", "REST APIs", "GraphQL"]
     },
     {
       id: 'frontend',
       title: "FRONT-END",
-      gradient: "from-purple-600 via-blue-500 to-indigo-400",
-      icon: <Monitor className="w-8 h-8" />,
+      gradient: "from-accent/80 via-primary to-accent/70",
+      icon: <Monitor className="w-10 h-10" />,
       skills: ["React", "TypeScript", "JavaScript", "HTML5", "CSS3", "Tailwind CSS", "GSAP", "Responsive Design"]
     },
     {
       id: 'devops',
       title: "DEVOPS",
-      gradient: "from-orange-500 via-pink-500 to-purple-600",
-      icon: <GitBranch className="w-8 h-8" />,
+      gradient: "from-secondary/60 via-accent/60 to-primary/60",
+      icon: <GitBranch className="w-10 h-10" />,
       skills: ["Docker", "Kubernetes", "Jenkins", "Git", "CI/CD", "AWS", "Linux", "Monitoring"]
     },
     {
       id: 'otros',
       title: "OTROS",
-      gradient: "from-green-500 via-emerald-500 to-teal-500",
-      icon: <Database className="w-8 h-8" />,
+      gradient: "from-primary/70 via-accent/50 to-secondary/70",
+      icon: <Database className="w-10 h-10" />,
       skills: ["MySQL", "PostgreSQL", "MongoDB", "Redis", "Webpack", "Vite", "Testing", "Agile/Scrum"]
     }
   ];
@@ -85,8 +85,8 @@ const Skills: React.FC = () => {
 
     // Animar tarjeta seleccionada a la izquierda (más ancha)
     tl.to(selectedCard, {
-      width: 400,
-      height: 300,
+      width: 500,
+      height: 350,
       x: 0,
       y: 0,
       duration: 0.8,
@@ -96,10 +96,10 @@ const Skills: React.FC = () => {
     // Animar otras tarjetas a la derecha (más pequeñas, apiladas)
     otherCards.forEach((card, index) => {
       tl.to(card, {
-        width: 120,
-        height: 90,
-        x: 420, // 400px + 20px gap
-        y: index * 100, // Apilar verticalmente
+        width: 150,
+        height: 110,
+        x: 530, // 500px + 30px gap
+        y: index * 120, // Apilar verticalmente
         duration: 0.8,
         ease: 'power3.inOut'
       }, 0); // Empezar al mismo tiempo
@@ -123,10 +123,10 @@ const Skills: React.FC = () => {
       const col = index % 2;
       
       tl.to(card, {
-        width: 250, // Más ancho para formato rectangular
-        height: 140, // Más bajo para formato rectangular
-        x: col * 270, // 250px + 20px gap
-        y: row * 160, // 140px + 20px gap
+        width: 320, // Más grande
+        height: 180, // Más grande
+        x: col * 350, // 320px + 30px gap
+        y: row * 210, // 180px + 30px gap
         duration: 0.8,
         ease: 'power3.inOut'
       }, 0);
@@ -134,7 +134,7 @@ const Skills: React.FC = () => {
   };
 
   useEffect(() => {
-    // Configurar posiciones iniciales del grid 2x2 rectangular
+    // Configurar posiciones iniciales del grid 2x2 rectangular más grande
     const container = containerRef.current;
     if (!container) return;
 
@@ -145,10 +145,10 @@ const Skills: React.FC = () => {
       
       gsap.set(card, {
         position: 'absolute',
-        width: 250, // Ancho rectangular
-        height: 140, // Alto rectangular
-        x: col * 270, // 250px + 20px gap
-        y: row * 160, // 140px + 20px gap
+        width: 320, // Más grande
+        height: 180, // Más grande
+        x: col * 350, // 320px + 30px gap
+        y: row * 210, // 180px + 30px gap
         transformOrigin: 'center center'
       });
     });
@@ -172,76 +172,79 @@ const Skills: React.FC = () => {
   }, []);
 
   return (
-    <section id="habilidades" ref={sectionRef} className="py-20">
-      <div className="max-w-7xl mx-auto px-4">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold text-foreground mb-4">Stack Tecnológico</h2>
-          <p className="text-xl text-muted-foreground">Especialización técnica por áreas</p>
+    <section id="habilidades" ref={sectionRef} className="py-8 sm:py-12 lg:py-20">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center mb-8 sm:mb-12 lg:mb-16">
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-foreground mb-2 sm:mb-4">Stack Tecnológico</h2>
+          <p className="text-base sm:text-lg lg:text-xl text-muted-foreground">Especialización técnica por áreas</p>
         </div>
 
-        {/* Container con dimensiones fijas para grid rectangular */}
-        <div className="max-w-4xl mx-auto flex justify-center">
+        {/* Container con dimensiones fijas para grid rectangular más grande */}
+        <div className="max-w-5xl mx-auto flex justify-center">
           <div 
             ref={containerRef}
             className="relative"
-            style={{ width: '540px', height: '320px' }} // Ajustado para formato rectangular
+            style={{ width: '700px', height: '420px' }} // Más grande
           >
             {skillCategories.map((category) => (
               <div
                 key={category.id}
                 data-id={category.id}
-                className={`skill-card cursor-pointer rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-shadow duration-300 group relative ${
-                  selectedTab === category.id ? 'ring-4 ring-white/50 z-10' : 'z-0'
+                className={`skill-card cursor-pointer rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-300 group relative border border-border/20 ${
+                  selectedTab === category.id ? 'ring-4 ring-accent/30 z-10' : 'z-0'
                 }`}
                 onClick={() => handleTabClick(category.id)}
               >
-                {/* Background Gradient */}
-                <div className={`absolute inset-0 bg-gradient-to-br ${category.gradient}`}></div>
+                {/* Background con gradiente acorde a la página */}
+                <div className={`absolute inset-0 bg-gradient-to-br ${category.gradient} backdrop-blur-sm`}></div>
                 
-                {/* Pattern */}
-                <div className="absolute inset-0 opacity-20">
+                {/* Pattern sutil */}
+                <div className="absolute inset-0 opacity-10">
                   <div 
                     className="w-full h-full"
                     style={{
-                      backgroundImage: `radial-gradient(circle at 25% 25%, white 2px, transparent 2px)`,
-                      backgroundSize: '30px 30px'
+                      backgroundImage: `radial-gradient(circle at 25% 25%, white 1px, transparent 1px)`,
+                      backgroundSize: '40px 40px'
                     }}
                   ></div>
                 </div>
 
-                {/* Content - Diseño rectangular */}
-                <div className="relative z-10 p-4 h-full flex flex-col text-white">
+                {/* Overlay para mejor legibilidad */}
+                <div className="absolute inset-0 bg-background/10 backdrop-blur-[1px]"></div>
+
+                {/* Content - Diseño rectangular mejorado */}
+                <div className="relative z-10 p-6 h-full flex flex-col text-white">
                   {/* Header con título e icono */}
-                  <div className="flex items-center justify-between mb-3">
-                    <h3 className="text-lg font-bold tracking-wider">
+                  <div className="flex items-center justify-between mb-4">
+                    <h3 className="text-xl font-bold tracking-wider text-white drop-shadow-sm">
                       {category.title}
                     </h3>
-                    <div className="w-8 h-8 bg-white/20 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                    <div className="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-xl border border-white/30 flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-lg">
                       {category.icon}
                     </div>
                   </div>
 
                   {/* Imagen/Placeholder en el centro */}
-                  <div className="flex-1 flex items-center justify-center mb-3">
-                    <div className="w-16 h-16 bg-white/20 rounded-xl border border-white/30 flex items-center justify-center">
-                      <span className="text-white/60 text-sm font-medium">IMG</span>
+                  <div className="flex-1 flex items-center justify-center mb-4">
+                    <div className="w-20 h-20 bg-white/20 backdrop-blur-sm rounded-2xl border border-white/30 flex items-center justify-center shadow-lg">
+                      <span className="text-white/80 text-sm font-medium">IMG</span>
                     </div>
                   </div>
 
                   {/* Skills preview - Solo en modo expandido */}
                   {selectedTab === category.id && (
-                    <div className="mt-2">
-                      <div className="flex flex-wrap gap-1">
+                    <div className="mt-3">
+                      <div className="flex flex-wrap gap-2">
                         {category.skills.slice(0, 6).map((skill, index) => (
                           <span
                             key={index}
-                            className="px-2 py-1 bg-white/20 text-white rounded text-xs font-medium"
+                            className="px-3 py-1 bg-white/25 backdrop-blur-sm text-white rounded-lg text-sm font-medium border border-white/20 shadow-sm"
                           >
                             {skill}
                           </span>
                         ))}
                         {category.skills.length > 6 && (
-                          <span className="px-2 py-1 bg-white/30 text-white rounded text-xs">
+                          <span className="px-3 py-1 bg-white/35 backdrop-blur-sm text-white rounded-lg text-sm border border-white/20 shadow-sm">
                             +{category.skills.length - 6}
                           </span>
                         )}
@@ -250,16 +253,21 @@ const Skills: React.FC = () => {
                   )}
                 </div>
 
-                {/* Hover Effect */}
-                <div className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                {/* Hover Effect sutil */}
+                <div className="absolute inset-0 bg-white/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                
+                {/* Glow effect en hover */}
+                <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+                  <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-accent/20 via-transparent to-accent/20 blur-sm"></div>
+                </div>
               </div>
             ))}
           </div>
         </div>
 
         {/* Selected Category Info */}
-        <div className="mt-12 text-center">
-          <div className="inline-flex items-center px-6 py-3 bg-accent/10 text-accent rounded-full text-lg font-medium">
+        <div className="mt-8 sm:mt-12 text-center">
+          <div className="inline-flex items-center px-4 sm:px-6 py-2 sm:py-3 bg-accent/10 text-accent rounded-full text-sm sm:text-base lg:text-lg font-medium border border-accent/20">
             {selectedTab 
               ? `Categoría seleccionada: ${skillCategories.find(cat => cat.id === selectedTab)?.title}`
               : 'Haz click en una categoría para expandir'
@@ -269,16 +277,16 @@ const Skills: React.FC = () => {
 
         {/* Skills Detail - Solo cuando hay selección */}
         {selectedTab && (
-          <div className="mt-8 max-w-4xl mx-auto">
-            <div className="bg-background/80 backdrop-blur-sm border border-border rounded-xl p-6">
-              <h3 className="text-2xl font-bold text-foreground mb-4">
+          <div className="mt-6 sm:mt-8 max-w-5xl mx-auto">
+            <div className="bg-background/80 backdrop-blur-sm border border-border rounded-xl p-4 sm:p-6 shadow-lg">
+              <h3 className="text-lg sm:text-xl lg:text-2xl font-bold text-foreground mb-3 sm:mb-4">
                 {skillCategories.find(cat => cat.id === selectedTab)?.title} - Tecnologías
               </h3>
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2 sm:gap-3">
                 {skillCategories.find(cat => cat.id === selectedTab)?.skills.map((skill, index) => (
                   <div
                     key={index}
-                    className="flex items-center p-3 bg-accent/10 text-accent rounded-lg hover:bg-accent hover:text-white transition-colors duration-300"
+                    className="flex items-center p-2 sm:p-3 bg-accent/10 text-accent rounded-lg hover:bg-accent hover:text-white transition-colors duration-300 text-sm sm:text-base"
                   >
                     <span className="font-medium">{skill}</span>
                   </div>
