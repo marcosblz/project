@@ -142,8 +142,6 @@ const Contact: React.FC = () => {
       case 'phone':
         window.open(`tel:${value.replace(/\s/g, '')}`, '_self');
         break;
-      case 'location':
-        window.open('https://www.google.com/maps/search/Madrid,+España', '_blank');
         break;
     }
   };
