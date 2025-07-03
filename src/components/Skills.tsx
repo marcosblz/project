@@ -118,42 +118,61 @@ const Skills: React.FC = () => {
   };
 
   useEffect(() => {
-    // Configurar posiciones iniciales del grid 2x2 CON MÁRGENES
     const container = containerRef.current;
     if (!container) return;
 
-    const cards = container.querySelectorAll('.skill-card');
-    
-    // CONFIGURACIÓN INICIAL CORRECTA
-    cards.forEach((card, index) => {
-      const row = Math.floor(index / 2);
-      const col = index % 2;
+    // ESPERAR A QUE EL DOM ESTÉ COMPLETAMENTE LISTO
+    const setupCards = () => {
+      const cards = container.querySelectorAll('.skill-card');
       
-      gsap.set(card, {
-        position: 'absolute',
-        width: 'calc(50% - 10px)',
-        height: 'calc(50% - 10px)',
-        x: col * 50 + '%',
-        y: row * 50 + '%',
-        transformOrigin: 'center center',
-        opacity: 0, // EMPEZAR INVISIBLE PARA EVITAR SUPERPOSICIÓN
-        scale: 0.8
-      });
-    });
-
-    // Animación de entrada DESPUÉS de configurar posiciones
-    gsap.to('.skill-card', {
-      opacity: 1,
-      scale: 1,
-      duration: 0.6,
-      stagger: 0.1,
-      ease: 'back.out(1.7)',
-      scrollTrigger: {
-        trigger: sectionRef.current,
-        start: 'top 80%',
-        toggleActions: 'play none none reverse'
+      if (cards.length === 0) {
+        // Si no hay tarjetas aún, esperar un poco más
+        setTimeout(setupCards, 10);
+        return;
       }
-    });
+
+      // CONFIGURACIÓN INICIAL INMEDIATA Y FORZADA
+      cards.forEach((card, index) => {
+        const row = Math.floor(index / 2);
+        const col = index % 2;
+        
+        // FORZAR POSICIONAMIENTO INMEDIATO
+        gsap.set(card, {
+          position: 'absolute',
+          width: 'calc(50% - 10px)',
+          height: 'calc(50% - 10px)',
+          x: col * 50 + '%',
+          y: row * 50 + '%',
+          transformOrigin: 'center center',
+          opacity: 1, // VISIBLE DESDE EL INICIO
+          scale: 1,   // TAMAÑO NORMAL DESDE EL INICIO
+          clearProps: 'transform' // LIMPIAR CUALQUIER TRANSFORM PREVIO
+        });
+      });
+
+      // ANIMACIÓN DE ENTRADA DESPUÉS DE POSICIONAR
+      gsap.fromTo('.skill-card', 
+        { 
+          opacity: 0,
+          scale: 0.8
+        },
+        {
+          opacity: 1,
+          scale: 1,
+          duration: 0.6,
+          stagger: 0.1,
+          ease: 'back.out(1.7)',
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: 'top 80%',
+            toggleActions: 'play none none reverse'
+          }
+        }
+      );
+    };
+
+    // EJECUTAR INMEDIATAMENTE
+    setupCards();
   }, []);
 
   return (
