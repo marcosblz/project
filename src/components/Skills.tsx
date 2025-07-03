@@ -74,8 +74,8 @@ const Skills: React.FC = () => {
 
     // Animar tarjeta seleccionada a la izquierda (75% ancho)
     tl.to(selectedCard, {
-      width: '75%',
-      height: '400px',
+      width: 'calc(75% - 8px)', // Restamos margen
+      height: 'calc(100% - 8px)',
       x: 0,
       y: 0,
       duration: 0.8,
@@ -85,10 +85,10 @@ const Skills: React.FC = () => {
     // Animar otras tarjetas a la derecha (25% ancho, apiladas)
     otherCards.forEach((card, index) => {
       tl.to(card, {
-        width: '25%',
-        height: '130px',
-        x: '300%', // Mover a la derecha
-        y: index * 135, // Apilar verticalmente
+        width: 'calc(25% - 8px)', // Restamos margen
+        height: 'calc(33.33% - 8px)', // 1/3 de altura con margen
+        x: 'calc(300% + 16px)', // Mover a la derecha con margen
+        y: `calc(${index * 33.33}% + ${index * 8}px)`, // Apilar verticalmente con margen
         duration: 0.8,
         ease: 'power3.inOut'
       }, 0); // Empezar al mismo tiempo
@@ -106,16 +106,16 @@ const Skills: React.FC = () => {
       onComplete: () => setIsAnimating(false)
     });
 
-    // Resetear todas las tarjetas al grid 2x2
+    // Resetear todas las tarjetas al grid 2x2 con márgenes
     cards.forEach((card, index) => {
       const row = Math.floor(index / 2);
       const col = index % 2;
       
       tl.to(card, {
-        width: '50%',
-        height: '50%',
-        x: col * 100 + '%',
-        y: row * 100 + '%',
+        width: 'calc(50% - 8px)', // 50% menos margen
+        height: 'calc(50% - 8px)', // 50% menos margen
+        x: `calc(${col * 50}% + ${col * 8}px)`, // Posición con margen
+        y: `calc(${row * 50}% + ${row * 8}px)`, // Posición con margen
         duration: 0.8,
         ease: 'power3.inOut'
       }, 0);
@@ -123,7 +123,7 @@ const Skills: React.FC = () => {
   };
 
   useEffect(() => {
-    // Configurar posiciones iniciales del grid 2x2
+    // Configurar posiciones iniciales del grid 2x2 con márgenes
     const container = containerRef.current;
     if (!container) return;
 
@@ -134,10 +134,10 @@ const Skills: React.FC = () => {
       
       gsap.set(card, {
         position: 'absolute',
-        width: '50%',
-        height: '50%',
-        x: col * 100 + '%',
-        y: row * 100 + '%',
+        width: 'calc(50% - 8px)', // 50% menos margen
+        height: 'calc(50% - 8px)', // 50% menos margen
+        x: `calc(${col * 50}% + ${col * 8}px)`, // Posición con margen
+        y: `calc(${row * 50}% + ${row * 8}px)`, // Posición con margen
         transformOrigin: 'center center'
       });
     });
@@ -168,11 +168,11 @@ const Skills: React.FC = () => {
           <p className="text-xl text-muted-foreground">Especialización técnica por áreas</p>
         </div>
 
-        {/* Container con aspect ratio fijo */}
+        {/* Container con aspect ratio fijo y padding para márgenes */}
         <div className="max-w-6xl mx-auto">
           <div 
             ref={containerRef}
-            className="relative w-full"
+            className="relative w-full p-2" // Padding para los márgenes
             style={{ height: '400px' }}
           >
             {skillCategories.map((category) => (
@@ -184,8 +184,18 @@ const Skills: React.FC = () => {
                 }`}
                 onClick={() => handleTabClick(category.id)}
               >
-                {/* Background Gradient */}
-                <div className={`absolute inset-0 bg-gradient-to-br ${category.gradient}`}></div>
+                {/* Background Gradient - FORZADO */}
+                <div 
+                  className="absolute inset-0 rounded-2xl"
+                  style={{
+                    background: `linear-gradient(135deg, 
+                      ${category.id === 'backend' ? '#2563eb, #06b6d4, #14b8a6' : 
+                        category.id === 'frontend' ? '#9333ea, #3b82f6, #6366f1' :
+                        category.id === 'devops' ? '#f97316, #ec4899, #9333ea' :
+                        '#10b981, #059669, #0d9488'
+                      })`
+                  }}
+                ></div>
                 
                 {/* Pattern */}
                 <div className="absolute inset-0 opacity-20">
@@ -206,7 +216,7 @@ const Skills: React.FC = () => {
                 </div>
 
                 {/* Hover Effect */}
-                <div className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <div className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl"></div>
               </div>
             ))}
           </div>
