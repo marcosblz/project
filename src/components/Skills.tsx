@@ -20,7 +20,8 @@ interface SkillCategory {
   icon: React.ReactNode;
   skills: Skill[];
   highlights: string[];
-  experience: string;
+  workExperience: string;
+  studyExperience: string;
 }
 
 const Skills: React.FC = () => {
@@ -36,7 +37,8 @@ const Skills: React.FC = () => {
       subtitle: "Desarrollo del lado del servidor",
       gradient: "from-blue-600 via-cyan-500 to-teal-400",
       icon: <Server className="w-8 h-8" />,
-      experience: "3+ años de experiencia",
+      workExperience: "3 años trabajando",
+      studyExperience: "4 años estudiando",
       highlights: [
         "APIs REST robustas y escalables",
         "Arquitectura de microservicios",
@@ -88,7 +90,8 @@ const Skills: React.FC = () => {
       subtitle: "Interfaces de usuario modernas",
       gradient: "from-purple-600 via-blue-500 to-indigo-400",
       icon: <Monitor className="w-8 h-8" />,
-      experience: "2+ años de experiencia",
+      workExperience: "2 años trabajando",
+      studyExperience: "3 años estudiando",
       highlights: [
         "Interfaces responsivas y accesibles",
         "Componentes reutilizables",
@@ -140,7 +143,8 @@ const Skills: React.FC = () => {
       subtitle: "Automatización y despliegue",
       gradient: "from-orange-500 via-pink-500 to-purple-600",
       icon: <GitBranch className="w-8 h-8" />,
-      experience: "1+ año de experiencia",
+      workExperience: "1 año trabajando",
+      studyExperience: "2 años estudiando",
       highlights: [
         "Pipelines CI/CD automatizados",
         "Containerización con Docker",
@@ -192,7 +196,8 @@ const Skills: React.FC = () => {
       subtitle: "Herramientas y metodologías",
       gradient: "from-green-500 via-emerald-500 to-teal-500",
       icon: <Settings className="w-8 h-8" />,
-      experience: "Experiencia variada",
+      workExperience: "2 años trabajando",
+      studyExperience: "3 años estudiando",
       highlights: [
         "Metodologías ágiles (Scrum/Kanban)",
         "Testing y calidad de código",
@@ -253,10 +258,6 @@ const Skills: React.FC = () => {
     
     if (!currentMainCard || !clickedCard) return;
 
-    // Store current transforms
-    const currentTransform = gsap.getProperty(currentMainCard, "transform");
-    const clickedTransform = gsap.getProperty(clickedCard, "transform");
-
     // Create timeline for the swap
     const tl = gsap.timeline({
       onComplete: () => {
@@ -268,7 +269,6 @@ const Skills: React.FC = () => {
     // Get current positions
     const currentRect = currentMainCard.getBoundingClientRect();
     const clickedRect = clickedCard.getBoundingClientRect();
-    const containerRect = container.getBoundingClientRect();
 
     // Calculate the distance to move
     const deltaX = clickedRect.left - currentRect.left;
@@ -378,46 +378,60 @@ const Skills: React.FC = () => {
                   selectedTab === category.id ? 'ring-2 ring-accent/50' : ''
                 } ${isAnimating ? 'pointer-events-none' : ''}`}
                 onClick={() => handleTabClick(category.id)}
+                style={{
+                  background: `linear-gradient(135deg, 
+                    hsl(var(--background)) 0%, 
+                    hsl(var(--card)) 50%, 
+                    hsl(var(--muted)) 100%
+                  )`,
+                  backdropFilter: 'blur(10px)',
+                  border: '1px solid hsl(var(--border))'
+                }}
               >
-                {/* Background Gradient */}
-                <div className={`absolute inset-0 bg-gradient-to-br ${category.gradient}`}></div>
+                {/* Gradient Accent Overlay */}
+                <div className={`absolute inset-0 bg-gradient-to-br ${category.gradient} opacity-10 group-hover:opacity-20 transition-opacity duration-300`}></div>
                 
                 {/* Pattern Overlay */}
-                <div className="absolute inset-0 opacity-10">
+                <div className="absolute inset-0 opacity-5">
                   <div 
                     className="w-full h-full"
                     style={{
-                      backgroundImage: `radial-gradient(circle at 25% 25%, white 2px, transparent 2px)`,
+                      backgroundImage: `radial-gradient(circle at 25% 25%, hsl(var(--accent)) 2px, transparent 2px)`,
                       backgroundSize: '30px 30px'
                     }}
                   ></div>
                 </div>
 
                 {/* Content */}
-                <div className="relative z-10 p-4 sm:p-6 lg:p-8 h-full text-white overflow-hidden">
+                <div className="relative z-10 p-4 sm:p-6 lg:p-8 h-full text-foreground overflow-hidden">
                   {selectedTab === category.id ? (
                     // Main card content (detailed view)
                     <div className="h-full flex flex-col">
                       <div className="flex items-center mb-4 sm:mb-6">
-                        <div className="w-12 sm:w-16 h-12 sm:h-16 bg-white/20 rounded-xl flex items-center justify-center mr-3 sm:mr-4 flex-shrink-0">
-                          {category.icon}
+                        <div className={`w-12 sm:w-16 h-12 sm:h-16 bg-gradient-to-br ${category.gradient} rounded-xl flex items-center justify-center mr-3 sm:mr-4 flex-shrink-0 shadow-lg`}>
+                          {React.cloneElement(category.icon as React.ReactElement, {
+                            className: "w-6 sm:w-8 h-6 sm:h-8 text-white"
+                          })}
                         </div>
                         <div className="min-w-0">
                           <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold tracking-wider mb-1">
                             {category.title}
                           </h3>
-                          <p className="text-sm sm:text-base text-white/80">{category.subtitle}</p>
-                          <p className="text-xs sm:text-sm text-white/70">{category.experience}</p>
+                          <p className="text-sm sm:text-base text-muted-foreground">{category.subtitle}</p>
+                          <div className="flex flex-col sm:flex-row sm:gap-4 text-xs sm:text-sm text-accent font-medium mt-1">
+                            <span>💼 {category.workExperience}</span>
+                            <span>📚 {category.studyExperience}</span>
+                          </div>
                         </div>
                       </div>
 
                       {/* Highlights */}
                       <div className="mb-4 sm:mb-6">
-                        <h4 className="text-sm sm:text-base font-semibold mb-2 sm:mb-3">Especialidades:</h4>
+                        <h4 className="text-sm sm:text-base font-semibold mb-2 sm:mb-3 text-foreground">Especialidades:</h4>
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-1 sm:gap-2">
                           {category.highlights.map((highlight, index) => (
-                            <div key={index} className="flex items-center text-xs sm:text-sm">
-                              <Zap className="w-3 sm:w-4 h-3 sm:h-4 mr-1 sm:mr-2 flex-shrink-0" />
+                            <div key={index} className="flex items-center text-xs sm:text-sm text-muted-foreground">
+                              <Zap className="w-3 sm:w-4 h-3 sm:h-4 mr-1 sm:mr-2 flex-shrink-0 text-accent" />
                               <span className="truncate">{highlight}</span>
                             </div>
                           ))}
@@ -426,21 +440,21 @@ const Skills: React.FC = () => {
 
                       {/* Skills with progress bars */}
                       <div className="flex-1 overflow-y-auto">
-                        <h4 className="text-sm sm:text-base font-semibold mb-2 sm:mb-3">Tecnologías:</h4>
+                        <h4 className="text-sm sm:text-base font-semibold mb-2 sm:mb-3 text-foreground">Tecnologías:</h4>
                         <div className="space-y-2 sm:space-y-3">
                           {category.skills.map((skill, index) => (
-                            <div key={index} className="bg-white/10 rounded-lg p-2 sm:p-3">
+                            <div key={index} className="bg-muted/50 backdrop-blur-sm rounded-lg p-2 sm:p-3 border border-border/50">
                               <div className="flex justify-between items-center mb-1 sm:mb-2">
-                                <span className="text-xs sm:text-sm font-medium">{skill.name}</span>
-                                <span className="text-xs text-white/70">{skill.experience}</span>
+                                <span className="text-xs sm:text-sm font-medium text-foreground">{skill.name}</span>
+                                <span className="text-xs text-muted-foreground">{skill.experience}</span>
                               </div>
-                              <div className="w-full bg-white/20 rounded-full h-1.5 sm:h-2 mb-1">
+                              <div className="w-full bg-muted rounded-full h-1.5 sm:h-2 mb-1">
                                 <div 
-                                  className="bg-white rounded-full h-full transition-all duration-1000 ease-out"
+                                  className="bg-gradient-to-r from-accent to-accent/80 rounded-full h-full transition-all duration-1000 ease-out"
                                   style={{ width: `${skill.level}%` }}
                                 ></div>
                               </div>
-                              <p className="text-xs text-white/80 line-clamp-2">{skill.description}</p>
+                              <p className="text-xs text-muted-foreground line-clamp-2">{skill.description}</p>
                             </div>
                           ))}
                         </div>
@@ -449,21 +463,25 @@ const Skills: React.FC = () => {
                   ) : (
                     // Sidebar card content (compact view)
                     <div className="h-full flex flex-col justify-center items-center text-center">
-                      <div className="w-8 sm:w-12 h-8 sm:h-12 bg-white/20 rounded-lg flex items-center justify-center mb-2 sm:mb-3 group-hover:scale-110 transition-transform duration-300">
+                      <div className={`w-8 sm:w-12 h-8 sm:h-12 bg-gradient-to-br ${category.gradient} rounded-lg flex items-center justify-center mb-2 sm:mb-3 group-hover:scale-110 transition-transform duration-300 shadow-lg`}>
                         {React.cloneElement(category.icon as React.ReactElement, {
-                          className: "w-4 sm:w-6 h-4 sm:h-6"
+                          className: "w-4 sm:w-6 h-4 sm:h-6 text-white"
                         })}
                       </div>
-                      <h3 className="text-sm sm:text-lg font-bold tracking-wider mb-1">
+                      <h3 className="text-sm sm:text-lg font-bold tracking-wider mb-1 text-foreground">
                         {category.title}
                       </h3>
-                      <p className="text-xs text-white/80 hidden sm:block">{category.subtitle}</p>
+                      <p className="text-xs text-muted-foreground hidden sm:block mb-1">{category.subtitle}</p>
+                      <div className="text-xs text-accent font-medium">
+                        <div>💼 {category.workExperience}</div>
+                        <div>📚 {category.studyExperience}</div>
+                      </div>
                     </div>
                   )}
                 </div>
 
                 {/* Hover Effect */}
-                <div className="absolute inset-0 bg-white/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
+                <div className="absolute inset-0 bg-accent/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none rounded-2xl"></div>
               </div>
             ))}
           </div>
@@ -475,7 +493,7 @@ const Skills: React.FC = () => {
             <div className="bg-background/80 backdrop-blur-sm border border-border rounded-xl p-4 sm:p-6 lg:p-8 shadow-lg">
               <div className="text-center">
                 <div className="flex items-center justify-center mb-3 sm:mb-4">
-                  <div className={`w-8 sm:w-10 h-8 sm:h-10 bg-gradient-to-r ${selectedCategory.gradient} rounded-lg flex items-center justify-center mr-2 sm:mr-3`}>
+                  <div className={`w-8 sm:w-10 h-8 sm:h-10 bg-gradient-to-r ${selectedCategory.gradient} rounded-lg flex items-center justify-center mr-2 sm:mr-3 shadow-lg`}>
                     {React.cloneElement(selectedCategory.icon as React.ReactElement, {
                       className: "w-4 sm:w-5 h-4 sm:h-5 text-white"
                     })}
@@ -485,30 +503,30 @@ const Skills: React.FC = () => {
                   </h3>
                 </div>
                 <p className="text-sm sm:text-base text-muted-foreground mb-4 sm:mb-6">
-                  {selectedCategory.experience} • {selectedCategory.skills.length} tecnologías dominadas
+                  💼 {selectedCategory.workExperience} • 📚 {selectedCategory.studyExperience} • {selectedCategory.skills.length} tecnologías dominadas
                 </p>
                 
                 {/* Quick stats */}
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4">
-                  <div className="bg-accent/10 rounded-lg p-2 sm:p-3">
+                  <div className="bg-accent/10 rounded-lg p-2 sm:p-3 border border-accent/20">
                     <div className="text-lg sm:text-xl font-bold text-accent">
                       {Math.round(selectedCategory.skills.reduce((acc, skill) => acc + skill.level, 0) / selectedCategory.skills.length)}%
                     </div>
                     <div className="text-xs sm:text-sm text-muted-foreground">Promedio</div>
                   </div>
-                  <div className="bg-accent/10 rounded-lg p-2 sm:p-3">
+                  <div className="bg-accent/10 rounded-lg p-2 sm:p-3 border border-accent/20">
                     <div className="text-lg sm:text-xl font-bold text-accent">
                       {selectedCategory.skills.filter(skill => skill.level >= 80).length}
                     </div>
                     <div className="text-xs sm:text-sm text-muted-foreground">Avanzado</div>
                   </div>
-                  <div className="bg-accent/10 rounded-lg p-2 sm:p-3">
+                  <div className="bg-accent/10 rounded-lg p-2 sm:p-3 border border-accent/20">
                     <div className="text-lg sm:text-xl font-bold text-accent">
                       {selectedCategory.highlights.length}
                     </div>
                     <div className="text-xs sm:text-sm text-muted-foreground">Especialidades</div>
                   </div>
-                  <div className="bg-accent/10 rounded-lg p-2 sm:p-3">
+                  <div className="bg-accent/10 rounded-lg p-2 sm:p-3 border border-accent/20">
                     <div className="text-lg sm:text-xl font-bold text-accent">
                       {selectedCategory.skills.length}
                     </div>
