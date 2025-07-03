@@ -44,7 +44,7 @@ const Contact: React.FC = () => {
   };
 
   const openGmail = () => {
-    const subject = encodeURIComponent('Oportunidad de Colaboración - Portfolio');
+    const subject = encodeURIComponent('Oportunidad de Colaboración');
     const body = encodeURIComponent(`Hola Marcos,
 
 He visto tu portfolio y me ha impresionado tu experiencia en desarrollo backend.
@@ -66,7 +66,7 @@ Saludos,
   };
 
   const openOutlook = () => {
-    const subject = encodeURIComponent('Oportunidad de Colaboración - Portfolio');
+    const subject = encodeURIComponent('Oportunidad de Colaboración');
     const body = encodeURIComponent(`Hola Marcos,
 
 He visto tu portfolio y me ha impresionado tu experiencia en desarrollo backend.
@@ -89,24 +89,24 @@ Saludos,
 
   const socialLinks = [
     {
-      icon: <Github className="w-5 sm:w-6 h-5 sm:h-6" />,
+      icon: <Github className="w-6 h-6" />,
       label: "GitHub",
       href: "https://github.com",
-      color: "from-gray-700 to-gray-900 hover:from-gray-600 hover:to-gray-800",
+      color: "hover:bg-gray-700",
       description: "Código y proyectos"
     },
     {
-      icon: <Linkedin className="w-5 sm:w-6 h-5 sm:h-6" />,
-      label: "LinkedIn",
+      icon: <Linkedin className="w-6 h-6" />,
+      label: "LinkedIn", 
       href: "https://www.linkedin.com/in/marcosbaeza",
-      color: "from-blue-600 to-blue-800 hover:from-blue-500 hover:to-blue-700",
+      color: "hover:bg-blue-600",
       description: "Perfil profesional"
     }
   ];
 
   return (
     <section id="contacto" className="contact-section py-12 sm:py-16 lg:py-24">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Header */}
         <div className="text-center mb-12 sm:mb-16">
@@ -121,14 +121,14 @@ Saludos,
         {/* Main Contact Block */}
         <div className="contact-card bg-background/90 backdrop-blur-sm border border-border rounded-3xl p-8 sm:p-10 lg:p-12 shadow-xl">
           
-          {/* Contact Methods Grid */}
+          {/* Primary Contact Methods - Email & Phone */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 mb-10">
             
-            {/* Email Section */}
+            {/* Email Section - Priority 1 */}
             <div>
               <div className="flex items-center mb-6">
-                <div className="w-12 h-12 bg-gradient-to-br from-accent to-secondary rounded-xl flex items-center justify-center mr-4">
-                  <Mail className="w-6 h-6 text-white" />
+                <div className="w-14 h-14 bg-gradient-to-br from-accent to-secondary rounded-xl flex items-center justify-center mr-4 shadow-lg">
+                  <Mail className="w-7 h-7 text-white" />
                 </div>
                 <div>
                   <h3 className="text-xl font-bold text-foreground">Email</h3>
@@ -139,7 +139,7 @@ Saludos,
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                 <button
                   onClick={openGmail}
-                  className="flex items-center justify-center px-4 py-3 bg-red-500 hover:bg-red-600 text-white rounded-xl transition-colors duration-300 font-medium"
+                  className="flex items-center justify-center px-4 py-3 bg-red-500 hover:bg-red-600 text-white rounded-xl transition-colors duration-300 font-medium shadow-md"
                 >
                   <ExternalLink className="w-4 h-4 mr-2" />
                   Gmail
@@ -147,7 +147,7 @@ Saludos,
                 
                 <button
                   onClick={openOutlook}
-                  className="flex items-center justify-center px-4 py-3 bg-blue-500 hover:bg-blue-600 text-white rounded-xl transition-colors duration-300 font-medium"
+                  className="flex items-center justify-center px-4 py-3 bg-blue-500 hover:bg-blue-600 text-white rounded-xl transition-colors duration-300 font-medium shadow-md"
                 >
                   <ExternalLink className="w-4 h-4 mr-2" />
                   Outlook
@@ -155,7 +155,7 @@ Saludos,
                 
                 <button
                   onClick={copyEmailToClipboard}
-                  className={`flex items-center justify-center px-4 py-3 rounded-xl transition-colors duration-300 font-medium ${
+                  className={`flex items-center justify-center px-4 py-3 rounded-xl transition-colors duration-300 font-medium shadow-md ${
                     copiedEmail 
                       ? 'bg-green-500 text-white' 
                       : 'bg-muted hover:bg-muted/80 text-foreground'
@@ -176,11 +176,11 @@ Saludos,
               </div>
             </div>
 
-            {/* Phone Section */}
+            {/* Phone Section - Priority 2 */}
             <div>
               <div className="flex items-center mb-6">
-                <div className="w-12 h-12 bg-gradient-to-br from-green-500 to-green-600 rounded-xl flex items-center justify-center mr-4">
-                  <Phone className="w-6 h-6 text-white" />
+                <div className="w-14 h-14 bg-gradient-to-br from-green-500 to-green-600 rounded-xl flex items-center justify-center mr-4 shadow-lg">
+                  <Phone className="w-7 h-7 text-white" />
                 </div>
                 <div>
                   <h3 className="text-xl font-bold text-foreground">Teléfono</h3>
@@ -190,7 +190,7 @@ Saludos,
               
               <button
                 onClick={() => window.open('tel:+34717705991', '_self')}
-                className="w-full flex items-center justify-center px-6 py-3 bg-green-500 hover:bg-green-600 text-white rounded-xl transition-colors duration-300 font-medium"
+                className="inline-flex items-center justify-center px-6 py-3 bg-green-500 hover:bg-green-600 text-white rounded-xl transition-colors duration-300 font-medium shadow-md"
               >
                 <Phone className="w-4 h-4 mr-2" />
                 Llamar Ahora
@@ -198,8 +198,8 @@ Saludos,
             </div>
           </div>
 
-          {/* Additional Info Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-8 border-t border-border">
+          {/* Secondary Info Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 pt-8 border-t border-border">
             
             {/* Location */}
             <div className="text-center">
@@ -208,7 +208,7 @@ Saludos,
               </div>
               <h4 className="font-semibold text-foreground mb-2">Ubicación</h4>
               <p className="text-sm text-muted-foreground">Madrid, España</p>
-              <p className="text-xs text-muted-foreground mt-1">Trabajo remoto y presencial</p>
+              <p className="text-xs text-muted-foreground mt-1">Remoto y presencial</p>
             </div>
 
             {/* Availability */}
@@ -216,30 +216,28 @@ Saludos,
               <div className="w-12 h-12 bg-green-500/10 rounded-xl flex items-center justify-center mx-auto mb-4">
                 <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
               </div>
-              <h4 className="font-semibold text-foreground mb-2">Disponibilidad</h4>
+              <h4 className="font-semibold text-foreground mb-2">Estado</h4>
               <p className="text-sm text-green-600 dark:text-green-400 font-medium">Disponible</p>
               <p className="text-xs text-muted-foreground mt-1">Respuesta en 24h</p>
             </div>
 
-            {/* Social */}
+            {/* Social Networks - Bigger Icons */}
             <div className="text-center">
               <div className="w-12 h-12 bg-secondary/10 rounded-xl flex items-center justify-center mx-auto mb-4">
                 <MessageCircle className="w-6 h-6 text-secondary" />
               </div>
-              <h4 className="font-semibold text-foreground mb-2">Redes Sociales</h4>
-              <div className="flex justify-center space-x-3">
+              <h4 className="font-semibold text-foreground mb-4">Redes Sociales</h4>
+              <div className="flex justify-center space-x-4">
                 {socialLinks.map((social, index) => (
                   <a
                     key={index}
                     href={social.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-8 h-8 bg-muted hover:bg-accent rounded-lg flex items-center justify-center text-muted-foreground hover:text-white transition-all duration-300"
+                    className={`w-12 h-12 bg-muted rounded-xl flex items-center justify-center text-muted-foreground transition-all duration-300 shadow-md ${social.color} hover:text-white hover:scale-105`}
                     title={social.label}
                   >
-                    {React.cloneElement(social.icon as React.ReactElement, {
-                      className: "w-4 h-4"
-                    })}
+                    {social.icon}
                   </a>
                 ))}
               </div>
