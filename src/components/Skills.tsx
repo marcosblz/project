@@ -80,7 +80,7 @@ const Skills: React.FC = () => {
 
     // Animar tarjeta seleccionada a la izquierda (75% ancho)
     tl.to(selectedCard, {
-      width: 'calc(75% - 8px)', // Restar el gap
+      width: 'calc(75% - 8px)',
       height: '400px',
       x: 0,
       y: 0,
@@ -91,10 +91,10 @@ const Skills: React.FC = () => {
     // Animar otras tarjetas a la derecha (25% ancho, apiladas)
     otherCards.forEach((card, index) => {
       tl.to(card, {
-        width: 'calc(25% - 8px)', // Restar el gap
-        height: 'calc(33.333% - 8px)', // Dividir altura en 3 partes con gaps
-        x: 'calc(300% + 16px)', // Mover a la derecha considerando gaps
-        y: `calc(${index * 133.333}% + ${index * 16}px)`, // Apilar verticalmente con gaps
+        width: 'calc(25% - 8px)',
+        height: 'calc(33.333% - 8px)',
+        x: 'calc(75% + 8px)', // Posición a la derecha
+        y: `calc(${index * 33.333}% + ${index * 8}px)`, // Apilar verticalmente
         duration: 0.8,
         ease: 'power3.inOut'
       }, 0); // Empezar al mismo tiempo
@@ -118,10 +118,10 @@ const Skills: React.FC = () => {
       const col = index % 2;
       
       tl.to(card, {
-        width: 'calc(50% - 8px)', // Restar la mitad del gap
-        height: 'calc(50% - 8px)', // Restar la mitad del gap
-        x: `calc(${col * 100}% + ${col * 16}px)`, // Posición con gap
-        y: `calc(${row * 100}% + ${row * 16}px)`, // Posición con gap
+        width: 'calc(50% - 8px)',
+        height: 'calc(50% - 8px)',
+        x: `calc(${col * 50}% + ${col * 8}px)`, // Posición horizontal con gap
+        y: `calc(${row * 50}% + ${row * 8}px)`, // Posición vertical con gap
         duration: 0.8,
         ease: 'power3.inOut'
       }, 0);
@@ -140,10 +140,10 @@ const Skills: React.FC = () => {
       
       gsap.set(card, {
         position: 'absolute',
-        width: 'calc(50% - 8px)', // Restar la mitad del gap (16px total / 2)
-        height: 'calc(50% - 8px)', // Restar la mitad del gap
-        x: `calc(${col * 100}% + ${col * 16}px)`, // Posición con gap
-        y: `calc(${row * 100}% + ${row * 16}px)`, // Posición con gap
+        width: 'calc(50% - 8px)',
+        height: 'calc(50% - 8px)',
+        x: `calc(${col * 50}% + ${col * 8}px)`, // Posición horizontal con gap
+        y: `calc(${row * 50}% + ${row * 8}px)`, // Posición vertical con gap
         transformOrigin: 'center center'
       });
     });
@@ -178,7 +178,7 @@ const Skills: React.FC = () => {
         <div className="max-w-4xl mx-auto">
           <div 
             ref={containerRef}
-            className="relative w-full p-2" // Padding para los gaps externos
+            className="relative w-full p-2"
             style={{ height: '400px' }}
           >
             {skillCategories.map((category) => (
