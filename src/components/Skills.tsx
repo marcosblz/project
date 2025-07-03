@@ -78,23 +78,23 @@ const Skills: React.FC = () => {
       onComplete: () => setIsAnimating(false)
     });
 
-    // Animar tarjeta seleccionada a la izquierda (75% ancho)
+    // Animar tarjeta seleccionada a la izquierda (300px ancho)
     tl.to(selectedCard, {
-      width: 'calc(75% - 8px)',
-      height: '400px',
+      width: 300,
+      height: 400,
       x: 0,
       y: 0,
       duration: 0.8,
       ease: 'power3.inOut'
     });
 
-    // Animar otras tarjetas a la derecha (25% ancho, apiladas)
+    // Animar otras tarjetas a la derecha (100px ancho, apiladas)
     otherCards.forEach((card, index) => {
       tl.to(card, {
-        width: 'calc(25% - 8px)',
-        height: 'calc(33.333% - 8px)',
-        x: 'calc(75% + 8px)', // Posición a la derecha
-        y: `calc(${index * 33.333}% + ${index * 8}px)`, // Apilar verticalmente
+        width: 100,
+        height: 130,
+        x: 320, // 300px + 20px gap
+        y: index * 135, // Apilar verticalmente con 5px gap
         duration: 0.8,
         ease: 'power3.inOut'
       }, 0); // Empezar al mismo tiempo
@@ -118,10 +118,10 @@ const Skills: React.FC = () => {
       const col = index % 2;
       
       tl.to(card, {
-        width: 'calc(50% - 8px)',
-        height: 'calc(50% - 8px)',
-        x: `calc(${col * 50}% + ${col * 8}px)`, // Posición horizontal con gap
-        y: `calc(${row * 50}% + ${row * 8}px)`, // Posición vertical con gap
+        width: 190, // (400px - 20px gap) / 2
+        height: 190,
+        x: col * 210, // 190px + 20px gap
+        y: row * 210, // 190px + 20px gap
         duration: 0.8,
         ease: 'power3.inOut'
       }, 0);
@@ -140,10 +140,10 @@ const Skills: React.FC = () => {
       
       gsap.set(card, {
         position: 'absolute',
-        width: 'calc(50% - 8px)',
-        height: 'calc(50% - 8px)',
-        x: `calc(${col * 50}% + ${col * 8}px)`, // Posición horizontal con gap
-        y: `calc(${row * 50}% + ${row * 8}px)`, // Posición vertical con gap
+        width: 190, // (400px - 20px gap) / 2
+        height: 190,
+        x: col * 210, // 190px + 20px gap
+        y: row * 210, // 190px + 20px gap
         transformOrigin: 'center center'
       });
     });
@@ -174,12 +174,12 @@ const Skills: React.FC = () => {
           <p className="text-xl text-muted-foreground">Especialización técnica por áreas</p>
         </div>
 
-        {/* Container con aspect ratio cuadrado y padding para gaps */}
-        <div className="max-w-4xl mx-auto">
+        {/* Container con dimensiones fijas */}
+        <div className="max-w-4xl mx-auto flex justify-center">
           <div 
             ref={containerRef}
-            className="relative w-full p-2"
-            style={{ height: '400px' }}
+            className="relative"
+            style={{ width: '420px', height: '420px' }}
           >
             {skillCategories.map((category) => (
               <div
