@@ -116,9 +116,7 @@ const Contact: React.FC = () => {
     {
       icon: <MapPin className="w-4 sm:w-5 lg:w-6 h-4 sm:h-5 lg:h-6" />,
       label: "Ubicación",
-      value: "Madrid, España",
-      action: "location"
-    }
+      value: "Madrid, España"    }
   ];
 
   const socialLinks = [
