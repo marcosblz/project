@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Mail, Phone, MapPin, Send, Github, Linkedin, Twitter, CheckCircle } from 'lucide-react';
+import { Mail, Phone, MapPin, Send, Github, Linkedin, CheckCircle, Copy, ExternalLink } from 'lucide-react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
@@ -21,6 +21,7 @@ const Contact: React.FC = () => {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [copiedEmail, setCopiedEmail] = useState(false);
 
   useEffect(() => {
     gsap.fromTo('.contact-card',
@@ -63,24 +64,60 @@ const Contact: React.FC = () => {
     setTimeout(() => setIsSubmitted(false), 5000);
   };
 
+  const copyEmailToClipboard = async () => {
+    try {
+      await navigator.clipboard.writeText('marcosbaezalopez@gmail.com');
+      setCopiedEmail(true);
+      setTimeout(() => setCopiedEmail(false), 2000);
+    } catch (err) {
+      // Fallback for older browsers
+      const textArea = document.createElement('textarea');
+      textArea.value = 'marcosbaezalopez@gmail.com';
+      document.body.appendChild(textArea);
+      textArea.select();
+      document.execCommand('copy');
+      document.body.removeChild(textArea);
+      setCopiedEmail(true);
+      setTimeout(() => setCopiedEmail(false), 2000);
+    }
+  };
+
+  const openEmailClient = () => {
+    const subject = encodeURIComponent('Contacto desde Portfolio');
+    const body = encodeURIComponent('Hola Marcos,\n\nMe gustaría contactar contigo para...\n\nSaludos,');
+    
+    // Try different email clients
+    const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=marcosbaezalopez@gmail.com&su=${subject}&body=${body}`;
+    const outlookUrl = `https://outlook.live.com/mail/0/deeplink/compose?to=marcosbaezalopez@gmail.com&subject=${subject}&body=${body}`;
+    const mailtoUrl = `mailto:marcosbaezalopez@gmail.com?subject=${subject}&body=${body}`;
+    
+    // Try to open Gmail first, then Outlook, then default mailto
+    const newWindow = window.open(gmailUrl, '_blank');
+    
+    // If popup was blocked, try mailto
+    if (!newWindow || newWindow.closed || typeof newWindow.closed == 'undefined') {
+      window.location.href = mailtoUrl;
+    }
+  };
+
   const contactInfo = [
     {
       icon: <Mail className="w-4 sm:w-5 lg:w-6 h-4 sm:h-5 lg:h-6" />,
       label: "Email",
       value: "marcosbaezalopez@gmail.com",
-      href: "mailto:marcosbaezalopez@gmail.com"
+      action: "email"
     },
     {
       icon: <Phone className="w-4 sm:w-5 lg:w-6 h-4 sm:h-5 lg:h-6" />,
       label: "Teléfono",
       value: "+34 717705991",
-      href: "tel:+34717705991"
+      action: "phone"
     },
     {
       icon: <MapPin className="w-4 sm:w-5 lg:w-6 h-4 sm:h-5 lg:h-6" />,
       label: "Ubicación",
       value: "Madrid, España",
-      href: "#"
+      action: "location"
     }
   ];
 
@@ -94,10 +131,24 @@ const Contact: React.FC = () => {
     {
       icon: <Linkedin className="w-4 sm:w-5 lg:w-6 h-4 sm:h-5 lg:h-6" />,
       label: "LinkedIn",
-      href: "www.linkedin.com/in/marcosbaeza",
+      href: "https://www.linkedin.com/in/marcosbaeza",
       color: "hover:bg-blue-600"
     }
   ];
+
+  const handleContactClick = (action: string, value: string) => {
+    switch (action) {
+      case 'email':
+        // Show options for email
+        break;
+      case 'phone':
+        window.open(`tel:${value.replace(/\s/g, '')}`, '_self');
+        break;
+      case 'location':
+        window.open('https://www.google.com/maps/search/Madrid,+España', '_blank');
+        break;
+    }
+  };
 
   return (
     <section id="contacto" className="contact-section py-8 sm:py-12 lg:py-20">
@@ -214,19 +265,53 @@ const Contact: React.FC = () => {
               <h3 className="text-base sm:text-lg lg:text-xl font-bold text-foreground mb-3 sm:mb-4 lg:mb-6">Información de Contacto</h3>
               <div className="space-y-2 sm:space-y-3 lg:space-y-4">
                 {contactInfo.map((item, index) => (
-                  <a
-                    key={index}
-                    href={item.href}
-                    className="flex items-center p-2 sm:p-3 rounded-lg hover:bg-accent/10 transition-colors duration-300 group"
-                  >
-                    <div className="w-8 sm:w-10 lg:w-12 h-8 sm:h-10 lg:h-12 bg-accent/10 rounded-lg flex items-center justify-center mr-2 sm:mr-3 lg:mr-4 group-hover:bg-accent group-hover:text-white transition-all duration-300">
-                      {item.icon}
-                    </div>
-                    <div>
-                      <p className="text-xs sm:text-sm text-muted-foreground">{item.label}</p>
-                      <p className="font-medium text-foreground text-xs sm:text-sm lg:text-base">{item.value}</p>
-                    </div>
-                  </a>
+                  <div key={index} className="group">
+                    {item.action === 'email' ? (
+                      <div className="space-y-2">
+                        <div className="flex items-center p-2 sm:p-3 rounded-lg hover:bg-accent/10 transition-colors duration-300">
+                          <div className="w-8 sm:w-10 lg:w-12 h-8 sm:h-10 lg:h-12 bg-accent/10 rounded-lg flex items-center justify-center mr-2 sm:mr-3 lg:mr-4 group-hover:bg-accent group-hover:text-white transition-all duration-300">
+                            {item.icon}
+                          </div>
+                          <div className="flex-1">
+                            <p className="text-xs sm:text-sm text-muted-foreground">{item.label}</p>
+                            <p className="font-medium text-foreground text-xs sm:text-sm lg:text-base">{item.value}</p>
+                          </div>
+                        </div>
+                        
+                        {/* Email Action Buttons */}
+                        <div className="ml-12 sm:ml-16 lg:ml-20 space-y-2">
+                          <button
+                            onClick={openEmailClient}
+                            className="w-full flex items-center justify-center px-3 py-2 bg-accent text-white rounded-lg hover:bg-accent/90 transition-all duration-300 text-xs sm:text-sm"
+                          >
+                            <ExternalLink className="w-3 sm:w-4 h-3 sm:h-4 mr-2" />
+                            Abrir Cliente de Email
+                          </button>
+                          
+                          <button
+                            onClick={copyEmailToClipboard}
+                            className="w-full flex items-center justify-center px-3 py-2 bg-muted text-foreground rounded-lg hover:bg-muted/80 transition-all duration-300 text-xs sm:text-sm"
+                          >
+                            <Copy className="w-3 sm:w-4 h-3 sm:h-4 mr-2" />
+                            {copiedEmail ? '¡Copiado!' : 'Copiar Email'}
+                          </button>
+                        </div>
+                      </div>
+                    ) : (
+                      <button
+                        onClick={() => handleContactClick(item.action, item.value)}
+                        className="w-full flex items-center p-2 sm:p-3 rounded-lg hover:bg-accent/10 transition-colors duration-300 group text-left"
+                      >
+                        <div className="w-8 sm:w-10 lg:w-12 h-8 sm:h-10 lg:h-12 bg-accent/10 rounded-lg flex items-center justify-center mr-2 sm:mr-3 lg:mr-4 group-hover:bg-accent group-hover:text-white transition-all duration-300">
+                          {item.icon}
+                        </div>
+                        <div>
+                          <p className="text-xs sm:text-sm text-muted-foreground">{item.label}</p>
+                          <p className="font-medium text-foreground text-xs sm:text-sm lg:text-base">{item.value}</p>
+                        </div>
+                      </button>
+                    )}
+                  </div>
                 ))}
               </div>
             </div>
