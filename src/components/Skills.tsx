@@ -10,6 +10,8 @@ interface SkillCategory {
   title: string;
   gradient: string;
   icon: React.ReactNode;
+  technologies: string[];
+  description: string;
 }
 
 const Skills: React.FC = () => {
@@ -23,25 +25,33 @@ const Skills: React.FC = () => {
       id: 'backend',
       title: "BACK-END",
       gradient: "from-blue-600 via-cyan-500 to-teal-400",
-      icon: <Server className="w-8 h-8" />
+      icon: <Server className="w-8 h-8" />,
+      technologies: ["Java", "Python", "Groovy", "Node.js", "Spring Boot", "Django", "REST APIs", "GraphQL"],
+      description: "Desarrollo de APIs robustas, arquitecturas escalables y sistemas backend eficientes"
     },
     {
       id: 'frontend',
       title: "FRONT-END",
       gradient: "from-purple-600 via-blue-500 to-indigo-400",
-      icon: <Monitor className="w-8 h-8" />
+      icon: <Monitor className="w-8 h-8" />,
+      technologies: ["React", "TypeScript", "JavaScript", "HTML5", "CSS3", "Tailwind CSS", "GSAP", "Responsive Design"],
+      description: "Interfaces modernas, experiencias de usuario intuitivas y animaciones fluidas"
     },
     {
       id: 'devops',
       title: "DEVOPS",
       gradient: "from-orange-500 via-pink-500 to-purple-600",
-      icon: <GitBranch className="w-8 h-8" />
+      icon: <GitBranch className="w-8 h-8" />,
+      technologies: ["Docker", "Kubernetes", "Jenkins", "Git", "CI/CD", "AWS", "Linux", "Automation"],
+      description: "Automatización de procesos, despliegue continuo y gestión de infraestructura"
     },
     {
       id: 'otros',
       title: "OTROS",
       gradient: "from-green-500 via-emerald-500 to-teal-500",
-      icon: <Database className="w-8 h-8" />
+      icon: <Database className="w-8 h-8" />,
+      technologies: ["MySQL", "PostgreSQL", "MongoDB", "Redis", "Webpack", "Vite", "Testing", "Agile/Scrum"],
+      description: "Bases de datos, herramientas de desarrollo y metodologías ágiles"
     }
   ];
 
@@ -166,6 +176,8 @@ const Skills: React.FC = () => {
     );
   }, []);
 
+  const selectedCategory = skillCategories.find(cat => cat.id === selectedTab);
+
   return (
     <section id="habilidades" ref={sectionRef} className="py-20">
       <div className="max-w-7xl mx-auto px-4">
@@ -204,20 +216,50 @@ const Skills: React.FC = () => {
                   ></div>
                 </div>
 
-                {/* Content */}
-                <div className="relative z-10 p-8 h-full flex flex-col justify-center items-center text-white text-center">
-                  <div className="w-20 h-20 bg-white/20 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
-                    {category.icon}
+                {/* Content - Grid view */}
+                {selectedTab !== category.id && (
+                  <div className="relative z-10 p-8 h-full flex flex-col justify-center items-center text-white text-center">
+                    <div className="w-20 h-20 bg-white/20 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                      {category.icon}
+                    </div>
+                    <h3 className="text-2xl font-bold tracking-wider">
+                      {category.title}
+                    </h3>
                   </div>
-                  <h3 className="text-2xl font-bold tracking-wider">
-                    {category.title}
-                  </h3>
-                </div>
+                )}
 
-                {/* Photo Placeholder */}
-                <div className="absolute top-6 right-6 w-16 h-16 bg-white/20 rounded-xl border border-white/30 flex items-center justify-center">
-                  <span className="text-white/60 text-sm font-medium">IMG</span>
-                </div>
+                {/* Content - Expanded view */}
+                {selectedTab === category.id && (
+                  <div className="relative z-10 p-8 h-full text-white">
+                    <div className="flex items-center mb-6">
+                      <div className="w-16 h-16 bg-white/20 rounded-xl flex items-center justify-center mr-4">
+                        {category.icon}
+                      </div>
+                      <div>
+                        <h3 className="text-3xl font-bold tracking-wider mb-2">
+                          {category.title}
+                        </h3>
+                        <p className="text-white/80 text-sm leading-relaxed">
+                          {category.description}
+                        </p>
+                      </div>
+                    </div>
+                    
+                    <div className="space-y-4">
+                      <h4 className="text-lg font-semibold text-white/90">Tecnologías:</h4>
+                      <div className="grid grid-cols-2 gap-3">
+                        {category.technologies.map((tech, index) => (
+                          <div
+                            key={index}
+                            className="bg-white/10 backdrop-blur-sm rounded-lg px-4 py-2 text-sm font-medium hover:bg-white/20 transition-colors duration-300"
+                          >
+                            {tech}
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                )}
 
                 {/* Hover Effect */}
                 <div className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
@@ -230,7 +272,7 @@ const Skills: React.FC = () => {
         <div className="mt-12 text-center">
           <div className="inline-flex items-center px-6 py-3 bg-accent/10 text-accent rounded-full text-lg font-medium">
             {selectedTab 
-              ? `Categoría seleccionada: ${skillCategories.find(cat => cat.id === selectedTab)?.title}`
+              ? `Categoría seleccionada: ${selectedCategory?.title}`
               : 'Haz click en una categoría para expandir'
             }
           </div>
