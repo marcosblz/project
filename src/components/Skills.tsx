@@ -14,7 +14,6 @@ interface SkillCategory {
 
 const Skills: React.FC = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
-  const containerRef = useRef<HTMLDivElement>(null);
   const [selectedTab, setSelectedTab] = useState<string>('backend');
 
   const skillCategories: SkillCategory[] = [
@@ -45,100 +44,19 @@ const Skills: React.FC = () => {
   ];
 
   const handleTabClick = (tabId: string) => {
-    if (tabId === selectedTab) return;
     setSelectedTab(tabId);
   };
 
   useEffect(() => {
-    const container = containerRef.current;
-    if (!container) return;
-
-    const cards = container.querySelectorAll('.skill-card');
-    
-    // Define positions for 2x2 grid (initial state)
-    const gridPositions = [
-      { x: 0, y: 0, width: '48%', height: '48%' },      // top-left
-      { x: '52%', y: 0, width: '48%', height: '48%' },  // top-right
-      { x: 0, y: '52%', width: '48%', height: '48%' },  // bottom-left
-      { x: '52%', y: '52%', width: '48%', height: '48%' } // bottom-right
-    ];
-
-    // Find selected card index
-    const selectedIndex = skillCategories.findIndex(cat => cat.id === selectedTab);
-    
-    cards.forEach((card, index) => {
-      const isSelected = index === selectedIndex;
-      
-      if (isSelected) {
-        // Selected card: large on the left (70% width, full height)
-        gsap.to(card, {
-          x: 0,
-          y: 0,
-          width: '70%',
-          height: '100%',
-          duration: 0.8,
-          ease: 'power3.out',
-          zIndex: 10
-        });
-      } else {
-        // Other cards: stack vertically on the right
-        let stackIndex = index > selectedIndex ? index - 1 : index;
-        if (index > selectedIndex) stackIndex = index - 1;
-        else stackIndex = index;
-        
-        // Adjust stack index for proper vertical positioning
-        const verticalIndex = stackIndex >= selectedIndex ? stackIndex : stackIndex;
-        const adjustedIndex = index < selectedIndex ? index : index - 1;
-        
-        gsap.to(card, {
-          x: '75%',
-          y: `${adjustedIndex * 33.33}%`,
-          width: '25%',
-          height: '30%',
-          duration: 0.8,
-          ease: 'power3.out',
-          delay: adjustedIndex * 0.1,
-          zIndex: 5
-        });
-      }
-    });
-
-  }, [selectedTab, skillCategories]);
-
-  useEffect(() => {
-    // Initial setup - 2x2 grid
-    const container = containerRef.current;
-    if (!container) return;
-
-    const cards = container.querySelectorAll('.skill-card');
-    
-    // Set initial 2x2 positions
-    cards.forEach((card, index) => {
-      const positions = [
-        { x: 0, y: 0 },           // top-left
-        { x: '52%', y: 0 },       // top-right  
-        { x: 0, y: '52%' },       // bottom-left
-        { x: '52%', y: '52%' }    // bottom-right
-      ];
-      
-      gsap.set(card, {
-        x: positions[index].x,
-        y: positions[index].y,
-        width: '48%',
-        height: '48%',
-        zIndex: 1
-      });
-    });
-
-    // Initial animation on scroll
+    // Simple scroll animation
     gsap.fromTo('.skill-card',
-      { opacity: 0, scale: 0.8 },
+      { opacity: 0, y: 30 },
       {
         opacity: 1,
-        scale: 1,
+        y: 0,
         duration: 0.6,
         stagger: 0.1,
-        ease: 'back.out(1.7)',
+        ease: 'power3.out',
         scrollTrigger: {
           trigger: sectionRef.current,
           start: 'top 80%',
@@ -156,60 +74,51 @@ const Skills: React.FC = () => {
           <p className="text-xl text-muted-foreground">Especialización técnica por áreas</p>
         </div>
 
-        {/* Grid Container */}
-        <div 
-          ref={containerRef}
-          className="relative w-full mx-auto"
-          style={{ 
-            maxWidth: '800px',
-            height: '500px'
-          }}
-        >
-          {skillCategories.map((category, index) => (
-            <div
-              key={category.id}
-              data-tab={category.id}
-              className="skill-card absolute cursor-pointer rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-shadow duration-300 group"
-              onClick={() => handleTabClick(category.id)}
-            >
-              {/* Background Gradient */}
-              <div className={`absolute inset-0 bg-gradient-to-br ${category.gradient}`}></div>
-              
-              {/* Pattern */}
-              <div className="absolute inset-0 opacity-20">
-                <div 
-                  className="w-full h-full"
-                  style={{
-                    backgroundImage: `radial-gradient(circle at 25% 25%, white 2px, transparent 2px)`,
-                    backgroundSize: '40px 40px'
-                  }}
-                ></div>
-              </div>
-
-              {/* Content */}
-              <div className="relative z-10 p-6 h-full flex flex-col justify-center items-center text-white text-center">
-                <div className="w-16 h-16 bg-white/20 rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
-                  {category.icon}
+        {/* Simple 2x2 Grid */}
+        <div className="max-w-4xl mx-auto">
+          <div className="grid grid-cols-2 gap-6 aspect-square">
+            {skillCategories.map((category) => (
+              <div
+                key={category.id}
+                className={`skill-card cursor-pointer rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-300 group relative ${
+                  selectedTab === category.id ? 'ring-4 ring-white/50' : ''
+                }`}
+                onClick={() => handleTabClick(category.id)}
+              >
+                {/* Background Gradient */}
+                <div className={`absolute inset-0 bg-gradient-to-br ${category.gradient}`}></div>
+                
+                {/* Pattern */}
+                <div className="absolute inset-0 opacity-20">
+                  <div 
+                    className="w-full h-full"
+                    style={{
+                      backgroundImage: `radial-gradient(circle at 25% 25%, white 2px, transparent 2px)`,
+                      backgroundSize: '40px 40px'
+                    }}
+                  ></div>
                 </div>
-                <h3 className="text-xl font-bold tracking-wider">
-                  {category.title}
-                </h3>
+
+                {/* Content */}
+                <div className="relative z-10 p-8 h-full flex flex-col justify-center items-center text-white text-center">
+                  <div className="w-20 h-20 bg-white/20 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                    {category.icon}
+                  </div>
+                  <h3 className="text-2xl font-bold tracking-wider">
+                    {category.title}
+                  </h3>
+                </div>
+
+                {/* Photo Placeholder */}
+                <div className="absolute top-6 right-6 w-16 h-16 bg-white/20 rounded-xl border border-white/30 flex items-center justify-center">
+                  <span className="text-white/60 text-sm font-medium">IMG</span>
+                </div>
+
+                {/* Hover Effect */}
+                <div className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               </div>
-
-              {/* Photo Placeholder */}
-              <div className="absolute top-4 right-4 w-12 h-12 bg-white/20 rounded-lg border border-white/30 flex items-center justify-center">
-                <span className="text-white/60 text-xs">IMG</span>
-              </div>
-
-              {/* Selection Indicator */}
-              {selectedTab === category.id && (
-                <div className="absolute inset-0 border-4 border-white/50 rounded-2xl pointer-events-none"></div>
-              )}
-
-              {/* Hover Effect */}
-              <div className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
 
         {/* Selected Category Info */}
