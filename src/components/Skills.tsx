@@ -69,7 +69,7 @@ const Skills: React.FC = () => {
 
     // Animar tarjeta seleccionada a la izquierda (CON MARGEN DERECHO)
     tl.to(selectedCard, {
-      width: 'calc(75% - 10px)', // MARGEN DERECHO AGREGADO
+      width: 'calc(75% - 15px)', // MARGEN DERECHO AGREGADO
       height: '400px',
       x: 0,
       y: 0,
@@ -81,9 +81,9 @@ const Skills: React.FC = () => {
     otherCards.forEach((card, index) => {
       tl.to(card, {
         width: '25%',
-        height: '130px',
+        height: '125px', // Altura ajustada para que quepan 3
         x: '300%', // Mover a la derecha
-        y: index * 135, // Apilar verticalmente
+        y: index * 130, // Apilar verticalmente con espacio
         duration: 0.8,
         ease: 'power3.inOut'
       }, 0); // Empezar al mismo tiempo
@@ -101,16 +101,16 @@ const Skills: React.FC = () => {
       onComplete: () => setIsAnimating(false)
     });
 
-    // Resetear todas las tarjetas al grid 2x2 CON MÁRGENES
+    // Resetear todas las tarjetas al grid 2x2 CON MÁRGENES REALES
     cards.forEach((card, index) => {
       const row = Math.floor(index / 2);
       const col = index % 2;
       
       tl.to(card, {
-        width: 'calc(50% - 10px)',
-        height: 'calc(50% - 10px)',
-        x: col * 50 + '%',
-        y: row * 50 + '%',
+        width: 'calc(50% - 15px)', // MARGEN HORIZONTAL
+        height: 'calc(50% - 15px)', // MARGEN VERTICAL
+        x: col === 0 ? '0%' : 'calc(50% + 15px)', // POSICIÓN CON MARGEN
+        y: row === 0 ? '0%' : 'calc(50% + 15px)', // POSICIÓN CON MARGEN
         duration: 0.8,
         ease: 'power3.inOut'
       }, 0);
@@ -131,44 +131,38 @@ const Skills: React.FC = () => {
         return;
       }
 
-      // CONFIGURACIÓN INICIAL INMEDIATA Y FORZADA
+      // CONFIGURACIÓN INICIAL CON MÁRGENES REALES
       cards.forEach((card, index) => {
         const row = Math.floor(index / 2);
         const col = index % 2;
         
-        // FORZAR POSICIONAMIENTO INMEDIATO
+        // FORZAR POSICIONAMIENTO CON ESPACIADO REAL
         gsap.set(card, {
           position: 'absolute',
-          width: 'calc(50% - 10px)',
-          height: 'calc(50% - 10px)',
-          x: col * 50 + '%',
-          y: row * 50 + '%',
+          width: 'calc(50% - 15px)', // ANCHO CON MARGEN
+          height: 'calc(50% - 15px)', // ALTO CON MARGEN
+          x: col === 0 ? '0%' : 'calc(50% + 15px)', // POSICIÓN CON ESPACIO
+          y: row === 0 ? '0%' : 'calc(50% + 15px)', // POSICIÓN CON ESPACIO
           transformOrigin: 'center center',
-          opacity: 1, // VISIBLE DESDE EL INICIO
-          scale: 1,   // TAMAÑO NORMAL DESDE EL INICIO
-          clearProps: 'transform' // LIMPIAR CUALQUIER TRANSFORM PREVIO
+          opacity: 0, // EMPEZAR INVISIBLE PARA ANIMACIÓN
+          scale: 0.8,
+          clearProps: false // NO LIMPIAR PARA MANTENER POSICIÓN
         });
       });
 
       // ANIMACIÓN DE ENTRADA DESPUÉS DE POSICIONAR
-      gsap.fromTo('.skill-card', 
-        { 
-          opacity: 0,
-          scale: 0.8
-        },
-        {
-          opacity: 1,
-          scale: 1,
-          duration: 0.6,
-          stagger: 0.1,
-          ease: 'back.out(1.7)',
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            start: 'top 80%',
-            toggleActions: 'play none none reverse'
-          }
+      gsap.to('.skill-card', {
+        opacity: 1,
+        scale: 1,
+        duration: 0.6,
+        stagger: 0.1,
+        ease: 'back.out(1.7)',
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: 'top 80%',
+          toggleActions: 'play none none reverse'
         }
-      );
+      });
     };
 
     // EJECUTAR INMEDIATAMENTE
@@ -183,12 +177,12 @@ const Skills: React.FC = () => {
           <p className="text-xl text-muted-foreground">Especialización técnica por áreas</p>
         </div>
 
-        {/* Container con aspect ratio fijo */}
+        {/* Container con aspect ratio fijo Y PADDING INTERNO */}
         <div className="max-w-6xl mx-auto">
           <div 
             ref={containerRef}
-            className="relative w-full"
-            style={{ height: '400px' }}
+            className="relative w-full p-4" // PADDING AGREGADO
+            style={{ height: '420px' }} // ALTURA AUMENTADA PARA COMPENSAR PADDING
           >
             {skillCategories.map((category) => (
               <div
