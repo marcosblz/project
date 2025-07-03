@@ -101,16 +101,24 @@ const Skills: React.FC = () => {
       onComplete: () => setIsAnimating(false)
     });
 
-    // Resetear todas las tarjetas al grid 2x2
+    // Resetear todas las tarjetas al grid 2x2 CON MÁRGENES
     cards.forEach((card, index) => {
       const row = Math.floor(index / 2);
       const col = index % 2;
       
+      // Calcular posición con márgenes
+      const marginX = 10; // 10px de margen horizontal
+      const marginY = 10; // 10px de margen vertical
+      const cardWidth = `calc(50% - ${marginX}px)`;
+      const cardHeight = `calc(50% - ${marginY}px)`;
+      const xPos = col * (50 + marginX / 2); // 50% + mitad del margen
+      const yPos = row * (50 + marginY / 2); // 50% + mitad del margen
+      
       tl.to(card, {
-        width: '50%',
-        height: '50%',
-        x: col * 100 + '%',
-        y: row * 100 + '%',
+        width: cardWidth,
+        height: cardHeight,
+        x: xPos + '%',
+        y: yPos + '%',
         duration: 0.8,
         ease: 'power3.inOut'
       }, 0);
@@ -118,7 +126,7 @@ const Skills: React.FC = () => {
   };
 
   useEffect(() => {
-    // Configurar posiciones iniciales del grid 2x2
+    // Configurar posiciones iniciales del grid 2x2 CON MÁRGENES
     const container = containerRef.current;
     if (!container) return;
 
@@ -127,12 +135,20 @@ const Skills: React.FC = () => {
       const row = Math.floor(index / 2);
       const col = index % 2;
       
+      // Configurar posición inicial con márgenes
+      const marginX = 10; // 10px de margen horizontal
+      const marginY = 10; // 10px de margen vertical
+      const cardWidth = `calc(50% - ${marginX}px)`;
+      const cardHeight = `calc(50% - ${marginY}px)`;
+      const xPos = col * (50 + marginX / 2); // 50% + mitad del margen
+      const yPos = row * (50 + marginY / 2); // 50% + mitad del margen
+      
       gsap.set(card, {
         position: 'absolute',
-        width: '50%',
-        height: '50%',
-        x: col * 100 + '%',
-        y: row * 100 + '%',
+        width: cardWidth,
+        height: cardHeight,
+        x: xPos + '%',
+        y: yPos + '%',
         transformOrigin: 'center center'
       });
     });
