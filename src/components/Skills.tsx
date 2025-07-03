@@ -26,6 +26,7 @@ const Skills: React.FC = () => {
   const [isDrawingComplete, setIsDrawingComplete] = useState(false);
   const [drawingProgress, setDrawingProgress] = useState(0);
   const [isInDrawingZone, setIsInDrawingZone] = useState(false);
+  const [scrollBlocked, setScrollBlocked] = useState(false);
 
   const technologies: Technology[] = [
     {
@@ -133,7 +134,10 @@ const Skills: React.FC = () => {
       svg.setAttribute('viewBox', `0 0 ${rect.width} ${rect.height}`);
     };
 
-    updateSVGDimensions();
+    // Esperar a que el DOM esté listo
+    setTimeout(() => {
+      updateSVGDimensions();
+    }, 100);
 
     // Crear paths para la tabla
     const createTablePaths = () => {
@@ -168,120 +172,189 @@ const Skills: React.FC = () => {
       return paths;
     };
 
-    const paths = createTablePaths();
-    
-    // Limpiar SVG
-    svg.innerHTML = '';
-
     // Crear elementos path
-    const pathElements = paths.map((pathData) => {
-      const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-      path.setAttribute('d', pathData);
-      path.setAttribute('stroke', 'hsl(var(--accent))');
-      path.setAttribute('stroke-width', '2');
-      path.setAttribute('fill', 'none');
+    let pathElements: Array<{ element: SVGPathElement; length: number }> = [];
+
+    const initializePaths = () => {
+      const paths = createTablePaths();
       
-      // Calcular longitud del path
-      const length = path.getTotalLength();
-      path.setAttribute('stroke-dasharray', `${length}`);
-      path.setAttribute('stroke-dashoffset', `${length}`);
-      path.style.opacity = '0.8';
-      
-      svg.appendChild(path);
-      return { element: path, length };
-    });
+      // Limpiar SVG
+      svg.innerHTML = '';
+      pathElements = [];
+
+      // Crear elementos path
+      paths.forEach((pathData) => {
+        const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+        path.setAttribute('d', pathData);
+        path.setAttribute('stroke', 'hsl(var(--accent))');
+        path.setAttribute('stroke-width', '2');
+        path.setAttribute('fill', 'none');
+        
+        svg.appendChild(path);
+        
+        // Calcular longitud del path después de añadirlo al DOM
+        const length = path.getTotalLength();
+        path.setAttribute('stroke-dasharray', `${length}`);
+        path.setAttribute('stroke-dashoffset', `${length}`);
+        path.style.opacity = '0.8';
+        
+        pathElements.push({ element: path, length });
+      });
+    };
+
+    // Inicializar paths
+    setTimeout(initializePaths, 200);
 
     // Ocultar contenido inicialmente
     gsap.set('.table-content', { opacity: 0 });
 
+    // Variable para controlar el scroll manual
+    let manualScrollProgress = 0;
+    let isManualScrolling = false;
+
     // ScrollTrigger para detectar cuando estamos en la zona de dibujo
-    ScrollTrigger.create({
+    const zoneTrigger = ScrollTrigger.create({
       trigger: section,
-      start: 'top 50%',
-      end: 'bottom 50%',
-      onEnter: () => setIsInDrawingZone(true),
-      onLeave: () => setIsInDrawingZone(false),
-      onEnterBack: () => setIsInDrawingZone(true),
-      onLeaveBack: () => setIsInDrawingZone(false),
+      start: 'top 80%',
+      end: 'bottom 20%',
+      onEnter: () => {
+        setIsInDrawingZone(true);
+        console.log('Entrando en zona de dibujo');
+      },
+      onLeave: () => {
+        setIsInDrawingZone(false);
+        setScrollBlocked(false);
+        console.log('Saliendo de zona de dibujo');
+      },
+      onEnterBack: () => {
+        setIsInDrawingZone(true);
+        console.log('Volviendo a zona de dibujo');
+      },
+      onLeaveBack: () => {
+        setIsInDrawingZone(false);
+        setScrollBlocked(false);
+        console.log('Saliendo hacia atrás de zona de dibujo');
+      },
     });
 
-    // ScrollTrigger principal para el dibujo
+    // Función para actualizar el dibujo
+    const updateDrawing = (progress: number) => {
+      setDrawingProgress(progress);
+
+      // Dibujar paths progresivamente
+      pathElements.forEach((pathObj, index) => {
+        const pathProgress = Math.max(0, Math.min(1, (progress * pathElements.length - index) / 1));
+        const offset = pathObj.length * (1 - pathProgress);
+        pathObj.element.setAttribute('stroke-dashoffset', `${offset}`);
+      });
+
+      // Mostrar contenido cuando el dibujo esté casi completo
+      if (progress > 0.7) {
+        gsap.to('.table-content', {
+          opacity: 1,
+          duration: 0.5,
+          stagger: 0.1,
+          ease: 'power2.out'
+        });
+      }
+
+      // Marcar como completo
+      if (progress >= 0.9) {
+        setIsDrawingComplete(true);
+        setScrollBlocked(false);
+        console.log('Dibujo completado');
+      } else {
+        setIsDrawingComplete(false);
+      }
+    };
+
+    // ScrollTrigger principal para el dibujo automático
     const drawingTrigger = ScrollTrigger.create({
       trigger: section,
       start: 'top 60%',
       end: 'bottom 40%',
       scrub: 1,
       onUpdate: (self) => {
-        const progress = self.progress;
-        setDrawingProgress(progress);
-
-        // Dibujar paths progresivamente
-        pathElements.forEach((pathObj, index) => {
-          const pathProgress = Math.max(0, Math.min(1, (progress * pathElements.length - index) / 1));
-          const offset = pathObj.length * (1 - pathProgress);
-          pathObj.element.setAttribute('stroke-dashoffset', `${offset}`);
-        });
-
-        // Mostrar contenido cuando el dibujo esté casi completo
-        if (progress > 0.8) {
-          gsap.to('.table-content', {
-            opacity: 1,
-            duration: 0.5,
-            stagger: 0.1,
-            ease: 'power2.out'
-          });
-        }
-
-        // Marcar como completo
-        if (progress >= 0.95) {
-          setIsDrawingComplete(true);
-        } else {
-          setIsDrawingComplete(false);
+        if (!isManualScrolling) {
+          updateDrawing(self.progress);
         }
       }
     });
 
+    // Función para manejar scroll manual cuando está bloqueado
+    const handleManualScroll = (delta: number) => {
+      if (scrollBlocked && pathElements.length > 0) {
+        isManualScrolling = true;
+        manualScrollProgress += delta * 0.002; // Ajustar sensibilidad
+        manualScrollProgress = Math.max(0, Math.min(1, manualScrollProgress));
+        updateDrawing(manualScrollProgress);
+        
+        // Resetear flag después de un tiempo
+        setTimeout(() => {
+          isManualScrolling = false;
+        }, 100);
+      }
+    };
+
+    // Event listeners para scroll manual
+    const handleWheel = (e: WheelEvent) => {
+      if (scrollBlocked) {
+        e.preventDefault();
+        e.stopPropagation();
+        handleManualScroll(e.deltaY);
+      }
+    };
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (scrollBlocked) {
+        const keys = ['ArrowUp', 'ArrowDown', 'PageUp', 'PageDown', 'Home', 'End', ' '];
+        if (keys.includes(e.key)) {
+          e.preventDefault();
+          const delta = ['ArrowDown', 'PageDown', ' '].includes(e.key) ? 50 : -50;
+          handleManualScroll(delta);
+        }
+      }
+    };
+
     // Manejar resize
     const handleResize = () => {
       updateSVGDimensions();
+      setTimeout(initializePaths, 100);
       drawingTrigger.refresh();
+      zoneTrigger.refresh();
     };
 
+    // Agregar event listeners
+    document.addEventListener('wheel', handleWheel, { passive: false });
+    document.addEventListener('keydown', handleKeyDown);
     window.addEventListener('resize', handleResize);
 
     return () => {
       ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+      document.removeEventListener('wheel', handleWheel);
+      document.removeEventListener('keydown', handleKeyDown);
       window.removeEventListener('resize', handleResize);
     };
   }, []);
 
-  // Bloquear scroll cuando estamos dibujando
+  // Efecto para controlar el bloqueo de scroll
   useEffect(() => {
-    if (isInDrawingZone && !isDrawingComplete && drawingProgress > 0.1) {
-      // Prevenir scroll con wheel
-      const preventScroll = (e: WheelEvent) => {
-        e.preventDefault();
-      };
-
-      // Prevenir scroll con teclado
-      const preventKeyScroll = (e: KeyboardEvent) => {
-        const keys = ['ArrowUp', 'ArrowDown', 'PageUp', 'PageDown', 'Home', 'End', ' '];
-        if (keys.includes(e.key)) {
-          e.preventDefault();
-        }
-      };
-
-      document.addEventListener('wheel', preventScroll, { passive: false });
-      document.addEventListener('keydown', preventKeyScroll);
+    if (isInDrawingZone && drawingProgress > 0.05 && !isDrawingComplete) {
+      setScrollBlocked(true);
       document.body.style.overflow = 'hidden';
-
-      return () => {
-        document.removeEventListener('wheel', preventScroll);
-        document.removeEventListener('keydown', preventKeyScroll);
-        document.body.style.overflow = 'unset';
-      };
+      console.log('Scroll bloqueado');
+    } else {
+      setScrollBlocked(false);
+      document.body.style.overflow = 'unset';
+      if (isDrawingComplete) {
+        console.log('Scroll desbloqueado - dibujo completo');
+      }
     }
-  }, [isInDrawingZone, isDrawingComplete, drawingProgress]);
+
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [isInDrawingZone, drawingProgress, isDrawingComplete]);
 
   return (
     <section id="habilidades" ref={sectionRef} className="skills-section py-8 sm:py-12 lg:py-20 relative min-h-screen">
@@ -296,16 +369,16 @@ const Skills: React.FC = () => {
         </div>
 
         {/* Indicador de progreso */}
-        {isInDrawingZone && drawingProgress > 0.1 && drawingProgress < 0.95 && (
+        {scrollBlocked && (
           <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50 bg-background/95 backdrop-blur-sm border border-accent/30 rounded-xl p-8 text-center shadow-2xl">
-            <div className="w-20 h-20 mx-auto mb-6 relative">
-              <svg className="w-20 h-20 transform -rotate-90" viewBox="0 0 80 80">
+            <div className="w-24 h-24 mx-auto mb-6 relative">
+              <svg className="w-24 h-24 transform -rotate-90" viewBox="0 0 80 80">
                 <circle
                   cx="40"
                   cy="40"
                   r="35"
                   stroke="hsl(var(--muted))"
-                  strokeWidth="6"
+                  strokeWidth="4"
                   fill="none"
                 />
                 <circle
@@ -313,21 +386,26 @@ const Skills: React.FC = () => {
                   cy="40"
                   r="35"
                   stroke="hsl(var(--accent))"
-                  strokeWidth="6"
+                  strokeWidth="4"
                   fill="none"
                   strokeDasharray="219.91"
                   strokeDashoffset={219.91 * (1 - drawingProgress)}
-                  className="transition-all duration-300"
+                  className="transition-all duration-200"
                 />
               </svg>
               <div className="absolute inset-0 flex items-center justify-center">
-                <span className="text-lg font-bold text-accent">
+                <span className="text-xl font-bold text-accent">
                   {Math.round(drawingProgress * 100)}%
                 </span>
               </div>
             </div>
-            <h3 className="text-xl font-bold text-foreground mb-2">Dibujando Tabla</h3>
-            <p className="text-sm text-muted-foreground">Sigue haciendo scroll para completar el dibujo</p>
+            <h3 className="text-xl font-bold text-foreground mb-2">🎨 Dibujando Tabla</h3>
+            <p className="text-sm text-muted-foreground mb-2">Sigue haciendo scroll para completar</p>
+            <div className="flex items-center justify-center space-x-2 text-xs text-accent">
+              <span>↕️ Rueda del ratón</span>
+              <span>•</span>
+              <span>⌨️ Flechas</span>
+            </div>
           </div>
         )}
 
