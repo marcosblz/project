@@ -27,6 +27,7 @@ const Skills: React.FC = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const [selectedTab, setSelectedTab] = useState<string>('backend');
+  const [isAnimating, setIsAnimating] = useState(false);
 
   const skillCategories: SkillCategory[] = [
     {
@@ -240,7 +241,9 @@ const Skills: React.FC = () => {
   ];
 
   const handleTabClick = (tabId: string) => {
-    if (selectedTab === tabId) return;
+    if (selectedTab === tabId || isAnimating) return;
+    
+    setIsAnimating(true);
     
     const container = containerRef.current;
     if (!container) return;
@@ -250,89 +253,94 @@ const Skills: React.FC = () => {
     
     if (!currentMainCard || !clickedCard) return;
 
-    // Get positions
+    // Store current transforms
+    const currentTransform = gsap.getProperty(currentMainCard, "transform");
+    const clickedTransform = gsap.getProperty(clickedCard, "transform");
+
+    // Create timeline for the swap
+    const tl = gsap.timeline({
+      onComplete: () => {
+        setSelectedTab(tabId);
+        setIsAnimating(false);
+      }
+    });
+
+    // Get current positions
     const currentRect = currentMainCard.getBoundingClientRect();
     const clickedRect = clickedCard.getBoundingClientRect();
     const containerRect = container.getBoundingClientRect();
 
-    // Calculate relative positions
-    const currentX = currentRect.left - containerRect.left;
-    const currentY = currentRect.top - containerRect.top;
-    const clickedX = clickedRect.left - containerRect.left;
-    const clickedY = clickedRect.top - containerRect.top;
+    // Calculate the distance to move
+    const deltaX = clickedRect.left - currentRect.left;
+    const deltaY = clickedRect.top - currentRect.top;
 
-    // Create timeline for swap animation
-    const tl = gsap.timeline({
-      onComplete: () => {
-        setSelectedTab(tabId);
-        // Reset positions after state change
-        gsap.set([currentMainCard, clickedCard], { x: 0, y: 0, clearProps: "all" });
-      }
-    });
-
-    // Animate the swap with scaling
+    // Animate both cards simultaneously
     tl.to(currentMainCard, {
-      x: clickedX - currentX,
-      y: clickedY - currentY,
-      scale: 0.4,
-      duration: 0.6,
+      x: deltaX,
+      y: deltaY,
+      width: clickedRect.width,
+      height: clickedRect.height,
+      duration: 0.8,
       ease: "power2.inOut"
     })
     .to(clickedCard, {
-      x: currentX - clickedX,
-      y: currentY - clickedY,
-      scale: 2.5,
-      duration: 0.6,
+      x: -deltaX,
+      y: -deltaY,
+      width: currentRect.width,
+      height: currentRect.height,
+      duration: 0.8,
       ease: "power2.inOut"
-    }, 0);
+    }, 0); // Start at the same time
   };
 
+  // Layout setup effect
   useEffect(() => {
     const container = containerRef.current;
     if (!container) return;
 
-    const cards = container.querySelectorAll('.skill-card');
+    const cards = container.querySelectorAll('.skill-card') as NodeListOf<HTMLElement>;
     
-    // Set up layout based on selected tab
-    cards.forEach((card) => {
+    // Clear any existing transforms
+    gsap.set(cards, { clearProps: "all" });
+    
+    // Set up positions based on selected tab
+    cards.forEach((card, index) => {
       const cardId = card.getAttribute('data-id');
       
       if (cardId === selectedTab) {
-        // Main card (left side, larger)
+        // Main card (left side, 65% width)
         gsap.set(card, {
           position: 'absolute',
+          left: 0,
+          top: 0,
           width: '65%',
           height: '500px',
-          x: 0,
-          y: 0,
-          scale: 1,
           zIndex: 10
         });
       } else {
-        // Sidebar cards (right side, smaller, stacked)
+        // Sidebar cards (right side, 35% width, stacked)
         const otherCards = skillCategories.filter(cat => cat.id !== selectedTab);
         const stackIndex = otherCards.findIndex(cat => cat.id === cardId);
         
         gsap.set(card, {
           position: 'absolute',
-          width: '35%',
-          height: '150px',
-          x: '185%',
-          y: stackIndex * 160,
-          scale: 1,
+          left: '67%', // Small gap from main card
+          top: stackIndex * 165 + 'px', // Stack with gap
+          width: '31%',
+          height: '155px',
           zIndex: 5
         });
       }
     });
 
-    // Initial entrance animation
-    if (sectionRef.current) {
+    // Initial entrance animation only on first load
+    if (sectionRef.current && !isAnimating) {
       gsap.fromTo('.skill-card',
-        { opacity: 0, scale: 0.8 },
+        { opacity: 0, scale: 0.9 },
         {
           opacity: 1,
           scale: 1,
-          duration: 0.8,
+          duration: 0.6,
           stagger: 0.1,
           ease: 'back.out(1.7)',
           scrollTrigger: {
@@ -343,7 +351,7 @@ const Skills: React.FC = () => {
         }
       );
     }
-  }, [selectedTab, skillCategories]);
+  }, [selectedTab, skillCategories, isAnimating]);
 
   const selectedCategory = skillCategories.find(cat => cat.id === selectedTab);
 
@@ -366,9 +374,9 @@ const Skills: React.FC = () => {
               <div
                 key={category.id}
                 data-id={category.id}
-                className={`skill-card cursor-pointer rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-300 group ${
+                className={`skill-card cursor-pointer rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-shadow duration-300 group ${
                   selectedTab === category.id ? 'ring-2 ring-accent/50' : ''
-                }`}
+                } ${isAnimating ? 'pointer-events-none' : ''}`}
                 onClick={() => handleTabClick(category.id)}
               >
                 {/* Background Gradient */}
@@ -386,15 +394,15 @@ const Skills: React.FC = () => {
                 </div>
 
                 {/* Content */}
-                <div className="relative z-10 p-4 sm:p-6 lg:p-8 h-full text-white">
+                <div className="relative z-10 p-4 sm:p-6 lg:p-8 h-full text-white overflow-hidden">
                   {selectedTab === category.id ? (
                     // Main card content (detailed view)
                     <div className="h-full flex flex-col">
                       <div className="flex items-center mb-4 sm:mb-6">
-                        <div className="w-12 sm:w-16 h-12 sm:h-16 bg-white/20 rounded-xl flex items-center justify-center mr-3 sm:mr-4">
+                        <div className="w-12 sm:w-16 h-12 sm:h-16 bg-white/20 rounded-xl flex items-center justify-center mr-3 sm:mr-4 flex-shrink-0">
                           {category.icon}
                         </div>
-                        <div>
+                        <div className="min-w-0">
                           <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold tracking-wider mb-1">
                             {category.title}
                           </h3>
@@ -410,7 +418,7 @@ const Skills: React.FC = () => {
                           {category.highlights.map((highlight, index) => (
                             <div key={index} className="flex items-center text-xs sm:text-sm">
                               <Zap className="w-3 sm:w-4 h-3 sm:h-4 mr-1 sm:mr-2 flex-shrink-0" />
-                              {highlight}
+                              <span className="truncate">{highlight}</span>
                             </div>
                           ))}
                         </div>
@@ -432,7 +440,7 @@ const Skills: React.FC = () => {
                                   style={{ width: `${skill.level}%` }}
                                 ></div>
                               </div>
-                              <p className="text-xs text-white/80">{skill.description}</p>
+                              <p className="text-xs text-white/80 line-clamp-2">{skill.description}</p>
                             </div>
                           ))}
                         </div>
