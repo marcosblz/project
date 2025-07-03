@@ -33,12 +33,12 @@ const About: React.FC = () => {
   {
     id: 1,
     text: "¿Cómo abordas un problema de programación complejo que no entiendes de inmediato?",
-    response: "El reclutador quiere ver que descompones el problema en partes, investigas, aplicas estrategias de debugging y perseveras, demostrando resiliencia y un enfoque estructurado."
+    response: "Primero busco entender 100% el problema, y una vez entendido tirar de algún hilo que me permita encontrar la solución descomponiendo el problema."
   },
   {
     id: 2,
     text: "Cuéntame de un bug especialmente difícil que resolviste. ¿Cómo lo solucionaste y cómo te sentiste?",
-    response: "El reclutador quiere conocer tu proceso de diagnóstico (logs, breakpoints, documentación) y tu capacidad de mantener la motivación y aprender del reto."
+    response: "En mi proyecto final de DAM, el Tamagotchi que puedes encontrar en el apartado Proyectos, enfrenté un bug que tenía que ver con concurrencia de ventanas, tenía mucha prisa por implementar un juego para que tuviese una base jugable el proyecto, pero las prisas combinadas con una falta de entendimiento general de lo que es un hilo me hicieron perder la cabeza. Paré, estudié y lo resolví, así de simple, me sentí súper tonto, una sola línea de código me habia estado frenando un mes de desarrollo. Ahí comprendí que no es buena idea el hacer algo sin entender que estás haciendo, esto con la IA se vuelve mucho más peligroso, por eso trato de primero entender que va a hacer o como resolver el problema antes de plantearme resolverlo."
   },
   {
     id: 3,
