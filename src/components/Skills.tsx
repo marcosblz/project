@@ -7,52 +7,48 @@ gsap.registerPlugin(ScrollTrigger);
 interface SkillCategory {
   id: string;
   title: string;
-  skills: string[];
 }
 
 const Skills: React.FC = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const [selectedTab, setSelectedTab] = useState<string | null>(null);
-  const [showSkills, setShowSkills] = useState<boolean>(false);
+  const [isAnimating, setIsAnimating] = useState(false);
 
   const skillCategories: SkillCategory[] = [
     {
       id: 'backend',
-      title: "BACK-END",
-      skills: ["Java", "Python", "Groovy", "Node.js", "Spring Boot", "Django", "REST APIs", "GraphQL"]
+      title: "BACK-END"
     },
     {
       id: 'frontend',
-      title: "FRONT-END",
-      skills: ["React", "TypeScript", "JavaScript", "HTML5", "CSS3", "Tailwind CSS", "GSAP", "Responsive Design"]
+      title: "FRONT-END"
     },
     {
       id: 'devops',
-      title: "DEVOPS",
-      skills: ["Docker", "Kubernetes", "Jenkins", "Git", "CI/CD", "AWS", "Linux", "Monitoring"]
+      title: "DEVOPS"
     },
     {
       id: 'otros',
-      title: "OTROS",
-      skills: ["MySQL", "PostgreSQL", "MongoDB", "Redis", "Webpack", "Vite", "Testing", "Agile/Scrum"]
+      title: "OTROS"
     }
   ];
 
   const handleTabClick = (tabId: string) => {
+    if (isAnimating) return;
+    
+    setIsAnimating(true);
+    
     if (selectedTab === null) {
       // Expandir
       setSelectedTab(tabId);
-      setShowSkills(false); // Ocultar skills primero
       animateToExpanded(tabId);
     } else if (selectedTab === tabId) {
       // Contraer
-      setShowSkills(false); // Ocultar skills primero
       setSelectedTab(null);
       animateToGrid();
     } else {
       // Cambiar selección
-      setShowSkills(false); // Ocultar skills primero
       setSelectedTab(tabId);
       animateToExpanded(tabId);
     }
@@ -67,10 +63,7 @@ const Skills: React.FC = () => {
     const otherCards = Array.from(cards).filter(card => card.getAttribute('data-id') !== selectedId);
 
     const tl = gsap.timeline({
-      onComplete: () => {
-        // Mostrar skills DESPUÉS de que termine la animación
-        setTimeout(() => setShowSkills(true), 100);
-      }
+      onComplete: () => setIsAnimating(false)
     });
 
     // Animar tarjeta seleccionada
@@ -102,7 +95,9 @@ const Skills: React.FC = () => {
 
     const cards = container.querySelectorAll('.skill-card');
 
-    const tl = gsap.timeline();
+    const tl = gsap.timeline({
+      onComplete: () => setIsAnimating(false)
+    });
 
     cards.forEach((card, index) => {
       const row = Math.floor(index / 2);
@@ -197,7 +192,7 @@ const Skills: React.FC = () => {
                 {/* Overlay */}
                 <div className="absolute inset-0 bg-background/10 backdrop-blur-[1px]"></div>
 
-                {/* Content */}
+                {/* Content - SOLO título e imagen */}
                 <div className="relative z-10 p-10 h-full flex flex-col text-white">
                   {/* Header con título */}
                   <div className="flex items-center justify-center mb-8">
@@ -207,32 +202,11 @@ const Skills: React.FC = () => {
                   </div>
 
                   {/* Área central para imagen */}
-                  <div className="flex-1 flex items-center justify-center mb-8">
+                  <div className="flex-1 flex items-center justify-center">
                     <div className="w-32 h-32 bg-white/20 backdrop-blur-sm rounded-2xl border border-white/30 flex items-center justify-center shadow-lg group-hover:scale-105 transition-transform duration-300">
                       <span className="text-white/80 text-lg font-medium">IMG</span>
                     </div>
                   </div>
-
-                  {/* Skills - Solo aparecen DESPUÉS de la animación */}
-                  {selectedTab === category.id && showSkills && (
-                    <div className="mt-6 animate-in fade-in duration-300">
-                      <div className="flex flex-wrap gap-3">
-                        {category.skills.slice(0, 8).map((skill, index) => (
-                          <span
-                            key={index}
-                            className="px-4 py-2 bg-white/25 backdrop-blur-sm text-white rounded-lg text-base font-medium border border-white/20 shadow-sm"
-                          >
-                            {skill}
-                          </span>
-                        ))}
-                        {category.skills.length > 8 && (
-                          <span className="px-4 py-2 bg-white/35 backdrop-blur-sm text-white rounded-lg text-base border border-white/20 shadow-sm">
-                            +{category.skills.length - 8}
-                          </span>
-                        )}
-                      </div>
-                    </div>
-                  )}
                 </div>
 
                 {/* Hover Effect */}
@@ -256,27 +230,6 @@ const Skills: React.FC = () => {
             }
           </div>
         </div>
-
-        {/* Skills Detail - Solo aparece cuando showSkills es true */}
-        {selectedTab && showSkills && (
-          <div className="mt-6 sm:mt-8 max-w-5xl mx-auto animate-in fade-in duration-500">
-            <div className="bg-background/80 backdrop-blur-sm border border-border rounded-xl p-4 sm:p-6 shadow-lg">
-              <h3 className="text-lg sm:text-xl lg:text-2xl font-bold text-foreground mb-3 sm:mb-4">
-                {skillCategories.find(cat => cat.id === selectedTab)?.title} - Tecnologías
-              </h3>
-              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2 sm:gap-3">
-                {skillCategories.find(cat => cat.id === selectedTab)?.skills.map((skill, index) => (
-                  <div
-                    key={index}
-                    className="flex items-center p-2 sm:p-3 bg-accent/10 text-accent rounded-lg hover:bg-accent hover:text-white transition-colors duration-300 text-sm sm:text-base"
-                  >
-                    <span className="font-medium">{skill}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        )}
       </div>
     </section>
   );
