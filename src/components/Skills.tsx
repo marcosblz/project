@@ -82,13 +82,19 @@ const Skills: React.FC = () => {
     setIsAnimating(true);
     
     const container = containerRef.current;
-    if (!container) return;
+    if (!container) {
+      setIsAnimating(false);
+      return;
+    }
 
     // Get the cards
     const currentMainCard = container.querySelector(`[data-category="${selectedCategory}"]`);
     const newMainCard = container.querySelector(`[data-category="${categoryId}"]`);
     
-    if (!currentMainCard || !newMainCard) return;
+    if (!currentMainCard || !newMainCard) {
+      setIsAnimating(false);
+      return;
+    }
 
     // Get their current positions and sizes
     const currentMainRect = currentMainCard.getBoundingClientRect();
@@ -99,12 +105,7 @@ const Skills: React.FC = () => {
     const deltaY = newMainRect.top - currentMainRect.top;
     
     // Timeline for the swap animation
-    const tl = gsap.timeline({
-      onComplete: () => {
-        setSelectedCategory(categoryId);
-        setIsAnimating(false);
-      }
-    });
+    const tl = gsap.timeline();
 
     // Animate both cards simultaneously
     tl.to(currentMainCard, {
@@ -122,11 +123,22 @@ const Skills: React.FC = () => {
       ease: "power2.inOut"
     }, 0) // Start at the same time
     
+    // Wait a bit, then change state and reset positions
+    .call(() => {
+      setSelectedCategory(categoryId);
+    }, [], "+=0.1")
+    
     // Reset positions after state change
     .set([currentMainCard, newMainCard], {
       x: 0,
       y: 0,
-      scale: 1
+      scale: 1,
+      delay: 0.1
+    })
+    
+    // Complete animation
+    .call(() => {
+      setIsAnimating(false);
     });
   };
 
