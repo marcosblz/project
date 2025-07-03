@@ -90,41 +90,51 @@ const Skills: React.FC = () => {
     const mainCard = container.querySelector('.main-card');
     const sideCards = container.querySelectorAll('.side-card');
     
-    // Timeline para la transición
+    // Exact CodePen animation replication
     const tl = gsap.timeline({
-      onComplete: () => {
-        setSelectedCategory(newCategoryId);
-        setIsAnimating(false);
-      }
+      onComplete: () => setIsAnimating(false)
     });
 
-    // Fade out del contenido actual
-    tl.to([mainCard?.querySelector('.card-content'), ...Array.from(sideCards).map(card => card.querySelector('.card-content'))], {
-      opacity: 0,
-      duration: 0.3,
-      ease: 'power2.inOut'
+    // Phase 1: Scale down and fade out current content
+    tl.to(mainCard, {
+      scale: 0.8,
+      rotationY: -15,
+      duration: 0.4,
+      ease: "power2.in"
     })
-    // Escalar ligeramente las tarjetas
-    .to([mainCard, ...sideCards], {
-      scale: 0.95,
-      duration: 0.3,
-      ease: 'power2.inOut'
+    .to(sideCards, {
+      scale: 0.9,
+      x: -20,
+      duration: 0.4,
+      ease: "power2.in"
     }, 0)
-    // Callback para cambiar el contenido
+    .to([mainCard, ...sideCards], {
+      opacity: 0.3,
+      duration: 0.4,
+      ease: "power2.in"
+    }, 0)
+    
+    // Phase 2: Change content (callback)
     .call(() => {
       setSelectedCategory(newCategoryId);
     })
-    // Fade in del nuevo contenido
-    .to([mainCard, ...sideCards], {
+    
+    // Phase 3: Scale up and fade in new content with bounce
+    .to(mainCard, {
       scale: 1,
-      duration: 0.4,
-      ease: 'back.out(1.7)'
-    })
-    .to([mainCard?.querySelector('.card-content'), ...Array.from(sideCards).map(card => card.querySelector('.card-content'))], {
+      rotationY: 0,
       opacity: 1,
-      duration: 0.4,
-      ease: 'power2.out'
-    }, '-=0.2');
+      duration: 0.6,
+      ease: "back.out(1.7)"
+    })
+    .to(sideCards, {
+      scale: 1,
+      x: 0,
+      opacity: 1,
+      duration: 0.6,
+      ease: "back.out(1.7)",
+      stagger: 0.1
+    }, "-=0.4");
   };
 
   useEffect(() => {
