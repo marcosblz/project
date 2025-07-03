@@ -81,47 +81,53 @@ const Skills: React.FC = () => {
     
     setIsAnimating(true);
     
-    // EXACT CodePen animation from https://codepen.io/GreenSock/pen/dyBwbeR
     const container = containerRef.current;
     if (!container) return;
 
-    const cards = container.querySelectorAll('.skill-card');
+    // Get the cards
+    const currentMainCard = container.querySelector(`[data-category="${selectedCategory}"]`);
+    const newMainCard = container.querySelector(`[data-category="${categoryId}"]`);
     
-    // Create timeline exactly like CodePen
+    if (!currentMainCard || !newMainCard) return;
+
+    // Get their current positions and sizes
+    const currentMainRect = currentMainCard.getBoundingClientRect();
+    const newMainRect = newMainCard.getBoundingClientRect();
+    
+    // Calculate the difference in positions
+    const deltaX = newMainRect.left - currentMainRect.left;
+    const deltaY = newMainRect.top - currentMainRect.top;
+    
+    // Timeline for the swap animation
     const tl = gsap.timeline({
-      onComplete: () => setIsAnimating(false)
+      onComplete: () => {
+        setSelectedCategory(categoryId);
+        setIsAnimating(false);
+      }
     });
 
-    // Phase 1: Animate out (exactly like CodePen)
-    tl.to(cards, {
-      scale: 0.8,
-      rotation: 5,
-      opacity: 0.3,
-      duration: 0.3,
-      ease: "power2.inOut",
-      stagger: {
-        amount: 0.1,
-        from: "random"
-      }
+    // Animate both cards simultaneously
+    tl.to(currentMainCard, {
+      x: deltaX,
+      y: deltaY,
+      scale: 0.3, // Scale down to small size
+      duration: 0.8,
+      ease: "power2.inOut"
     })
+    .to(newMainCard, {
+      x: -deltaX,
+      y: -deltaY,
+      scale: 3.33, // Scale up to large size (1/0.3)
+      duration: 0.8,
+      ease: "power2.inOut"
+    }, 0) // Start at the same time
     
-    // Phase 2: Change content in the middle
-    .call(() => {
-      setSelectedCategory(categoryId);
-    })
-    
-    // Phase 3: Animate in (exactly like CodePen)
-    .to(cards, {
-      scale: 1,
-      rotation: 0,
-      opacity: 1,
-      duration: 0.5,
-      ease: "back.out(1.7)",
-      stagger: {
-        amount: 0.15,
-        from: "random"
-      }
-    }, "-=0.1");
+    // Reset positions after state change
+    .set([currentMainCard, newMainCard], {
+      x: 0,
+      y: 0,
+      scale: 1
+    });
   };
 
   useEffect(() => {
@@ -160,7 +166,10 @@ const Skills: React.FC = () => {
           <div className="grid grid-cols-1 lg:grid-cols-4 gap-4 lg:gap-6">
             {/* Tarjeta principal (75% del ancho en desktop) */}
             <div className="lg:col-span-3">
-              <div className="skill-card rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-300 group relative h-80 lg:h-96 cursor-pointer">
+              <div 
+                data-category={selectedCategory}
+                className="skill-card rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-300 group relative h-80 lg:h-96 cursor-pointer"
+              >
                 {/* Background Gradient */}
                 <div className={`absolute inset-0 bg-gradient-to-br ${selectedCategoryData.gradient}`}></div>
                 
@@ -229,6 +238,7 @@ const Skills: React.FC = () => {
               {otherCategories.map((category) => (
                 <div 
                   key={category.id}
+                  data-category={category.id}
                   onClick={() => handleCategoryClick(category.id)}
                   className="skill-card rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-300 group relative h-24 lg:h-28 cursor-pointer hover:scale-105"
                 >
