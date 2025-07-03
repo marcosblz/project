@@ -258,6 +258,21 @@ const Skills: React.FC = () => {
     
     if (!currentMainCard || !clickedCard) return;
 
+    // Get current positions and sizes
+    const currentRect = currentMainCard.getBoundingClientRect();
+    const clickedRect = clickedCard.getBoundingClientRect();
+    const containerRect = container.getBoundingClientRect();
+
+    // Calculate relative positions within the container
+    const currentX = currentRect.left - containerRect.left;
+    const currentY = currentRect.top - containerRect.top;
+    const clickedX = clickedRect.left - containerRect.left;
+    const clickedY = clickedRect.top - containerRect.top;
+
+    // Calculate the distance to move
+    const deltaX = clickedX - currentX;
+    const deltaY = clickedY - currentY;
+
     // Create timeline for the swap
     const tl = gsap.timeline({
       onComplete: () => {
@@ -266,26 +281,18 @@ const Skills: React.FC = () => {
       }
     });
 
-    // Get current positions
-    const currentRect = currentMainCard.getBoundingClientRect();
-    const clickedRect = clickedCard.getBoundingClientRect();
-
-    // Calculate the distance to move
-    const deltaX = clickedRect.left - currentRect.left;
-    const deltaY = clickedRect.top - currentRect.top;
-
-    // Animate both cards simultaneously
+    // Animate both cards simultaneously with position and size swap
     tl.to(currentMainCard, {
-      x: deltaX,
-      y: deltaY,
+      x: `+=${deltaX}`,
+      y: `+=${deltaY}`,
       width: clickedRect.width,
       height: clickedRect.height,
       duration: 0.8,
       ease: "power2.inOut"
     })
     .to(clickedCard, {
-      x: -deltaX,
-      y: -deltaY,
+      x: `+=${-deltaX}`,
+      y: `+=${-deltaY}`,
       width: currentRect.width,
       height: currentRect.height,
       duration: 0.8,
@@ -438,23 +445,34 @@ const Skills: React.FC = () => {
                         </div>
                       </div>
 
-                      {/* Skills with progress bars */}
-                      <div className="flex-1 overflow-y-auto">
+                      {/* Technologies Summary - Compact Pills */}
+                      <div className="flex-1">
                         <h4 className="text-sm sm:text-base font-semibold mb-2 sm:mb-3 text-foreground">Tecnologías:</h4>
-                        <div className="space-y-2 sm:space-y-3">
+                        <div className="flex flex-wrap gap-2">
                           {category.skills.map((skill, index) => (
-                            <div key={index} className="bg-muted/50 backdrop-blur-sm rounded-lg p-2 sm:p-3 border border-border/50">
-                              <div className="flex justify-between items-center mb-1 sm:mb-2">
+                            <div 
+                              key={index} 
+                              className="group relative bg-muted/50 backdrop-blur-sm rounded-full px-3 py-1.5 border border-border/50 hover:bg-accent/10 hover:border-accent/30 transition-all duration-300 cursor-pointer"
+                            >
+                              <div className="flex items-center space-x-2">
                                 <span className="text-xs sm:text-sm font-medium text-foreground">{skill.name}</span>
-                                <span className="text-xs text-muted-foreground">{skill.experience}</span>
+                                <div className="flex items-center space-x-1">
+                                  <div className="w-8 sm:w-12 bg-muted rounded-full h-1">
+                                    <div 
+                                      className="bg-gradient-to-r from-accent to-accent/80 rounded-full h-full transition-all duration-500"
+                                      style={{ width: `${skill.level}%` }}
+                                    ></div>
+                                  </div>
+                                  <span className="text-xs text-accent font-medium">{skill.level}%</span>
+                                </div>
                               </div>
-                              <div className="w-full bg-muted rounded-full h-1.5 sm:h-2 mb-1">
-                                <div 
-                                  className="bg-gradient-to-r from-accent to-accent/80 rounded-full h-full transition-all duration-1000 ease-out"
-                                  style={{ width: `${skill.level}%` }}
-                                ></div>
+                              
+                              {/* Tooltip on hover */}
+                              <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-2 bg-background border border-border rounded-lg shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none z-20 w-48">
+                                <p className="text-xs text-foreground font-medium mb-1">{skill.name}</p>
+                                <p className="text-xs text-muted-foreground mb-1">{skill.experience} de experiencia</p>
+                                <p className="text-xs text-muted-foreground">{skill.description}</p>
                               </div>
-                              <p className="text-xs text-muted-foreground line-clamp-2">{skill.description}</p>
                             </div>
                           ))}
                         </div>
