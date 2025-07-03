@@ -10,6 +10,7 @@ interface SkillCategory {
   title: string;
   gradient: string;
   icon: React.ReactNode;
+  skills: string[];
 }
 
 const Skills: React.FC = () => {
@@ -23,25 +24,29 @@ const Skills: React.FC = () => {
       id: 'backend',
       title: "BACK-END",
       gradient: "from-blue-600 via-cyan-500 to-teal-400",
-      icon: <Server className="w-8 h-8" />
+      icon: <Server className="w-8 h-8" />,
+      skills: ["Java", "Python", "Groovy", "Node.js", "Spring Boot", "Django", "REST APIs", "GraphQL"]
     },
     {
       id: 'frontend',
       title: "FRONT-END",
       gradient: "from-purple-600 via-blue-500 to-indigo-400",
-      icon: <Monitor className="w-8 h-8" />
+      icon: <Monitor className="w-8 h-8" />,
+      skills: ["React", "TypeScript", "JavaScript", "HTML5", "CSS3", "Tailwind CSS", "GSAP", "Responsive Design"]
     },
     {
       id: 'devops',
       title: "DEVOPS",
       gradient: "from-orange-500 via-pink-500 to-purple-600",
-      icon: <GitBranch className="w-8 h-8" />
+      icon: <GitBranch className="w-8 h-8" />,
+      skills: ["Docker", "Kubernetes", "Jenkins", "Git", "CI/CD", "AWS", "Linux", "Monitoring"]
     },
     {
       id: 'otros',
       title: "OTROS",
       gradient: "from-green-500 via-emerald-500 to-teal-500",
-      icon: <Database className="w-8 h-8" />
+      icon: <Database className="w-8 h-8" />,
+      skills: ["MySQL", "PostgreSQL", "MongoDB", "Redis", "Webpack", "Vite", "Testing", "Agile/Scrum"]
     }
   ];
 
@@ -78,23 +83,23 @@ const Skills: React.FC = () => {
       onComplete: () => setIsAnimating(false)
     });
 
-    // Animar tarjeta seleccionada a la izquierda (300px ancho)
+    // Animar tarjeta seleccionada a la izquierda (más ancha)
     tl.to(selectedCard, {
-      width: 300,
-      height: 400,
+      width: 400,
+      height: 300,
       x: 0,
       y: 0,
       duration: 0.8,
       ease: 'power3.inOut'
     });
 
-    // Animar otras tarjetas a la derecha (100px ancho, apiladas)
+    // Animar otras tarjetas a la derecha (más pequeñas, apiladas)
     otherCards.forEach((card, index) => {
       tl.to(card, {
-        width: 100,
-        height: 130,
-        x: 320, // 300px + 20px gap
-        y: index * 135, // Apilar verticalmente con 5px gap
+        width: 120,
+        height: 90,
+        x: 420, // 400px + 20px gap
+        y: index * 100, // Apilar verticalmente
         duration: 0.8,
         ease: 'power3.inOut'
       }, 0); // Empezar al mismo tiempo
@@ -118,10 +123,10 @@ const Skills: React.FC = () => {
       const col = index % 2;
       
       tl.to(card, {
-        width: 190, // (400px - 20px gap) / 2
-        height: 190,
-        x: col * 210, // 190px + 20px gap
-        y: row * 210, // 190px + 20px gap
+        width: 250, // Más ancho para formato rectangular
+        height: 140, // Más bajo para formato rectangular
+        x: col * 270, // 250px + 20px gap
+        y: row * 160, // 140px + 20px gap
         duration: 0.8,
         ease: 'power3.inOut'
       }, 0);
@@ -129,7 +134,7 @@ const Skills: React.FC = () => {
   };
 
   useEffect(() => {
-    // Configurar posiciones iniciales del grid 2x2
+    // Configurar posiciones iniciales del grid 2x2 rectangular
     const container = containerRef.current;
     if (!container) return;
 
@@ -140,10 +145,10 @@ const Skills: React.FC = () => {
       
       gsap.set(card, {
         position: 'absolute',
-        width: 190, // (400px - 20px gap) / 2
-        height: 190,
-        x: col * 210, // 190px + 20px gap
-        y: row * 210, // 190px + 20px gap
+        width: 250, // Ancho rectangular
+        height: 140, // Alto rectangular
+        x: col * 270, // 250px + 20px gap
+        y: row * 160, // 140px + 20px gap
         transformOrigin: 'center center'
       });
     });
@@ -174,12 +179,12 @@ const Skills: React.FC = () => {
           <p className="text-xl text-muted-foreground">Especialización técnica por áreas</p>
         </div>
 
-        {/* Container con dimensiones fijas */}
+        {/* Container con dimensiones fijas para grid rectangular */}
         <div className="max-w-4xl mx-auto flex justify-center">
           <div 
             ref={containerRef}
             className="relative"
-            style={{ width: '420px', height: '420px' }}
+            style={{ width: '540px', height: '320px' }} // Ajustado para formato rectangular
           >
             {skillCategories.map((category) => (
               <div
@@ -199,24 +204,50 @@ const Skills: React.FC = () => {
                     className="w-full h-full"
                     style={{
                       backgroundImage: `radial-gradient(circle at 25% 25%, white 2px, transparent 2px)`,
-                      backgroundSize: '40px 40px'
+                      backgroundSize: '30px 30px'
                     }}
                   ></div>
                 </div>
 
-                {/* Content */}
-                <div className="relative z-10 p-8 h-full flex flex-col justify-center items-center text-white text-center">
-                  <div className="w-20 h-20 bg-white/20 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
-                    {category.icon}
+                {/* Content - Diseño rectangular */}
+                <div className="relative z-10 p-4 h-full flex flex-col text-white">
+                  {/* Header con título e icono */}
+                  <div className="flex items-center justify-between mb-3">
+                    <h3 className="text-lg font-bold tracking-wider">
+                      {category.title}
+                    </h3>
+                    <div className="w-8 h-8 bg-white/20 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                      {category.icon}
+                    </div>
                   </div>
-                  <h3 className="text-2xl font-bold tracking-wider">
-                    {category.title}
-                  </h3>
-                </div>
 
-                {/* Photo Placeholder */}
-                <div className="absolute top-6 right-6 w-16 h-16 bg-white/20 rounded-xl border border-white/30 flex items-center justify-center">
-                  <span className="text-white/60 text-sm font-medium">IMG</span>
+                  {/* Imagen/Placeholder en el centro */}
+                  <div className="flex-1 flex items-center justify-center mb-3">
+                    <div className="w-16 h-16 bg-white/20 rounded-xl border border-white/30 flex items-center justify-center">
+                      <span className="text-white/60 text-sm font-medium">IMG</span>
+                    </div>
+                  </div>
+
+                  {/* Skills preview - Solo en modo expandido */}
+                  {selectedTab === category.id && (
+                    <div className="mt-2">
+                      <div className="flex flex-wrap gap-1">
+                        {category.skills.slice(0, 6).map((skill, index) => (
+                          <span
+                            key={index}
+                            className="px-2 py-1 bg-white/20 text-white rounded text-xs font-medium"
+                          >
+                            {skill}
+                          </span>
+                        ))}
+                        {category.skills.length > 6 && (
+                          <span className="px-2 py-1 bg-white/30 text-white rounded text-xs">
+                            +{category.skills.length - 6}
+                          </span>
+                        )}
+                      </div>
+                    </div>
+                  )}
                 </div>
 
                 {/* Hover Effect */}
@@ -235,6 +266,27 @@ const Skills: React.FC = () => {
             }
           </div>
         </div>
+
+        {/* Skills Detail - Solo cuando hay selección */}
+        {selectedTab && (
+          <div className="mt-8 max-w-4xl mx-auto">
+            <div className="bg-background/80 backdrop-blur-sm border border-border rounded-xl p-6">
+              <h3 className="text-2xl font-bold text-foreground mb-4">
+                {skillCategories.find(cat => cat.id === selectedTab)?.title} - Tecnologías
+              </h3>
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+                {skillCategories.find(cat => cat.id === selectedTab)?.skills.map((skill, index) => (
+                  <div
+                    key={index}
+                    className="flex items-center p-3 bg-accent/10 text-accent rounded-lg hover:bg-accent hover:text-white transition-colors duration-300"
+                  >
+                    <span className="font-medium">{skill}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </section>
   );
