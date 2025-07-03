@@ -142,7 +142,6 @@ const Contact: React.FC = () => {
       case 'phone':
         window.open(`tel:${value.replace(/\s/g, '')}`, '_self');
         break;
-        break;
     }
   };
 
