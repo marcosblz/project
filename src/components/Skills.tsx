@@ -7,8 +7,8 @@ gsap.registerPlugin(ScrollTrigger);
 
 interface Skill {
   name: string;
-  level: number;
-  experience: string;
+  workTime: string;
+  studyTime: string;
   description: string;
 }
 
@@ -48,39 +48,39 @@ const Skills: React.FC = () => {
       skills: [
         {
           name: "Groovy",
-          level: 90,
-          experience: "2 años",
-          description: "Desarrollo de SaaS y automatización de procesos"
+          workTime: "1 año",
+          studyTime: "6 meses",
+          description: "Desarrollo de SaaS y automatización de procesos empresariales"
         },
         {
           name: "Python",
-          level: 85,
-          experience: "3 años",
-          description: "Django, FastAPI, scripts de automatización"
+          workTime: "8 meses",
+          studyTime: "2 años",
+          description: "Django, FastAPI, scripts de automatización e IA"
         },
         {
           name: "Java",
-          level: 80,
-          experience: "2 años",
-          description: "Spring Boot, aplicaciones empresariales"
+          workTime: "3 meses",
+          studyTime: "2 años",
+          description: "Spring Boot, aplicaciones empresariales y multihilo"
         },
         {
           name: "Node.js",
-          level: 75,
-          experience: "1.5 años",
+          workTime: "2 meses",
+          studyTime: "1 año",
           description: "Express, APIs REST, microservicios"
         },
         {
           name: "PostgreSQL",
-          level: 85,
-          experience: "3 años",
+          workTime: "1 año",
+          studyTime: "2 años",
           description: "Diseño de esquemas, optimización de consultas"
         },
         {
-          name: "MongoDB",
-          level: 70,
-          experience: "1 año",
-          description: "Bases de datos NoSQL, agregaciones"
+          name: "MySQL",
+          workTime: "8 meses",
+          studyTime: "1.5 años",
+          description: "Bases de datos relacionales, stored procedures"
         }
       ]
     },
@@ -100,40 +100,40 @@ const Skills: React.FC = () => {
       ],
       skills: [
         {
+          name: "JavaScript",
+          workTime: "2 años",
+          studyTime: "3 años",
+          description: "ES6+, DOM manipulation, async/await, programación funcional"
+        },
+        {
+          name: "HTML5/CSS3",
+          workTime: "2 años",
+          studyTime: "3 años",
+          description: "Semantic HTML, Flexbox, Grid, animations, responsive design"
+        },
+        {
           name: "React",
-          level: 85,
-          experience: "2 años",
+          workTime: "6 meses",
+          studyTime: "1 año",
           description: "Hooks, Context API, componentes funcionales"
         },
         {
           name: "TypeScript",
-          level: 80,
-          experience: "1.5 años",
+          workTime: "3 meses",
+          studyTime: "8 meses",
           description: "Tipado estático, interfaces, generics"
         },
         {
-          name: "JavaScript",
-          level: 90,
-          experience: "3 años",
-          description: "ES6+, DOM manipulation, async/await"
-        },
-        {
           name: "Tailwind CSS",
-          level: 85,
-          experience: "1 año",
-          description: "Utility-first, responsive design"
-        },
-        {
-          name: "HTML5/CSS3",
-          level: 90,
-          experience: "3 años",
-          description: "Semantic HTML, Flexbox, Grid, animations"
+          workTime: "4 meses",
+          studyTime: "6 meses",
+          description: "Utility-first, responsive design, componentes"
         },
         {
           name: "GSAP",
-          level: 70,
-          experience: "6 meses",
-          description: "Animaciones complejas, ScrollTrigger"
+          workTime: "2 meses",
+          studyTime: "4 meses",
+          description: "Animaciones complejas, ScrollTrigger, timeline"
         }
       ]
     },
@@ -153,40 +153,40 @@ const Skills: React.FC = () => {
       ],
       skills: [
         {
+          name: "Git",
+          workTime: "3 años",
+          studyTime: "3 años",
+          description: "Control de versiones, branching strategies, workflows"
+        },
+        {
           name: "Docker",
-          level: 80,
-          experience: "1 año",
+          workTime: "8 meses",
+          studyTime: "1 año",
           description: "Containerización, Docker Compose, multi-stage builds"
         },
         {
-          name: "Git",
-          level: 90,
-          experience: "3 años",
-          description: "Control de versiones, branching strategies"
-        },
-        {
           name: "Jenkins",
-          level: 75,
-          experience: "8 meses",
+          workTime: "6 meses",
+          studyTime: "8 meses",
           description: "Pipelines CI/CD, automatización de despliegues"
         },
         {
-          name: "AWS",
-          level: 65,
-          experience: "6 meses",
-          description: "EC2, S3, RDS, Lambda básico"
+          name: "Linux",
+          workTime: "1 año",
+          studyTime: "2 años",
+          description: "Administración de servidores, bash scripting, Ubuntu/CentOS"
         },
         {
-          name: "Linux",
-          level: 80,
-          experience: "2 años",
-          description: "Administración de servidores, bash scripting"
+          name: "AWS",
+          workTime: "3 meses",
+          studyTime: "6 meses",
+          description: "EC2, S3, RDS, Lambda básico, certificación en progreso"
         },
         {
           name: "Nginx",
-          level: 70,
-          experience: "1 año",
-          description: "Reverse proxy, load balancing, SSL"
+          workTime: "4 meses",
+          studyTime: "8 meses",
+          description: "Reverse proxy, load balancing, SSL, configuración"
         }
       ]
     },
@@ -207,39 +207,39 @@ const Skills: React.FC = () => {
       skills: [
         {
           name: "Scrum/Kanban",
-          level: 85,
-          experience: "2 años",
-          description: "Metodologías ágiles, gestión de proyectos"
-        },
-        {
-          name: "Figma",
-          level: 70,
-          experience: "1 año",
-          description: "Prototipado, diseño de interfaces"
-        },
-        {
-          name: "Photoshop",
-          level: 75,
-          experience: "2 años",
-          description: "Edición de imágenes, optimización web"
-        },
-        {
-          name: "Jest/Testing",
-          level: 65,
-          experience: "8 meses",
-          description: "Unit testing, integration testing"
+          workTime: "2 años",
+          studyTime: "1 año",
+          description: "Metodologías ágiles, gestión de proyectos, Jira, Trello"
         },
         {
           name: "REST APIs",
-          level: 90,
-          experience: "3 años",
-          description: "Diseño, documentación, integración"
+          workTime: "2 años",
+          studyTime: "2 años",
+          description: "Diseño, documentación, integración, Postman, Swagger"
+        },
+        {
+          name: "Photoshop",
+          workTime: "6 meses",
+          studyTime: "2 años",
+          description: "Edición de imágenes, optimización web, diseño básico"
+        },
+        {
+          name: "Figma",
+          workTime: "3 meses",
+          studyTime: "8 meses",
+          description: "Prototipado, diseño de interfaces, colaboración"
+        },
+        {
+          name: "Jest/Testing",
+          workTime: "2 meses",
+          studyTime: "6 meses",
+          description: "Unit testing, integration testing, TDD básico"
         },
         {
           name: "Webpack",
-          level: 60,
-          experience: "6 meses",
-          description: "Bundling, optimización de assets"
+          workTime: "1 mes",
+          studyTime: "4 meses",
+          description: "Bundling, optimización de assets, configuración"
         }
       ]
     }
@@ -445,7 +445,7 @@ const Skills: React.FC = () => {
                         </div>
                       </div>
 
-                      {/* Technologies Summary - Compact Pills */}
+                      {/* Technologies Summary - Compact Pills with Time */}
                       <div className="flex-1">
                         <h4 className="text-sm sm:text-base font-semibold mb-2 sm:mb-3 text-foreground">Tecnologías:</h4>
                         <div className="flex flex-wrap gap-2">
@@ -456,21 +456,20 @@ const Skills: React.FC = () => {
                             >
                               <div className="flex items-center space-x-2">
                                 <span className="text-xs sm:text-sm font-medium text-foreground">{skill.name}</span>
-                                <div className="flex items-center space-x-1">
-                                  <div className="w-8 sm:w-12 bg-muted rounded-full h-1">
-                                    <div 
-                                      className="bg-gradient-to-r from-accent to-accent/80 rounded-full h-full transition-all duration-500"
-                                      style={{ width: `${skill.level}%` }}
-                                    ></div>
-                                  </div>
-                                  <span className="text-xs text-accent font-medium">{skill.level}%</span>
+                                <div className="flex items-center space-x-1 text-xs text-accent">
+                                  <span>💼 {skill.workTime}</span>
+                                  <span className="text-muted-foreground">•</span>
+                                  <span>📚 {skill.studyTime}</span>
                                 </div>
                               </div>
                               
                               {/* Tooltip on hover */}
-                              <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-2 bg-background border border-border rounded-lg shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none z-20 w-48">
+                              <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-2 bg-background border border-border rounded-lg shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none z-20 w-64">
                                 <p className="text-xs text-foreground font-medium mb-1">{skill.name}</p>
-                                <p className="text-xs text-muted-foreground mb-1">{skill.experience} de experiencia</p>
+                                <div className="text-xs text-muted-foreground mb-2">
+                                  <div>💼 Experiencia laboral: {skill.workTime}</div>
+                                  <div>📚 Tiempo estudiando: {skill.studyTime}</div>
+                                </div>
                                 <p className="text-xs text-muted-foreground">{skill.description}</p>
                               </div>
                             </div>
@@ -528,15 +527,17 @@ const Skills: React.FC = () => {
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4">
                   <div className="bg-accent/10 rounded-lg p-2 sm:p-3 border border-accent/20">
                     <div className="text-lg sm:text-xl font-bold text-accent">
-                      {Math.round(selectedCategory.skills.reduce((acc, skill) => acc + skill.level, 0) / selectedCategory.skills.length)}%
+                      {selectedCategory.skills.length}
                     </div>
-                    <div className="text-xs sm:text-sm text-muted-foreground">Promedio</div>
+                    <div className="text-xs sm:text-sm text-muted-foreground">Tecnologías</div>
                   </div>
                   <div className="bg-accent/10 rounded-lg p-2 sm:p-3 border border-accent/20">
                     <div className="text-lg sm:text-xl font-bold text-accent">
-                      {selectedCategory.skills.filter(skill => skill.level >= 80).length}
+                      {selectedCategory.skills.filter(skill => 
+                        parseInt(skill.workTime) >= 1 || skill.workTime.includes('año')
+                      ).length}
                     </div>
-                    <div className="text-xs sm:text-sm text-muted-foreground">Avanzado</div>
+                    <div className="text-xs sm:text-sm text-muted-foreground">Con experiencia</div>
                   </div>
                   <div className="bg-accent/10 rounded-lg p-2 sm:p-3 border border-accent/20">
                     <div className="text-lg sm:text-xl font-bold text-accent">
@@ -546,9 +547,9 @@ const Skills: React.FC = () => {
                   </div>
                   <div className="bg-accent/10 rounded-lg p-2 sm:p-3 border border-accent/20">
                     <div className="text-lg sm:text-xl font-bold text-accent">
-                      {selectedCategory.skills.length}
+                      {selectedCategory.workExperience.split(' ')[0]}
                     </div>
-                    <div className="text-xs sm:text-sm text-muted-foreground">Tecnologías</div>
+                    <div className="text-xs sm:text-sm text-muted-foreground">Años total</div>
                   </div>
                 </div>
               </div>
