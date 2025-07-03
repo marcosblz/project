@@ -54,42 +54,83 @@ const Skills: React.FC = () => {
     if (!container) return;
 
     const cards = container.querySelectorAll('.skill-card');
-    const selectedCard = container.querySelector(`[data-tab="${selectedTab}"]`);
-    const otherCards = Array.from(cards).filter(card => card.getAttribute('data-tab') !== selectedTab);
+    
+    // Define positions for 2x2 grid (initial state)
+    const gridPositions = [
+      { x: 0, y: 0, width: '48%', height: '48%' },      // top-left
+      { x: '52%', y: 0, width: '48%', height: '48%' },  // top-right
+      { x: 0, y: '52%', width: '48%', height: '48%' },  // bottom-left
+      { x: '52%', y: '52%', width: '48%', height: '48%' } // bottom-right
+    ];
 
-    gsap.killTweensOf(cards);
-
-    if (selectedCard && otherCards.length > 0) {
-      // Selected card: 75% width, full height, left side
-      gsap.to(selectedCard, {
-        width: '75%',
-        height: '400px',
-        x: 0,
-        y: 0,
-        duration: 0.8,
-        ease: 'power3.out',
-        zIndex: 10
-      });
-
-      // Other cards: 22% width, stacked vertically on the right
-      const cardHeight = 400 / 3; // Divide the height equally among 3 cards
-      otherCards.forEach((card, index) => {
+    // Find selected card index
+    const selectedIndex = skillCategories.findIndex(cat => cat.id === selectedTab);
+    
+    cards.forEach((card, index) => {
+      const isSelected = index === selectedIndex;
+      
+      if (isSelected) {
+        // Selected card: large on the left (70% width, full height)
         gsap.to(card, {
-          width: '22%',
-          height: `${cardHeight - 5}px`, // Small gap between cards
-          x: '78%', // Position to the right of the selected card
-          y: index * cardHeight,
+          x: 0,
+          y: 0,
+          width: '70%',
+          height: '100%',
           duration: 0.8,
           ease: 'power3.out',
-          delay: index * 0.1,
+          zIndex: 10
+        });
+      } else {
+        // Other cards: stack vertically on the right
+        let stackIndex = index > selectedIndex ? index - 1 : index;
+        if (index > selectedIndex) stackIndex = index - 1;
+        else stackIndex = index;
+        
+        // Adjust stack index for proper vertical positioning
+        const verticalIndex = stackIndex >= selectedIndex ? stackIndex : stackIndex;
+        const adjustedIndex = index < selectedIndex ? index : index - 1;
+        
+        gsap.to(card, {
+          x: '75%',
+          y: `${adjustedIndex * 33.33}%`,
+          width: '25%',
+          height: '30%',
+          duration: 0.8,
+          ease: 'power3.out',
+          delay: adjustedIndex * 0.1,
           zIndex: 5
         });
-      });
-    }
-  }, [selectedTab]);
+      }
+    });
+
+  }, [selectedTab, skillCategories]);
 
   useEffect(() => {
-    // Initial animation on load
+    // Initial setup - 2x2 grid
+    const container = containerRef.current;
+    if (!container) return;
+
+    const cards = container.querySelectorAll('.skill-card');
+    
+    // Set initial 2x2 positions
+    cards.forEach((card, index) => {
+      const positions = [
+        { x: 0, y: 0 },           // top-left
+        { x: '52%', y: 0 },       // top-right  
+        { x: 0, y: '52%' },       // bottom-left
+        { x: '52%', y: '52%' }    // bottom-right
+      ];
+      
+      gsap.set(card, {
+        x: positions[index].x,
+        y: positions[index].y,
+        width: '48%',
+        height: '48%',
+        zIndex: 1
+      });
+    });
+
+    // Initial animation on scroll
     gsap.fromTo('.skill-card',
       { opacity: 0, scale: 0.8 },
       {
@@ -118,20 +159,17 @@ const Skills: React.FC = () => {
         {/* Grid Container */}
         <div 
           ref={containerRef}
-          className="relative w-full h-[450px] mx-auto"
-          style={{ maxWidth: '1000px' }}
+          className="relative w-full mx-auto"
+          style={{ 
+            maxWidth: '800px',
+            height: '500px'
+          }}
         >
           {skillCategories.map((category, index) => (
             <div
               key={category.id}
               data-tab={category.id}
-              className="skill-card absolute cursor-pointer rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-300 group"
-              style={{
-                width: '48%',
-                height: '200px',
-                left: index % 2 === 0 ? '0%' : '52%',
-                top: index < 2 ? '0%' : '220px'
-              }}
+              className="skill-card absolute cursor-pointer rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-shadow duration-300 group"
               onClick={() => handleTabClick(category.id)}
             >
               {/* Background Gradient */}
