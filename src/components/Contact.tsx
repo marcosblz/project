@@ -73,8 +73,8 @@ const Contact: React.FC = () => {
     {
       icon: <Phone className="w-4 sm:w-5 lg:w-6 h-4 sm:h-5 lg:h-6" />,
       label: "Teléfono",
-      value: "+34 123 456 789",
-      href: "tel:+34123456789"
+      value: "+34 717705991",
+      href: "tel:+34717705991"
     },
     {
       icon: <MapPin className="w-4 sm:w-5 lg:w-6 h-4 sm:h-5 lg:h-6" />,
@@ -94,14 +94,8 @@ const Contact: React.FC = () => {
     {
       icon: <Linkedin className="w-4 sm:w-5 lg:w-6 h-4 sm:h-5 lg:h-6" />,
       label: "LinkedIn",
-      href: "https://linkedin.com",
+      href: "www.linkedin.com/in/marcosbaeza",
       color: "hover:bg-blue-600"
-    },
-    {
-      icon: <Twitter className="w-4 sm:w-5 lg:w-6 h-4 sm:h-5 lg:h-6" />,
-      label: "Twitter",
-      href: "https://twitter.com",
-      color: "hover:bg-blue-400"
     }
   ];
 
@@ -254,9 +248,6 @@ const Contact: React.FC = () => {
                   </a>
                 ))}
               </div>
-              <p className="text-xs sm:text-sm text-muted-foreground mt-3 sm:mt-4">
-                Sígueme para ver mis últimos proyectos y actualizaciones sobre tecnología.
-              </p>
             </div>
 
             {/* Availability */}
