@@ -75,26 +75,28 @@ const Skills: React.FC = () => {
       onComplete: () => setIsAnimating(false)
     });
 
-    // Animar tarjeta seleccionada (75% ancho, altura completa)
+    // Animar tarjeta seleccionada (75% ancho, altura completa) CON Z-INDEX ALTO
     tl.to(selectedCard, {
       width: '75%',
       height: '100%',
       x: 0,
       y: 0,
+      zIndex: 20, // Z-index alto para que esté encima
       duration: 0.8,
       ease: 'power3.inOut'
     });
 
-    // Animar otras tarjetas (25% ancho, apiladas verticalmente CON MÁS MÁRGENES)
+    // Animar otras tarjetas (25% ancho, apiladas verticalmente) CON Z-INDEX ALTO
     otherCards.forEach((card, index) => {
-      const marginBetween = 16; // Más margen entre tarjetas
-      const cardHeight = (400 - (4 * marginBetween)) / 3; // Altura de cada tarjeta con más márgenes
+      const marginBetween = 20; // Más margen entre tarjetas
+      const cardHeight = (400 - (4 * marginBetween)) / 3; // Altura de cada tarjeta
       
       tl.to(card, {
-        width: 'calc(25% - 16px)', // Ancho con más margen
+        width: 'calc(25% - 20px)', // Ancho con más margen
         height: `${cardHeight}px`, // Altura calculada
-        x: '300%', // Mover a la derecha
-        y: index * (cardHeight + marginBetween) + marginBetween, // Posición Y con más márgenes
+        x: 'calc(75% + 20px)', // Mover a la derecha CON MARGEN
+        y: index * (cardHeight + marginBetween) + marginBetween, // Posición Y con márgenes
+        zIndex: 15, // Z-index alto para que estén encima del fondo
         duration: 0.8,
         ease: 'power3.inOut'
       }, 0); // Empezar al mismo tiempo
@@ -114,17 +116,24 @@ const Skills: React.FC = () => {
       }
     });
 
-    // Resetear todas las tarjetas al grid 2x2 SIN SUPERPOSICIÓN
+    // Resetear todas las tarjetas al grid 2x2 CON POSICIONES ABSOLUTAS CORRECTAS
     cards.forEach((card, index) => {
       const row = Math.floor(index / 2);
       const col = index % 2;
-      const margin = 8; // Margen entre tarjetas
+      const margin = 10; // Margen entre tarjetas
+      
+      // Calcular posiciones absolutas en píxeles para evitar superposición
+      const cardWidth = `calc(50% - ${margin * 1.5}px)`;
+      const cardHeight = `calc(50% - ${margin * 1.5}px)`;
+      const xPos = col === 0 ? `${margin}px` : `calc(50% + ${margin / 2}px)`;
+      const yPos = row === 0 ? `${margin}px` : `calc(50% + ${margin / 2}px)`;
       
       tl.to(card, {
-        width: `calc(50% - ${margin}px)`, // Ancho con margen
-        height: `calc(50% - ${margin}px)`, // Alto con margen
-        x: col === 0 ? '0%' : `calc(50% + ${margin}px)`, // Posición X sin superposición
-        y: row === 0 ? '0%' : `calc(50% + ${margin}px)`, // Posición Y sin superposición
+        width: cardWidth,
+        height: cardHeight,
+        x: xPos,
+        y: yPos,
+        zIndex: 10, // Z-index normal
         duration: 0.8,
         ease: 'power3.inOut'
       }, 0);
@@ -132,7 +141,7 @@ const Skills: React.FC = () => {
   };
 
   useEffect(() => {
-    // Configurar posiciones iniciales del grid 2x2 SIN SUPERPOSICIÓN
+    // Configurar posiciones iniciales del grid 2x2 CON POSICIONES ABSOLUTAS CORRECTAS
     const container = containerRef.current;
     if (!container) return;
 
@@ -140,14 +149,21 @@ const Skills: React.FC = () => {
     cards.forEach((card, index) => {
       const row = Math.floor(index / 2);
       const col = index % 2;
-      const margin = 8; // Margen entre tarjetas
+      const margin = 10; // Margen entre tarjetas
+      
+      // Calcular posiciones absolutas en píxeles para evitar superposición
+      const cardWidth = `calc(50% - ${margin * 1.5}px)`;
+      const cardHeight = `calc(50% - ${margin * 1.5}px)`;
+      const xPos = col === 0 ? `${margin}px` : `calc(50% + ${margin / 2}px)`;
+      const yPos = row === 0 ? `${margin}px` : `calc(50% + ${margin / 2}px)`;
       
       gsap.set(card, {
         position: 'absolute',
-        width: `calc(50% - ${margin}px)`, // Ancho con margen
-        height: `calc(50% - ${margin}px)`, // Alto con margen
-        x: col === 0 ? '0%' : `calc(50% + ${margin}px)`, // Posición X sin superposición
-        y: row === 0 ? '0%' : `calc(50% + ${margin}px)`, // Posición Y sin superposición
+        width: cardWidth,
+        height: cardHeight,
+        x: xPos,
+        y: yPos,
+        zIndex: 10,
         transformOrigin: 'center center'
       });
     });
