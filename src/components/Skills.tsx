@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { Server, Database, Monitor, GitBranch } from 'lucide-react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
@@ -7,7 +8,7 @@ gsap.registerPlugin(ScrollTrigger);
 interface SkillCategory {
   id: string;
   title: string;
-  gradient: string;
+  icon: React.ReactNode;
 }
 
 const Skills: React.FC = () => {
@@ -20,22 +21,22 @@ const Skills: React.FC = () => {
     {
       id: 'backend',
       title: "BACK-END",
-      gradient: "linear-gradient(135deg, #3b82f6 0%, #06b6d4 50%, #14b8a6 100%)" // AZUL → CYAN → TEAL
+      icon: <Server className="w-8 h-8" />
     },
     {
       id: 'frontend', 
       title: "FRONT-END",
-      gradient: "linear-gradient(135deg, #8b5cf6 0%, #a855f7 50%, #c084fc 100%)" // PÚRPURA → VIOLETA → LAVANDA
+      icon: <Monitor className="w-8 h-8" />
     },
     {
       id: 'devops',
       title: "DEVOPS", 
-      gradient: "linear-gradient(135deg, #f59e0b 0%, #f97316 50%, #ea580c 100%)" // AMARILLO → NARANJA → ROJO
+      icon: <GitBranch className="w-8 h-8" />
     },
     {
       id: 'otros',
       title: "OTROS",
-      gradient: "linear-gradient(135deg, #10b981 0%, #059669 50%, #047857 100%)" // VERDE → ESMERALDA → VERDE OSCURO
+      icon: <Database className="w-8 h-8" />
     }
   ];
 
@@ -69,20 +70,20 @@ const Skills: React.FC = () => {
     });
 
     tl.to(selectedCard, {
-      width: 'calc(75% - 8px)',
-      height: 'calc(100% - 8px)',
-      left: '4px',
-      top: '4px',
+      width: 'calc(75% - 12px)',
+      height: 'calc(100% - 12px)',
+      left: '6px',
+      top: '6px',
       duration: 0.8,
       ease: 'power3.inOut'
     });
 
     otherCards.forEach((card, index) => {
       tl.to(card, {
-        width: 'calc(25% - 8px)',
-        height: 'calc(33.33% - 8px)',
-        left: 'calc(75% + 4px)',
-        top: `calc(${index * 33.33}% + 4px)`,
+        width: 'calc(25% - 12px)',
+        height: 'calc(33.33% - 12px)',
+        left: 'calc(75% + 6px)',
+        top: `calc(${index * 33.33}% + 6px)`,
         duration: 0.8,
         ease: 'power3.inOut'
       }, 0);
@@ -104,10 +105,10 @@ const Skills: React.FC = () => {
       const col = index % 2;
       
       tl.to(card, {
-        width: 'calc(50% - 8px)',
-        height: 'calc(50% - 8px)',
-        left: `calc(${col * 50}% + 4px)`,
-        top: `calc(${row * 50}% + 4px)`,
+        width: 'calc(50% - 12px)',
+        height: 'calc(50% - 12px)',
+        left: `calc(${col * 50}% + 6px)`,
+        top: `calc(${row * 50}% + 6px)`,
         duration: 0.8,
         ease: 'power3.inOut'
       }, 0);
@@ -125,10 +126,10 @@ const Skills: React.FC = () => {
       
       gsap.set(card, {
         position: 'absolute',
-        width: 'calc(50% - 8px)',
-        height: 'calc(50% - 8px)',
-        left: `calc(${col * 50}% + 4px)`,
-        top: `calc(${row * 50}% + 4px)`,
+        width: 'calc(50% - 12px)',
+        height: 'calc(50% - 12px)',
+        left: `calc(${col * 50}% + 6px)`,
+        top: `calc(${row * 50}% + 6px)`,
         transformOrigin: 'center center'
       });
     });
@@ -169,45 +170,35 @@ const Skills: React.FC = () => {
                 key={category.id}
                 data-id={category.id}
                 className={`skill-card cursor-pointer rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-300 group relative ${
-                  selectedTab === category.id ? 'ring-4 ring-white/50 z-10' : 'z-0'
+                  selectedTab === category.id ? 'ring-4 ring-accent/50 z-10' : 'z-0'
                 }`}
                 onClick={() => handleTabClick(category.id)}
                 style={{
-                  background: `${category.gradient} !important`,
-                  backgroundSize: 'cover !important',
-                  backgroundRepeat: 'no-repeat !important',
-                  backgroundAttachment: 'local !important'
+                  background: 'linear-gradient(135deg, hsl(221, 83%, 53%) 0%, hsl(217, 91%, 60%) 50%, hsl(221, 83%, 45%) 100%)',
+                  backgroundAttachment: 'fixed'
                 }}
               >
-                {/* PATRÓN MUY SUTIL - SIN TAPAR EL GRADIENTE */}
+                {/* Patrón sutil */}
                 <div 
-                  className="absolute inset-0 opacity-5 pointer-events-none"
+                  className="absolute inset-0 opacity-10"
                   style={{
-                    backgroundImage: `radial-gradient(circle at 25% 25%, rgba(255,255,255,0.3) 1px, transparent 1px)`,
-                    backgroundSize: '30px 30px'
+                    backgroundImage: `radial-gradient(circle at 25% 25%, rgba(255,255,255,0.4) 1px, transparent 1px)`,
+                    backgroundSize: '40px 40px'
                   }}
                 ></div>
 
-                {/* CONTENIDO */}
+                {/* Contenido */}
                 <div className="relative z-10 p-8 h-full flex flex-col justify-center items-center text-white text-center">
-                  <h3 
-                    className="text-2xl font-bold tracking-wider"
-                    style={{
-                      textShadow: '2px 2px 4px rgba(0,0,0,0.5)',
-                      color: 'white !important'
-                    }}
-                  >
+                  <div className="w-20 h-20 bg-white/20 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                    {category.icon}
+                  </div>
+                  <h3 className="text-2xl font-bold tracking-wider text-white drop-shadow-lg">
                     {category.title}
                   </h3>
                 </div>
 
-                {/* HOVER EFFECT MUY SUTIL */}
-                <div 
-                  className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl pointer-events-none"
-                  style={{
-                    background: 'rgba(255,255,255,0.05)'
-                  }}
-                ></div>
+                {/* Hover effect */}
+                <div className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl"></div>
               </div>
             ))}
           </div>
