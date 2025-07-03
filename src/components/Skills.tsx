@@ -14,7 +14,6 @@ const Skills: React.FC = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const [selectedTab, setSelectedTab] = useState<string | null>(null);
-  const [isAnimating, setIsAnimating] = useState(false);
 
   const skillCategories: SkillCategory[] = [
     {
@@ -40,23 +39,17 @@ const Skills: React.FC = () => {
   ];
 
   const handleTabClick = (tabId: string) => {
-    if (isAnimating) return;
-    
-    setIsAnimating(true);
-    
-    // Usar un timeout más corto para reducir el lag
-    setTimeout(() => {
-      if (selectedTab === null) {
-        setSelectedTab(tabId);
-        animateToExpanded(tabId);
-      } else if (selectedTab === tabId) {
-        setSelectedTab(null);
-        animateToGrid();
-      } else {
-        setSelectedTab(tabId);
-        animateToExpanded(tabId);
-      }
-    }, 50);
+    // Respuesta inmediata sin triggereo
+    if (selectedTab === null) {
+      setSelectedTab(tabId);
+      animateToExpanded(tabId);
+    } else if (selectedTab === tabId) {
+      setSelectedTab(null);
+      animateToGrid();
+    } else {
+      setSelectedTab(tabId);
+      animateToExpanded(tabId);
+    }
   };
 
   const animateToExpanded = (selectedId: string) => {
@@ -67,30 +60,28 @@ const Skills: React.FC = () => {
     const selectedCard = container.querySelector(`[data-id="${selectedId}"]`);
     const otherCards = Array.from(cards).filter(card => card.getAttribute('data-id') !== selectedId);
 
-    // Animación más rápida y suave
-    const tl = gsap.timeline({
-      onComplete: () => setIsAnimating(false)
-    });
+    // Animación instantánea y fluida
+    const tl = gsap.timeline();
 
-    // Animar tarjeta seleccionada (más grande)
+    // Animar tarjeta seleccionada (mucho más grande)
     tl.to(selectedCard, {
-      width: 600,
-      height: 400,
+      width: 700,
+      height: 450,
       x: 0,
       y: 0,
-      duration: 0.5, // Más rápido
-      ease: 'power2.inOut'
+      duration: 0.4,
+      ease: 'power2.out'
     });
 
     // Animar otras tarjetas a la derecha
     otherCards.forEach((card, index) => {
       tl.to(card, {
-        width: 180,
-        height: 125,
-        x: 630, // 600px + 30px gap
-        y: index * 135,
-        duration: 0.5, // Más rápido
-        ease: 'power2.inOut'
+        width: 200,
+        height: 140,
+        x: 730, // 700px + 30px gap
+        y: index * 150,
+        duration: 0.4,
+        ease: 'power2.out'
       }, 0);
     });
   };
@@ -101,22 +92,20 @@ const Skills: React.FC = () => {
 
     const cards = container.querySelectorAll('.skill-card');
 
-    // Animación más rápida
-    const tl = gsap.timeline({
-      onComplete: () => setIsAnimating(false)
-    });
+    // Animación instantánea
+    const tl = gsap.timeline();
 
     cards.forEach((card, index) => {
       const row = Math.floor(index / 2);
       const col = index % 2;
       
       tl.to(card, {
-        width: 380, // Más grande
-        height: 220, // Más grande
-        x: col * 410, // 380px + 30px gap
-        y: row * 250, // 220px + 30px gap
-        duration: 0.5, // Más rápido
-        ease: 'power2.inOut'
+        width: 450, // Mucho más grande
+        height: 280, // Mucho más grande
+        x: col * 480, // 450px + 30px gap
+        y: row * 310, // 280px + 30px gap
+        duration: 0.4,
+        ease: 'power2.out'
       }, 0);
     });
   };
@@ -132,15 +121,15 @@ const Skills: React.FC = () => {
       
       gsap.set(card, {
         position: 'absolute',
-        width: 380, // Más grande
-        height: 220, // Más grande
-        x: col * 410, // 380px + 30px gap
-        y: row * 250, // 220px + 30px gap
+        width: 450, // Mucho más grande
+        height: 280, // Mucho más grande
+        x: col * 480, // 450px + 30px gap
+        y: row * 310, // 280px + 30px gap
         transformOrigin: 'center center'
       });
     });
 
-    // Animación de entrada más suave
+    // Animación de entrada
     gsap.fromTo('.skill-card',
       { opacity: 0, scale: 0.9 },
       {
@@ -166,12 +155,12 @@ const Skills: React.FC = () => {
           <p className="text-base sm:text-lg lg:text-xl text-muted-foreground">Especialización técnica por áreas</p>
         </div>
 
-        {/* Container más grande */}
-        <div className="max-w-6xl mx-auto flex justify-center">
+        {/* Container aún más grande */}
+        <div className="max-w-7xl mx-auto flex justify-center">
           <div 
             ref={containerRef}
             className="relative"
-            style={{ width: '820px', height: '500px' }} // Mucho más grande
+            style={{ width: '960px', height: '620px' }} // Mucho más grande
           >
             {skillCategories.map((category) => (
               <div
@@ -182,10 +171,10 @@ const Skills: React.FC = () => {
                 }`}
                 onClick={() => handleTabClick(category.id)}
               >
-                {/* Background unificado - Diseño DevOps/Otros */}
+                {/* Background unificado */}
                 <div className="absolute inset-0 bg-gradient-to-br from-secondary/60 via-accent/60 to-primary/60 backdrop-blur-sm"></div>
                 
-                {/* Pattern sutil unificado */}
+                {/* Pattern sutil */}
                 <div className="absolute inset-0 opacity-10">
                   <div 
                     className="w-full h-full"
@@ -196,39 +185,39 @@ const Skills: React.FC = () => {
                   ></div>
                 </div>
 
-                {/* Overlay para mejor legibilidad */}
+                {/* Overlay */}
                 <div className="absolute inset-0 bg-background/10 backdrop-blur-[1px]"></div>
 
-                {/* Content unificado */}
-                <div className="relative z-10 p-8 h-full flex flex-col text-white">
-                  {/* Header con título */}
-                  <div className="flex items-center justify-center mb-6">
-                    <h3 className="text-2xl font-bold tracking-wider text-white drop-shadow-sm text-center">
+                {/* Content */}
+                <div className="relative z-10 p-10 h-full flex flex-col text-white">
+                  {/* Header con título más grande */}
+                  <div className="flex items-center justify-center mb-8">
+                    <h3 className="text-3xl font-bold tracking-wider text-white drop-shadow-sm text-center">
                       {category.title}
                     </h3>
                   </div>
 
-                  {/* Área central para imagen */}
-                  <div className="flex-1 flex items-center justify-center mb-6">
-                    <div className="w-24 h-24 bg-white/20 backdrop-blur-sm rounded-2xl border border-white/30 flex items-center justify-center shadow-lg group-hover:scale-105 transition-transform duration-300">
-                      <span className="text-white/80 text-base font-medium">IMG</span>
+                  {/* Área central para imagen más grande */}
+                  <div className="flex-1 flex items-center justify-center mb-8">
+                    <div className="w-32 h-32 bg-white/20 backdrop-blur-sm rounded-2xl border border-white/30 flex items-center justify-center shadow-lg group-hover:scale-105 transition-transform duration-300">
+                      <span className="text-white/80 text-lg font-medium">IMG</span>
                     </div>
                   </div>
 
                   {/* Skills preview - Solo en modo expandido */}
                   {selectedTab === category.id && (
-                    <div className="mt-4">
-                      <div className="flex flex-wrap gap-2">
+                    <div className="mt-6">
+                      <div className="flex flex-wrap gap-3">
                         {category.skills.slice(0, 8).map((skill, index) => (
                           <span
                             key={index}
-                            className="px-3 py-1.5 bg-white/25 backdrop-blur-sm text-white rounded-lg text-sm font-medium border border-white/20 shadow-sm"
+                            className="px-4 py-2 bg-white/25 backdrop-blur-sm text-white rounded-lg text-base font-medium border border-white/20 shadow-sm"
                           >
                             {skill}
                           </span>
                         ))}
                         {category.skills.length > 8 && (
-                          <span className="px-3 py-1.5 bg-white/35 backdrop-blur-sm text-white rounded-lg text-sm border border-white/20 shadow-sm">
+                          <span className="px-4 py-2 bg-white/35 backdrop-blur-sm text-white rounded-lg text-base border border-white/20 shadow-sm">
                             +{category.skills.length - 8}
                           </span>
                         )}
@@ -237,10 +226,10 @@ const Skills: React.FC = () => {
                   )}
                 </div>
 
-                {/* Hover Effect sutil */}
+                {/* Hover Effect */}
                 <div className="absolute inset-0 bg-white/5 opacity-0 group-hover:opacity-100 transition-opacity duration-200"></div>
                 
-                {/* Glow effect en hover */}
+                {/* Glow effect */}
                 <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none">
                   <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-accent/20 via-transparent to-accent/20 blur-sm"></div>
                 </div>
@@ -259,7 +248,7 @@ const Skills: React.FC = () => {
           </div>
         </div>
 
-        {/* Skills Detail - Solo cuando hay selección */}
+        {/* Skills Detail */}
         {selectedTab && (
           <div className="mt-6 sm:mt-8 max-w-5xl mx-auto">
             <div className="bg-background/80 backdrop-blur-sm border border-border rounded-xl p-4 sm:p-6 shadow-lg">
