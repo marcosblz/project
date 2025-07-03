@@ -1,287 +1,262 @@
-import React, { useEffect, useRef } from 'react';
-import { Server, Database, Code, Cloud, Terminal, Smartphone, Monitor, Cpu, GitBranch, Pocket as Docker } from 'lucide-react';
+import React, { useEffect, useRef, useState } from 'react';
+import { Server, Database, Code, Cloud, Monitor, Cpu, GitBranch, Smartphone } from 'lucide-react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
 
-interface Technology {
-  name: string;
-  level: number;
-  icon: React.ReactNode;
-}
-
 interface SkillCategory {
+  id: string;
   title: string;
   description: string;
-  technologies: Technology[];
   gradient: string;
   icon: React.ReactNode;
-  bgPattern: string;
+  technologies: string[];
 }
 
 const Skills: React.FC = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [selectedTab, setSelectedTab] = useState<string>('backend');
 
   const skillCategories: SkillCategory[] = [
     {
+      id: 'backend',
       title: "BACK-END",
-      description: "Desarrollo de servidores robustos y APIs escalables",
+      description: "Desarrollo de servidores robustos, APIs escalables y sistemas de automatización empresarial",
       gradient: "from-blue-600 via-cyan-500 to-teal-400",
-      icon: <Server className="w-16 h-16" />,
-      bgPattern: "bg-gradient-to-br from-blue-900/20 to-cyan-900/20",
-      technologies: [
-        { name: "Groovy", level: 90, icon: <Code className="w-5 h-5" /> },
-        { name: "Python", level: 85, icon: <Code className="w-5 h-5" /> },
-        { name: "Java", level: 80, icon: <Cpu className="w-5 h-5" /> },
-        { name: "Django", level: 85, icon: <Server className="w-5 h-5" /> },
-        { name: "REST APIs", level: 90, icon: <Terminal className="w-5 h-5" /> }
-      ]
+      icon: <Server className="w-12 h-12" />,
+      technologies: ["Groovy", "Python", "Java", "Django", "REST APIs", "Microservicios"]
     },
     {
+      id: 'frontend',
       title: "FRONT-END",
-      description: "Interfaces modernas y experiencias de usuario intuitivas",
+      description: "Interfaces modernas, experiencias de usuario intuitivas y desarrollo web responsive",
       gradient: "from-purple-600 via-blue-500 to-indigo-400",
-      icon: <Monitor className="w-16 h-16" />,
-      bgPattern: "bg-gradient-to-br from-purple-900/20 to-blue-900/20",
-      technologies: [
-        { name: "JavaScript", level: 80, icon: <Code className="w-5 h-5" /> },
-        { name: "React", level: 75, icon: <Code className="w-5 h-5" /> },
-        { name: "TypeScript", level: 70, icon: <Code className="w-5 h-5" /> },
-        { name: "HTML/CSS", level: 85, icon: <Monitor className="w-5 h-5" /> },
-        { name: "Tailwind", level: 80, icon: <Monitor className="w-5 h-5" /> }
-      ]
+      icon: <Monitor className="w-12 h-12" />,
+      technologies: ["JavaScript", "React", "TypeScript", "HTML/CSS", "Tailwind CSS", "GSAP"]
     },
     {
+      id: 'devops',
       title: "DEVOPS",
-      description: "Automatización, CI/CD y gestión de infraestructura",
+      description: "Automatización CI/CD, gestión de infraestructura y optimización de procesos",
       gradient: "from-orange-500 via-pink-500 to-purple-600",
-      icon: <GitBranch className="w-16 h-16" />,
-      bgPattern: "bg-gradient-to-br from-orange-900/20 to-purple-900/20",
-      technologies: [
-        { name: "Docker", level: 75, icon: <Docker className="w-5 h-5" /> },
-        { name: "Kubernetes", level: 70, icon: <Cloud className="w-5 h-5" /> },
-        { name: "Jenkins", level: 75, icon: <Terminal className="w-5 h-5" /> },
-        { name: "Git", level: 90, icon: <GitBranch className="w-5 h-5" /> },
-        { name: "CI/CD", level: 80, icon: <Terminal className="w-5 h-5" /> }
-      ]
+      icon: <GitBranch className="w-12 h-12" />,
+      technologies: ["Docker", "Kubernetes", "Jenkins", "Git", "CI/CD", "Automatización"]
     },
     {
+      id: 'database',
       title: "DATABASE",
-      description: "Gestión y optimización de bases de datos",
+      description: "Gestión, optimización y diseño de bases de datos relacionales y no relacionales",
       gradient: "from-green-500 via-emerald-500 to-teal-500",
-      icon: <Database className="w-16 h-16" />,
-      bgPattern: "bg-gradient-to-br from-green-900/20 to-teal-900/20",
-      technologies: [
-        { name: "MySQL", level: 85, icon: <Database className="w-5 h-5" /> },
-        { name: "PostgreSQL", level: 80, icon: <Database className="w-5 h-5" /> },
-        { name: "MongoDB", level: 70, icon: <Database className="w-5 h-5" /> },
-        { name: "Redis", level: 65, icon: <Database className="w-5 h-5" /> },
-        { name: "SQL", level: 90, icon: <Database className="w-5 h-5" /> }
-      ]
+      icon: <Database className="w-12 h-12" />,
+      technologies: ["MySQL", "PostgreSQL", "MongoDB", "Redis", "SQL", "Optimización"]
     }
   ];
 
+  const handleTabClick = (tabId: string) => {
+    if (tabId === selectedTab) return;
+
+    const container = containerRef.current;
+    if (!container) return;
+
+    // Animate to new layout
+    setSelectedTab(tabId);
+  };
+
   useEffect(() => {
-    // Parallax effect for cards
-    gsap.utils.toArray('.skill-card').forEach((card: any, index) => {
-      gsap.fromTo(card,
-        { 
-          y: 100,
-          opacity: 0,
-          rotationY: 15,
-          scale: 0.9
-        },
-        {
-          y: 0,
-          opacity: 1,
-          rotationY: 0,
-          scale: 1,
-          duration: 1,
-          delay: index * 0.2,
+    const container = containerRef.current;
+    if (!container) return;
+
+    const cards = container.querySelectorAll('.skill-tab');
+    const selectedCard = container.querySelector(`[data-tab="${selectedTab}"]`);
+    const otherCards = Array.from(cards).filter(card => card.getAttribute('data-tab') !== selectedTab);
+
+    // Clear any existing animations
+    gsap.killTweensOf(cards);
+
+    if (selectedCard && otherCards.length > 0) {
+      // Animate selected card to large size
+      gsap.to(selectedCard, {
+        width: '70%',
+        height: '400px',
+        duration: 0.8,
+        ease: 'power3.out',
+        zIndex: 10
+      });
+
+      // Animate other cards to sidebar
+      gsap.to(otherCards, {
+        width: '25%',
+        height: '120px',
+        duration: 0.8,
+        ease: 'power3.out',
+        stagger: 0.1,
+        zIndex: 5
+      });
+
+      // Position cards
+      gsap.set(selectedCard, { x: 0, y: 0 });
+      
+      otherCards.forEach((card, index) => {
+        gsap.to(card, {
+          x: '280%', // Move to right side
+          y: index * 130, // Stack vertically
+          duration: 0.8,
           ease: 'power3.out',
-          scrollTrigger: {
-            trigger: card,
-            start: 'top 85%',
-            end: 'bottom 15%',
-            toggleActions: 'play none none reverse'
-          }
-        }
-      );
+          delay: index * 0.1
+        });
+      });
+    }
+  }, [selectedTab]);
 
-      // Parallax movement during scroll
-      gsap.to(card, {
-        y: -50,
-        ease: 'none',
+  useEffect(() => {
+    // Initial animation
+    gsap.fromTo('.skills-container',
+      { opacity: 0, y: 50 },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 1,
+        ease: 'power3.out',
         scrollTrigger: {
-          trigger: card,
-          start: 'top bottom',
-          end: 'bottom top',
-          scrub: 1
+          trigger: sectionRef.current,
+          start: 'top 80%',
+          toggleActions: 'play none none reverse'
         }
-      });
-    });
-
-    // Animate technology bars
-    gsap.utils.toArray('.tech-bar').forEach((bar: any) => {
-      const width = bar.dataset.level;
-      gsap.fromTo(bar,
-        { width: '0%' },
-        {
-          width: `${width}%`,
-          duration: 1.5,
-          ease: 'power2.out',
-          scrollTrigger: {
-            trigger: bar,
-            start: 'top 90%',
-            toggleActions: 'play none none reverse'
-          }
-        }
-      );
-    });
-
-    // Floating animation for icons
-    gsap.utils.toArray('.floating-icon').forEach((icon: any) => {
-      gsap.to(icon, {
-        y: -10,
-        duration: 2,
-        ease: 'power2.inOut',
-        yoyo: true,
-        repeat: -1
-      });
-    });
-
+      }
+    );
   }, []);
 
   return (
     <section id="habilidades" ref={sectionRef} className="skills-section py-8 sm:py-12 lg:py-20 relative overflow-hidden">
-      {/* Background Elements */}
-      <div className="absolute inset-0 bg-gradient-to-br from-background via-muted/20 to-background"></div>
-      
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-8 sm:mb-12 lg:mb-16">
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-foreground mb-2 sm:mb-4">
             Stack Tecnológico
           </h2>
           <p className="text-base sm:text-lg lg:text-xl text-muted-foreground max-w-2xl mx-auto">
-            Experiencia especializada en desarrollo backend con conocimientos complementarios en frontend y DevOps
+            Especialización en desarrollo backend con experiencia complementaria en frontend y DevOps
           </p>
         </div>
 
-        {/* Skills Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-10 mb-12">
-          {skillCategories.map((category, index) => (
-            <div
-              key={index}
-              className="skill-card group relative"
-              style={{ perspective: '1000px' }}
-            >
-              <div className={`relative h-96 sm:h-[420px] lg:h-[450px] rounded-2xl overflow-hidden border border-border/50 shadow-2xl transition-all duration-700 hover:shadow-3xl hover:-translate-y-2 ${category.bgPattern}`}>
-                
-                {/* Background Gradient */}
-                <div className={`absolute inset-0 bg-gradient-to-br ${category.gradient} opacity-10 group-hover:opacity-20 transition-opacity duration-500`}></div>
-                
-                {/* Geometric Pattern Overlay */}
-                <div className="absolute inset-0 opacity-5">
-                  <div 
-                    className="w-full h-full"
-                    style={{
-                      backgroundImage: `
-                        radial-gradient(circle at 25% 25%, currentColor 2px, transparent 2px),
-                        radial-gradient(circle at 75% 75%, currentColor 1px, transparent 1px)
-                      `,
-                      backgroundSize: '60px 60px, 30px 30px'
-                    }}
-                  ></div>
-                </div>
-
-                {/* Content */}
-                <div className="relative z-10 p-6 sm:p-8 h-full flex flex-col">
+        {/* Skills Container */}
+        <div className="skills-container relative">
+          <div 
+            ref={containerRef}
+            className="relative w-full h-[500px] mx-auto"
+            style={{ maxWidth: '1000px' }}
+          >
+            {skillCategories.map((category, index) => {
+              const isSelected = category.id === selectedTab;
+              
+              return (
+                <div
+                  key={category.id}
+                  data-tab={category.id}
+                  className={`skill-tab absolute cursor-pointer transition-all duration-300 rounded-2xl overflow-hidden border border-border/50 shadow-xl hover:shadow-2xl ${
+                    isSelected ? 'z-10' : 'z-5'
+                  }`}
+                  style={{
+                    width: isSelected ? '70%' : '48%',
+                    height: isSelected ? '400px' : '240px',
+                    left: isSelected ? '0%' : index % 2 === 0 ? '0%' : '52%',
+                    top: isSelected ? '0%' : index < 2 ? '0%' : '260px',
+                    transform: isSelected ? 'none' : 'none'
+                  }}
+                  onClick={() => handleTabClick(category.id)}
+                >
+                  {/* Background */}
+                  <div className={`absolute inset-0 bg-gradient-to-br ${category.gradient} opacity-90`}></div>
                   
-                  {/* Header */}
-                  <div className="text-center mb-6">
-                    <div className="floating-icon inline-flex items-center justify-center w-20 h-20 mb-4 rounded-2xl bg-background/80 backdrop-blur-sm border border-border/50 shadow-lg">
-                      <div className={`text-transparent bg-gradient-to-r ${category.gradient} bg-clip-text`}>
+                  {/* Pattern Overlay */}
+                  <div className="absolute inset-0 opacity-10">
+                    <div 
+                      className="w-full h-full"
+                      style={{
+                        backgroundImage: `
+                          radial-gradient(circle at 25% 25%, white 2px, transparent 2px),
+                          radial-gradient(circle at 75% 75%, white 1px, transparent 1px)
+                        `,
+                        backgroundSize: '60px 60px, 30px 30px'
+                      }}
+                    ></div>
+                  </div>
+
+                  {/* Content */}
+                  <div className="relative z-10 p-6 h-full flex flex-col text-white">
+                    {/* Header */}
+                    <div className={`${isSelected ? 'text-center mb-8' : 'text-center mb-4'}`}>
+                      <div className={`inline-flex items-center justify-center ${isSelected ? 'w-20 h-20 mb-6' : 'w-12 h-12 mb-3'} rounded-2xl bg-white/20 backdrop-blur-sm transition-all duration-300`}>
                         {category.icon}
                       </div>
+                      <h3 className={`font-bold tracking-wider ${isSelected ? 'text-3xl mb-4' : 'text-xl mb-2'} transition-all duration-300`}>
+                        {category.title}
+                      </h3>
+                      {isSelected && (
+                        <p className="text-white/90 leading-relaxed text-lg max-w-2xl mx-auto">
+                          {category.description}
+                        </p>
+                      )}
                     </div>
-                    <h3 className="text-xl sm:text-2xl font-bold text-foreground mb-2 tracking-wider">
-                      {category.title}
-                    </h3>
-                    <p className="text-sm sm:text-base text-muted-foreground leading-relaxed">
-                      {category.description}
-                    </p>
-                  </div>
 
-                  {/* Technologies */}
-                  <div className="flex-1 space-y-4">
-                    {category.technologies.map((tech, techIndex) => (
-                      <div key={techIndex} className="group/tech">
-                        <div className="flex items-center justify-between mb-2">
-                          <div className="flex items-center space-x-3">
-                            <div className="w-8 h-8 rounded-lg bg-accent/10 flex items-center justify-center text-accent group-hover/tech:bg-accent group-hover/tech:text-white transition-all duration-300">
-                              {tech.icon}
+                    {/* Technologies - Only show when selected */}
+                    {isSelected && (
+                      <div className="flex-1 flex flex-col justify-center">
+                        <div className="grid grid-cols-2 gap-4 max-w-2xl mx-auto">
+                          {category.technologies.map((tech, techIndex) => (
+                            <div
+                              key={techIndex}
+                              className="bg-white/20 backdrop-blur-sm rounded-xl p-4 text-center hover:bg-white/30 transition-all duration-300 hover:scale-105"
+                            >
+                              <span className="font-semibold text-white">
+                                {tech}
+                              </span>
                             </div>
-                            <span className="font-medium text-foreground text-sm sm:text-base">
-                              {tech.name}
-                            </span>
-                          </div>
-                          <span className="text-xs sm:text-sm text-muted-foreground font-medium">
-                            {tech.level}%
-                          </span>
-                        </div>
-                        
-                        {/* Progress Bar */}
-                        <div className="relative h-2 bg-muted rounded-full overflow-hidden">
-                          <div
-                            className={`tech-bar absolute left-0 top-0 h-full bg-gradient-to-r ${category.gradient} rounded-full shadow-sm`}
-                            data-level={tech.level}
-                            style={{ width: '0%' }}
-                          ></div>
-                          
-                          {/* Shine Effect */}
-                          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -skew-x-12 animate-pulse"></div>
+                          ))}
                         </div>
                       </div>
-                    ))}
+                    )}
+
+                    {/* Click indicator for non-selected */}
+                    {!isSelected && (
+                      <div className="mt-auto text-center">
+                        <div className="inline-flex items-center text-white/80 text-sm">
+                          <span>Click para expandir</span>
+                        </div>
+                      </div>
+                    )}
+
+                    {/* Hover glow effect */}
+                    <div className="absolute inset-0 rounded-2xl opacity-0 hover:opacity-100 transition-opacity duration-500 bg-white/10 pointer-events-none"></div>
                   </div>
 
-                  {/* Card Glow Effect */}
-                  <div className={`absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-r ${category.gradient} blur-xl -z-10 scale-110`}></div>
+                  {/* Photo placeholder */}
+                  <div className="absolute top-4 right-4 w-16 h-16 bg-white/20 rounded-xl border-2 border-white/30 flex items-center justify-center">
+                    <span className="text-white/60 text-xs font-medium">IMG</span>
+                  </div>
                 </div>
-              </div>
-            </div>
-          ))}
+              );
+            })}
+          </div>
         </div>
 
-        {/* Summary Section */}
-        <div className="bg-background/80 backdrop-blur-sm border border-border rounded-2xl p-6 sm:p-8 lg:p-12 text-center shadow-xl">
+        {/* Summary */}
+        <div className="mt-16 bg-background/80 backdrop-blur-sm border border-border rounded-2xl p-6 sm:p-8 text-center shadow-xl">
           <div className="flex items-center justify-center mb-6">
             <div className="w-16 h-16 bg-accent/20 rounded-2xl flex items-center justify-center mr-4">
               <Cpu className="w-8 h-8 text-accent" />
             </div>
             <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-foreground">
-              Especialización Backend
+              Enfoque Backend Especializado
             </h3>
           </div>
           
-          <p className="text-base sm:text-lg text-muted-foreground max-w-4xl mx-auto leading-relaxed mb-8">
+          <p className="text-base sm:text-lg text-muted-foreground max-w-4xl mx-auto leading-relaxed">
             Mi experiencia se centra en el desarrollo backend robusto, desde la creación de APIs escalables 
             hasta la implementación de sistemas de automatización que mejoran la productividad empresarial 
-            entre un 30% y 50%. Combino análisis técnico profundo con implementación eficiente.
+            entre un 30% y 50%.
           </p>
-
-          <div className="flex flex-wrap justify-center gap-4">
-            <span className="px-6 py-3 bg-accent/20 text-accent rounded-full text-sm font-medium border border-accent/30 hover:bg-accent hover:text-white transition-all duration-300">
-              Automatización de Procesos
-            </span>
-            <span className="px-6 py-3 bg-accent/20 text-accent rounded-full text-sm font-medium border border-accent/30 hover:bg-accent hover:text-white transition-all duration-300">
-              APIs Escalables
-            </span>
-            <span className="px-6 py-3 bg-accent/20 text-accent rounded-full text-sm font-medium border border-accent/30 hover:bg-accent hover:text-white transition-all duration-300">
-              Soluciones Empresariales
-            </span>
-          </div>
         </div>
       </div>
     </section>
