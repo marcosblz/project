@@ -1,5 +1,4 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Server, Database, Monitor, GitBranch } from 'lucide-react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
@@ -8,7 +7,6 @@ gsap.registerPlugin(ScrollTrigger);
 interface SkillCategory {
   id: string;
   title: string;
-  icon: React.ReactNode;
 }
 
 const Skills: React.FC = () => {
@@ -20,23 +18,19 @@ const Skills: React.FC = () => {
   const skillCategories: SkillCategory[] = [
     {
       id: 'backend',
-      title: "BACK-END",
-      icon: <Server className="w-8 h-8" />
+      title: "BACK-END"
     },
     {
       id: 'frontend', 
-      title: "FRONT-END",
-      icon: <Monitor className="w-8 h-8" />
+      title: "FRONT-END"
     },
     {
       id: 'devops',
-      title: "DEVOPS", 
-      icon: <GitBranch className="w-8 h-8" />
+      title: "DEVOPS"
     },
     {
       id: 'otros',
-      title: "OTROS",
-      icon: <Database className="w-8 h-8" />
+      title: "OTROS"
     }
   ];
 
@@ -187,11 +181,8 @@ const Skills: React.FC = () => {
                   }}
                 ></div>
 
-                {/* Contenido */}
+                {/* Contenido SIN ICONOS */}
                 <div className="relative z-10 p-8 h-full flex flex-col justify-center items-center text-white text-center">
-                  <div className="w-20 h-20 bg-white/20 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
-                    {category.icon}
-                  </div>
                   <h3 className="text-2xl font-bold tracking-wider text-white drop-shadow-lg">
                     {category.title}
                   </h3>
