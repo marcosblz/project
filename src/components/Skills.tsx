@@ -74,10 +74,10 @@ const Skills: React.FC = () => {
 
     // Animar tarjeta seleccionada a la izquierda (75% ancho)
     tl.to(selectedCard, {
-      width: 'calc(75% - 8px)', // Restamos margen
-      height: 'calc(100% - 8px)',
-      x: 0,
-      y: 0,
+      width: '75%',
+      height: '100%',
+      left: '0px',
+      top: '0px',
       duration: 0.8,
       ease: 'power3.inOut'
     });
@@ -85,10 +85,10 @@ const Skills: React.FC = () => {
     // Animar otras tarjetas a la derecha (25% ancho, apiladas)
     otherCards.forEach((card, index) => {
       tl.to(card, {
-        width: 'calc(25% - 8px)', // Restamos margen
-        height: 'calc(33.33% - 8px)', // 1/3 de altura con margen
-        x: 'calc(300% + 16px)', // Mover a la derecha con margen
-        y: `calc(${index * 33.33}% + ${index * 8}px)`, // Apilar verticalmente con margen
+        width: '25%',
+        height: '33.33%',
+        left: '75%',
+        top: `${index * 33.33}%`,
         duration: 0.8,
         ease: 'power3.inOut'
       }, 0); // Empezar al mismo tiempo
@@ -106,16 +106,16 @@ const Skills: React.FC = () => {
       onComplete: () => setIsAnimating(false)
     });
 
-    // Resetear todas las tarjetas al grid 2x2 con márgenes
+    // Resetear todas las tarjetas al grid 2x2
     cards.forEach((card, index) => {
       const row = Math.floor(index / 2);
       const col = index % 2;
       
       tl.to(card, {
-        width: 'calc(50% - 8px)', // 50% menos margen
-        height: 'calc(50% - 8px)', // 50% menos margen
-        x: `calc(${col * 50}% + ${col * 8}px)`, // Posición con margen
-        y: `calc(${row * 50}% + ${row * 8}px)`, // Posición con margen
+        width: '50%',
+        height: '50%',
+        left: `${col * 50}%`,
+        top: `${row * 50}%`,
         duration: 0.8,
         ease: 'power3.inOut'
       }, 0);
@@ -123,7 +123,7 @@ const Skills: React.FC = () => {
   };
 
   useEffect(() => {
-    // Configurar posiciones iniciales del grid 2x2 con márgenes
+    // Configurar posiciones iniciales del grid 2x2
     const container = containerRef.current;
     if (!container) return;
 
@@ -134,10 +134,10 @@ const Skills: React.FC = () => {
       
       gsap.set(card, {
         position: 'absolute',
-        width: 'calc(50% - 8px)', // 50% menos margen
-        height: 'calc(50% - 8px)', // 50% menos margen
-        x: `calc(${col * 50}% + ${col * 8}px)`, // Posición con margen
-        y: `calc(${row * 50}% + ${row * 8}px)`, // Posición con margen
+        width: '50%',
+        height: '50%',
+        left: `${col * 50}%`,
+        top: `${row * 50}%`,
         transformOrigin: 'center center'
       });
     });
@@ -168,11 +168,11 @@ const Skills: React.FC = () => {
           <p className="text-xl text-muted-foreground">Especialización técnica por áreas</p>
         </div>
 
-        {/* Container con aspect ratio fijo y padding para márgenes */}
+        {/* Container con aspect ratio fijo */}
         <div className="max-w-6xl mx-auto">
           <div 
             ref={containerRef}
-            className="relative w-full p-2" // Padding para los márgenes
+            className="relative w-full"
             style={{ height: '400px' }}
           >
             {skillCategories.map((category) => (
@@ -183,6 +183,7 @@ const Skills: React.FC = () => {
                   selectedTab === category.id ? 'ring-4 ring-white/50 z-10' : 'z-0'
                 }`}
                 onClick={() => handleTabClick(category.id)}
+                style={{ margin: '4px' }} // Margen pequeño para separación
               >
                 {/* Background Gradient - FORZADO */}
                 <div 
