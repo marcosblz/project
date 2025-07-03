@@ -1,5 +1,4 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Server, Database, Monitor, GitBranch } from 'lucide-react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
@@ -8,8 +7,6 @@ gsap.registerPlugin(ScrollTrigger);
 interface SkillCategory {
   id: string;
   title: string;
-  gradient: string;
-  icon: React.ReactNode;
   skills: string[];
 }
 
@@ -23,29 +20,21 @@ const Skills: React.FC = () => {
     {
       id: 'backend',
       title: "BACK-END",
-      gradient: "from-accent/90 via-accent to-accent/80",
-      icon: <Server className="w-10 h-10" />,
       skills: ["Java", "Python", "Groovy", "Node.js", "Spring Boot", "Django", "REST APIs", "GraphQL"]
     },
     {
       id: 'frontend',
       title: "FRONT-END",
-      gradient: "from-accent/80 via-primary to-accent/70",
-      icon: <Monitor className="w-10 h-10" />,
       skills: ["React", "TypeScript", "JavaScript", "HTML5", "CSS3", "Tailwind CSS", "GSAP", "Responsive Design"]
     },
     {
       id: 'devops',
       title: "DEVOPS",
-      gradient: "from-secondary/60 via-accent/60 to-primary/60",
-      icon: <GitBranch className="w-10 h-10" />,
       skills: ["Docker", "Kubernetes", "Jenkins", "Git", "CI/CD", "AWS", "Linux", "Monitoring"]
     },
     {
       id: 'otros',
       title: "OTROS",
-      gradient: "from-primary/70 via-accent/50 to-secondary/70",
-      icon: <Database className="w-10 h-10" />,
       skills: ["MySQL", "PostgreSQL", "MongoDB", "Redis", "Webpack", "Vite", "Testing", "Agile/Scrum"]
     }
   ];
@@ -55,19 +44,19 @@ const Skills: React.FC = () => {
     
     setIsAnimating(true);
     
-    if (selectedTab === null) {
-      // Transformar de 2x2 a layout expandido
-      setSelectedTab(tabId);
-      animateToExpanded(tabId);
-    } else if (selectedTab === tabId) {
-      // Volver al 2x2
-      setSelectedTab(null);
-      animateToGrid();
-    } else {
-      // Cambiar selección
-      setSelectedTab(tabId);
-      animateToExpanded(tabId);
-    }
+    // Usar un timeout más corto para reducir el lag
+    setTimeout(() => {
+      if (selectedTab === null) {
+        setSelectedTab(tabId);
+        animateToExpanded(tabId);
+      } else if (selectedTab === tabId) {
+        setSelectedTab(null);
+        animateToGrid();
+      } else {
+        setSelectedTab(tabId);
+        animateToExpanded(tabId);
+      }
+    }, 50);
   };
 
   const animateToExpanded = (selectedId: string) => {
@@ -78,31 +67,31 @@ const Skills: React.FC = () => {
     const selectedCard = container.querySelector(`[data-id="${selectedId}"]`);
     const otherCards = Array.from(cards).filter(card => card.getAttribute('data-id') !== selectedId);
 
-    // Timeline para la animación
+    // Animación más rápida y suave
     const tl = gsap.timeline({
       onComplete: () => setIsAnimating(false)
     });
 
-    // Animar tarjeta seleccionada a la izquierda (más ancha)
+    // Animar tarjeta seleccionada (más grande)
     tl.to(selectedCard, {
-      width: 500,
-      height: 350,
+      width: 600,
+      height: 400,
       x: 0,
       y: 0,
-      duration: 0.8,
-      ease: 'power3.inOut'
+      duration: 0.5, // Más rápido
+      ease: 'power2.inOut'
     });
 
-    // Animar otras tarjetas a la derecha (más pequeñas, apiladas)
+    // Animar otras tarjetas a la derecha
     otherCards.forEach((card, index) => {
       tl.to(card, {
-        width: 150,
-        height: 110,
-        x: 530, // 500px + 30px gap
-        y: index * 120, // Apilar verticalmente
-        duration: 0.8,
-        ease: 'power3.inOut'
-      }, 0); // Empezar al mismo tiempo
+        width: 180,
+        height: 125,
+        x: 630, // 600px + 30px gap
+        y: index * 135,
+        duration: 0.5, // Más rápido
+        ease: 'power2.inOut'
+      }, 0);
     });
   };
 
@@ -112,29 +101,27 @@ const Skills: React.FC = () => {
 
     const cards = container.querySelectorAll('.skill-card');
 
-    // Timeline para volver al grid
+    // Animación más rápida
     const tl = gsap.timeline({
       onComplete: () => setIsAnimating(false)
     });
 
-    // Resetear todas las tarjetas al grid 2x2
     cards.forEach((card, index) => {
       const row = Math.floor(index / 2);
       const col = index % 2;
       
       tl.to(card, {
-        width: 320, // Más grande
-        height: 180, // Más grande
-        x: col * 350, // 320px + 30px gap
-        y: row * 210, // 180px + 30px gap
-        duration: 0.8,
-        ease: 'power3.inOut'
+        width: 380, // Más grande
+        height: 220, // Más grande
+        x: col * 410, // 380px + 30px gap
+        y: row * 250, // 220px + 30px gap
+        duration: 0.5, // Más rápido
+        ease: 'power2.inOut'
       }, 0);
     });
   };
 
   useEffect(() => {
-    // Configurar posiciones iniciales del grid 2x2 rectangular más grande
     const container = containerRef.current;
     if (!container) return;
 
@@ -145,23 +132,23 @@ const Skills: React.FC = () => {
       
       gsap.set(card, {
         position: 'absolute',
-        width: 320, // Más grande
-        height: 180, // Más grande
-        x: col * 350, // 320px + 30px gap
-        y: row * 210, // 180px + 30px gap
+        width: 380, // Más grande
+        height: 220, // Más grande
+        x: col * 410, // 380px + 30px gap
+        y: row * 250, // 220px + 30px gap
         transformOrigin: 'center center'
       });
     });
 
-    // Animación de entrada
+    // Animación de entrada más suave
     gsap.fromTo('.skill-card',
-      { opacity: 0, scale: 0.8 },
+      { opacity: 0, scale: 0.9 },
       {
         opacity: 1,
         scale: 1,
-        duration: 0.6,
-        stagger: 0.1,
-        ease: 'back.out(1.7)',
+        duration: 0.4,
+        stagger: 0.08,
+        ease: 'power2.out',
         scrollTrigger: {
           trigger: sectionRef.current,
           start: 'top 80%',
@@ -179,26 +166,26 @@ const Skills: React.FC = () => {
           <p className="text-base sm:text-lg lg:text-xl text-muted-foreground">Especialización técnica por áreas</p>
         </div>
 
-        {/* Container con dimensiones fijas para grid rectangular más grande */}
-        <div className="max-w-5xl mx-auto flex justify-center">
+        {/* Container más grande */}
+        <div className="max-w-6xl mx-auto flex justify-center">
           <div 
             ref={containerRef}
             className="relative"
-            style={{ width: '700px', height: '420px' }} // Más grande
+            style={{ width: '820px', height: '500px' }} // Mucho más grande
           >
             {skillCategories.map((category) => (
               <div
                 key={category.id}
                 data-id={category.id}
-                className={`skill-card cursor-pointer rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-300 group relative border border-border/20 ${
+                className={`skill-card cursor-pointer rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-200 group relative border border-border/20 ${
                   selectedTab === category.id ? 'ring-4 ring-accent/30 z-10' : 'z-0'
                 }`}
                 onClick={() => handleTabClick(category.id)}
               >
-                {/* Background con gradiente acorde a la página */}
-                <div className={`absolute inset-0 bg-gradient-to-br ${category.gradient} backdrop-blur-sm`}></div>
+                {/* Background unificado - Diseño DevOps/Otros */}
+                <div className="absolute inset-0 bg-gradient-to-br from-secondary/60 via-accent/60 to-primary/60 backdrop-blur-sm"></div>
                 
-                {/* Pattern sutil */}
+                {/* Pattern sutil unificado */}
                 <div className="absolute inset-0 opacity-10">
                   <div 
                     className="w-full h-full"
@@ -212,40 +199,37 @@ const Skills: React.FC = () => {
                 {/* Overlay para mejor legibilidad */}
                 <div className="absolute inset-0 bg-background/10 backdrop-blur-[1px]"></div>
 
-                {/* Content - Diseño rectangular mejorado */}
-                <div className="relative z-10 p-6 h-full flex flex-col text-white">
-                  {/* Header con título e icono */}
-                  <div className="flex items-center justify-between mb-4">
-                    <h3 className="text-xl font-bold tracking-wider text-white drop-shadow-sm">
+                {/* Content unificado */}
+                <div className="relative z-10 p-8 h-full flex flex-col text-white">
+                  {/* Header con título */}
+                  <div className="flex items-center justify-center mb-6">
+                    <h3 className="text-2xl font-bold tracking-wider text-white drop-shadow-sm text-center">
                       {category.title}
                     </h3>
-                    <div className="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-xl border border-white/30 flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-lg">
-                      {category.icon}
-                    </div>
                   </div>
 
-                  {/* Imagen/Placeholder en el centro */}
-                  <div className="flex-1 flex items-center justify-center mb-4">
-                    <div className="w-20 h-20 bg-white/20 backdrop-blur-sm rounded-2xl border border-white/30 flex items-center justify-center shadow-lg">
-                      <span className="text-white/80 text-sm font-medium">IMG</span>
+                  {/* Área central para imagen */}
+                  <div className="flex-1 flex items-center justify-center mb-6">
+                    <div className="w-24 h-24 bg-white/20 backdrop-blur-sm rounded-2xl border border-white/30 flex items-center justify-center shadow-lg group-hover:scale-105 transition-transform duration-300">
+                      <span className="text-white/80 text-base font-medium">IMG</span>
                     </div>
                   </div>
 
                   {/* Skills preview - Solo en modo expandido */}
                   {selectedTab === category.id && (
-                    <div className="mt-3">
+                    <div className="mt-4">
                       <div className="flex flex-wrap gap-2">
-                        {category.skills.slice(0, 6).map((skill, index) => (
+                        {category.skills.slice(0, 8).map((skill, index) => (
                           <span
                             key={index}
-                            className="px-3 py-1 bg-white/25 backdrop-blur-sm text-white rounded-lg text-sm font-medium border border-white/20 shadow-sm"
+                            className="px-3 py-1.5 bg-white/25 backdrop-blur-sm text-white rounded-lg text-sm font-medium border border-white/20 shadow-sm"
                           >
                             {skill}
                           </span>
                         ))}
-                        {category.skills.length > 6 && (
-                          <span className="px-3 py-1 bg-white/35 backdrop-blur-sm text-white rounded-lg text-sm border border-white/20 shadow-sm">
-                            +{category.skills.length - 6}
+                        {category.skills.length > 8 && (
+                          <span className="px-3 py-1.5 bg-white/35 backdrop-blur-sm text-white rounded-lg text-sm border border-white/20 shadow-sm">
+                            +{category.skills.length - 8}
                           </span>
                         )}
                       </div>
@@ -254,10 +238,10 @@ const Skills: React.FC = () => {
                 </div>
 
                 {/* Hover Effect sutil */}
-                <div className="absolute inset-0 bg-white/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <div className="absolute inset-0 bg-white/5 opacity-0 group-hover:opacity-100 transition-opacity duration-200"></div>
                 
                 {/* Glow effect en hover */}
-                <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+                <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none">
                   <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-accent/20 via-transparent to-accent/20 blur-sm"></div>
                 </div>
               </div>
