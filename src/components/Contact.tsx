@@ -24,16 +24,6 @@ const Contact: React.FC = () => {
         }
       }
     );
-
-    // Floating animation for contact cards
-    gsap.to('.floating-card', {
-      y: -10,
-      duration: 3,
-      ease: 'power2.inOut',
-      yoyo: true,
-      repeat: -1,
-      stagger: 0.5
-    });
   }, []);
 
   const copyEmailToClipboard = async () => {
@@ -54,10 +44,10 @@ const Contact: React.FC = () => {
   };
 
   const openGmail = () => {
-    const subject = encodeURIComponent('🚀 Oportunidad de Colaboración - Portfolio');
+    const subject = encodeURIComponent('Oportunidad de Colaboración - Portfolio');
     const body = encodeURIComponent(`Hola Marcos,
 
-He visto tu portfolio y me ha impresionado tu experiencia en desarrollo backend y tu enfoque en la calidad del código.
+He visto tu portfolio y me ha impresionado tu experiencia en desarrollo backend.
 
 Me gustaría hablar contigo sobre:
 • [Describe tu proyecto o oportunidad]
@@ -76,10 +66,10 @@ Saludos,
   };
 
   const openOutlook = () => {
-    const subject = encodeURIComponent('🚀 Oportunidad de Colaboración - Portfolio');
+    const subject = encodeURIComponent('Oportunidad de Colaboración - Portfolio');
     const body = encodeURIComponent(`Hola Marcos,
 
-He visto tu portfolio y me ha impresionado tu experiencia en desarrollo backend y tu enfoque en la calidad del código.
+He visto tu portfolio y me ha impresionado tu experiencia en desarrollo backend.
 
 Me gustaría hablar contigo sobre:
 • [Describe tu proyecto o oportunidad]
@@ -115,189 +105,143 @@ Saludos,
   ];
 
   return (
-    <section id="contacto" className="contact-section py-12 sm:py-16 lg:py-24 relative overflow-hidden">
-      {/* Background Elements */}
-      <div className="absolute inset-0 bg-gradient-to-br from-accent/5 via-transparent to-secondary/5"></div>
-      <div className="absolute top-20 left-10 w-32 h-32 bg-accent/10 rounded-full blur-3xl"></div>
-      <div className="absolute bottom-20 right-10 w-40 h-40 bg-secondary/10 rounded-full blur-3xl"></div>
-      
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <section id="contacto" className="contact-section py-12 sm:py-16 lg:py-24">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        
         {/* Header */}
-        <div className="text-center mb-12 sm:mb-16 lg:mb-20">
-          <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-accent to-secondary rounded-2xl mb-6 shadow-lg">
-            <MessageCircle className="w-8 h-8 text-white" />
-          </div>
+        <div className="text-center mb-12 sm:mb-16">
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground mb-4">
-            Hablemos
+            Contacto
           </h2>
-          <p className="text-lg sm:text-xl lg:text-2xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-            ¿Tienes un proyecto en mente? Me encantaría conocer más sobre tu idea y cómo puedo ayudarte a hacerla realidad.
+          <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto">
+            ¿Tienes un proyecto en mente? Me encantaría conocer más sobre tu idea.
           </p>
         </div>
 
-        <div className="max-w-5xl mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12">
+        {/* Main Contact Block */}
+        <div className="contact-card bg-background/90 backdrop-blur-sm border border-border rounded-3xl p-8 sm:p-10 lg:p-12 shadow-xl">
+          
+          {/* Contact Methods Grid */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 mb-10">
             
-            {/* Main Contact Card */}
-            <div className="lg:col-span-2">
-              <div className="contact-card floating-card bg-background/90 backdrop-blur-xl border border-border/50 rounded-3xl p-6 sm:p-8 lg:p-10 shadow-2xl hover:shadow-3xl transition-all duration-500 relative overflow-hidden">
-                {/* Gradient overlay */}
-                <div className="absolute inset-0 bg-gradient-to-br from-accent/5 via-transparent to-secondary/5 rounded-3xl"></div>
-                
-                <div className="relative z-10">
-                  <div className="flex items-center mb-8">
-                    <div className="w-12 h-12 bg-gradient-to-br from-accent to-secondary rounded-xl flex items-center justify-center mr-4 shadow-lg">
-                      <Mail className="w-6 h-6 text-white" />
-                    </div>
-                    <div>
-                      <h3 className="text-2xl sm:text-3xl font-bold text-foreground">Contacto Directo</h3>
-                      <p className="text-muted-foreground">La forma más rápida de conectar</p>
-                    </div>
-                  </div>
-
-                  {/* Email Section */}
-                  <div className="bg-muted/30 rounded-2xl p-6 mb-6 border border-border/30">
-                    <div className="flex items-center justify-between mb-4">
-                      <div>
-                        <p className="text-sm font-medium text-muted-foreground uppercase tracking-wider">Email</p>
-                        <p className="text-lg font-semibold text-foreground">marcosbaezalopez@gmail.com</p>
-                      </div>
-                      <div className="w-10 h-10 bg-accent/10 rounded-lg flex items-center justify-center">
-                        <Mail className="w-5 h-5 text-accent" />
-                      </div>
-                    </div>
-                    
-                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                      <button
-                        onClick={openGmail}
-                        className="flex items-center justify-center px-4 py-3 bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white rounded-xl transition-all duration-300 hover:scale-105 hover:shadow-lg font-medium group"
-                      >
-                        <ExternalLink className="w-4 h-4 mr-2 group-hover:rotate-12 transition-transform" />
-                        Gmail
-                      </button>
-                      
-                      <button
-                        onClick={openOutlook}
-                        className="flex items-center justify-center px-4 py-3 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white rounded-xl transition-all duration-300 hover:scale-105 hover:shadow-lg font-medium group"
-                      >
-                        <ExternalLink className="w-4 h-4 mr-2 group-hover:rotate-12 transition-transform" />
-                        Outlook
-                      </button>
-                      
-                      <button
-                        onClick={copyEmailToClipboard}
-                        className={`flex items-center justify-center px-4 py-3 rounded-xl transition-all duration-300 hover:scale-105 font-medium ${
-                          copiedEmail 
-                            ? 'bg-green-500 text-white' 
-                            : 'bg-muted hover:bg-muted/80 text-foreground hover:shadow-lg'
-                        }`}
-                      >
-                        {copiedEmail ? (
-                          <>
-                            <CheckCircle className="w-4 h-4 mr-2" />
-                            ¡Copiado!
-                          </>
-                        ) : (
-                          <>
-                            <Copy className="w-4 h-4 mr-2" />
-                            Copiar
-                          </>
-                        )}
-                      </button>
-                    </div>
-                  </div>
-
-                  {/* Phone Section */}
-                  <div className="bg-muted/30 rounded-2xl p-6 border border-border/30">
-                    <button
-                      onClick={() => window.open('tel:+34717705991', '_self')}
-                      className="w-full flex items-center justify-between p-4 rounded-xl hover:bg-accent/10 transition-all duration-300 group"
-                    >
-                      <div className="flex items-center">
-                        <div className="w-10 h-10 bg-green-500/10 rounded-lg flex items-center justify-center mr-4 group-hover:bg-green-500 group-hover:text-white transition-all duration-300">
-                          <Phone className="w-5 h-5 text-green-500 group-hover:text-white" />
-                        </div>
-                        <div className="text-left">
-                          <p className="text-sm font-medium text-muted-foreground uppercase tracking-wider">Teléfono</p>
-                          <p className="text-lg font-semibold text-foreground">+34 717 705 991</p>
-                        </div>
-                      </div>
-                      <ExternalLink className="w-5 h-5 text-muted-foreground group-hover:text-accent transition-colors" />
-                    </button>
-                  </div>
+            {/* Email Section */}
+            <div>
+              <div className="flex items-center mb-6">
+                <div className="w-12 h-12 bg-gradient-to-br from-accent to-secondary rounded-xl flex items-center justify-center mr-4">
+                  <Mail className="w-6 h-6 text-white" />
                 </div>
+                <div>
+                  <h3 className="text-xl font-bold text-foreground">Email</h3>
+                  <p className="text-muted-foreground">marcosbaezalopez@gmail.com</p>
+                </div>
+              </div>
+              
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                <button
+                  onClick={openGmail}
+                  className="flex items-center justify-center px-4 py-3 bg-red-500 hover:bg-red-600 text-white rounded-xl transition-colors duration-300 font-medium"
+                >
+                  <ExternalLink className="w-4 h-4 mr-2" />
+                  Gmail
+                </button>
+                
+                <button
+                  onClick={openOutlook}
+                  className="flex items-center justify-center px-4 py-3 bg-blue-500 hover:bg-blue-600 text-white rounded-xl transition-colors duration-300 font-medium"
+                >
+                  <ExternalLink className="w-4 h-4 mr-2" />
+                  Outlook
+                </button>
+                
+                <button
+                  onClick={copyEmailToClipboard}
+                  className={`flex items-center justify-center px-4 py-3 rounded-xl transition-colors duration-300 font-medium ${
+                    copiedEmail 
+                      ? 'bg-green-500 text-white' 
+                      : 'bg-muted hover:bg-muted/80 text-foreground'
+                  }`}
+                >
+                  {copiedEmail ? (
+                    <>
+                      <CheckCircle className="w-4 h-4 mr-2" />
+                      ¡Copiado!
+                    </>
+                  ) : (
+                    <>
+                      <Copy className="w-4 h-4 mr-2" />
+                      Copiar
+                    </>
+                  )}
+                </button>
               </div>
             </div>
 
-            {/* Sidebar */}
-            <div className="space-y-8">
-              {/* Location */}
-              <div className="contact-card floating-card bg-background/90 backdrop-blur-xl border border-border/50 rounded-3xl p-6 shadow-xl relative overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-br from-secondary/5 via-transparent to-accent/5 rounded-3xl"></div>
-                <div className="relative z-10">
-                  <div className="flex items-center mb-4">
-                    <div className="w-10 h-10 bg-accent/10 rounded-lg flex items-center justify-center mr-3">
-                      <MapPin className="w-5 h-5 text-accent" />
-                    </div>
-                    <div>
-                      <p className="text-sm font-medium text-muted-foreground uppercase tracking-wider">Ubicación</p>
-                      <p className="text-lg font-semibold text-foreground">Madrid, España</p>
-                    </div>
-                  </div>
-                  <p className="text-sm text-muted-foreground">
-                    Disponible para trabajo remoto y presencial en la Comunidad de Madrid.
-                  </p>
+            {/* Phone Section */}
+            <div>
+              <div className="flex items-center mb-6">
+                <div className="w-12 h-12 bg-gradient-to-br from-green-500 to-green-600 rounded-xl flex items-center justify-center mr-4">
+                  <Phone className="w-6 h-6 text-white" />
+                </div>
+                <div>
+                  <h3 className="text-xl font-bold text-foreground">Teléfono</h3>
+                  <p className="text-muted-foreground">+34 717 705 991</p>
                 </div>
               </div>
+              
+              <button
+                onClick={() => window.open('tel:+34717705991', '_self')}
+                className="w-full flex items-center justify-center px-6 py-3 bg-green-500 hover:bg-green-600 text-white rounded-xl transition-colors duration-300 font-medium"
+              >
+                <Phone className="w-4 h-4 mr-2" />
+                Llamar Ahora
+              </button>
+            </div>
+          </div>
 
-              {/* Social Media */}
-              <div className="contact-card floating-card bg-background/90 backdrop-blur-xl border border-border/50 rounded-3xl p-6 shadow-xl relative overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-br from-accent/5 via-transparent to-secondary/5 rounded-3xl"></div>
-                <div className="relative z-10">
-                  <h3 className="text-xl font-bold text-foreground mb-6 flex items-center">
-                    <div className="w-2 h-2 bg-accent rounded-full mr-3"></div>
-                    Redes Sociales
-                  </h3>
-                  <div className="space-y-4">
-                    {socialLinks.map((social, index) => (
-                      <a
-                        key={index}
-                        href={social.href}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className={`flex items-center p-4 bg-gradient-to-r ${social.color} text-white rounded-xl transition-all duration-300 hover:scale-105 hover:shadow-lg group`}
-                      >
-                        <div className="w-10 h-10 bg-white/20 rounded-lg flex items-center justify-center mr-4 group-hover:bg-white/30 transition-colors">
-                          {social.icon}
-                        </div>
-                        <div className="flex-1">
-                          <p className="font-semibold">{social.label}</p>
-                          <p className="text-sm text-white/80">{social.description}</p>
-                        </div>
-                        <ExternalLink className="w-4 h-4 opacity-60 group-hover:opacity-100 group-hover:rotate-12 transition-all" />
-                      </a>
-                    ))}
-                  </div>
-                </div>
+          {/* Additional Info Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-8 border-t border-border">
+            
+            {/* Location */}
+            <div className="text-center">
+              <div className="w-12 h-12 bg-accent/10 rounded-xl flex items-center justify-center mx-auto mb-4">
+                <MapPin className="w-6 h-6 text-accent" />
               </div>
+              <h4 className="font-semibold text-foreground mb-2">Ubicación</h4>
+              <p className="text-sm text-muted-foreground">Madrid, España</p>
+              <p className="text-xs text-muted-foreground mt-1">Trabajo remoto y presencial</p>
+            </div>
 
-              {/* Availability */}
-              <div className="contact-card floating-card bg-gradient-to-br from-green-500/10 to-emerald-500/10 border border-green-500/20 rounded-3xl p-6 shadow-xl relative overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-br from-green-500/5 via-transparent to-emerald-500/5 rounded-3xl"></div>
-                <div className="relative z-10">
-                  <div className="flex items-center mb-4">
-                    <div className="w-3 h-3 bg-green-500 rounded-full mr-3 animate-pulse"></div>
-                    <h3 className="text-lg font-bold text-foreground">Disponible</h3>
-                  </div>
-                  <p className="text-sm text-muted-foreground leading-relaxed mb-4">
-                    Actualmente estoy disponible para nuevos proyectos y oportunidades que me permitan crecer profesionalmente.
-                  </p>
-                  <div className="bg-green-500/10 rounded-lg p-3 border border-green-500/20">
-                    <p className="text-xs text-green-700 dark:text-green-400 font-medium">
-                      💼 Respuesta en menos de 24 horas
-                    </p>
-                  </div>
-                </div>
+            {/* Availability */}
+            <div className="text-center">
+              <div className="w-12 h-12 bg-green-500/10 rounded-xl flex items-center justify-center mx-auto mb-4">
+                <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
+              </div>
+              <h4 className="font-semibold text-foreground mb-2">Disponibilidad</h4>
+              <p className="text-sm text-green-600 dark:text-green-400 font-medium">Disponible</p>
+              <p className="text-xs text-muted-foreground mt-1">Respuesta en 24h</p>
+            </div>
+
+            {/* Social */}
+            <div className="text-center">
+              <div className="w-12 h-12 bg-secondary/10 rounded-xl flex items-center justify-center mx-auto mb-4">
+                <MessageCircle className="w-6 h-6 text-secondary" />
+              </div>
+              <h4 className="font-semibold text-foreground mb-2">Redes Sociales</h4>
+              <div className="flex justify-center space-x-3">
+                {socialLinks.map((social, index) => (
+                  <a
+                    key={index}
+                    href={social.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-8 h-8 bg-muted hover:bg-accent rounded-lg flex items-center justify-center text-muted-foreground hover:text-white transition-all duration-300"
+                    title={social.label}
+                  >
+                    {React.cloneElement(social.icon as React.ReactElement, {
+                      className: "w-4 h-4"
+                    })}
+                  </a>
+                ))}
               </div>
             </div>
           </div>
