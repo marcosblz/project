@@ -1,5 +1,4 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Server, Database, Monitor, GitBranch } from 'lucide-react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
@@ -8,8 +7,6 @@ gsap.registerPlugin(ScrollTrigger);
 interface SkillCategory {
   id: string;
   title: string;
-  gradient: string;
-  icon: React.ReactNode;
   skills: string[];
   description: string;
 }
@@ -24,32 +21,24 @@ const Skills: React.FC = () => {
     {
       id: 'backend',
       title: "BACK-END",
-      gradient: "from-blue-600 via-cyan-500 to-teal-400",
-      icon: <Server className="w-8 h-8" />,
       skills: ["Groovy", "Python", "Django", "Java", "Node.js", "REST APIs", "PostgreSQL", "MySQL"],
       description: "Desarrollo de APIs robustas y arquitecturas escalables"
     },
     {
       id: 'frontend',
       title: "FRONT-END",
-      gradient: "from-purple-600 via-blue-500 to-indigo-400",
-      icon: <Monitor className="w-8 h-8" />,
       skills: ["React", "TypeScript", "JavaScript", "HTML5", "CSS3", "Tailwind CSS", "GSAP", "Responsive Design"],
       description: "Interfaces modernas y experiencias de usuario excepcionales"
     },
     {
       id: 'devops',
       title: "DEVOPS",
-      gradient: "from-orange-500 via-pink-500 to-purple-600",
-      icon: <GitBranch className="w-8 h-8" />,
       skills: ["Docker", "Git", "Jenkins", "CI/CD", "Linux", "Bash", "Webpack", "Vite"],
       description: "Automatización y optimización de procesos de desarrollo"
     },
     {
       id: 'otros',
       title: "OTROS",
-      gradient: "from-green-500 via-emerald-500 to-teal-500",
-      icon: <Database className="w-8 h-8" />,
       skills: ["IA/ML", "PhotoShop", "Figma", "Scrum", "Kanban", "Testing", "Debugging", "Problem Solving"],
       description: "Herramientas complementarias y metodologías ágiles"
     }
@@ -136,7 +125,7 @@ const Skills: React.FC = () => {
             
             {/* Tarjeta Principal (1x1 expandida) */}
             <div className="lg:col-span-3 order-2 lg:order-1">
-              <div className={`skill-card h-full bg-gradient-to-br ${selectedCategoryData.gradient} rounded-2xl overflow-hidden shadow-xl relative group`}>
+              <div className="skill-card h-full bg-gradient-to-br from-blue-600 via-cyan-500 to-teal-400 rounded-2xl overflow-hidden shadow-xl relative group">
                 {/* Pattern Background */}
                 <div className="absolute inset-0 opacity-10">
                   <div 
@@ -151,18 +140,13 @@ const Skills: React.FC = () => {
                 {/* Content */}
                 <div className="main-card-content relative z-10 p-6 sm:p-8 lg:p-12 h-full flex flex-col text-white">
                   {/* Header */}
-                  <div className="flex items-center mb-6 sm:mb-8">
-                    <div className="w-12 sm:w-16 lg:w-20 h-12 sm:h-16 lg:h-20 bg-white/20 rounded-2xl flex items-center justify-center mr-4 sm:mr-6">
-                      {selectedCategoryData.icon}
-                    </div>
-                    <div>
-                      <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold tracking-wider mb-2">
-                        {selectedCategoryData.title}
-                      </h3>
-                      <p className="text-sm sm:text-base lg:text-lg text-white/80">
-                        {selectedCategoryData.description}
-                      </p>
-                    </div>
+                  <div className="mb-6 sm:mb-8">
+                    <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold tracking-wider mb-4">
+                      {selectedCategoryData.title}
+                    </h3>
+                    <p className="text-sm sm:text-base lg:text-lg text-white/90 leading-relaxed">
+                      {selectedCategoryData.description}
+                    </p>
                   </div>
 
                   {/* Skills Grid */}
@@ -172,7 +156,7 @@ const Skills: React.FC = () => {
                       {selectedCategoryData.skills.map((skill, index) => (
                         <div
                           key={index}
-                          className="bg-white/20 backdrop-blur-sm rounded-lg px-2 sm:px-3 lg:px-4 py-2 sm:py-3 text-center hover:bg-white/30 transition-all duration-300 hover:scale-105"
+                          className="bg-white/20 backdrop-blur-sm rounded-lg px-2 sm:px-3 lg:px-4 py-2 sm:py-3 text-center hover:bg-white/30 transition-all duration-300 hover:scale-105 border border-white/10"
                         >
                           <span className="text-xs sm:text-sm lg:text-base font-medium">{skill}</span>
                         </div>
@@ -180,7 +164,7 @@ const Skills: React.FC = () => {
                     </div>
                   </div>
 
-                  {/* Stats or Additional Info */}
+                  {/* Stats */}
                   <div className="mt-6 sm:mt-8 pt-4 sm:pt-6 border-t border-white/20">
                     <div className="grid grid-cols-3 gap-4 text-center">
                       <div>
@@ -210,7 +194,7 @@ const Skills: React.FC = () => {
                 {otherCategories.map((category, index) => (
                   <div
                     key={category.id}
-                    className={`skill-card flex-1 bg-gradient-to-br ${category.gradient} rounded-xl overflow-hidden shadow-lg cursor-pointer hover:shadow-xl transition-all duration-300 hover:scale-105 group relative`}
+                    className="skill-card flex-1 bg-gradient-to-br from-blue-600 via-cyan-500 to-teal-400 rounded-xl overflow-hidden shadow-lg cursor-pointer hover:shadow-xl transition-all duration-300 hover:scale-105 group relative"
                     onClick={() => handleCategoryClick(category.id)}
                   >
                     {/* Pattern */}
@@ -226,12 +210,12 @@ const Skills: React.FC = () => {
 
                     {/* Content */}
                     <div className="relative z-10 p-3 sm:p-4 lg:p-6 h-full flex flex-col justify-center items-center text-white text-center">
-                      <div className="w-8 sm:w-10 lg:w-12 h-8 sm:h-10 lg:h-12 bg-white/20 rounded-lg flex items-center justify-center mb-2 sm:mb-3 group-hover:scale-110 transition-transform duration-300">
-                        {category.icon}
-                      </div>
                       <h4 className="text-xs sm:text-sm lg:text-base font-bold tracking-wide">
                         {category.title}
                       </h4>
+                      <div className="mt-2 text-xs text-white/80">
+                        {category.skills.length} tecnologías
+                      </div>
                     </div>
 
                     {/* Hover Effect */}
