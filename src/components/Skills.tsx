@@ -40,12 +40,15 @@ const Skills: React.FC = () => {
     setIsAnimating(true);
     
     if (selectedTab === null) {
+      // Transformar de 2x2 a layout expandido
       setSelectedTab(tabId);
       animateToExpanded(tabId);
     } else if (selectedTab === tabId) {
+      // Volver al 2x2
       setSelectedTab(null);
       animateToGrid();
     } else {
+      // Cambiar selección
       setSelectedTab(tabId);
       animateToExpanded(tabId);
     }
@@ -59,28 +62,31 @@ const Skills: React.FC = () => {
     const selectedCard = container.querySelector(`[data-id="${selectedId}"]`);
     const otherCards = Array.from(cards).filter(card => card.getAttribute('data-id') !== selectedId);
 
+    // Timeline para la animación
     const tl = gsap.timeline({
       onComplete: () => setIsAnimating(false)
     });
 
+    // Animar tarjeta seleccionada a la izquierda (75% ancho)
     tl.to(selectedCard, {
-      width: 'calc(75% - 12px)',
-      height: 'calc(100% - 12px)',
-      left: '6px',
-      top: '6px',
+      width: '75%',
+      height: '400px',
+      x: 0,
+      y: 0,
       duration: 0.8,
       ease: 'power3.inOut'
     });
 
+    // Animar otras tarjetas a la derecha (25% ancho, apiladas)
     otherCards.forEach((card, index) => {
       tl.to(card, {
-        width: 'calc(25% - 12px)',
-        height: 'calc(33.33% - 12px)',
-        left: 'calc(75% + 6px)',
-        top: `calc(${index * 33.33}% + 6px)`,
+        width: '25%',
+        height: '130px',
+        x: '300%', // Mover a la derecha
+        y: index * 135, // Apilar verticalmente
         duration: 0.8,
         ease: 'power3.inOut'
-      }, 0);
+      }, 0); // Empezar al mismo tiempo
     });
   };
 
@@ -90,19 +96,21 @@ const Skills: React.FC = () => {
 
     const cards = container.querySelectorAll('.skill-card');
 
+    // Timeline para volver al grid
     const tl = gsap.timeline({
       onComplete: () => setIsAnimating(false)
     });
 
+    // Resetear todas las tarjetas al grid 2x2
     cards.forEach((card, index) => {
       const row = Math.floor(index / 2);
       const col = index % 2;
       
       tl.to(card, {
-        width: 'calc(50% - 12px)',
-        height: 'calc(50% - 12px)',
-        left: `calc(${col * 50}% + 6px)`,
-        top: `calc(${row * 50}% + 6px)`,
+        width: '50%',
+        height: '50%',
+        x: col * 100 + '%',
+        y: row * 100 + '%',
         duration: 0.8,
         ease: 'power3.inOut'
       }, 0);
@@ -110,6 +118,7 @@ const Skills: React.FC = () => {
   };
 
   useEffect(() => {
+    // Configurar posiciones iniciales del grid 2x2
     const container = containerRef.current;
     if (!container) return;
 
@@ -120,14 +129,15 @@ const Skills: React.FC = () => {
       
       gsap.set(card, {
         position: 'absolute',
-        width: 'calc(50% - 12px)',
-        height: 'calc(50% - 12px)',
-        left: `calc(${col * 50}% + 6px)`,
-        top: `calc(${row * 50}% + 6px)`,
+        width: '50%',
+        height: '50%',
+        x: col * 100 + '%',
+        y: row * 100 + '%',
         transformOrigin: 'center center'
       });
     });
 
+    // Animación de entrada
     gsap.fromTo('.skill-card',
       { opacity: 0, scale: 0.8 },
       {
@@ -153,6 +163,7 @@ const Skills: React.FC = () => {
           <p className="text-xl text-muted-foreground">Especialización técnica por áreas</p>
         </div>
 
+        {/* Container con aspect ratio fijo */}
         <div className="max-w-6xl mx-auto">
           <div 
             ref={containerRef}
@@ -163,8 +174,8 @@ const Skills: React.FC = () => {
               <div
                 key={category.id}
                 data-id={category.id}
-                className={`skill-card cursor-pointer rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-300 group relative ${
-                  selectedTab === category.id ? 'ring-4 ring-accent/50 z-10' : 'z-0'
+                className={`skill-card cursor-pointer rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-shadow duration-300 group relative ${
+                  selectedTab === category.id ? 'ring-4 ring-white/50 z-10' : 'z-0'
                 }`}
                 onClick={() => handleTabClick(category.id)}
                 style={{
@@ -172,29 +183,32 @@ const Skills: React.FC = () => {
                   backgroundAttachment: 'fixed'
                 }}
               >
-                {/* Patrón sutil */}
-                <div 
-                  className="absolute inset-0 opacity-10"
-                  style={{
-                    backgroundImage: `radial-gradient(circle at 25% 25%, rgba(255,255,255,0.4) 1px, transparent 1px)`,
-                    backgroundSize: '40px 40px'
-                  }}
-                ></div>
+                {/* Pattern */}
+                <div className="absolute inset-0 opacity-20">
+                  <div 
+                    className="w-full h-full"
+                    style={{
+                      backgroundImage: `radial-gradient(circle at 25% 25%, white 2px, transparent 2px)`,
+                      backgroundSize: '40px 40px'
+                    }}
+                  ></div>
+                </div>
 
-                {/* Contenido SIN ICONOS */}
+                {/* Content - SOLO TEXTO */}
                 <div className="relative z-10 p-8 h-full flex flex-col justify-center items-center text-white text-center">
-                  <h3 className="text-2xl font-bold tracking-wider text-white drop-shadow-lg">
+                  <h3 className="text-2xl font-bold tracking-wider">
                     {category.title}
                   </h3>
                 </div>
 
-                {/* Hover effect */}
-                <div className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl"></div>
+                {/* Hover Effect */}
+                <div className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               </div>
             ))}
           </div>
         </div>
 
+        {/* Selected Category Info */}
         <div className="mt-12 text-center">
           <div className="inline-flex items-center px-6 py-3 bg-accent/10 text-accent rounded-full text-lg font-medium">
             {selectedTab 
