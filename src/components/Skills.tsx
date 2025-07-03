@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react';
-import { Server, Database, Code, Cloud, Terminal, Smartphone, Monitor, Cpu, GitBranch, Docker } from 'lucide-react';
+import { Server, Database, Code, Cloud, Terminal, Smartphone, Monitor, Cpu, GitBranch, Pocket as Docker } from 'lucide-react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
