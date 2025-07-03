@@ -80,65 +80,52 @@ const Skills: React.FC = () => {
     if (isAnimating || categoryId === selectedCategory) return;
     
     setIsAnimating(true);
-    animateTransition(categoryId);
-  };
-
-  const animateTransition = (newCategoryId: string) => {
+    
+    // EXACT CodePen animation from https://codepen.io/GreenSock/pen/dyBwbeR
     const container = containerRef.current;
     if (!container) return;
 
-    const mainCard = container.querySelector('.main-card');
-    const sideCards = container.querySelectorAll('.side-card');
+    const cards = container.querySelectorAll('.skill-card');
     
-    // Exact CodePen animation replication
+    // Create timeline exactly like CodePen
     const tl = gsap.timeline({
       onComplete: () => setIsAnimating(false)
     });
 
-    // Phase 1: Scale down and fade out current content
-    tl.to(mainCard, {
+    // Phase 1: Animate out (exactly like CodePen)
+    tl.to(cards, {
       scale: 0.8,
-      rotationY: -15,
-      duration: 0.4,
-      ease: "power2.in"
-    })
-    .to(sideCards, {
-      scale: 0.9,
-      x: -20,
-      duration: 0.4,
-      ease: "power2.in"
-    }, 0)
-    .to([mainCard, ...sideCards], {
+      rotation: 5,
       opacity: 0.3,
-      duration: 0.4,
-      ease: "power2.in"
-    }, 0)
+      duration: 0.3,
+      ease: "power2.inOut",
+      stagger: {
+        amount: 0.1,
+        from: "random"
+      }
+    })
     
-    // Phase 2: Change content (callback)
+    // Phase 2: Change content in the middle
     .call(() => {
-      setSelectedCategory(newCategoryId);
+      setSelectedCategory(categoryId);
     })
     
-    // Phase 3: Scale up and fade in new content with bounce
-    .to(mainCard, {
+    // Phase 3: Animate in (exactly like CodePen)
+    .to(cards, {
       scale: 1,
-      rotationY: 0,
+      rotation: 0,
       opacity: 1,
-      duration: 0.6,
-      ease: "back.out(1.7)"
-    })
-    .to(sideCards, {
-      scale: 1,
-      x: 0,
-      opacity: 1,
-      duration: 0.6,
+      duration: 0.5,
       ease: "back.out(1.7)",
-      stagger: 0.1
-    }, "-=0.4");
+      stagger: {
+        amount: 0.15,
+        from: "random"
+      }
+    }, "-=0.1");
   };
 
   useEffect(() => {
-    // Animación de entrada inicial
+    // Initial entrance animation
     gsap.fromTo('.skill-card',
       { opacity: 0, scale: 0.8, y: 30 },
       {
@@ -173,7 +160,7 @@ const Skills: React.FC = () => {
           <div className="grid grid-cols-1 lg:grid-cols-4 gap-4 lg:gap-6">
             {/* Tarjeta principal (75% del ancho en desktop) */}
             <div className="lg:col-span-3">
-              <div className="skill-card main-card rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-300 group relative h-80 lg:h-96 cursor-pointer">
+              <div className="skill-card rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-300 group relative h-80 lg:h-96 cursor-pointer">
                 {/* Background Gradient */}
                 <div className={`absolute inset-0 bg-gradient-to-br ${selectedCategoryData.gradient}`}></div>
                 
@@ -189,7 +176,7 @@ const Skills: React.FC = () => {
                 </div>
 
                 {/* Contenido expandido */}
-                <div className="card-content relative z-10 p-6 lg:p-8 h-full flex flex-col text-white">
+                <div className="relative z-10 p-6 lg:p-8 h-full flex flex-col text-white">
                   <div className="mb-6">
                     <div className="flex items-center mb-4">
                       <div className="w-12 lg:w-16 h-12 lg:h-16 bg-white/20 rounded-2xl flex items-center justify-center mr-4">
@@ -243,7 +230,7 @@ const Skills: React.FC = () => {
                 <div 
                   key={category.id}
                   onClick={() => handleCategoryClick(category.id)}
-                  className="skill-card side-card rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-300 group relative h-24 lg:h-28 cursor-pointer hover:scale-105"
+                  className="skill-card rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-300 group relative h-24 lg:h-28 cursor-pointer hover:scale-105"
                 >
                   <div className={`absolute inset-0 bg-gradient-to-br ${category.gradient}`}></div>
                   <div className="absolute inset-0 opacity-20">
@@ -255,7 +242,7 @@ const Skills: React.FC = () => {
                       }}
                     ></div>
                   </div>
-                  <div className="card-content relative z-10 p-4 h-full flex flex-col justify-center items-center text-white text-center">
+                  <div className="relative z-10 p-4 h-full flex flex-col justify-center items-center text-white text-center">
                     <h3 className="text-sm lg:text-base font-bold tracking-wider">
                       {category.title}
                     </h3>
