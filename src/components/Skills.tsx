@@ -360,8 +360,6 @@ const Skills: React.FC = () => {
     }
   }, [selectedTab, skillCategories, isAnimating]);
 
-  const selectedCategory = skillCategories.find(cat => cat.id === selectedTab);
-
   return (
     <section id="habilidades" ref={sectionRef} className="py-8 sm:py-12 lg:py-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -371,7 +369,7 @@ const Skills: React.FC = () => {
         </div>
 
         {/* Container with fixed height for layout */}
-        <div className="max-w-6xl mx-auto mb-8 lg:mb-12">
+        <div className="max-w-6xl mx-auto">
           <div 
             ref={containerRef}
             className="relative w-full"
@@ -493,59 +491,6 @@ const Skills: React.FC = () => {
             ))}
           </div>
         </div>
-
-        {/* Selected Category Summary */}
-        {selectedCategory && (
-          <div className="max-w-4xl mx-auto">
-            <div className="bg-background/80 backdrop-blur-sm border border-border rounded-xl p-4 sm:p-6 lg:p-8 shadow-lg">
-              <div className="text-center">
-                <div className="flex items-center justify-center mb-3 sm:mb-4">
-                  <div className={`w-8 sm:w-10 h-8 sm:h-10 bg-gradient-to-r ${selectedCategory.gradient} rounded-lg flex items-center justify-center mr-2 sm:mr-3 shadow-lg`}>
-                    {React.cloneElement(selectedCategory.icon as React.ReactElement, {
-                      className: "w-4 sm:w-5 h-4 sm:h-5 text-white"
-                    })}
-                  </div>
-                  <h3 className="text-lg sm:text-xl lg:text-2xl font-bold text-foreground">
-                    Especialización en {selectedCategory.title}
-                  </h3>
-                </div>
-                <p className="text-sm sm:text-base text-muted-foreground mb-4 sm:mb-6">
-                  💼 {selectedCategory.workExperience} • 📚 {selectedCategory.studyExperience} • {selectedCategory.skills.length} tecnologías dominadas
-                </p>
-                
-                {/* Quick stats */}
-                <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4">
-                  <div className="bg-accent/10 rounded-lg p-2 sm:p-3 border border-accent/20">
-                    <div className="text-lg sm:text-xl font-bold text-accent">
-                      {selectedCategory.skills.length}
-                    </div>
-                    <div className="text-xs sm:text-sm text-muted-foreground">Tecnologías</div>
-                  </div>
-                  <div className="bg-accent/10 rounded-lg p-2 sm:p-3 border border-accent/20">
-                    <div className="text-lg sm:text-xl font-bold text-accent">
-                      {selectedCategory.skills.filter(skill => 
-                        parseInt(skill.workTime) >= 1 || skill.workTime.includes('año')
-                      ).length}
-                    </div>
-                    <div className="text-xs sm:text-sm text-muted-foreground">Con experiencia</div>
-                  </div>
-                  <div className="bg-accent/10 rounded-lg p-2 sm:p-3 border border-accent/20">
-                    <div className="text-lg sm:text-xl font-bold text-accent">
-                      {selectedCategory.highlights.length}
-                    </div>
-                    <div className="text-xs sm:text-sm text-muted-foreground">Especialidades</div>
-                  </div>
-                  <div className="bg-accent/10 rounded-lg p-2 sm:p-3 border border-accent/20">
-                    <div className="text-lg sm:text-xl font-bold text-accent">
-                      {selectedCategory.workExperience.split(' ')[0]}
-                    </div>
-                    <div className="text-xs sm:text-sm text-muted-foreground">Años total</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        )}
       </div>
     </section>
   );
