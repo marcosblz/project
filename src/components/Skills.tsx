@@ -75,7 +75,7 @@ const Skills: React.FC = () => {
       onComplete: () => setIsAnimating(false)
     });
 
-    // Animar tarjeta seleccionada (75% ancho, altura completa)
+    // Animar tarjeta seleccionada (75% ancho, altura completa, sin márgenes)
     tl.to(selectedCard, {
       width: '75%',
       height: '100%',
@@ -85,13 +85,16 @@ const Skills: React.FC = () => {
       ease: 'power3.inOut'
     });
 
-    // Animar otras tarjetas (25% ancho, apiladas verticalmente)
+    // Animar otras tarjetas (25% ancho, apiladas verticalmente CON MÁRGENES)
     otherCards.forEach((card, index) => {
+      const marginBetween = 8; // Margen entre tarjetas
+      const cardHeight = (400 - (2 * marginBetween)) / 3; // Altura de cada tarjeta con márgenes
+      
       tl.to(card, {
-        width: '25%',
-        height: '33.333%',
+        width: 'calc(25% - 8px)', // Ancho con margen
+        height: `${cardHeight}px`, // Altura calculada
         x: '300%', // Mover a la derecha
-        y: index * 133.333, // Apilar verticalmente
+        y: index * (cardHeight + marginBetween) + marginBetween, // Posición Y con márgenes
         duration: 0.8,
         ease: 'power3.inOut'
       }, 0); // Empezar al mismo tiempo
@@ -111,16 +114,17 @@ const Skills: React.FC = () => {
       }
     });
 
-    // Resetear todas las tarjetas al grid 2x2 CON MÁRGENES
+    // Resetear todas las tarjetas al grid 2x2 CON MÁRGENES CORREGIDOS
     cards.forEach((card, index) => {
       const row = Math.floor(index / 2);
       const col = index % 2;
+      const margin = 8; // Margen entre tarjetas
       
       tl.to(card, {
-        width: 'calc(50% - 8px)', // Ancho con margen
-        height: 'calc(50% - 8px)', // Alto con margen
-        x: col * 50 + 1 + '%', // Posición X con offset
-        y: row * 50 + 1 + '%', // Posición Y con offset
+        width: `calc(50% - ${margin}px)`, // Ancho con margen
+        height: `calc(50% - ${margin}px)`, // Alto con margen
+        x: col * 50 + (col * margin / 2) + '%', // Posición X corregida
+        y: row * 50 + (row * margin / 2) + '%', // Posición Y corregida
         duration: 0.8,
         ease: 'power3.inOut'
       }, 0);
@@ -128,7 +132,7 @@ const Skills: React.FC = () => {
   };
 
   useEffect(() => {
-    // Configurar posiciones iniciales del grid 2x2 CON MÁRGENES
+    // Configurar posiciones iniciales del grid 2x2 CON MÁRGENES CORREGIDOS
     const container = containerRef.current;
     if (!container) return;
 
@@ -136,13 +140,14 @@ const Skills: React.FC = () => {
     cards.forEach((card, index) => {
       const row = Math.floor(index / 2);
       const col = index % 2;
+      const margin = 8; // Margen entre tarjetas
       
       gsap.set(card, {
         position: 'absolute',
-        width: 'calc(50% - 8px)', // Ancho con margen
-        height: 'calc(50% - 8px)', // Alto con margen
-        x: col * 50 + 1 + '%', // Posición X con offset
-        y: row * 50 + 1 + '%', // Posición Y con offset
+        width: `calc(50% - ${margin}px)`, // Ancho con margen
+        height: `calc(50% - ${margin}px)`, // Alto con margen
+        x: col * 50 + (col * margin / 2) + '%', // Posición X corregida
+        y: row * 50 + (row * margin / 2) + '%', // Posición Y corregida
         transformOrigin: 'center center'
       });
     });
@@ -247,9 +252,7 @@ const Skills: React.FC = () => {
                 <div
                   key={category.id}
                   data-id={category.id}
-                  className={`skill-card cursor-pointer rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-shadow duration-300 group relative ${
-                    isSelected ? 'ring-4 ring-white/50 z-10' : 'z-0'
-                  }`}
+                  className="skill-card cursor-pointer rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-shadow duration-300 group relative z-0"
                   onClick={() => handleCategoryClick(category.id)}
                 >
                   {/* Background Gradient */}
