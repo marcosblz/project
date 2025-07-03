@@ -14,7 +14,9 @@ interface SkillCategory {
 
 const Skills: React.FC = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
-  const [selectedTab, setSelectedTab] = useState<string>('backend');
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [selectedTab, setSelectedTab] = useState<string | null>(null);
+  const [isAnimating, setIsAnimating] = useState(false);
 
   const skillCategories: SkillCategory[] = [
     {
@@ -44,19 +46,117 @@ const Skills: React.FC = () => {
   ];
 
   const handleTabClick = (tabId: string) => {
-    setSelectedTab(tabId);
+    if (isAnimating) return;
+    
+    setIsAnimating(true);
+    
+    if (selectedTab === null) {
+      // Transformar de 2x2 a layout expandido
+      setSelectedTab(tabId);
+      animateToExpanded(tabId);
+    } else if (selectedTab === tabId) {
+      // Volver al 2x2
+      setSelectedTab(null);
+      animateToGrid();
+    } else {
+      // Cambiar selección
+      setSelectedTab(tabId);
+      animateToExpanded(tabId);
+    }
+  };
+
+  const animateToExpanded = (selectedId: string) => {
+    const container = containerRef.current;
+    if (!container) return;
+
+    const cards = container.querySelectorAll('.skill-card');
+    const selectedCard = container.querySelector(`[data-id="${selectedId}"]`);
+    const otherCards = Array.from(cards).filter(card => card.getAttribute('data-id') !== selectedId);
+
+    // Timeline para la animación
+    const tl = gsap.timeline({
+      onComplete: () => setIsAnimating(false)
+    });
+
+    // Animar tarjeta seleccionada a la izquierda (75% ancho)
+    tl.to(selectedCard, {
+      width: '75%',
+      height: '400px',
+      x: 0,
+      y: 0,
+      duration: 0.8,
+      ease: 'power3.inOut'
+    });
+
+    // Animar otras tarjetas a la derecha (25% ancho, apiladas)
+    otherCards.forEach((card, index) => {
+      tl.to(card, {
+        width: '25%',
+        height: '130px',
+        x: '300%', // Mover a la derecha
+        y: index * 135, // Apilar verticalmente
+        duration: 0.8,
+        ease: 'power3.inOut'
+      }, 0); // Empezar al mismo tiempo
+    });
+  };
+
+  const animateToGrid = () => {
+    const container = containerRef.current;
+    if (!container) return;
+
+    const cards = container.querySelectorAll('.skill-card');
+
+    // Timeline para volver al grid
+    const tl = gsap.timeline({
+      onComplete: () => setIsAnimating(false)
+    });
+
+    // Resetear todas las tarjetas al grid 2x2
+    cards.forEach((card, index) => {
+      const row = Math.floor(index / 2);
+      const col = index % 2;
+      
+      tl.to(card, {
+        width: '50%',
+        height: '50%',
+        x: col * 100 + '%',
+        y: row * 100 + '%',
+        duration: 0.8,
+        ease: 'power3.inOut'
+      }, 0);
+    });
   };
 
   useEffect(() => {
-    // Simple scroll animation
+    // Configurar posiciones iniciales del grid 2x2
+    const container = containerRef.current;
+    if (!container) return;
+
+    const cards = container.querySelectorAll('.skill-card');
+    cards.forEach((card, index) => {
+      const row = Math.floor(index / 2);
+      const col = index % 2;
+      
+      gsap.set(card, {
+        position: 'absolute',
+        width: '50%',
+        height: '50%',
+        x: col * 100 + '%',
+        y: row * 100 + '%',
+        transformOrigin: 'center center'
+      });
+    });
+
+    // Animación de entrada
     gsap.fromTo('.skill-card',
-      { opacity: 0, y: 30 },
+      { opacity: 0, scale: 0.8 },
       {
         opacity: 1,
-        y: 0,
+        scale: 1,
         duration: 0.6,
         stagger: 0.1,
-        ease: 'power3.out',
+        ease: 'back.out(1.7)',
         scrollTrigger: {
           trigger: sectionRef.current,
           start: 'top 80%',
@@ -74,14 +174,19 @@ const Skills: React.FC = () => {
           <p className="text-xl text-muted-foreground">Especialización técnica por áreas</p>
         </div>
 
-        {/* Simple 2x2 Grid */}
-        <div className="max-w-4xl mx-auto">
-          <div className="grid grid-cols-2 gap-6 aspect-square">
+        {/* Container con aspect ratio fijo */}
+        <div className="max-w-6xl mx-auto">
+          <div 
+            ref={containerRef}
+            className="relative w-full"
+            style={{ height: '400px' }}
+          >
             {skillCategories.map((category) => (
               <div
                 key={category.id}
-                className={`skill-card cursor-pointer rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-300 group relative ${
-                  selectedTab === category.id ? 'ring-4 ring-white/50' : ''
+                data-id={category.id}
+                className={`skill-card cursor-pointer rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-shadow duration-300 group relative ${
+                  selectedTab === category.id ? 'ring-4 ring-white/50 z-10' : 'z-0'
                 }`}
                 onClick={() => handleTabClick(category.id)}
               >
@@ -124,7 +229,10 @@ const Skills: React.FC = () => {
         {/* Selected Category Info */}
         <div className="mt-12 text-center">
           <div className="inline-flex items-center px-6 py-3 bg-accent/10 text-accent rounded-full text-lg font-medium">
-            Categoría seleccionada: {skillCategories.find(cat => cat.id === selectedTab)?.title}
+            {selectedTab 
+              ? `Categoría seleccionada: ${skillCategories.find(cat => cat.id === selectedTab)?.title}`
+              : 'Haz click en una categoría para expandir'
+            }
           </div>
         </div>
       </div>
