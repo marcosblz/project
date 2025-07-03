@@ -145,8 +145,7 @@ const Skills: React.FC = () => {
           y: row === 0 ? '0%' : 'calc(50% + 15px)', // POSICIÓN CON ESPACIO
           transformOrigin: 'center center',
           opacity: 0, // EMPEZAR INVISIBLE PARA ANIMACIÓN
-          scale: 0.8,
-          clearProps: false // NO LIMPIAR PARA MANTENER POSICIÓN
+          scale: 0.8
         });
       });
 
