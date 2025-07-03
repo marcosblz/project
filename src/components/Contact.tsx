@@ -257,8 +257,7 @@ const Contact: React.FC = () => {
                 Disponible para proyectos
               </h3>
               <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
-                Actualmente estoy disponible para nuevos proyectos freelance y oportunidades de colaboración. 
-                ¡No dudes en contactarme!
+                Actualmente estoy disponible para nuevos desafíos que me reten a ser mejor profesional.
               </p>
             </div>
           </div>
