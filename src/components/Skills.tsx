@@ -20,10 +20,12 @@ interface SoftSkill {
 }
 
 const Skills: React.FC = () => {
+  const sectionRef = useRef<HTMLDivElement>(null);
   const tableRef = useRef<HTMLDivElement>(null);
   const svgRef = useRef<SVGSVGElement>(null);
   const [isDrawingComplete, setIsDrawingComplete] = useState(false);
   const [drawingProgress, setDrawingProgress] = useState(0);
+  const [isInDrawingZone, setIsInDrawingZone] = useState(false);
 
   const technologies: Technology[] = [
     {
@@ -117,29 +119,42 @@ const Skills: React.FC = () => {
   ];
 
   useEffect(() => {
-    const svg = svgRef.current;
+    const section = sectionRef.current;
     const table = tableRef.current;
+    const svg = svgRef.current;
     
-    if (!svg || !table) return;
+    if (!section || !table || !svg) return;
 
-    // Configurar SVG
-    const rect = table.getBoundingClientRect();
-    svg.style.width = `${rect.width}px`;
-    svg.style.height = `${rect.height}px`;
-    svg.setAttribute('viewBox', `0 0 ${rect.width} ${rect.height}`);
+    // Configurar dimensiones del SVG
+    const updateSVGDimensions = () => {
+      const rect = table.getBoundingClientRect();
+      svg.style.width = `${rect.width}px`;
+      svg.style.height = `${rect.height}px`;
+      svg.setAttribute('viewBox', `0 0 ${rect.width} ${rect.height}`);
+    };
 
-    // Crear paths para dibujar la tabla
+    updateSVGDimensions();
+
+    // Crear paths para la tabla
     const createTablePaths = () => {
+      const rect = table.getBoundingClientRect();
       const paths: string[] = [];
-      const padding = 20;
+      const padding = 0;
       const headerHeight = 60;
       const rowHeight = 80;
       const cols = 4;
-      const colWidth = (rect.width - padding * 2) / cols;
+      const colWidth = rect.width / cols;
 
-      // Líneas horizontales
+      // Líneas horizontales (header + filas)
       for (let i = 0; i <= technologies.length + 1; i++) {
-        const y = padding + (i === 0 ? 0 : headerHeight) + (i > 1 ? (i - 1) * rowHeight : 0);
+        let y;
+        if (i === 0) {
+          y = padding;
+        } else if (i === 1) {
+          y = padding + headerHeight;
+        } else {
+          y = padding + headerHeight + (i - 1) * rowHeight;
+        }
         paths.push(`M ${padding} ${y} L ${rect.width - padding} ${y}`);
       }
 
@@ -155,90 +170,121 @@ const Skills: React.FC = () => {
 
     const paths = createTablePaths();
     
-    // Limpiar SVG anterior
+    // Limpiar SVG
     svg.innerHTML = '';
 
     // Crear elementos path
-    const pathElements = paths.map((pathData, index) => {
+    const pathElements = paths.map((pathData) => {
       const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
       path.setAttribute('d', pathData);
       path.setAttribute('stroke', 'hsl(var(--accent))');
       path.setAttribute('stroke-width', '2');
       path.setAttribute('fill', 'none');
-      path.setAttribute('stroke-dasharray', '1000');
-      path.setAttribute('stroke-dashoffset', '1000');
+      
+      // Calcular longitud del path
+      const length = path.getTotalLength();
+      path.setAttribute('stroke-dasharray', `${length}`);
+      path.setAttribute('stroke-dashoffset', `${length}`);
       path.style.opacity = '0.8';
+      
       svg.appendChild(path);
-      return path;
+      return { element: path, length };
     });
 
-    // Configurar ScrollTrigger para el dibujo
-    let drawingTl = gsap.timeline({
-      scrollTrigger: {
-        trigger: table,
-        start: 'top 80%',
-        end: 'bottom 20%',
-        scrub: 1,
-        onUpdate: (self) => {
-          const progress = self.progress;
-          setDrawingProgress(progress);
-          
-          // Bloquear scroll si no está completo
-          if (progress < 0.95) {
-            setIsDrawingComplete(false);
-          } else {
-            setIsDrawingComplete(true);
-          }
-        },
-        onComplete: () => {
+    // Ocultar contenido inicialmente
+    gsap.set('.table-content', { opacity: 0 });
+
+    // ScrollTrigger para detectar cuando estamos en la zona de dibujo
+    ScrollTrigger.create({
+      trigger: section,
+      start: 'top 50%',
+      end: 'bottom 50%',
+      onEnter: () => setIsInDrawingZone(true),
+      onLeave: () => setIsInDrawingZone(false),
+      onEnterBack: () => setIsInDrawingZone(true),
+      onLeaveBack: () => setIsInDrawingZone(false),
+    });
+
+    // ScrollTrigger principal para el dibujo
+    const drawingTrigger = ScrollTrigger.create({
+      trigger: section,
+      start: 'top 60%',
+      end: 'bottom 40%',
+      scrub: 1,
+      onUpdate: (self) => {
+        const progress = self.progress;
+        setDrawingProgress(progress);
+
+        // Dibujar paths progresivamente
+        pathElements.forEach((pathObj, index) => {
+          const pathProgress = Math.max(0, Math.min(1, (progress * pathElements.length - index) / 1));
+          const offset = pathObj.length * (1 - pathProgress);
+          pathObj.element.setAttribute('stroke-dashoffset', `${offset}`);
+        });
+
+        // Mostrar contenido cuando el dibujo esté casi completo
+        if (progress > 0.8) {
+          gsap.to('.table-content', {
+            opacity: 1,
+            duration: 0.5,
+            stagger: 0.1,
+            ease: 'power2.out'
+          });
+        }
+
+        // Marcar como completo
+        if (progress >= 0.95) {
           setIsDrawingComplete(true);
-          setDrawingProgress(1);
+        } else {
+          setIsDrawingComplete(false);
         }
       }
     });
 
-    // Animar cada path
-    pathElements.forEach((path, index) => {
-      drawingTl.to(path, {
-        strokeDashoffset: 0,
-        duration: 0.1,
-        ease: 'none'
-      }, index * 0.05);
-    });
+    // Manejar resize
+    const handleResize = () => {
+      updateSVGDimensions();
+      drawingTrigger.refresh();
+    };
 
-    // Animar contenido de la tabla después del dibujo
-    drawingTl.fromTo('.table-content',
-      { opacity: 0, y: 20 },
-      {
-        opacity: 1,
-        y: 0,
-        duration: 0.3,
-        stagger: 0.05,
-        ease: 'power2.out'
-      },
-      0.8
-    );
+    window.addEventListener('resize', handleResize);
 
     return () => {
       ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+      window.removeEventListener('resize', handleResize);
     };
   }, []);
 
-  // Bloquear scroll si el dibujo no está completo
+  // Bloquear scroll cuando estamos dibujando
   useEffect(() => {
-    if (!isDrawingComplete && drawingProgress > 0.1 && drawingProgress < 0.95) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = 'unset';
-    }
+    if (isInDrawingZone && !isDrawingComplete && drawingProgress > 0.1) {
+      // Prevenir scroll con wheel
+      const preventScroll = (e: WheelEvent) => {
+        e.preventDefault();
+      };
 
-    return () => {
-      document.body.style.overflow = 'unset';
-    };
-  }, [isDrawingComplete, drawingProgress]);
+      // Prevenir scroll con teclado
+      const preventKeyScroll = (e: KeyboardEvent) => {
+        const keys = ['ArrowUp', 'ArrowDown', 'PageUp', 'PageDown', 'Home', 'End', ' '];
+        if (keys.includes(e.key)) {
+          e.preventDefault();
+        }
+      };
+
+      document.addEventListener('wheel', preventScroll, { passive: false });
+      document.addEventListener('keydown', preventKeyScroll);
+      document.body.style.overflow = 'hidden';
+
+      return () => {
+        document.removeEventListener('wheel', preventScroll);
+        document.removeEventListener('keydown', preventKeyScroll);
+        document.body.style.overflow = 'unset';
+      };
+    }
+  }, [isInDrawingZone, isDrawingComplete, drawingProgress]);
 
   return (
-    <section id="habilidades" className="skills-section py-8 sm:py-12 lg:py-20 relative">
+    <section id="habilidades" ref={sectionRef} className="skills-section py-8 sm:py-12 lg:py-20 relative min-h-screen">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-8 sm:mb-12 lg:mb-16">
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-foreground mb-2 sm:mb-4">
@@ -250,37 +296,38 @@ const Skills: React.FC = () => {
         </div>
 
         {/* Indicador de progreso */}
-        {drawingProgress > 0 && drawingProgress < 1 && (
-          <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50 bg-background/90 backdrop-blur-sm border border-border rounded-xl p-6 text-center">
-            <div className="w-16 h-16 mx-auto mb-4 relative">
-              <svg className="w-16 h-16 transform -rotate-90" viewBox="0 0 64 64">
+        {isInDrawingZone && drawingProgress > 0.1 && drawingProgress < 0.95 && (
+          <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50 bg-background/95 backdrop-blur-sm border border-accent/30 rounded-xl p-8 text-center shadow-2xl">
+            <div className="w-20 h-20 mx-auto mb-6 relative">
+              <svg className="w-20 h-20 transform -rotate-90" viewBox="0 0 80 80">
                 <circle
-                  cx="32"
-                  cy="32"
-                  r="28"
+                  cx="40"
+                  cy="40"
+                  r="35"
                   stroke="hsl(var(--muted))"
-                  strokeWidth="4"
+                  strokeWidth="6"
                   fill="none"
                 />
                 <circle
-                  cx="32"
-                  cy="32"
-                  r="28"
+                  cx="40"
+                  cy="40"
+                  r="35"
                   stroke="hsl(var(--accent))"
-                  strokeWidth="4"
+                  strokeWidth="6"
                   fill="none"
-                  strokeDasharray="175.93"
-                  strokeDashoffset={175.93 * (1 - drawingProgress)}
+                  strokeDasharray="219.91"
+                  strokeDashoffset={219.91 * (1 - drawingProgress)}
                   className="transition-all duration-300"
                 />
               </svg>
               <div className="absolute inset-0 flex items-center justify-center">
-                <span className="text-sm font-bold text-accent">
+                <span className="text-lg font-bold text-accent">
                   {Math.round(drawingProgress * 100)}%
                 </span>
               </div>
             </div>
-            <p className="text-sm text-muted-foreground">Dibujando tabla tecnológica...</p>
+            <h3 className="text-xl font-bold text-foreground mb-2">Dibujando Tabla</h3>
+            <p className="text-sm text-muted-foreground">Sigue haciendo scroll para completar el dibujo</p>
           </div>
         )}
 
@@ -288,47 +335,46 @@ const Skills: React.FC = () => {
         <div className="relative mb-12">
           <div
             ref={tableRef}
-            className="relative bg-background/80 backdrop-blur-sm border border-border rounded-xl overflow-hidden shadow-lg"
+            className="relative bg-background/80 backdrop-blur-sm border-2 border-border rounded-xl overflow-hidden shadow-xl"
           >
             {/* SVG para dibujar la tabla */}
             <svg
               ref={svgRef}
               className="absolute inset-0 pointer-events-none z-10"
-              style={{ mixBlendMode: 'multiply' }}
             />
 
             {/* Contenido de la tabla */}
             <div className="relative z-20">
               {/* Header */}
-              <div className="table-content grid grid-cols-4 gap-4 p-5 bg-accent/5 border-b border-border">
-                <div className="font-bold text-foreground text-sm">Tecnología</div>
-                <div className="font-bold text-foreground text-sm">Categoría</div>
-                <div className="font-bold text-foreground text-sm">Experiencia</div>
-                <div className="font-bold text-foreground text-sm">Descripción</div>
+              <div className="table-content grid grid-cols-4 gap-4 p-5 bg-accent/5">
+                <div className="font-bold text-foreground text-sm lg:text-base">Tecnología</div>
+                <div className="font-bold text-foreground text-sm lg:text-base">Categoría</div>
+                <div className="font-bold text-foreground text-sm lg:text-base">Experiencia</div>
+                <div className="font-bold text-foreground text-sm lg:text-base">Descripción</div>
               </div>
 
               {/* Filas de tecnologías */}
               {technologies.map((tech, index) => (
                 <div
                   key={index}
-                  className="table-content grid grid-cols-4 gap-4 p-5 border-b border-border/50 hover:bg-accent/5 transition-colors duration-300 group"
+                  className="table-content grid grid-cols-4 gap-4 p-5 hover:bg-accent/5 transition-colors duration-300 group"
                 >
                   <div className="flex items-center space-x-3">
                     <div className="w-8 h-8 bg-accent/10 rounded-lg flex items-center justify-center text-accent group-hover:bg-accent group-hover:text-white transition-all duration-300">
                       {tech.icon}
                     </div>
-                    <span className="font-semibold text-foreground text-sm">{tech.name}</span>
+                    <span className="font-semibold text-foreground text-sm lg:text-base">{tech.name}</span>
                   </div>
                   <div className="flex items-center">
-                    <span className="text-muted-foreground text-sm">{tech.category}</span>
+                    <span className="text-muted-foreground text-sm lg:text-base">{tech.category}</span>
                   </div>
                   <div className="flex items-center">
-                    <span className="px-3 py-1 bg-accent/10 text-accent rounded-full text-xs font-medium">
+                    <span className="px-3 py-1 bg-accent/10 text-accent rounded-full text-xs lg:text-sm font-medium">
                       {tech.experience}
                     </span>
                   </div>
                   <div className="flex items-center">
-                    <span className="text-muted-foreground text-sm leading-relaxed">
+                    <span className="text-muted-foreground text-sm lg:text-base leading-relaxed">
                       {tech.description}
                     </span>
                   </div>
