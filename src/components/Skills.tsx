@@ -14,6 +14,7 @@ const Skills: React.FC = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const [selectedTab, setSelectedTab] = useState<string | null>(null);
+  const [showSkills, setShowSkills] = useState<boolean>(false);
 
   const skillCategories: SkillCategory[] = [
     {
@@ -39,14 +40,19 @@ const Skills: React.FC = () => {
   ];
 
   const handleTabClick = (tabId: string) => {
-    // Respuesta inmediata sin triggereo
     if (selectedTab === null) {
+      // Expandir
       setSelectedTab(tabId);
+      setShowSkills(false); // Ocultar skills primero
       animateToExpanded(tabId);
     } else if (selectedTab === tabId) {
+      // Contraer
+      setShowSkills(false); // Ocultar skills primero
       setSelectedTab(null);
       animateToGrid();
     } else {
+      // Cambiar selección
+      setShowSkills(false); // Ocultar skills primero
       setSelectedTab(tabId);
       animateToExpanded(tabId);
     }
@@ -60,10 +66,14 @@ const Skills: React.FC = () => {
     const selectedCard = container.querySelector(`[data-id="${selectedId}"]`);
     const otherCards = Array.from(cards).filter(card => card.getAttribute('data-id') !== selectedId);
 
-    // Animación instantánea y fluida
-    const tl = gsap.timeline();
+    const tl = gsap.timeline({
+      onComplete: () => {
+        // Mostrar skills DESPUÉS de que termine la animación
+        setTimeout(() => setShowSkills(true), 100);
+      }
+    });
 
-    // Animar tarjeta seleccionada (mucho más grande)
+    // Animar tarjeta seleccionada
     tl.to(selectedCard, {
       width: 700,
       height: 450,
@@ -73,12 +83,12 @@ const Skills: React.FC = () => {
       ease: 'power2.out'
     });
 
-    // Animar otras tarjetas a la derecha
+    // Animar otras tarjetas
     otherCards.forEach((card, index) => {
       tl.to(card, {
         width: 200,
         height: 140,
-        x: 730, // 700px + 30px gap
+        x: 730,
         y: index * 150,
         duration: 0.4,
         ease: 'power2.out'
@@ -92,7 +102,6 @@ const Skills: React.FC = () => {
 
     const cards = container.querySelectorAll('.skill-card');
 
-    // Animación instantánea
     const tl = gsap.timeline();
 
     cards.forEach((card, index) => {
@@ -100,10 +109,10 @@ const Skills: React.FC = () => {
       const col = index % 2;
       
       tl.to(card, {
-        width: 450, // Mucho más grande
-        height: 280, // Mucho más grande
-        x: col * 480, // 450px + 30px gap
-        y: row * 310, // 280px + 30px gap
+        width: 450,
+        height: 280,
+        x: col * 480,
+        y: row * 310,
         duration: 0.4,
         ease: 'power2.out'
       }, 0);
@@ -121,10 +130,10 @@ const Skills: React.FC = () => {
       
       gsap.set(card, {
         position: 'absolute',
-        width: 450, // Mucho más grande
-        height: 280, // Mucho más grande
-        x: col * 480, // 450px + 30px gap
-        y: row * 310, // 280px + 30px gap
+        width: 450,
+        height: 280,
+        x: col * 480,
+        y: row * 310,
         transformOrigin: 'center center'
       });
     });
@@ -155,12 +164,12 @@ const Skills: React.FC = () => {
           <p className="text-base sm:text-lg lg:text-xl text-muted-foreground">Especialización técnica por áreas</p>
         </div>
 
-        {/* Container aún más grande */}
+        {/* Container */}
         <div className="max-w-7xl mx-auto flex justify-center">
           <div 
             ref={containerRef}
             className="relative"
-            style={{ width: '960px', height: '620px' }} // Mucho más grande
+            style={{ width: '960px', height: '620px' }}
           >
             {skillCategories.map((category) => (
               <div
@@ -190,23 +199,23 @@ const Skills: React.FC = () => {
 
                 {/* Content */}
                 <div className="relative z-10 p-10 h-full flex flex-col text-white">
-                  {/* Header con título más grande */}
+                  {/* Header con título */}
                   <div className="flex items-center justify-center mb-8">
                     <h3 className="text-3xl font-bold tracking-wider text-white drop-shadow-sm text-center">
                       {category.title}
                     </h3>
                   </div>
 
-                  {/* Área central para imagen más grande */}
+                  {/* Área central para imagen */}
                   <div className="flex-1 flex items-center justify-center mb-8">
                     <div className="w-32 h-32 bg-white/20 backdrop-blur-sm rounded-2xl border border-white/30 flex items-center justify-center shadow-lg group-hover:scale-105 transition-transform duration-300">
                       <span className="text-white/80 text-lg font-medium">IMG</span>
                     </div>
                   </div>
 
-                  {/* Skills preview - Solo en modo expandido */}
-                  {selectedTab === category.id && (
-                    <div className="mt-6">
+                  {/* Skills - Solo aparecen DESPUÉS de la animación */}
+                  {selectedTab === category.id && showSkills && (
+                    <div className="mt-6 animate-in fade-in duration-300">
                       <div className="flex flex-wrap gap-3">
                         {category.skills.slice(0, 8).map((skill, index) => (
                           <span
@@ -248,9 +257,9 @@ const Skills: React.FC = () => {
           </div>
         </div>
 
-        {/* Skills Detail */}
-        {selectedTab && (
-          <div className="mt-6 sm:mt-8 max-w-5xl mx-auto">
+        {/* Skills Detail - Solo aparece cuando showSkills es true */}
+        {selectedTab && showSkills && (
+          <div className="mt-6 sm:mt-8 max-w-5xl mx-auto animate-in fade-in duration-500">
             <div className="bg-background/80 backdrop-blur-sm border border-border rounded-xl p-4 sm:p-6 shadow-lg">
               <h3 className="text-lg sm:text-xl lg:text-2xl font-bold text-foreground mb-3 sm:mb-4">
                 {skillCategories.find(cat => cat.id === selectedTab)?.title} - Tecnologías
