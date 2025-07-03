@@ -445,14 +445,14 @@ const Skills: React.FC = () => {
                         </div>
                       </div>
 
-                      {/* Technologies Summary - Compact Pills with Time */}
+                      {/* Technologies Summary - Clean Pills with Time */}
                       <div className="flex-1">
                         <h4 className="text-sm sm:text-base font-semibold mb-2 sm:mb-3 text-foreground">Tecnologías:</h4>
                         <div className="flex flex-wrap gap-2">
                           {category.skills.map((skill, index) => (
                             <div 
                               key={index} 
-                              className="group relative bg-muted/50 backdrop-blur-sm rounded-full px-3 py-1.5 border border-border/50 hover:bg-accent/10 hover:border-accent/30 transition-all duration-300 cursor-pointer"
+                              className="bg-muted/50 backdrop-blur-sm rounded-full px-3 py-1.5 border border-border/50 hover:bg-accent/10 hover:border-accent/30 transition-all duration-300"
                             >
                               <div className="flex items-center space-x-2">
                                 <span className="text-xs sm:text-sm font-medium text-foreground">{skill.name}</span>
@@ -461,16 +461,6 @@ const Skills: React.FC = () => {
                                   <span className="text-muted-foreground">•</span>
                                   <span>📚 {skill.studyTime}</span>
                                 </div>
-                              </div>
-                              
-                              {/* Tooltip on hover */}
-                              <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-2 bg-background border border-border rounded-lg shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none z-20 w-64">
-                                <p className="text-xs text-foreground font-medium mb-1">{skill.name}</p>
-                                <div className="text-xs text-muted-foreground mb-2">
-                                  <div>💼 Experiencia laboral: {skill.workTime}</div>
-                                  <div>📚 Tiempo estudiando: {skill.studyTime}</div>
-                                </div>
-                                <p className="text-xs text-muted-foreground">{skill.description}</p>
                               </div>
                             </div>
                           ))}
