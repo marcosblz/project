@@ -43,7 +43,7 @@ const About: React.FC = () => {
   {
     id: 3,
     text: "Describe una ocasión en la que cometiste un error de programación importante. ¿Cómo lo detectaste y qué aprendiste?",
-    response: "El reclutador busca honestidad y autocrítica, tu método de detección (tests, revisión) y las lecciones concretas que incorporaste para evitarlo en el futuro."
+    response: "Hubo una vez que bloqueé la página web de la empresa en la que estoy trabajando, hice una edición masiva y nadie pudo hacer nada cerca de una hora, el impacto fue grande y la cara que se me ponía cada vez que alguien me preguntaba era un poema... aprendí que hay cosas que no hay que hacer cuando la situación no es realmente crítica, tenía prisa por entregar todo y no paré a valorar consecuencias."
   },
   {
     id: 4,
