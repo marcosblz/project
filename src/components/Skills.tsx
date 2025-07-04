@@ -346,71 +346,41 @@ const Skills: React.FC = () => {
         </div>
 
         <div className="skills-container">
-          {/* Notebook Style Selector */}
-          <div className="notebook-container relative mb-8 sm:mb-12">
-            {/* Notebook Background */}
-            <div className="relative bg-background/80 backdrop-blur-sm border border-border rounded-xl shadow-lg overflow-hidden">
-              {/* Notebook Lines Pattern */}
-              <div className="absolute inset-0 opacity-5">
-                <div 
-                  className="w-full h-full"
-                  style={{
-                    backgroundImage: 'repeating-linear-gradient(transparent, transparent 24px, hsl(var(--border)) 24px, hsl(var(--border)) 25px)',
-                  }}
-                ></div>
-              </div>
-              
-              {/* Red Margin Line */}
-              <div className="absolute left-12 top-0 bottom-0 w-0.5 bg-red-300 opacity-30"></div>
-              
-              {/* Spiral Holes */}
-              <div className="absolute left-2 top-4 bottom-4 flex flex-col justify-evenly">
-                {[...Array(8)].map((_, i) => (
-                  <div key={i} className="w-2 h-2 bg-muted rounded-full border border-border"></div>
-                ))}
-              </div>
-
-              {/* Notebook Header */}
-              <div className="relative z-10 p-4 sm:p-6 border-b border-border/50">
-                <div className="flex items-center space-x-3 ml-8">
-                  <BookOpen className="w-5 h-5 text-accent" />
-                  <h3 className="text-lg sm:text-xl font-bold text-foreground">Cuaderno de Habilidades</h3>
-                  <div className="flex-1 border-b border-dashed border-muted-foreground/30"></div>
-                </div>
-              </div>
-
-              {/* Tabs Container */}
-              <div className="relative z-10 p-4 sm:p-6 ml-8">
-                <div className="flex flex-wrap gap-2 sm:gap-3">
+          {/* Selected Category Details */}
+          {selectedCategoryData && (
+            <div className="relative">
+              {/* Tabs positioned above content */}
+              <div className="relative -mb-4 z-20">
+                <div className="flex flex-wrap gap-2 sm:gap-3 justify-center sm:justify-start">
                   {skillCategories.map((category, index) => (
                     <button
                       key={category.id}
                       onClick={() => setSelectedCategory(category.id)}
                       className={`notebook-tab relative group transition-all duration-300 ${
                         selectedCategory === category.id
-                          ? 'transform -translate-y-1'
-                          : 'hover:-translate-y-0.5'
+                          ? 'transform -translate-y-1 z-30'
+                          : 'hover:-translate-y-0.5 z-20'
                       }`}
                     >
                       {/* Tab Background */}
                       <div className={`
-                        relative px-4 sm:px-6 py-2 sm:py-3 rounded-t-lg border-t-2 border-l-2 border-r-2 transition-all duration-300
+                        relative px-3 sm:px-4 lg:px-6 py-2 sm:py-3 rounded-t-lg border-t-2 border-l-2 border-r-2 transition-all duration-300
                         ${selectedCategory === category.id 
                           ? `${category.tabColor} text-white shadow-lg border-transparent` 
-                          : 'bg-muted/50 text-muted-foreground border-border hover:bg-muted hover:text-foreground'
+                          : 'bg-muted/80 text-muted-foreground border-border hover:bg-muted hover:text-foreground'
                         }
                       `}>
                         {/* Tab Content */}
                         <div className="flex items-center space-x-2">
                           {React.cloneElement(category.icon as React.ReactElement, {
-                            className: "w-4 h-4"
+                            className: "w-3 sm:w-4 h-3 sm:h-4"
                           })}
-                          <span className="text-sm sm:text-base font-medium">{category.title}</span>
+                          <span className="text-xs sm:text-sm lg:text-base font-medium">{category.title}</span>
                         </div>
 
                         {/* Tab Number */}
                         <div className={`
-                          absolute -top-1 -right-1 w-5 h-5 rounded-full text-xs flex items-center justify-center font-bold
+                          absolute -top-1 -right-1 w-4 sm:w-5 h-4 sm:h-5 rounded-full text-xs flex items-center justify-center font-bold
                           ${selectedCategory === category.id 
                             ? 'bg-white text-gray-800' 
                             : 'bg-accent text-white'
@@ -419,115 +389,114 @@ const Skills: React.FC = () => {
                           {index + 1}
                         </div>
 
-                        {/* Active Tab Indicator */}
+                        {/* Active Tab Connector */}
                         {selectedCategory === category.id && (
-                          <div className="absolute -bottom-0.5 left-0 right-0 h-0.5 bg-background"></div>
+                          <div className="absolute -bottom-0.5 left-0 right-0 h-1 bg-background rounded-b-sm"></div>
                         )}
                       </div>
                     </button>
                   ))}
                 </div>
               </div>
-            </div>
-          </div>
 
-          {/* Selected Category Details */}
-          {selectedCategoryData && (
-            <div className="bg-background/80 backdrop-blur-sm border border-border rounded-2xl p-6 sm:p-8 lg:p-10 shadow-xl">
+              {/* Main Content Area */}
+              <div className="bg-background/80 backdrop-blur-sm border border-border rounded-2xl p-6 sm:p-8 lg:p-10 shadow-xl relative z-10">
               
-              {/* Category Header */}
-              <div className="flex items-center mb-6 sm:mb-8">
-                <div className={`w-16 sm:w-20 h-16 sm:h-20 rounded-xl bg-gradient-to-br ${selectedCategoryData.color} flex items-center justify-center mr-4 sm:mr-6 shadow-lg`}>
-                  {React.cloneElement(selectedCategoryData.icon as React.ReactElement, {
-                    className: "w-8 sm:w-10 h-8 sm:h-10 text-white"
-                  })}
-                </div>
-                <div className="flex-1">
-                  <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-foreground mb-2">{selectedCategoryData.title} Development</h3>
-                  <p className="text-sm sm:text-base text-muted-foreground mb-3">{selectedCategoryData.subtitle}</p>
-                  
-                  {/* Highlights */}
-                  <div className="flex flex-wrap gap-2">
-                    {selectedCategoryData.highlights.map((highlight, index) => (
-                      <span
-                        key={index}
-                        className="inline-flex items-center px-2 sm:px-3 py-1 bg-accent/10 text-accent rounded-full text-xs sm:text-sm font-medium"
-                      >
-                        <Star className="w-3 h-3 mr-1" />
-                        {highlight}
-                      </span>
-                    ))}
+                {/* Category Header */}
+                <div className="flex items-center mb-6 sm:mb-8">
+                  <div className={`w-16 sm:w-20 h-16 sm:h-20 rounded-xl bg-gradient-to-br ${selectedCategoryData.color} flex items-center justify-center mr-4 sm:mr-6 shadow-lg`}>
+                    {React.cloneElement(selectedCategoryData.icon as React.ReactElement, {
+                      className: "w-8 sm:w-10 h-8 sm:h-10 text-white"
+                    })}
+                  </div>
+                  <div className="flex-1">
+                    <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-foreground mb-2">{selectedCategoryData.title} Development</h3>
+                    <p className="text-sm sm:text-base text-muted-foreground mb-3">{selectedCategoryData.subtitle}</p>
+                    
+                    {/* Highlights */}
+                    <div className="flex flex-wrap gap-2">
+                      {selectedCategoryData.highlights.map((highlight, index) => (
+                        <span
+                          key={index}
+                          className="inline-flex items-center px-2 sm:px-3 py-1 bg-accent/10 text-accent rounded-full text-xs sm:text-sm font-medium"
+                        >
+                          <Star className="w-3 h-3 mr-1" />
+                          {highlight}
+                        </span>
+                      ))}
+                    </div>
                   </div>
                 </div>
-              </div>
 
-              {/* Technologies Grid */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
-                {selectedCategoryData.technologies.map((tech, index) => (
-                  <div
-                    key={index}
-                    className="bg-card/50 border border-border rounded-xl p-4 sm:p-6 hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
-                  >
-                    <div className="flex items-start justify-between mb-3">
-                      <div className="flex items-center space-x-3">
-                        <div className="w-10 h-10 bg-muted rounded-lg flex items-center justify-center">
-                          {tech.icon}
-                        </div>
-                        <div>
-                          <h4 className="text-base sm:text-lg font-bold text-foreground">{tech.name}</h4>
-                          <div className="flex items-center space-x-2 mt-1">
-                            <span className={`px-2 py-1 rounded-full text-xs font-medium ${getLevelColor(tech.level)}`}>
-                              {tech.level}
-                            </span>
-                            <span className={`px-2 py-1 rounded-full text-xs font-medium border ${getContextColor(tech.context)}`}>
-                              {tech.context}
-                            </span>
+                {/* Technologies Grid */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
+                  {selectedCategoryData.technologies.map((tech, index) => (
+                    <div
+                      key={index}
+                      className="bg-card/50 border border-border rounded-xl p-4 sm:p-6 hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
+                    >
+                      <div className="flex items-start justify-between mb-3">
+                        <div className="flex items-center space-x-3">
+                          <div className="w-10 h-10 bg-muted rounded-lg flex items-center justify-center">
+                            {tech.icon}
+                          </div>
+                          <div>
+                            <h4 className="text-base sm:text-lg font-bold text-foreground">{tech.name}</h4>
+                            <div className="flex items-center space-x-2 mt-1">
+                              <span className={`px-2 py-1 rounded-full text-xs font-medium ${getLevelColor(tech.level)}`}>
+                                {tech.level}
+                              </span>
+                              <span className={`px-2 py-1 rounded-full text-xs font-medium border ${getContextColor(tech.context)}`}>
+                                {tech.context}
+                              </span>
+                            </div>
                           </div>
                         </div>
+                        <button
+                          onClick={() => toggleDetails(tech.name)}
+                          className="p-2 hover:bg-muted rounded-lg transition-colors duration-200"
+                        >
+                          <ChevronRight className={`w-4 h-4 text-muted-foreground transition-transform duration-200 ${
+                            showDetails[tech.name] ? 'rotate-90' : ''
+                          }`} />
+                        </button>
                       </div>
-                      <button
-                        onClick={() => toggleDetails(tech.name)}
-                        className="p-2 hover:bg-muted rounded-lg transition-colors duration-200"
-                      >
-                        <ChevronRight className={`w-4 h-4 text-muted-foreground transition-transform duration-200 ${
-                          showDetails[tech.name] ? 'rotate-90' : ''
-                        }`} />
-                      </button>
+                      
+                      {showDetails[tech.name] && (
+                        <div className="mt-3 pt-3 border-t border-border">
+                          <p className="text-sm text-muted-foreground leading-relaxed">
+                            {tech.description}
+                          </p>
+                        </div>
+                      )}
                     </div>
-                    
-                    {showDetails[tech.name] && (
-                      <div className="mt-3 pt-3 border-t border-border">
-                        <p className="text-sm text-muted-foreground leading-relaxed">
-                          {tech.description}
-                        </p>
-                      </div>
-                    )}
-                  </div>
-                ))}
-              </div>
+                  ))}
+                </div>
 
-              {/* Legend */}
-              <div className="mt-6 sm:mt-8 pt-6 sm:pt-8 border-t border-border">
-                <h4 className="text-sm font-semibold text-foreground mb-3">Leyenda:</h4>
-                <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
-                  <div className="flex items-center space-x-2">
-                    <div className="w-3 h-3 bg-purple-500 rounded-full"></div>
-                    <span className="text-xs sm:text-sm text-muted-foreground">Experto</span>
-                  </div>
-                  <div className="flex items-center space-x-2">
-                    <div className="w-3 h-3 bg-green-500 rounded-full"></div>
-                    <span className="text-xs sm:text-sm text-muted-foreground">Avanzado</span>
-                  </div>
-                  <div className="flex items-center space-x-2">
-                    <div className="w-3 h-3 bg-blue-500 rounded-full"></div>
-                    <span className="text-xs sm:text-sm text-muted-foreground">Intermedio</span>
-                  </div>
-                  <div className="flex items-center space-x-2">
-                    <div className="w-3 h-3 bg-orange-500 rounded-full"></div>
-                    <span className="text-xs sm:text-sm text-muted-foreground">Principiante</span>
+                {/* Legend */}
+                <div className="mt-6 sm:mt-8 pt-6 sm:pt-8 border-t border-border">
+                  <h4 className="text-sm font-semibold text-foreground mb-3">Leyenda:</h4>
+                  <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
+                    <div className="flex items-center space-x-2">
+                      <div className="w-3 h-3 bg-purple-500 rounded-full"></div>
+                      <span className="text-xs sm:text-sm text-muted-foreground">Experto</span>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <div className="w-3 h-3 bg-green-500 rounded-full"></div>
+                      <span className="text-xs sm:text-sm text-muted-foreground">Avanzado</span>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <div className="w-3 h-3 bg-blue-500 rounded-full"></div>
+                      <span className="text-xs sm:text-sm text-muted-foreground">Intermedio</span>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <div className="w-3 h-3 bg-orange-500 rounded-full"></div>
+                      <span className="text-xs sm:text-sm text-muted-foreground">Principiante</span>
+                    </div>
                   </div>
                 </div>
               </div>
+            </div>
             </div>
           )}
         </div>
