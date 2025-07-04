@@ -58,7 +58,7 @@ const About: React.FC = () => {
   {
     id: 6,
     text: "¿Cómo decides cuándo tu código está listo para producción en lugar de seguir mejorándolo?",
-    response: "El reclutador busca entender tu equilibrio entre calidad y pragmatismo: uso de pruebas, criterios de riesgo y respeto a los plazos."
+    response: "Verifico que pase los tests que he definido, evalúo posibles riesgos o conflictos y, si la estabilidad está garantizada, lo publico."
   },
   {
     id: 7,
