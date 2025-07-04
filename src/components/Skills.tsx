@@ -16,7 +16,6 @@ interface SkillCategory {
   id: string;
   title: string;
   subtitle: string;
-  gradient: string;
   icon: React.ReactNode;
   skills: Skill[];
   highlights: string[];
@@ -35,7 +34,6 @@ const Skills: React.FC = () => {
       id: 'backend',
       title: "BACK-END",
       subtitle: "Desarrollo del lado del servidor",
-      gradient: "from-blue-600 via-cyan-500 to-teal-400",
       icon: <Server className="w-8 h-8" />,
       workExperience: "3 años trabajando",
       studyExperience: "4 años estudiando",
@@ -88,7 +86,6 @@ const Skills: React.FC = () => {
       id: 'frontend',
       title: "FRONT-END",
       subtitle: "Interfaces de usuario modernas",
-      gradient: "from-purple-600 via-blue-500 to-indigo-400",
       icon: <Monitor className="w-8 h-8" />,
       workExperience: "2 años trabajando",
       studyExperience: "3 años estudiando",
@@ -141,7 +138,6 @@ const Skills: React.FC = () => {
       id: 'devops',
       title: "DEVOPS",
       subtitle: "Automatización y despliegue",
-      gradient: "from-orange-500 via-pink-500 to-purple-600",
       icon: <GitBranch className="w-8 h-8" />,
       workExperience: "1 año trabajando",
       studyExperience: "2 años estudiando",
@@ -194,7 +190,6 @@ const Skills: React.FC = () => {
       id: 'otros',
       title: "OTROS",
       subtitle: "Herramientas y metodologías",
-      gradient: "from-green-500 via-emerald-500 to-teal-500",
       icon: <Settings className="w-8 h-8" />,
       workExperience: "2 años trabajando",
       studyExperience: "3 años estudiando",
@@ -379,33 +374,15 @@ const Skills: React.FC = () => {
               <div
                 key={category.id}
                 data-id={category.id}
-                className={`skill-card cursor-pointer rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-shadow duration-300 group ${
-                  selectedTab === category.id ? 'ring-2 ring-accent/50' : ''
-                } ${isAnimating ? 'pointer-events-none' : ''}`}
+                className={`skill-card cursor-pointer rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 group ${
+                  selectedTab === category.id ? 'ring-2 ring-accent/30' : ''
+                } ${isAnimating ? 'pointer-events-none' : ''} bg-background/80 backdrop-blur-sm border border-border`}
                 onClick={() => handleTabClick(category.id)}
-                style={{
-                  background: `linear-gradient(135deg, 
-                    hsl(var(--background)) 0%, 
-                    hsl(var(--card)) 50%, 
-                    hsl(var(--muted)) 100%
-                  )`,
-                  backdropFilter: 'blur(10px)',
-                  border: '1px solid hsl(var(--border))'
-                }}
               >
-                {/* Gradient Accent Overlay */}
-                <div className={`absolute inset-0 bg-gradient-to-br ${category.gradient} opacity-10 group-hover:opacity-20 transition-opacity duration-300`}></div>
-                
-                {/* Pattern Overlay */}
-                <div className="absolute inset-0 opacity-5">
-                  <div 
-                    className="w-full h-full"
-                    style={{
-                      backgroundImage: `radial-gradient(circle at 25% 25%, hsl(var(--accent)) 2px, transparent 2px)`,
-                      backgroundSize: '30px 30px'
-                    }}
-                  ></div>
-                </div>
+                {/* Subtle accent overlay only for selected card */}
+                {selectedTab === category.id && (
+                  <div className="absolute inset-0 bg-accent/5 pointer-events-none rounded-2xl"></div>
+                )}
 
                 {/* Content */}
                 <div className="relative z-10 p-4 sm:p-6 lg:p-8 h-full text-foreground overflow-hidden">
@@ -413,13 +390,13 @@ const Skills: React.FC = () => {
                     // Main card content (detailed view)
                     <div className="h-full flex flex-col">
                       <div className="flex items-center mb-4 sm:mb-6">
-                        <div className={`w-12 sm:w-16 h-12 sm:h-16 bg-gradient-to-br ${category.gradient} rounded-xl flex items-center justify-center mr-3 sm:mr-4 flex-shrink-0 shadow-lg`}>
+                        <div className="w-12 sm:w-16 h-12 sm:h-16 bg-accent/10 border border-accent/20 rounded-xl flex items-center justify-center mr-3 sm:mr-4 flex-shrink-0 shadow-sm">
                           {React.cloneElement(category.icon as React.ReactElement, {
-                            className: "w-6 sm:w-8 h-6 sm:h-8 text-white"
+                            className: "w-6 sm:w-8 h-6 sm:h-8 text-accent"
                           })}
                         </div>
                         <div className="min-w-0">
-                          <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold tracking-wider mb-1">
+                          <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold tracking-wider mb-1 text-foreground">
                             {category.title}
                           </h3>
                           <p className="text-sm sm:text-base text-muted-foreground">{category.subtitle}</p>
@@ -436,14 +413,14 @@ const Skills: React.FC = () => {
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-1 sm:gap-2">
                           {category.highlights.map((highlight, index) => (
                             <div key={index} className="flex items-center text-xs sm:text-sm text-muted-foreground">
-                              <Zap className="w-3 sm:w-4 h-3 sm:h-4 mr-1 sm:mr-2 flex-shrink-0 text-accent" />
+                              <div className="w-1.5 sm:w-2 h-1.5 sm:h-2 bg-accent rounded-full mr-2 sm:mr-3 flex-shrink-0"></div>
                               <span className="truncate">{highlight}</span>
                             </div>
                           ))}
                         </div>
                       </div>
 
-                      {/* Technologies Summary - Clean Pills with Time */}
+                      {/* Technologies Summary */}
                       <div className="flex-1">
                         <h4 className="text-sm sm:text-base font-semibold mb-2 sm:mb-3 text-foreground">Tecnologías:</h4>
                         <div className="flex flex-wrap gap-2">
@@ -468,9 +445,9 @@ const Skills: React.FC = () => {
                   ) : (
                     // Sidebar card content (compact view)
                     <div className="h-full flex flex-col justify-center items-center text-center">
-                      <div className={`w-8 sm:w-12 h-8 sm:h-12 bg-gradient-to-br ${category.gradient} rounded-lg flex items-center justify-center mb-2 sm:mb-3 group-hover:scale-110 transition-transform duration-300 shadow-lg`}>
+                      <div className="w-8 sm:w-12 h-8 sm:h-12 bg-accent/10 border border-accent/20 rounded-lg flex items-center justify-center mb-2 sm:mb-3 group-hover:scale-110 transition-transform duration-300 shadow-sm">
                         {React.cloneElement(category.icon as React.ReactElement, {
-                          className: "w-4 sm:w-6 h-4 sm:h-6 text-white"
+                          className: "w-4 sm:w-6 h-4 sm:h-6 text-accent"
                         })}
                       </div>
                       <h3 className="text-sm sm:text-lg font-bold tracking-wider mb-1 text-foreground">
@@ -485,7 +462,7 @@ const Skills: React.FC = () => {
                   )}
                 </div>
 
-                {/* Hover Effect */}
+                {/* Subtle hover effect */}
                 <div className="absolute inset-0 bg-accent/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none rounded-2xl"></div>
               </div>
             ))}
