@@ -33,7 +33,7 @@ const About: React.FC = () => {
   {
     id: 1,
     text: "¿Cómo abordas un problema de programación complejo que no entiendes de inmediato?",
-    response: "Primero busco entender 100% el problema, y una vez entendido tirar de algún hilo que me permita encontrar la solución descomponiendo el problema."
+    response: "“Lo primero es asegurarme de entender el problema al 100 %: formulo hipótesis, reviso la documentación y, si me atasco, dibujo diagramas de flujo o se lo explico en voz alta a un compañero para verlo con perspectiva. Luego descompongo el problema en subproblemas más pequeños, creo tests para cada uno y avanzo por etapas, validando en cada paso que la solución funcione antes de reunirlo todo.”"
   },
   {
     id: 2,
