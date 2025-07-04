@@ -273,7 +273,7 @@ const Skills: React.FC = () => {
       x: clickedRect.left - containerRect.left,
       y: clickedRect.top - containerRect.top,
       width: clickedRect.width,
-      height: clickRect.height
+      height: clickedRect.height
     };
 
     // Timeline para la animación de intercambio
