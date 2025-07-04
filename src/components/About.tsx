@@ -48,7 +48,7 @@ const About: React.FC = () => {
   {
     id: 4,
     text: "¿Cómo manejas la presión de plazos ajustados o cambios inesperados en los requisitos del proyecto?",
-    response: "El reclutador quiere evaluar tu capacidad para priorizar tareas, comunicarte proactivamente y adaptarte con calma y eficacia ante imprevistos."
+    response: "Reviso las tareas críticas, establezco prioridades y aviso al equipo sobre el impacto. Propongo soluciones realistas, mantengo la calma y ajusto el plan para cumplir con la calidad esperada."
   },
   {
     id: 5,
