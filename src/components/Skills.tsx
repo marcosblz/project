@@ -240,77 +240,87 @@ const Skills: React.FC = () => {
     }
   ];
 
-  const handleTabClick = (tabId: string) => {
-    if (selectedTab === tabId || isAnimating) return;
+  // Función para intercambiar tarjetas con animación GSAP
+  const handleTabClick = (clickedId: string) => {
+    if (selectedTab === clickedId || isAnimating) return;
     
     setIsAnimating(true);
     
     const container = containerRef.current;
     if (!container) return;
 
-    const currentMainCard = container.querySelector(`[data-id="${selectedTab}"]`) as HTMLElement;
-    const clickedCard = container.querySelector(`[data-id="${tabId}"]`) as HTMLElement;
+    // Obtener todas las tarjetas
+    const cards = Array.from(container.querySelectorAll('.skill-card')) as HTMLElement[];
+    const currentCard = cards.find(card => card.getAttribute('data-id') === selectedTab);
+    const clickedCard = cards.find(card => card.getAttribute('data-id') === clickedId);
     
-    if (!currentMainCard || !clickedCard) return;
+    if (!currentCard || !clickedCard) return;
 
-    // Get current positions and sizes
-    const currentRect = currentMainCard.getBoundingClientRect();
+    // Obtener posiciones actuales
+    const currentRect = currentCard.getBoundingClientRect();
     const clickedRect = clickedCard.getBoundingClientRect();
     const containerRect = container.getBoundingClientRect();
 
-    // Calculate relative positions within the container
-    const currentX = currentRect.left - containerRect.left;
-    const currentY = currentRect.top - containerRect.top;
-    const clickedX = clickedRect.left - containerRect.left;
-    const clickedY = clickedRect.top - containerRect.top;
+    // Calcular posiciones relativas al contenedor
+    const currentPos = {
+      x: currentRect.left - containerRect.left,
+      y: currentRect.top - containerRect.top,
+      width: currentRect.width,
+      height: currentRect.height
+    };
 
-    // Calculate the distance to move
-    const deltaX = clickedX - currentX;
-    const deltaY = clickedY - currentY;
+    const clickedPos = {
+      x: clickedRect.left - containerRect.left,
+      y: clickedRect.top - containerRect.top,
+      width: clickedRect.width,
+      height: clickRect.height
+    };
 
-    // Create timeline for the swap
+    // Timeline para la animación de intercambio
     const tl = gsap.timeline({
       onComplete: () => {
-        setSelectedTab(tabId);
+        // Limpiar transforms y actualizar estado
+        gsap.set(cards, { clearProps: "all" });
+        setSelectedTab(clickedId);
         setIsAnimating(false);
       }
     });
 
-    // Animate both cards simultaneously with position and size swap
-    tl.to(currentMainCard, {
-      x: `+=${deltaX}`,
-      y: `+=${deltaY}`,
-      width: clickedRect.width,
-      height: clickedRect.height,
-      duration: 0.8,
+    // Animar el intercambio simultáneo
+    tl.to(currentCard, {
+      x: clickedPos.x - currentPos.x,
+      y: clickedPos.y - currentPos.y,
+      width: clickedPos.width,
+      height: clickedPos.height,
+      duration: 0.6,
       ease: "power2.inOut"
     })
     .to(clickedCard, {
-      x: `+=${-deltaX}`,
-      y: `+=${-deltaY}`,
-      width: currentRect.width,
-      height: currentRect.height,
-      duration: 0.8,
+      x: currentPos.x - clickedPos.x,
+      y: currentPos.y - clickedPos.y,
+      width: currentPos.width,
+      height: currentPos.height,
+      duration: 0.6,
       ease: "power2.inOut"
-    }, 0); // Start at the same time
+    }, 0); // Empezar al mismo tiempo
   };
 
-  // Layout setup effect
+  // Configurar layout inicial y cuando cambia selectedTab
   useEffect(() => {
     const container = containerRef.current;
     if (!container) return;
 
     const cards = container.querySelectorAll('.skill-card') as NodeListOf<HTMLElement>;
     
-    // Clear any existing transforms
+    // Limpiar cualquier transform existente
     gsap.set(cards, { clearProps: "all" });
     
-    // Set up positions based on selected tab
-    cards.forEach((card, index) => {
+    // Configurar posiciones basadas en selectedTab
+    cards.forEach((card) => {
       const cardId = card.getAttribute('data-id');
       
       if (cardId === selectedTab) {
-        // Main card (left side, 65% width)
+        // Tarjeta principal (izquierda, 65% ancho)
         gsap.set(card, {
           position: 'absolute',
           left: 0,
@@ -320,14 +330,14 @@ const Skills: React.FC = () => {
           zIndex: 10
         });
       } else {
-        // Sidebar cards (right side, 35% width, stacked)
+        // Tarjetas secundarias (derecha, apiladas)
         const otherCards = skillCategories.filter(cat => cat.id !== selectedTab);
         const stackIndex = otherCards.findIndex(cat => cat.id === cardId);
         
         gsap.set(card, {
           position: 'absolute',
-          left: '67%', // Small gap from main card
-          top: stackIndex * 165 + 'px', // Stack with gap
+          left: '67%',
+          top: stackIndex * 165 + 'px',
           width: '31%',
           height: '155px',
           zIndex: 5
@@ -335,7 +345,7 @@ const Skills: React.FC = () => {
       }
     });
 
-    // Initial entrance animation only on first load
+    // Animación de entrada inicial solo en la primera carga
     if (sectionRef.current && !isAnimating) {
       gsap.fromTo('.skill-card',
         { opacity: 0, scale: 0.9 },
@@ -353,7 +363,7 @@ const Skills: React.FC = () => {
         }
       );
     }
-  }, [selectedTab, skillCategories, isAnimating]);
+  }, [selectedTab, isAnimating]);
 
   return (
     <section id="habilidades" ref={sectionRef} className="py-8 sm:py-12 lg:py-20">
@@ -363,7 +373,7 @@ const Skills: React.FC = () => {
           <p className="text-base sm:text-lg lg:text-xl text-muted-foreground">Especialización técnica por áreas de desarrollo</p>
         </div>
 
-        {/* Container with fixed height for layout */}
+        {/* Container con altura fija para el layout */}
         <div className="max-w-6xl mx-auto">
           <div 
             ref={containerRef}
@@ -379,15 +389,15 @@ const Skills: React.FC = () => {
                 } ${isAnimating ? 'pointer-events-none' : ''} bg-background/80 backdrop-blur-sm border border-border`}
                 onClick={() => handleTabClick(category.id)}
               >
-                {/* Subtle accent overlay only for selected card */}
+                {/* Overlay sutil para tarjeta seleccionada */}
                 {selectedTab === category.id && (
                   <div className="absolute inset-0 bg-accent/5 pointer-events-none rounded-2xl"></div>
                 )}
 
-                {/* Content */}
+                {/* Contenido */}
                 <div className="relative z-10 p-4 sm:p-6 lg:p-8 h-full text-foreground overflow-hidden">
                   {selectedTab === category.id ? (
-                    // Main card content (detailed view)
+                    // Vista detallada de la tarjeta principal
                     <div className="h-full flex flex-col">
                       <div className="flex items-center mb-4 sm:mb-6">
                         <div className="w-12 sm:w-16 h-12 sm:h-16 bg-accent/10 border border-accent/20 rounded-xl flex items-center justify-center mr-3 sm:mr-4 flex-shrink-0 shadow-sm">
@@ -407,7 +417,7 @@ const Skills: React.FC = () => {
                         </div>
                       </div>
 
-                      {/* Highlights */}
+                      {/* Especialidades */}
                       <div className="mb-4 sm:mb-6">
                         <h4 className="text-sm sm:text-base font-semibold mb-2 sm:mb-3 text-foreground">Especialidades:</h4>
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-1 sm:gap-2">
@@ -420,7 +430,7 @@ const Skills: React.FC = () => {
                         </div>
                       </div>
 
-                      {/* Technologies Summary */}
+                      {/* Tecnologías */}
                       <div className="flex-1">
                         <h4 className="text-sm sm:text-base font-semibold mb-2 sm:mb-3 text-foreground">Tecnologías:</h4>
                         <div className="flex flex-wrap gap-2">
@@ -443,7 +453,7 @@ const Skills: React.FC = () => {
                       </div>
                     </div>
                   ) : (
-                    // Sidebar card content (compact view)
+                    // Vista compacta de tarjetas secundarias
                     <div className="h-full flex flex-col justify-center items-center text-center">
                       <div className="w-8 sm:w-12 h-8 sm:h-12 bg-accent/10 border border-accent/20 rounded-lg flex items-center justify-center mb-2 sm:mb-3 group-hover:scale-110 transition-transform duration-300 shadow-sm">
                         {React.cloneElement(category.icon as React.ReactElement, {
@@ -462,7 +472,7 @@ const Skills: React.FC = () => {
                   )}
                 </div>
 
-                {/* Subtle hover effect */}
+                {/* Efecto hover sutil */}
                 <div className="absolute inset-0 bg-accent/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none rounded-2xl"></div>
               </div>
             ))}
