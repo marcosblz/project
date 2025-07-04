@@ -53,7 +53,7 @@ const About: React.FC = () => {
   {
     id: 5,
     text: "¿Qué haces cuando alguien critica duramente tu código en una revisión?",
-    response: "El reclutador desea ver tu apertura al feedback, humildad al debatir mejoras y tu disposición a colaborar para elevar la calidad del código."
+    response: "Escucho con atención, agradezco el feedback y analizo las sugerencias. Si tiene sentido, lo aplico de inmediato; si no, lo discuto para encontrar juntos la mejor solución."
   },
   {
     id: 6,
