@@ -33,17 +33,17 @@ const About: React.FC = () => {
   {
     id: 1,
     text: "¿Cómo abordas un problema de programación complejo que no entiendes de inmediato?",
-    response: "“Lo primero es asegurarme de entender el problema al 100 %: formulo hipótesis, reviso la documentación y, si me atasco, dibujo diagramas de flujo o se lo explico en voz alta a un compañero para verlo con perspectiva. Luego descompongo el problema en subproblemas más pequeños, creo tests para cada uno y avanzo por etapas, validando en cada paso que la solución funcione antes de reunirlo todo.”"
+    response: "Lo primero es asegurarme de entender el problema al 100 %: formulo hipótesis, reviso la documentación y dibujo diagramas de flujo o se lo explico en voz alta a un compañero para verlo con perspectiva. Luego descompongo el problema en subproblemas más pequeños, creo tests para cada uno y avanzo por etapas, validando en cada paso que la solución funcione antes de reunirlo todo."
   },
   {
     id: 2,
     text: "Cuéntame de un bug especialmente difícil que resolviste. ¿Cómo lo solucionaste y cómo te sentiste?",
-    response: "En mi proyecto final de DAM, el Tamagotchi que puedes encontrar en el apartado Proyectos, enfrenté un bug que tenía que ver con concurrencia de ventanas, tenía mucha prisa por implementar un juego para que tuviese una base jugable el proyecto, pero las prisas combinadas con una falta de entendimiento general de lo que es un hilo me hicieron perder la cabeza. Paré, estudié y lo resolví, así de simple, me sentí súper tonto, una sola línea de código me habia estado frenando un mes de desarrollo. Ahí comprendí que no es buena idea el hacer algo sin entender que estás haciendo, esto con la IA se vuelve mucho más peligroso, por eso trato de primero entender que va a hacer o como resolver el problema antes de plantearme resolverlo."
+    response: "En mi proyecto final de DAM, estaba creando una aplicación de Tamagotchi en JavaNo comprendía bien la concurrencia en Java, por lo que mi app se bloqueaba al abrir varias ventanas. Decidí detenerme, aprender cómo Java gestiona procesos simultáneos y, gracias a esa comprensión, abrí cada ventana de forma independiente. En cuestión de minutos el bloqueo que tanto me había frustrado se desvaneció. Esta experiencia me enseñó la importancia de detenerme a comprender bien cómo funciona la tecnología antes de lanzarme a programar, lo que me ahorra tiempo y evita bloqueos en el futuro."
   },
   {
     id: 3,
     text: "Describe una ocasión en la que cometiste un error de programación importante. ¿Cómo lo detectaste y qué aprendiste?",
-    response: "Hubo una vez que bloqueé la página web de la empresa en la que estoy trabajando, hice una edición masiva y nadie pudo hacer nada cerca de una hora, el impacto fue grande y la cara que se me ponía cada vez que alguien me preguntaba era un poema... aprendí que hay cosas que no hay que hacer cuando la situación no es realmente crítica, tenía prisa por entregar todo y no paré a valorar consecuencias."
+    response: "Al ejecutar un script masivo en producción colapsé la web de la empresa y tuve que esperar a que terminara la cola de ejecución porque no habia manera de pararla. Tras esa experiencia, pedí un servidor de desarrollo independiente, acordé plazos realistas y aprendí a cuestionar instrucciones."
   },
   {
     id: 4,
