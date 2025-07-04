@@ -1,9 +1,10 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Server, Monitor, GitBranch, Settings } from 'lucide-react';
 import { gsap } from 'gsap';
+import { Flip } from 'gsap/Flip';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
-gsap.registerPlugin(ScrollTrigger);
+gsap.registerPlugin(Flip, ScrollTrigger);
 
 interface SkillCategory {
   id: string;
@@ -24,12 +25,11 @@ interface SkillCategory {
 
 const Skills: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
-  const [selectedTab, setSelectedTab] = useState<string>('backend');
-  const [isAnimating, setIsAnimating] = useState(false);
+  const activeRef = useRef<HTMLDivElement | null>(null);
 
   const skillCategories: SkillCategory[] = [
     {
-      id: 'backend',
+      id: 'skill-1',
       title: "BACK-END",
       subtitle: "Desarrollo del lado del servidor",
       icon: <Server className="w-8 h-8" />,
@@ -52,7 +52,7 @@ const Skills: React.FC = () => {
       ]
     },
     {
-      id: 'frontend',
+      id: 'skill-2',
       title: "FRONT-END",
       subtitle: "Interfaces de usuario modernas",
       icon: <Monitor className="w-8 h-8" />,
@@ -75,7 +75,7 @@ const Skills: React.FC = () => {
       ]
     },
     {
-      id: 'devops',
+      id: 'skill-3',
       title: "DEVOPS",
       subtitle: "Automatización y despliegue",
       icon: <GitBranch className="w-8 h-8" />,
@@ -98,7 +98,7 @@ const Skills: React.FC = () => {
       ]
     },
     {
-      id: 'otros',
+      id: 'skill-4',
       title: "OTROS",
       subtitle: "Herramientas y metodologías",
       icon: <Settings className="w-8 h-8" />,
@@ -122,59 +122,46 @@ const Skills: React.FC = () => {
     }
   ];
 
-  // Función para intercambiar tarjetas (como en el CodePen)
-  const handleCardClick = (clickedId: string) => {
-    if (selectedTab === clickedId || isAnimating) return;
+  // Función exacta del CodePen
+  const changeGrid = (el: HTMLElement) => {
+    if (el === activeRef.current) return;
     
-    setIsAnimating(true);
+    const products = gsap.utils.toArray(".product") as HTMLElement[];
+    let state = Flip.getState(products);
     
-    const container = containerRef.current;
-    if (!container) return;
-
-    // Obtener todas las tarjetas
-    const cards = Array.from(container.querySelectorAll('.card')) as HTMLElement[];
+    if (activeRef.current) {
+      activeRef.current.dataset.grid = el.dataset.grid;
+    }
+    el.dataset.grid = "skill-1";
+    activeRef.current = el;
     
-    // Guardar el estado actual antes del cambio
-    const state = gsap.getProperty(cards, "x,y,width,height,rotation,scale");
-    
-    // Cambiar el estado (esto reorganiza el DOM)
-    setSelectedTab(clickedId);
-    
-    // Usar requestAnimationFrame para asegurar que el DOM se ha actualizado
-    requestAnimationFrame(() => {
-      // Aplicar el estado anterior temporalmente
-      gsap.set(cards, state);
-      
-      // Animar hacia las nuevas posiciones
-      gsap.to(cards, {
-        x: 0,
-        y: 0,
-        width: "auto",
-        height: "auto",
-        rotation: 0,
-        scale: 1,
-        duration: 0.6,
-        ease: "power2.inOut",
-        onComplete: () => {
-          setIsAnimating(false);
-        }
-      });
+    Flip.from(state, {
+      duration: 0.3,
+      absolute: true,
+      ease: "power1.inOut"
     });
   };
 
-  // Configuración inicial
   useEffect(() => {
     const container = containerRef.current;
     if (!container) return;
 
+    // Configurar el primer elemento como activo
+    const products = gsap.utils.toArray(".product") as HTMLElement[];
+    activeRef.current = products[0];
+
+    // Agregar event listeners
+    products.forEach(el => {
+      el.addEventListener("click", () => changeGrid(el));
+    });
+
     // Animación de entrada inicial
-    gsap.fromTo('.card',
+    gsap.fromTo('.skill-content',
       { opacity: 0, y: 30 },
       {
         opacity: 1,
         y: 0,
         duration: 0.6,
-        stagger: 0.1,
         ease: 'power3.out',
         scrollTrigger: {
           trigger: container,
@@ -183,7 +170,77 @@ const Skills: React.FC = () => {
         }
       }
     );
+
+    return () => {
+      // Cleanup event listeners
+      products.forEach(el => {
+        el.removeEventListener("click", () => changeGrid(el));
+      });
+    };
   }, []);
+
+  const getSkillContent = (skillId: string) => {
+    const skill = skillCategories.find(s => s.id === skillId);
+    if (!skill) return null;
+
+    return (
+      <div className="p-6 h-full flex flex-col">
+        {/* Header */}
+        <div className="flex items-center mb-6">
+          <div className={`w-16 h-16 rounded-xl bg-gradient-to-br ${skill.color} flex items-center justify-center mr-4 shadow-lg`}>
+            {React.cloneElement(skill.icon as React.ReactElement, {
+              className: "w-8 h-8 text-white"
+            })}
+          </div>
+          <div className="min-w-0 flex-1">
+            <h3 className="text-2xl font-bold text-foreground tracking-wide mb-1">
+              {skill.title}
+            </h3>
+            <p className="text-muted-foreground">{skill.subtitle}</p>
+            <div className="flex flex-col sm:flex-row sm:gap-4 text-sm text-accent font-medium mt-2">
+              <span>💼 {skill.workExperience}</span>
+              <span>📚 {skill.studyExperience}</span>
+            </div>
+          </div>
+        </div>
+
+        {/* Especialidades */}
+        <div className="mb-6">
+          <h4 className="text-lg font-semibold text-foreground mb-3">Especialidades:</h4>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+            {skill.highlights.map((highlight, index) => (
+              <div key={index} className="flex items-center text-sm text-muted-foreground">
+                <div className="w-2 h-2 bg-accent rounded-full mr-3 flex-shrink-0"></div>
+                <span>{highlight}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Tecnologías */}
+        <div className="flex-1">
+          <h4 className="text-lg font-semibold text-foreground mb-3">Tecnologías:</h4>
+          <div className="flex flex-wrap gap-2">
+            {skill.skills.map((tech, index) => (
+              <div 
+                key={index} 
+                className="bg-muted/50 backdrop-blur-sm rounded-full px-4 py-2 border border-border/50 hover:bg-accent/10 hover:border-accent/30 transition-all duration-300"
+              >
+                <div className="flex items-center space-x-2">
+                  <span className="text-sm font-medium text-foreground">{tech.name}</span>
+                  <div className="flex items-center space-x-1 text-xs text-accent">
+                    <span>💼 {tech.workTime}</span>
+                    <span className="text-muted-foreground">•</span>
+                    <span>📚 {tech.studyTime}</span>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    );
+  };
 
   return (
     <section id="habilidades" className="py-8 sm:py-12 lg:py-20">
@@ -193,126 +250,81 @@ const Skills: React.FC = () => {
           <p className="text-base sm:text-lg lg:text-xl text-muted-foreground">Especialización técnica por áreas de desarrollo</p>
         </div>
 
-        {/* Container principal */}
-        <div className="max-w-6xl mx-auto">
-          <div 
-            ref={containerRef}
-            className="grid grid-cols-1 lg:grid-cols-3 gap-4 lg:gap-6"
-          >
-            {skillCategories.map((category) => {
-              const isSelected = selectedTab === category.id;
-              
-              return (
+        {/* Estructura exacta del CodePen */}
+        <div className="skill-content max-w-6xl mx-auto">
+          <div className="skill-container">
+            <div 
+              ref={containerRef}
+              className="skills"
+              style={{
+                width: '100%',
+                height: '500px',
+                position: 'relative',
+                display: 'grid',
+                gridTemplateColumns: 'repeat(3, 1fr)',
+                gridTemplateRows: 'repeat(4, 1fr)',
+                gap: '8px',
+                gridTemplateAreas: `
+                  "skill-1 skill-1 skill-1"
+                  "skill-1 skill-1 skill-1"
+                  "skill-1 skill-1 skill-1"
+                  "skill-2 skill-3 skill-4"
+                `
+              }}
+            >
+              {skillCategories.map((category, index) => (
                 <div
                   key={category.id}
-                  className={`card cursor-pointer transition-all duration-300 ${
-                    isSelected 
-                      ? 'lg:col-span-2 lg:row-span-2' 
-                      : 'lg:col-span-1 lg:row-span-1'
-                  } ${isAnimating ? 'pointer-events-none' : ''}`}
-                  onClick={() => handleCardClick(category.id)}
+                  className="product"
+                  data-grid={category.id}
+                  style={{
+                    gridArea: category.id,
+                    cursor: index === 0 ? 'default' : 'pointer',
+                    willChange: 'transform',
+                    border: '1px solid hsl(var(--border))',
+                    borderRadius: '12px',
+                    overflow: 'hidden',
+                    background: 'hsl(var(--background))',
+                    backdropFilter: 'blur(10px)',
+                    boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)',
+                    transition: 'box-shadow 0.3s ease',
+                    zIndex: index === 0 ? 1 : 'auto'
+                  }}
+                  onMouseEnter={(e) => {
+                    if (e.currentTarget !== activeRef.current) {
+                      e.currentTarget.style.boxShadow = '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)';
+                    }
+                  }}
+                  onMouseLeave={(e) => {
+                    if (e.currentTarget !== activeRef.current) {
+                      e.currentTarget.style.boxShadow = '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)';
+                    }
+                  }}
                 >
-                  <div className={`
-                    relative overflow-hidden rounded-2xl border border-border shadow-lg hover:shadow-xl
-                    bg-background/80 backdrop-blur-sm
-                    ${isSelected ? 'h-96 lg:h-full' : 'h-48 lg:h-40'}
-                    transition-all duration-300 hover:-translate-y-1
-                    group
-                  `}>
-                    
-                    {/* Fondo con gradiente sutil */}
-                    <div className={`absolute inset-0 bg-gradient-to-br ${category.color} opacity-5 group-hover:opacity-10 transition-opacity duration-300`}></div>
-                    
-                    {/* Contenido */}
-                    <div className="relative z-10 p-4 sm:p-6 h-full flex flex-col">
-                      
-                      {/* Header */}
-                      <div className="flex items-center mb-4">
-                        <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${category.color} flex items-center justify-center mr-4 shadow-lg group-hover:scale-110 transition-transform duration-300`}>
-                          {React.cloneElement(category.icon as React.ReactElement, {
-                            className: "w-6 h-6 text-white"
-                          })}
-                        </div>
-                        <div className="min-w-0 flex-1">
-                          <h3 className="text-lg sm:text-xl font-bold text-foreground tracking-wide">
-                            {category.title}
-                          </h3>
-                          <p className="text-sm text-muted-foreground">{category.subtitle}</p>
-                          {!isSelected && (
-                            <div className="text-xs text-accent font-medium mt-1">
-                              💼 {category.workExperience} • 📚 {category.studyExperience}
-                            </div>
-                          )}
-                        </div>
+                  {/* Contenido para tarjeta principal */}
+                  {category.id === 'skill-1' ? (
+                    getSkillContent('skill-1')
+                  ) : (
+                    /* Contenido para tarjetas pequeñas */
+                    <div className="p-4 h-full flex flex-col justify-center items-center text-center">
+                      <div className={`w-12 h-12 rounded-lg bg-gradient-to-br ${category.color} flex items-center justify-center mb-3 shadow-lg`}>
+                        {React.cloneElement(category.icon as React.ReactElement, {
+                          className: "w-6 h-6 text-white"
+                        })}
                       </div>
-
-                      {/* Contenido expandido solo para tarjeta seleccionada */}
-                      {isSelected && (
-                        <div className="flex-1 space-y-4">
-                          
-                          {/* Experiencia */}
-                          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
-                            <div className="flex items-center">
-                              <span className="text-accent font-medium">💼 {category.workExperience}</span>
-                            </div>
-                            <div className="flex items-center">
-                              <span className="text-accent font-medium">📚 {category.studyExperience}</span>
-                            </div>
-                          </div>
-
-                          {/* Especialidades */}
-                          <div>
-                            <h4 className="text-sm font-semibold text-foreground mb-2">Especialidades:</h4>
-                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-1">
-                              {category.highlights.map((highlight, index) => (
-                                <div key={index} className="flex items-center text-xs text-muted-foreground">
-                                  <div className="w-1.5 h-1.5 bg-accent rounded-full mr-2 flex-shrink-0"></div>
-                                  <span>{highlight}</span>
-                                </div>
-                              ))}
-                            </div>
-                          </div>
-
-                          {/* Tecnologías */}
-                          <div className="flex-1">
-                            <h4 className="text-sm font-semibold text-foreground mb-2">Tecnologías:</h4>
-                            <div className="flex flex-wrap gap-2">
-                              {category.skills.map((skill, index) => (
-                                <div 
-                                  key={index} 
-                                  className="bg-muted/50 backdrop-blur-sm rounded-full px-3 py-1 border border-border/50 hover:bg-accent/10 hover:border-accent/30 transition-all duration-300"
-                                >
-                                  <div className="flex items-center space-x-2">
-                                    <span className="text-xs font-medium text-foreground">{skill.name}</span>
-                                    <div className="flex items-center space-x-1 text-xs text-accent">
-                                      <span>💼 {skill.workTime}</span>
-                                      <span className="text-muted-foreground">•</span>
-                                      <span>📚 {skill.studyTime}</span>
-                                    </div>
-                                  </div>
-                                </div>
-                              ))}
-                            </div>
-                          </div>
-                        </div>
-                      )}
-
-                      {/* Indicador de click para tarjetas no seleccionadas */}
-                      {!isSelected && (
-                        <div className="mt-auto pt-2">
-                          <div className="text-xs text-accent font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                            Click para ver detalles →
-                          </div>
-                        </div>
-                      )}
+                      <h3 className="text-lg font-bold text-foreground mb-1 tracking-wide">
+                        {category.title}
+                      </h3>
+                      <p className="text-xs text-muted-foreground mb-2">{category.subtitle}</p>
+                      <div className="text-xs text-accent font-medium">
+                        <div>💼 {category.workExperience}</div>
+                        <div>📚 {category.studyExperience}</div>
+                      </div>
                     </div>
-
-                    {/* Efecto hover */}
-                    <div className="absolute inset-0 bg-accent/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none rounded-2xl"></div>
-                  </div>
+                  )}
                 </div>
-              );
-            })}
+              ))}
+            </div>
           </div>
         </div>
       </div>
