@@ -350,7 +350,7 @@ const Skills: React.FC = () => {
           {selectedCategoryData && (
             <div className="relative">
               {/* Tabs positioned above content */}
-              <div className="relative -mb-4 z-20">
+              <div className="relative -mb-px z-20">
                 <div className="flex flex-wrap gap-2 sm:gap-3 justify-center sm:justify-start">
                   {skillCategories.map((category, index) => (
                     <button
@@ -358,15 +358,15 @@ const Skills: React.FC = () => {
                       onClick={() => setSelectedCategory(category.id)}
                       className={`notebook-tab relative group transition-all duration-300 ${
                         selectedCategory === category.id
-                          ? 'transform -translate-y-1 z-30'
+                          ? 'z-30'
                           : 'hover:-translate-y-0.5 z-20'
                       }`}
                     >
                       {/* Tab Background */}
                       <div className={`
-                        relative px-3 sm:px-4 lg:px-6 py-2 sm:py-3 rounded-t-lg border-t-2 border-l-2 border-r-2 transition-all duration-300
+                        relative px-3 sm:px-4 lg:px-6 py-2 sm:py-3 rounded-t-lg border-t border-l border-r transition-all duration-300
                         ${selectedCategory === category.id 
-                          ? `${category.tabColor} text-white shadow-lg border-transparent` 
+                          ? `${category.tabColor} text-white shadow-lg border-transparent border-b-0` 
                           : 'bg-muted/80 text-muted-foreground border-border hover:bg-muted hover:text-foreground'
                         }
                       `}>
@@ -378,20 +378,9 @@ const Skills: React.FC = () => {
                           <span className="text-xs sm:text-sm lg:text-base font-medium">{category.title}</span>
                         </div>
 
-                        {/* Tab Number */}
-                        <div className={`
-                          absolute -top-1 -right-1 w-4 sm:w-5 h-4 sm:h-5 rounded-full text-xs flex items-center justify-center font-bold
-                          ${selectedCategory === category.id 
-                            ? 'bg-white text-gray-800' 
-                            : 'bg-accent text-white'
-                          }
-                        `}>
-                          {index + 1}
-                        </div>
-
                         {/* Active Tab Connector */}
                         {selectedCategory === category.id && (
-                          <div className="absolute -bottom-0.5 left-0 right-0 h-1 bg-background rounded-b-sm"></div>
+                          <div className="absolute -bottom-px left-0 right-0 h-px bg-background"></div>
                         )}
                       </div>
                     </button>
@@ -400,7 +389,7 @@ const Skills: React.FC = () => {
               </div>
 
               {/* Main Content Area */}
-              <div className="bg-background/80 backdrop-blur-sm border border-border rounded-2xl p-6 sm:p-8 lg:p-10 shadow-xl relative z-10">
+              <div className="bg-background/80 backdrop-blur-sm border border-border rounded-2xl rounded-tl-none p-6 sm:p-8 lg:p-10 shadow-xl relative z-10">
               
                 {/* Category Header */}
                 <div className="flex items-center mb-6 sm:mb-8">
@@ -471,29 +460,6 @@ const Skills: React.FC = () => {
                       )}
                     </div>
                   ))}
-                </div>
-
-                {/* Legend */}
-                <div className="mt-6 sm:mt-8 pt-6 sm:pt-8 border-t border-border">
-                  <h4 className="text-sm font-semibold text-foreground mb-3">Leyenda:</h4>
-                  <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
-                    <div className="flex items-center space-x-2">
-                      <div className="w-3 h-3 bg-purple-500 rounded-full"></div>
-                      <span className="text-xs sm:text-sm text-muted-foreground">Experto</span>
-                    </div>
-                    <div className="flex items-center space-x-2">
-                      <div className="w-3 h-3 bg-green-500 rounded-full"></div>
-                      <span className="text-xs sm:text-sm text-muted-foreground">Avanzado</span>
-                    </div>
-                    <div className="flex items-center space-x-2">
-                      <div className="w-3 h-3 bg-blue-500 rounded-full"></div>
-                      <span className="text-xs sm:text-sm text-muted-foreground">Intermedio</span>
-                    </div>
-                    <div className="flex items-center space-x-2">
-                      <div className="w-3 h-3 bg-orange-500 rounded-full"></div>
-                      <span className="text-xs sm:text-sm text-muted-foreground">Principiante</span>
-                    </div>
-                  </div>
                 </div>
               </div>
             </div>
