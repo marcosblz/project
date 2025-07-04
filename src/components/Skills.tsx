@@ -1,10 +1,29 @@
-import React, { useEffect, useRef } from 'react';
-import { Server, Monitor, GitBranch, Settings } from 'lucide-react';
+import React, { useEffect, useState } from 'react';
+import { 
+  Server, 
+  Monitor, 
+  GitBranch, 
+  Settings, 
+  ChevronRight, 
+  Code, 
+  Database, 
+  Globe, 
+  Wrench,
+  Zap,
+  Star
+} from 'lucide-react';
 import { gsap } from 'gsap';
-import { Flip } from 'gsap/Flip';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
-gsap.registerPlugin(Flip, ScrollTrigger);
+gsap.registerPlugin(ScrollTrigger);
+
+interface Technology {
+  name: string;
+  level: 'Principiante' | 'Intermedio' | 'Avanzado' | 'Experto';
+  context: 'Trabajo' | 'Estudios' | 'Ambos';
+  description: string;
+  icon?: React.ReactNode;
+}
 
 interface SkillCategory {
   id: string;
@@ -12,127 +31,247 @@ interface SkillCategory {
   subtitle: string;
   icon: React.ReactNode;
   color: string;
-  workExperience: string;
-  studyExperience: string;
+  technologies: Technology[];
   highlights: string[];
-  skills: Array<{
-    name: string;
-    workTime: string;
-    studyTime: string;
-    description: string;
-  }>;
 }
 
 const Skills: React.FC = () => {
-  const containerRef = useRef<HTMLDivElement>(null);
+  const [selectedCategory, setSelectedCategory] = useState<string>('backend');
+  const [showDetails, setShowDetails] = useState<{ [key: string]: boolean }>({});
 
   const skillCategories: SkillCategory[] = [
     {
-      id: 'skill-1',
-      title: 'BACK-END',
+      id: 'backend',
+      title: 'Backend Development',
       subtitle: 'Desarrollo del lado del servidor',
-      icon: <Server className="w-8 h-8" />,
+      icon: <Server className="w-6 h-6" />,
       color: 'from-blue-500 to-cyan-500',
-      workExperience: '3 años trabajando',
-      studyExperience: '4 años estudiando',
       highlights: [
-        'APIs REST robustas y escalables',
+        'APIs REST y GraphQL',
+        'Bases de datos relacionales y NoSQL',
         'Arquitectura de microservicios',
-        'Optimización de bases de datos',
-        'Integración con servicios externos'
+        'Optimización de rendimiento'
       ],
-      skills: [
-        { name: 'Groovy', workTime: '1 año', studyTime: '6 meses', description: 'Desarrollo de SaaS y automatización' },
-        { name: 'Python', workTime: '8 meses', studyTime: '2 años', description: 'Django, FastAPI, scripts de automatización' },
-        { name: 'Java', workTime: '3 meses', studyTime: '2 años', description: 'Spring Boot, aplicaciones empresariales' },
-        { name: 'Node.js', workTime: '2 meses', studyTime: '1 año', description: 'Express, APIs REST, microservicios' },
-        { name: 'PostgreSQL', workTime: '1 año', studyTime: '2 años', description: 'Diseño de esquemas, optimización' },
-        { name: 'MySQL', workTime: '8 meses', studyTime: '1.5 años', description: 'Bases de datos relacionales' }
+      technologies: [
+        {
+          name: 'Groovy',
+          level: 'Avanzado',
+          context: 'Trabajo',
+          description: 'Desarrollo de SaaS empresarial y automatización de procesos',
+          icon: <Code className="w-4 h-4" />
+        },
+        {
+          name: 'Python',
+          level: 'Avanzado',
+          context: 'Ambos',
+          description: 'Django, FastAPI, scripts de automatización e integración con IA',
+          icon: <Code className="w-4 h-4" />
+        },
+        {
+          name: 'Java',
+          level: 'Intermedio',
+          context: 'Estudios',
+          description: 'Spring Boot, aplicaciones empresariales y programación multihilo',
+          icon: <Code className="w-4 h-4" />
+        },
+        {
+          name: 'Node.js',
+          level: 'Intermedio',
+          context: 'Estudios',
+          description: 'Express.js, APIs REST y desarrollo de microservicios',
+          icon: <Code className="w-4 h-4" />
+        },
+        {
+          name: 'PostgreSQL',
+          level: 'Avanzado',
+          context: 'Trabajo',
+          description: 'Diseño de esquemas, optimización de consultas y administración',
+          icon: <Database className="w-4 h-4" />
+        },
+        {
+          name: 'MySQL',
+          level: 'Intermedio',
+          context: 'Ambos',
+          description: 'Bases de datos relacionales y stored procedures',
+          icon: <Database className="w-4 h-4" />
+        }
       ]
     },
     {
-      id: 'skill-2',
-      title: 'FRONT-END',
+      id: 'frontend',
+      title: 'Frontend Development',
       subtitle: 'Interfaces de usuario modernas',
-      icon: <Monitor className="w-8 h-8" />,
+      icon: <Monitor className="w-6 h-6" />,
       color: 'from-purple-500 to-pink-500',
-      workExperience: '2 años trabajando',
-      studyExperience: '3 años estudiando',
       highlights: [
         'Interfaces responsivas y accesibles',
         'Componentes reutilizables',
-        'Optimización de rendimiento',
-        'Experiencia de usuario fluida'
+        'Animaciones y micro-interacciones',
+        'Optimización de rendimiento'
       ],
-      skills: [
-        { name: 'JavaScript', workTime: '2 años', studyTime: '3 años', description: 'ES6+, DOM manipulation, async/await' },
-        { name: 'HTML5/CSS3', workTime: '2 años', studyTime: '3 años', description: 'Semantic HTML, Flexbox, Grid' },
-        { name: 'React', workTime: '6 meses', studyTime: '1 año', description: 'Hooks, Context API, componentes' },
-        { name: 'TypeScript', workTime: '3 meses', studyTime: '8 meses', description: 'Tipado estático, interfaces' },
-        { name: 'Tailwind CSS', workTime: '4 meses', studyTime: '6 meses', description: 'Utility-first, responsive design' },
-        { name: 'GSAP', workTime: '2 meses', studyTime: '4 meses', description: 'Animaciones complejas, ScrollTrigger' }
+      technologies: [
+        {
+          name: 'JavaScript',
+          level: 'Avanzado',
+          context: 'Ambos',
+          description: 'ES6+, DOM manipulation, async/await y programación funcional',
+          icon: <Code className="w-4 h-4" />
+        },
+        {
+          name: 'HTML5 & CSS3',
+          level: 'Avanzado',
+          context: 'Ambos',
+          description: 'Semantic HTML, Flexbox, Grid, animations y responsive design',
+          icon: <Globe className="w-4 h-4" />
+        },
+        {
+          name: 'React',
+          level: 'Intermedio',
+          context: 'Estudios',
+          description: 'Hooks, Context API, componentes funcionales y estado global',
+          icon: <Code className="w-4 h-4" />
+        },
+        {
+          name: 'TypeScript',
+          level: 'Intermedio',
+          context: 'Estudios',
+          description: 'Tipado estático, interfaces, generics y desarrollo escalable',
+          icon: <Code className="w-4 h-4" />
+        },
+        {
+          name: 'Tailwind CSS',
+          level: 'Intermedio',
+          context: 'Estudios',
+          description: 'Utility-first CSS, responsive design y componentes personalizados',
+          icon: <Globe className="w-4 h-4" />
+        },
+        {
+          name: 'GSAP',
+          level: 'Intermedio',
+          context: 'Estudios',
+          description: 'Animaciones complejas, ScrollTrigger y timeline avanzado',
+          icon: <Zap className="w-4 h-4" />
+        }
       ]
     },
     {
-      id: 'skill-3',
-      title: 'DEVOPS',
+      id: 'devops',
+      title: 'DevOps & Infrastructure',
       subtitle: 'Automatización y despliegue',
-      icon: <GitBranch className="w-8 h-8" />,
+      icon: <GitBranch className="w-6 h-6" />,
       color: 'from-orange-500 to-red-500',
-      workExperience: '1 año trabajando',
-      studyExperience: '2 años estudiando',
       highlights: [
         'Pipelines CI/CD automatizados',
-        'Containerización con Docker',
+        'Containerización y orquestación',
         'Monitoreo y logging',
         'Infraestructura como código'
       ],
-      skills: [
-        { name: 'Git', workTime: '3 años', studyTime: '3 años', description: 'Control de versiones, branching strategies' },
-        { name: 'Docker', workTime: '8 meses', studyTime: '1 año', description: 'Containerización, Docker Compose' },
-        { name: 'Jenkins', workTime: '6 meses', studyTime: '8 meses', description: 'Pipelines CI/CD, automatización' },
-        { name: 'Linux', workTime: '1 año', studyTime: '2 años', description: 'Administración de servidores, bash' },
-        { name: 'AWS', workTime: '3 meses', studyTime: '6 meses', description: 'EC2, S3, RDS, Lambda básico' },
-        { name: 'Nginx', workTime: '4 meses', studyTime: '8 meses', description: 'Reverse proxy, load balancing' }
+      technologies: [
+        {
+          name: 'Git',
+          level: 'Avanzado',
+          context: 'Ambos',
+          description: 'Control de versiones, branching strategies y workflows colaborativos',
+          icon: <GitBranch className="w-4 h-4" />
+        },
+        {
+          name: 'Docker',
+          level: 'Intermedio',
+          context: 'Ambos',
+          description: 'Containerización, Docker Compose y multi-stage builds',
+          icon: <Settings className="w-4 h-4" />
+        },
+        {
+          name: 'Jenkins',
+          level: 'Intermedio',
+          context: 'Estudios',
+          description: 'Pipelines CI/CD, automatización de despliegues y testing',
+          icon: <Settings className="w-4 h-4" />
+        },
+        {
+          name: 'Linux',
+          level: 'Intermedio',
+          context: 'Ambos',
+          description: 'Administración de servidores, bash scripting y Ubuntu/CentOS',
+          icon: <Settings className="w-4 h-4" />
+        },
+        {
+          name: 'AWS',
+          level: 'Principiante',
+          context: 'Estudios',
+          description: 'EC2, S3, RDS, Lambda básico - Certificación en progreso',
+          icon: <Globe className="w-4 h-4" />
+        },
+        {
+          name: 'Nginx',
+          level: 'Intermedio',
+          context: 'Estudios',
+          description: 'Reverse proxy, load balancing, SSL y configuración avanzada',
+          icon: <Settings className="w-4 h-4" />
+        }
       ]
     },
     {
-      id: 'skill-4',
-      title: 'OTROS',
+      id: 'tools',
+      title: 'Tools & Methodologies',
       subtitle: 'Herramientas y metodologías',
-      icon: <Settings className="w-8 h-8" />,
+      icon: <Settings className="w-6 h-6" />,
       color: 'from-green-500 to-emerald-500',
-      workExperience: '2 años trabajando',
-      studyExperience: '3 años estudiando',
       highlights: [
-        'Metodologías ágiles (Scrum/Kanban)',
+        'Metodologías ágiles',
         'Testing y calidad de código',
         'Herramientas de diseño',
         'Análisis y documentación'
       ],
-      skills: [
-        { name: 'Scrum/Kanban', workTime: '2 años', studyTime: '1 año', description: 'Metodologías ágiles, gestión' },
-        { name: 'REST APIs', workTime: '2 años', studyTime: '2 años', description: 'Diseño, documentación, integración' },
-        { name: 'Photoshop', workTime: '6 meses', studyTime: '2 años', description: 'Edición de imágenes, optimización' },
-        { name: 'Figma', workTime: '3 meses', studyTime: '8 meses', description: 'Prototipado, diseño de interfaces' },
-        { name: 'Jest/Testing', workTime: '2 meses', studyTime: '6 meses', description: 'Unit testing, integration testing' },
-        { name: 'Webpack', workTime: '1 mes', studyTime: '4 meses', description: 'Bundling, optimización de assets' }
+      technologies: [
+        {
+          name: 'Scrum/Kanban',
+          level: 'Avanzado',
+          context: 'Trabajo',
+          description: 'Metodologías ágiles, gestión de proyectos con Jira y Trello',
+          icon: <Wrench className="w-4 h-4" />
+        },
+        {
+          name: 'REST APIs',
+          level: 'Avanzado',
+          context: 'Ambos',
+          description: 'Diseño, documentación, integración con Postman y Swagger',
+          icon: <Globe className="w-4 h-4" />
+        },
+        {
+          name: 'Photoshop',
+          level: 'Intermedio',
+          context: 'Trabajo',
+          description: 'Edición de imágenes, optimización web y diseño básico',
+          icon: <Monitor className="w-4 h-4" />
+        },
+        {
+          name: 'Figma',
+          level: 'Principiante',
+          context: 'Estudios',
+          description: 'Prototipado, diseño de interfaces y colaboración en equipo',
+          icon: <Monitor className="w-4 h-4" />
+        },
+        {
+          name: 'Jest/Testing',
+          level: 'Principiante',
+          context: 'Estudios',
+          description: 'Unit testing, integration testing y TDD básico',
+          icon: <Code className="w-4 h-4" />
+        },
+        {
+          name: 'Webpack',
+          level: 'Principiante',
+          context: 'Estudios',
+          description: 'Bundling, optimización de assets y configuración avanzada',
+          icon: <Settings className="w-4 h-4" />
+        }
       ]
     }
   ];
 
-  const changeGrid = (viewId: string) => {
-    const container = containerRef.current;
-    if (!container || container.dataset.view === viewId) return;
-    const products = gsap.utils.toArray<HTMLElement>('.product');
-    const state = Flip.getState(products);
-    container.dataset.view = viewId;
-    Flip.from(state, { duration: 0.3, absolute: true, ease: 'power1.inOut' });
-  };
-
   useEffect(() => {
-    gsap.fromTo(
-      '.skill-content',
+    gsap.fromTo('.skills-container',
       { opacity: 0, y: 30 },
       {
         opacity: 1,
@@ -140,119 +279,203 @@ const Skills: React.FC = () => {
         duration: 0.6,
         ease: 'power3.out',
         scrollTrigger: {
-          trigger: containerRef.current,
+          trigger: '.skills-section',
           start: 'top 80%',
+          toggleActions: 'play none none reverse'
+        }
+      }
+    );
+
+    gsap.fromTo('.category-card',
+      { opacity: 0, scale: 0.9 },
+      {
+        opacity: 1,
+        scale: 1,
+        duration: 0.5,
+        stagger: 0.1,
+        ease: 'back.out(1.7)',
+        scrollTrigger: {
+          trigger: '.categories-grid',
+          start: 'top 85%',
           toggleActions: 'play none none reverse'
         }
       }
     );
   }, []);
 
-  const getSkillContent = (skillId: string) => {
-    const skill = skillCategories.find(s => s.id === skillId);
-    if (!skill) return null;
-    return (
-      <div className="p-6 h-full flex flex-col">
-        <div className="flex items-center mb-6">
-          <div className={`w-16 h-16 rounded-xl bg-gradient-to-br ${skill.color} flex items-center justify-center mr-4 shadow-lg`}>
-            {React.cloneElement(skill.icon as React.ReactElement, { className: 'w-8 h-8 text-white' })}
-          </div>
-          <div className="min-w-0 flex-1">
-            <h3 className="text-2xl font-bold text-foreground tracking-wide mb-1">{skill.title}</h3>
-            <p className="text-muted-foreground">{skill.subtitle}</p>
-            <div className="flex flex-col sm:flex-row sm:gap-4 text-sm text-accent font-medium mt-2">
-              <span>💼 {skill.workExperience}</span>
-              <span>📚 {skill.studyExperience}</span>
-            </div>
-          </div>
+  const getLevelColor = (level: string) => {
+    switch (level) {
+      case 'Experto': return 'bg-purple-500 text-white';
+      case 'Avanzado': return 'bg-green-500 text-white';
+      case 'Intermedio': return 'bg-blue-500 text-white';
+      case 'Principiante': return 'bg-orange-500 text-white';
+      default: return 'bg-gray-500 text-white';
+    }
+  };
+
+  const getContextColor = (context: string) => {
+    switch (context) {
+      case 'Trabajo': return 'bg-accent/10 text-accent border-accent/20';
+      case 'Estudios': return 'bg-purple-500/10 text-purple-600 border-purple-500/20';
+      case 'Ambos': return 'bg-green-500/10 text-green-600 border-green-500/20';
+      default: return 'bg-gray-500/10 text-gray-600 border-gray-500/20';
+    }
+  };
+
+  const toggleDetails = (techName: string) => {
+    setShowDetails(prev => ({
+      ...prev,
+      [techName]: !prev[techName]
+    }));
+  };
+
+  const selectedCategoryData = skillCategories.find(cat => cat.id === selectedCategory);
+
+  return (
+    <section id="habilidades" className="skills-section py-8 sm:py-12 lg:py-20">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center mb-8 sm:mb-12 lg:mb-16">
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-foreground mb-2 sm:mb-4">Stack Tecnológico</h2>
+          <p className="text-base sm:text-lg lg:text-xl text-muted-foreground">Mis habilidades técnicas organizadas por especialización</p>
         </div>
-        <div className="mb-6">
-          <h4 className="text-lg font-semibold text-foreground mb-3">Especialidades:</h4>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-            {skill.highlights.map((highlight, i) => (
-              <div key={i} className="flex items-center text-sm text-muted-foreground">
-                <div className="w-2 h-2 bg-accent rounded-full mr-3 flex-shrink-0"></div>
-                <span>{highlight}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-        <div className="flex-1">
-          <h4 className="text-lg font-semibold text-foreground mb-3">Tecnologías:</h4>
-          <div className="flex flex-wrap gap-2">
-            {skill.skills.map((tech, i) => (
-              <div key={i} className="bg-muted/50 backdrop-blur-sm rounded-full px-4 py-2 border border-border/50 hover:bg-accent/10 hover:border-accent/30 transition-all duration-300">
-                <div className="flex items-center space-x-2">
-                  <span className="text-sm font-medium text-foreground">{tech.name}</span>
-                  <div className="flex items-center space-x-1 text-xs text-accent">
-                    <span>💼 {tech.workTime}</span>
-                    <span className="text-muted-foreground">•</span>
-                    <span>📚 {tech.studyTime}</span>
+
+        <div className="skills-container">
+          {/* Category Selection */}
+          <div className="categories-grid grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 lg:gap-6 mb-8 sm:mb-12">
+            {skillCategories.map((category) => (
+              <div
+                key={category.id}
+                onClick={() => setSelectedCategory(category.id)}
+                className={`category-card cursor-pointer rounded-xl p-4 sm:p-6 transition-all duration-300 hover:scale-105 ${
+                  selectedCategory === category.id
+                    ? `bg-gradient-to-br ${category.color} text-white shadow-lg`
+                    : 'bg-background/80 backdrop-blur-sm border border-border hover:shadow-lg'
+                }`}
+              >
+                <div className="text-center">
+                  <div className={`w-12 sm:w-16 h-12 sm:h-16 rounded-xl flex items-center justify-center mx-auto mb-3 sm:mb-4 ${
+                    selectedCategory === category.id
+                      ? 'bg-white/20'
+                      : `bg-gradient-to-br ${category.color}`
+                  }`}>
+                    {React.cloneElement(category.icon as React.ReactElement, {
+                      className: `w-6 sm:w-8 h-6 sm:h-8 ${selectedCategory === category.id ? 'text-white' : 'text-white'}`
+                    })}
                   </div>
+                  <h3 className={`text-sm sm:text-base lg:text-lg font-bold mb-1 ${
+                    selectedCategory === category.id ? 'text-white' : 'text-foreground'
+                  }`}>
+                    {category.title}
+                  </h3>
+                  <p className={`text-xs sm:text-sm ${
+                    selectedCategory === category.id ? 'text-white/80' : 'text-muted-foreground'
+                  }`}>
+                    {category.subtitle}
+                  </p>
                 </div>
               </div>
             ))}
           </div>
-        </div>
-      </div>
-    );
-  };
 
-  return (
-    <section id="habilidades" className="py-8 sm:py-12 lg:py-20">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-8 sm:mb-12 lg:mb-16">
-          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-foreground mb-2 sm:mb-4">Stack Tecnológico</h2>
-          <p className="text-base sm:text-lg lg:text-xl text-muted-foreground">Especialización técnica por áreas de desarrollo</p>
-        </div>
-        <div className="skill-content max-w-6xl mx-auto">
-          <div ref={containerRef} className="skills" data-view="skill-1">
-            {skillCategories.map((category, index) => (
-              <div
-                key={category.id}
-                className="product"
-                style={{
-                  gridArea: category.id,
-                  cursor: index === 0 ? 'default' : 'pointer',
-                  border: '1px solid hsl(var(--border))',
-                  borderRadius: '12px',
-                  overflow: 'hidden',
-                  background: 'hsl(var(--background))',
-                  backdropFilter: 'blur(10px)',
-                  boxShadow: '0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06)',
-                  transition: 'box-shadow 0.3s ease',
-                  zIndex: index === 0 ? 1 : 'auto'
-                }}
-                onClick={() => changeGrid(category.id)}
-                onMouseEnter={e => {
-                  if (category.id !== containerRef.current?.dataset.view) {
-                    e.currentTarget.style.boxShadow = '0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05)';
-                  }
-                }}
-                onMouseLeave={e => {
-                  if (category.id !== containerRef.current?.dataset.view) {
-                    e.currentTarget.style.boxShadow = '0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06)';
-                  }
-                }}
-              >
-                {category.id === containerRef.current?.dataset.view ? (
-                  getSkillContent(category.id)
-                ) : (
-                  <div className="p-4 h-full flex flex-col justify-center items-center text-center">
-                    <div className={`w-12 h-12 rounded-lg bg-gradient-to-br ${category.color} flex items-center justify-center mb-3 shadow-lg`}>
-                      {React.cloneElement(category.icon as React.ReactElement, { className: 'w-6 h-6 text-white' })}
-                    </div>
-                    <h3 className="text-lg font-bold text-foreground mb-1 tracking-wide">{category.title}</h3>
-                    <p className="text-xs text-muted-foreground mb-2">{category.subtitle}</p>
-                    <div className="text-xs text-accent font-medium">
-                      <div>💼 {category.workExperience}</div>
-                      <div>📚 {category.studyExperience}</div>
-                    </div>
+          {/* Selected Category Details */}
+          {selectedCategoryData && (
+            <div className="bg-background/80 backdrop-blur-sm border border-border rounded-2xl p-6 sm:p-8 lg:p-10 shadow-xl">
+              
+              {/* Category Header */}
+              <div className="flex items-center mb-6 sm:mb-8">
+                <div className={`w-16 sm:w-20 h-16 sm:h-20 rounded-xl bg-gradient-to-br ${selectedCategoryData.color} flex items-center justify-center mr-4 sm:mr-6 shadow-lg`}>
+                  {React.cloneElement(selectedCategoryData.icon as React.ReactElement, {
+                    className: "w-8 sm:w-10 h-8 sm:h-10 text-white"
+                  })}
+                </div>
+                <div className="flex-1">
+                  <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-foreground mb-2">{selectedCategoryData.title}</h3>
+                  <p className="text-sm sm:text-base text-muted-foreground mb-3">{selectedCategoryData.subtitle}</p>
+                  
+                  {/* Highlights */}
+                  <div className="flex flex-wrap gap-2">
+                    {selectedCategoryData.highlights.map((highlight, index) => (
+                      <span
+                        key={index}
+                        className="inline-flex items-center px-2 sm:px-3 py-1 bg-accent/10 text-accent rounded-full text-xs sm:text-sm font-medium"
+                      >
+                        <Star className="w-3 h-3 mr-1" />
+                        {highlight}
+                      </span>
+                    ))}
                   </div>
-                )}
+                </div>
               </div>
-            ))}
-          </div>
+
+              {/* Technologies Grid */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
+                {selectedCategoryData.technologies.map((tech, index) => (
+                  <div
+                    key={index}
+                    className="bg-card/50 border border-border rounded-xl p-4 sm:p-6 hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
+                  >
+                    <div className="flex items-start justify-between mb-3">
+                      <div className="flex items-center space-x-3">
+                        <div className="w-10 h-10 bg-muted rounded-lg flex items-center justify-center">
+                          {tech.icon}
+                        </div>
+                        <div>
+                          <h4 className="text-base sm:text-lg font-bold text-foreground">{tech.name}</h4>
+                          <div className="flex items-center space-x-2 mt-1">
+                            <span className={`px-2 py-1 rounded-full text-xs font-medium ${getLevelColor(tech.level)}`}>
+                              {tech.level}
+                            </span>
+                            <span className={`px-2 py-1 rounded-full text-xs font-medium border ${getContextColor(tech.context)}`}>
+                              {tech.context}
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                      <button
+                        onClick={() => toggleDetails(tech.name)}
+                        className="p-2 hover:bg-muted rounded-lg transition-colors duration-200"
+                      >
+                        <ChevronRight className={`w-4 h-4 text-muted-foreground transition-transform duration-200 ${
+                          showDetails[tech.name] ? 'rotate-90' : ''
+                        }`} />
+                      </button>
+                    </div>
+                    
+                    {showDetails[tech.name] && (
+                      <div className="mt-3 pt-3 border-t border-border">
+                        <p className="text-sm text-muted-foreground leading-relaxed">
+                          {tech.description}
+                        </p>
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </div>
+
+              {/* Legend */}
+              <div className="mt-6 sm:mt-8 pt-6 sm:pt-8 border-t border-border">
+                <h4 className="text-sm font-semibold text-foreground mb-3">Leyenda:</h4>
+                <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
+                  <div className="flex items-center space-x-2">
+                    <div className="w-3 h-3 bg-purple-500 rounded-full"></div>
+                    <span className="text-xs sm:text-sm text-muted-foreground">Experto</span>
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <div className="w-3 h-3 bg-green-500 rounded-full"></div>
+                    <span className="text-xs sm:text-sm text-muted-foreground">Avanzado</span>
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <div className="w-3 h-3 bg-blue-500 rounded-full"></div>
+                    <span className="text-xs sm:text-sm text-muted-foreground">Intermedio</span>
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <div className="w-3 h-3 bg-orange-500 rounded-full"></div>
+                    <span className="text-xs sm:text-sm text-muted-foreground">Principiante</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </section>
