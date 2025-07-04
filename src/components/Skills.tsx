@@ -3,7 +3,6 @@ import { Server, Monitor, GitBranch, Settings } from 'lucide-react';
 import { gsap } from 'gsap';
 import { Flip } from 'gsap/Flip';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import './Skills.css';
 
 gsap.registerPlugin(Flip, ScrollTrigger);
 
