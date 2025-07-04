@@ -58,7 +58,7 @@ const About: React.FC = () => {
   {
     id: 6,
     text: "¿Cómo decides cuándo tu código está listo para producción en lugar de seguir mejorándolo?",
-    response: "Verifico que pase los tests que he definido, evalúo posibles riesgos o conflictos y, si la estabilidad está garantizada, lo publico."
+    response: "Verifico que pase los tests que he definido, evalúo posibles riesgos o conflictos y, si es estabile, lo publico."
   },
   {
     id: 7,
