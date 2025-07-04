@@ -23,7 +23,7 @@ const About: React.FC = () => {
   const [messages, setMessages] = useState<Message[]>([
     {
       id: 1,
-      text: "¡Hola! 👋 Soy Marcos, desarrollador front-end con pasión por crear experiencias digitales increíbles.",
+      text: "¡Hola! 👋 Soy Marcos, desarrollador back-end con pasión por crear experiencias digitales increíbles.",
       isBot: true,
       timestamp: getCurrentTime()
     }
@@ -176,7 +176,7 @@ const About: React.FC = () => {
                   <h3 className="font-semibold text-foreground text-sm sm:text-base lg:text-lg">Marcos</h3>
                   <p className="text-xs sm:text-sm text-green-500 flex items-center font-medium">
                     <span className="w-1.5 sm:w-2 h-1.5 sm:h-2 bg-green-500 rounded-full mr-1 sm:mr-2 animate-pulse"></span>
-                    Disponible
+                    Disponible para nuevos proyectos
                   </p>
                 </div>
               </div>
