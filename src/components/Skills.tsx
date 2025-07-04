@@ -10,7 +10,8 @@ import {
   Globe, 
   Wrench,
   Zap,
-  Star
+  Star,
+  BookOpen
 } from 'lucide-react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -33,6 +34,7 @@ interface SkillCategory {
   color: string;
   technologies: Technology[];
   highlights: string[];
+  tabColor: string;
 }
 
 const Skills: React.FC = () => {
@@ -42,10 +44,11 @@ const Skills: React.FC = () => {
   const skillCategories: SkillCategory[] = [
     {
       id: 'backend',
-      title: 'Backend Development',
+      title: 'Backend',
       subtitle: 'Desarrollo del lado del servidor',
-      icon: <Server className="w-6 h-6" />,
+      icon: <Server className="w-4 h-4" />,
       color: 'from-blue-500 to-cyan-500',
+      tabColor: 'bg-blue-500',
       highlights: [
         'APIs REST y GraphQL',
         'Bases de datos relacionales y NoSQL',
@@ -99,10 +102,11 @@ const Skills: React.FC = () => {
     },
     {
       id: 'frontend',
-      title: 'Frontend Development',
+      title: 'Frontend',
       subtitle: 'Interfaces de usuario modernas',
-      icon: <Monitor className="w-6 h-6" />,
+      icon: <Monitor className="w-4 h-4" />,
       color: 'from-purple-500 to-pink-500',
+      tabColor: 'bg-purple-500',
       highlights: [
         'Interfaces responsivas y accesibles',
         'Componentes reutilizables',
@@ -156,10 +160,11 @@ const Skills: React.FC = () => {
     },
     {
       id: 'devops',
-      title: 'DevOps & Infrastructure',
+      title: 'DevOps',
       subtitle: 'Automatización y despliegue',
-      icon: <GitBranch className="w-6 h-6" />,
+      icon: <GitBranch className="w-4 h-4" />,
       color: 'from-orange-500 to-red-500',
+      tabColor: 'bg-orange-500',
       highlights: [
         'Pipelines CI/CD automatizados',
         'Containerización y orquestación',
@@ -213,10 +218,11 @@ const Skills: React.FC = () => {
     },
     {
       id: 'tools',
-      title: 'Tools & Methodologies',
+      title: 'Tools',
       subtitle: 'Herramientas y metodologías',
-      icon: <Settings className="w-6 h-6" />,
+      icon: <Settings className="w-4 h-4" />,
       color: 'from-green-500 to-emerald-500',
+      tabColor: 'bg-green-500',
       highlights: [
         'Metodologías ágiles',
         'Testing y calidad de código',
@@ -286,16 +292,16 @@ const Skills: React.FC = () => {
       }
     );
 
-    gsap.fromTo('.category-card',
-      { opacity: 0, scale: 0.9 },
+    gsap.fromTo('.notebook-tab',
+      { opacity: 0, x: -20 },
       {
         opacity: 1,
-        scale: 1,
-        duration: 0.5,
+        x: 0,
+        duration: 0.4,
         stagger: 0.1,
         ease: 'back.out(1.7)',
         scrollTrigger: {
-          trigger: '.categories-grid',
+          trigger: '.notebook-container',
           start: 'top 85%',
           toggleActions: 'play none none reverse'
         }
@@ -340,41 +346,89 @@ const Skills: React.FC = () => {
         </div>
 
         <div className="skills-container">
-          {/* Category Selection */}
-          <div className="categories-grid grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 lg:gap-6 mb-8 sm:mb-12">
-            {skillCategories.map((category) => (
-              <div
-                key={category.id}
-                onClick={() => setSelectedCategory(category.id)}
-                className={`category-card cursor-pointer rounded-xl p-4 sm:p-6 transition-all duration-300 hover:scale-105 ${
-                  selectedCategory === category.id
-                    ? `bg-gradient-to-br ${category.color} text-white shadow-lg`
-                    : 'bg-background/80 backdrop-blur-sm border border-border hover:shadow-lg'
-                }`}
-              >
-                <div className="text-center">
-                  <div className={`w-12 sm:w-16 h-12 sm:h-16 rounded-xl flex items-center justify-center mx-auto mb-3 sm:mb-4 ${
-                    selectedCategory === category.id
-                      ? 'bg-white/20'
-                      : `bg-gradient-to-br ${category.color}`
-                  }`}>
-                    {React.cloneElement(category.icon as React.ReactElement, {
-                      className: `w-6 sm:w-8 h-6 sm:h-8 ${selectedCategory === category.id ? 'text-white' : 'text-white'}`
-                    })}
-                  </div>
-                  <h3 className={`text-sm sm:text-base lg:text-lg font-bold mb-1 ${
-                    selectedCategory === category.id ? 'text-white' : 'text-foreground'
-                  }`}>
-                    {category.title}
-                  </h3>
-                  <p className={`text-xs sm:text-sm ${
-                    selectedCategory === category.id ? 'text-white/80' : 'text-muted-foreground'
-                  }`}>
-                    {category.subtitle}
-                  </p>
+          {/* Notebook Style Selector */}
+          <div className="notebook-container relative mb-8 sm:mb-12">
+            {/* Notebook Background */}
+            <div className="relative bg-background/80 backdrop-blur-sm border border-border rounded-xl shadow-lg overflow-hidden">
+              {/* Notebook Lines Pattern */}
+              <div className="absolute inset-0 opacity-5">
+                <div 
+                  className="w-full h-full"
+                  style={{
+                    backgroundImage: 'repeating-linear-gradient(transparent, transparent 24px, hsl(var(--border)) 24px, hsl(var(--border)) 25px)',
+                  }}
+                ></div>
+              </div>
+              
+              {/* Red Margin Line */}
+              <div className="absolute left-12 top-0 bottom-0 w-0.5 bg-red-300 opacity-30"></div>
+              
+              {/* Spiral Holes */}
+              <div className="absolute left-2 top-4 bottom-4 flex flex-col justify-evenly">
+                {[...Array(8)].map((_, i) => (
+                  <div key={i} className="w-2 h-2 bg-muted rounded-full border border-border"></div>
+                ))}
+              </div>
+
+              {/* Notebook Header */}
+              <div className="relative z-10 p-4 sm:p-6 border-b border-border/50">
+                <div className="flex items-center space-x-3 ml-8">
+                  <BookOpen className="w-5 h-5 text-accent" />
+                  <h3 className="text-lg sm:text-xl font-bold text-foreground">Cuaderno de Habilidades</h3>
+                  <div className="flex-1 border-b border-dashed border-muted-foreground/30"></div>
                 </div>
               </div>
-            ))}
+
+              {/* Tabs Container */}
+              <div className="relative z-10 p-4 sm:p-6 ml-8">
+                <div className="flex flex-wrap gap-2 sm:gap-3">
+                  {skillCategories.map((category, index) => (
+                    <button
+                      key={category.id}
+                      onClick={() => setSelectedCategory(category.id)}
+                      className={`notebook-tab relative group transition-all duration-300 ${
+                        selectedCategory === category.id
+                          ? 'transform -translate-y-1'
+                          : 'hover:-translate-y-0.5'
+                      }`}
+                    >
+                      {/* Tab Background */}
+                      <div className={`
+                        relative px-4 sm:px-6 py-2 sm:py-3 rounded-t-lg border-t-2 border-l-2 border-r-2 transition-all duration-300
+                        ${selectedCategory === category.id 
+                          ? `${category.tabColor} text-white shadow-lg border-transparent` 
+                          : 'bg-muted/50 text-muted-foreground border-border hover:bg-muted hover:text-foreground'
+                        }
+                      `}>
+                        {/* Tab Content */}
+                        <div className="flex items-center space-x-2">
+                          {React.cloneElement(category.icon as React.ReactElement, {
+                            className: "w-4 h-4"
+                          })}
+                          <span className="text-sm sm:text-base font-medium">{category.title}</span>
+                        </div>
+
+                        {/* Tab Number */}
+                        <div className={`
+                          absolute -top-1 -right-1 w-5 h-5 rounded-full text-xs flex items-center justify-center font-bold
+                          ${selectedCategory === category.id 
+                            ? 'bg-white text-gray-800' 
+                            : 'bg-accent text-white'
+                          }
+                        `}>
+                          {index + 1}
+                        </div>
+
+                        {/* Active Tab Indicator */}
+                        {selectedCategory === category.id && (
+                          <div className="absolute -bottom-0.5 left-0 right-0 h-0.5 bg-background"></div>
+                        )}
+                      </div>
+                    </button>
+                  ))}
+                </div>
+              </div>
+            </div>
           </div>
 
           {/* Selected Category Details */}
@@ -389,7 +443,7 @@ const Skills: React.FC = () => {
                   })}
                 </div>
                 <div className="flex-1">
-                  <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-foreground mb-2">{selectedCategoryData.title}</h3>
+                  <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-foreground mb-2">{selectedCategoryData.title} Development</h3>
                   <p className="text-sm sm:text-base text-muted-foreground mb-3">{selectedCategoryData.subtitle}</p>
                   
                   {/* Highlights */}
