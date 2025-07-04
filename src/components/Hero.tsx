@@ -304,7 +304,7 @@ const Hero: React.FC = () => {
 
             <div className="inline-block bg-card/80 backdrop-blur-sm border border-border rounded-lg px-3 sm:px-4 lg:px-6 py-2 sm:py-3 lg:py-4 max-w-xs sm:max-w-sm lg:max-w-md mx-auto lg:mx-0">
               <p className="text-sm sm:text-base lg:text-lg text-muted-foreground italic leading-relaxed">
-                Me gusta pensar y pasarlo a código. Siempre enfocado en hacerlo mejor y aprender algo nuevo cada día.
+                “Para mí, la calidad no es solo que el código funcione, sino dejarlo cada día un poco mejor que ayer.”
               </p>
             </div>
 
