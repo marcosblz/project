@@ -167,7 +167,7 @@ const About: React.FC = () => {
               <div className="flex items-center space-x-2 sm:space-x-3">
                 <div className="relative">
                   <img
-                    src="./marcos.jpg"
+                    src="./marcos2.jpg"
                     alt="Marcos"
                     className="w-8 sm:w-10 lg:w-12 h-8 sm:h-10 lg:h-12 rounded-full border-2 border-accent/20"
                   />
