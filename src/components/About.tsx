@@ -181,7 +181,7 @@ const About: React.FC = () => {
                 </div>
               </div>
               <div className="text-right hidden sm:block">
-                <p className="text-xs text-muted-foreground">Desarrollador Front-End</p>
+                <p className="text-xs text-muted-foreground">Desarrollador Back-End</p>
                 <p className="text-xs text-muted-foreground">Madrid, España</p>
               </div>
             </div>
