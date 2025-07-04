@@ -496,8 +496,6 @@ const Skills: React.FC = () => {
                   </div>
                 </div>
               </div>
-            </div>
-            </div>
           )}
         </div>
       </div>
