@@ -63,12 +63,12 @@ const About: React.FC = () => {
   {
     id: 7,
     text: "¿Cómo explicas conceptos técnicos complejos a alguien sin conocimientos técnicos?",
-    response: "El reclutador quiere ver tu habilidad para simplificar ideas, usar analogías claras y adaptar el lenguaje al interlocutor."
+    response: "Uso ejemplos del día a día y analogías sencillas. Si la persona lo requiere, dibujo esquemas básicos, evito jerga y confirmo que lo han entendido."
   },
   {
     id: 8,
     text: "¿Qué haces para mantener tus conocimientos y habilidades de programación actualizadas?",
-    response: "El reclutador espera conocer tu iniciativa de aprendizaje continuo: cursos, proyectos personales, participación en comunidades y lectura de documentación."
+    response: "Estudio con cursos online regularmente, realizo mis propios proyectos y practico resolviendo problemas de lógica."
   }
 ]);
 
