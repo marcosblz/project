@@ -55,102 +55,98 @@ Saludos,
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-12">
           
-          {/* Main Contact Cards */}
-          <div className="space-y-4 sm:space-y-6">
-            
-            {/* Email Card */}
-            <div 
-              onClick={handleEmailClick}
-              className="contact-card bg-background/80 backdrop-blur-sm border border-border rounded-xl p-4 sm:p-6 lg:p-8 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 cursor-pointer group"
-            >
-              <div className="flex items-center space-x-4">
-                <div className="w-12 sm:w-14 lg:w-16 h-12 sm:h-14 lg:h-16 bg-gradient-to-br from-accent to-accent/80 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-lg">
-                  <Mail className="w-6 sm:w-7 lg:w-8 h-6 sm:h-7 lg:h-8 text-white" />
-                </div>
-                <div className="flex-1 min-w-0">
-                  <h3 className="text-lg sm:text-xl lg:text-2xl font-bold text-foreground group-hover:text-accent transition-colors duration-300 mb-1">Email</h3>
-                  <p className="text-sm sm:text-base text-muted-foreground truncate">marcosbaezalopez@gmail.com</p>
-                  <p className="text-xs sm:text-sm text-accent font-medium mt-1">Click para enviar mensaje</p>
-                </div>
+          {/* Email Card */}
+          <div 
+            onClick={handleEmailClick}
+            className="contact-card bg-background/80 backdrop-blur-sm border border-border rounded-xl p-4 sm:p-6 lg:p-8 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 cursor-pointer group"
+          >
+            <div className="flex items-center space-x-4">
+              <div className="w-12 sm:w-14 lg:w-16 h-12 sm:h-14 lg:h-16 bg-gradient-to-br from-accent to-accent/80 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-lg">
+                <Mail className="w-6 sm:w-7 lg:w-8 h-6 sm:h-7 lg:h-8 text-white" />
               </div>
-            </div>
-
-            {/* Phone Card */}
-            <div 
-              onClick={handlePhoneClick}
-              className="contact-card bg-background/80 backdrop-blur-sm border border-border rounded-xl p-4 sm:p-6 lg:p-8 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 cursor-pointer group"
-            >
-              <div className="flex items-center space-x-4">
-                <div className="w-12 sm:w-14 lg:w-16 h-12 sm:h-14 lg:h-16 bg-gradient-to-br from-green-500 to-green-600 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-lg">
-                  <Phone className="w-6 sm:w-7 lg:w-8 h-6 sm:h-7 lg:h-8 text-white" />
-                </div>
-                <div className="flex-1 min-w-0">
-                  <h3 className="text-lg sm:text-xl lg:text-2xl font-bold text-foreground group-hover:text-green-500 transition-colors duration-300 mb-1">Teléfono</h3>
-                  <p className="text-sm sm:text-base text-muted-foreground">+34 717 705 991</p>
-                  <p className="text-xs sm:text-sm text-green-500 font-medium mt-1">Click para llamar</p>
-                </div>
+              <div className="flex-1 min-w-0">
+                <h3 className="text-lg sm:text-xl lg:text-2xl font-bold text-foreground group-hover:text-accent transition-colors duration-300 mb-1">Email</h3>
+                <p className="text-sm sm:text-base text-muted-foreground truncate">marcosbaezalopez@gmail.com</p>
+                <p className="text-xs sm:text-sm text-accent font-medium mt-1">Click para enviar mensaje</p>
               </div>
             </div>
           </div>
 
-          {/* Info Grid */}
-          <div className="space-y-4 sm:space-y-6">
-            
-            {/* Location */}
-            <div className="contact-card bg-background/80 backdrop-blur-sm border border-border rounded-xl p-4 sm:p-6 lg:p-8 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
-              <div className="flex items-center space-x-4">
-                <div className="w-12 sm:w-14 lg:w-16 h-12 sm:h-14 lg:h-16 bg-gradient-to-br from-purple-500 to-purple-600 rounded-xl flex items-center justify-center shadow-lg">
-                  <MapPin className="w-6 sm:w-7 lg:w-8 h-6 sm:h-7 lg:h-8 text-white" />
-                </div>
-                <div className="flex-1">
-                  <h4 className="text-lg sm:text-xl font-bold text-foreground mb-1">Ubicación</h4>
-                  <p className="text-sm sm:text-base text-muted-foreground">Madrid, España</p>
-                  <p className="text-xs sm:text-sm text-purple-500 font-medium mt-1">Disponible para remoto</p>
-                </div>
+          {/* Phone Card */}
+          <div 
+            onClick={handlePhoneClick}
+            className="contact-card bg-background/80 backdrop-blur-sm border border-border rounded-xl p-4 sm:p-6 lg:p-8 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 cursor-pointer group"
+          >
+            <div className="flex items-center space-x-4">
+              <div className="w-12 sm:w-14 lg:w-16 h-12 sm:h-14 lg:h-16 bg-gradient-to-br from-green-500 to-green-600 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-lg">
+                <Phone className="w-6 sm:w-7 lg:w-8 h-6 sm:h-7 lg:h-8 text-white" />
+              </div>
+              <div className="flex-1 min-w-0">
+                <h3 className="text-lg sm:text-xl lg:text-2xl font-bold text-foreground group-hover:text-green-500 transition-colors duration-300 mb-1">Teléfono</h3>
+                <p className="text-sm sm:text-base text-muted-foreground">+34 717 705 991</p>
+                <p className="text-xs sm:text-sm text-green-500 font-medium mt-1">Click para llamar</p>
               </div>
             </div>
+          </div>
+        </div>
 
-            {/* Availability */}
-            <div className="contact-card bg-background/80 backdrop-blur-sm border border-border rounded-xl p-4 sm:p-6 lg:p-8 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
-              <div className="flex items-center space-x-4">
-                <div className="w-12 sm:w-14 lg:w-16 h-12 sm:h-14 lg:h-16 bg-gradient-to-br from-green-500 to-emerald-500 rounded-xl flex items-center justify-center shadow-lg">
-                  <div className="w-3 sm:w-4 h-3 sm:h-4 bg-white rounded-full animate-pulse"></div>
-                </div>
-                <div className="flex-1">
-                  <h4 className="text-lg sm:text-xl font-bold text-foreground mb-1">Estado</h4>
-                  <p className="text-sm sm:text-base text-green-600 dark:text-green-400 font-medium">Disponible</p>
-                  <p className="text-xs sm:text-sm text-muted-foreground mt-1">Respuesta en 24h</p>
-                </div>
+        {/* Second Row - Info Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mt-6 sm:mt-8">
+          
+          {/* Location */}
+          <div className="contact-card bg-background/80 backdrop-blur-sm border border-border rounded-xl p-4 sm:p-6 lg:p-8 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+            <div className="flex items-center space-x-4">
+              <div className="w-12 sm:w-14 lg:w-16 h-12 sm:h-14 lg:h-16 bg-gradient-to-br from-purple-500 to-purple-600 rounded-xl flex items-center justify-center shadow-lg">
+                <MapPin className="w-6 sm:w-7 lg:w-8 h-6 sm:h-7 lg:h-8 text-white" />
+              </div>
+              <div className="flex-1">
+                <h4 className="text-lg sm:text-xl font-bold text-foreground mb-1">Ubicación</h4>
+                <p className="text-sm sm:text-base text-muted-foreground">Madrid, España</p>
+                <p className="text-xs sm:text-sm text-purple-500 font-medium mt-1">Disponible para remoto</p>
               </div>
             </div>
+          </div>
 
-            {/* Social */}
-            <div className="contact-card bg-background/80 backdrop-blur-sm border border-border rounded-xl p-4 sm:p-6 lg:p-8 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
-              <div className="flex items-center justify-between">
-                <div className="flex-1">
-                  <h4 className="text-lg sm:text-xl font-bold text-foreground mb-1">Redes Sociales</h4>
-                  <p className="text-xs sm:text-sm text-muted-foreground">Conecta conmigo</p>
-                </div>
-                <div className="flex space-x-3">
-                  <a
-                    href="https://github.com"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="w-12 sm:w-14 h-12 sm:h-14 bg-gradient-to-br from-gray-700 to-gray-800 dark:from-gray-600 dark:to-gray-700 hover:from-gray-600 hover:to-gray-700 dark:hover:from-gray-500 dark:hover:to-gray-600 rounded-xl flex items-center justify-center text-white transition-all duration-300 hover:scale-110 shadow-lg"
-                    title="GitHub"
-                  >
-                    <Github className="w-6 sm:w-7 h-6 sm:h-7" />
-                  </a>
-                  <a
-                    href="https://www.linkedin.com/in/marcosbaeza"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="w-12 sm:w-14 h-12 sm:h-14 bg-gradient-to-br from-blue-600 to-blue-700 hover:from-blue-500 hover:to-blue-600 rounded-xl flex items-center justify-center text-white transition-all duration-300 hover:scale-110 shadow-lg"
-                    title="LinkedIn"
-                  >
-                    <Linkedin className="w-6 sm:w-7 h-6 sm:h-7" />
-                  </a>
-                </div>
+          {/* Availability */}
+          <div className="contact-card bg-background/80 backdrop-blur-sm border border-border rounded-xl p-4 sm:p-6 lg:p-8 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+            <div className="flex items-center space-x-4">
+              <div className="w-12 sm:w-14 lg:w-16 h-12 sm:h-14 lg:h-16 bg-gradient-to-br from-green-500 to-emerald-500 rounded-xl flex items-center justify-center shadow-lg">
+                <div className="w-3 sm:w-4 h-3 sm:h-4 bg-white rounded-full animate-pulse"></div>
+              </div>
+              <div className="flex-1">
+                <h4 className="text-lg sm:text-xl font-bold text-foreground mb-1">Estado</h4>
+                <p className="text-sm sm:text-base text-green-600 dark:text-green-400 font-medium">Disponible</p>
+                <p className="text-xs sm:text-sm text-muted-foreground mt-1">Respuesta en 24h</p>
+              </div>
+            </div>
+          </div>
+
+          {/* Social */}
+          <div className="contact-card bg-background/80 backdrop-blur-sm border border-border rounded-xl p-4 sm:p-6 lg:p-8 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 md:col-span-2 lg:col-span-1">
+            <div className="flex items-center justify-between">
+              <div className="flex-1">
+                <h4 className="text-lg sm:text-xl font-bold text-foreground mb-1">Redes Sociales</h4>
+                <p className="text-xs sm:text-sm text-muted-foreground">Conecta conmigo</p>
+              </div>
+              <div className="flex space-x-3">
+                <a
+                  href="https://github.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-12 sm:w-14 h-12 sm:h-14 bg-gradient-to-br from-gray-700 to-gray-800 dark:from-gray-600 dark:to-gray-700 hover:from-gray-600 hover:to-gray-700 dark:hover:from-gray-500 dark:hover:to-gray-600 rounded-xl flex items-center justify-center text-white transition-all duration-300 hover:scale-110 shadow-lg"
+                  title="GitHub"
+                >
+                  <Github className="w-6 sm:w-7 h-6 sm:h-7" />
+                </a>
+                <a
+                  href="https://www.linkedin.com/in/marcosbaeza"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-12 sm:w-14 h-12 sm:h-14 bg-gradient-to-br from-blue-600 to-blue-700 hover:from-blue-500 hover:to-blue-600 rounded-xl flex items-center justify-center text-white transition-all duration-300 hover:scale-110 shadow-lg"
+                  title="LinkedIn"
+                >
+                  <Linkedin className="w-6 sm:w-7 h-6 sm:h-7" />
+                </a>
               </div>
             </div>
           </div>
