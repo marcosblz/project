@@ -25,18 +25,18 @@ const Contact: React.FC = () => {
   }, []);
 
   const handleEmailClick = async () => {
-    const subject = encodeURIComponent('Oportunidad de Colaboración');
-    const body = encodeURIComponent(`Hola Marcos,
-
-He visto tu portfolio y me gustaría hablar contigo sobre una oportunidad.
-
-¿Tienes disponibilidad para una llamada?
-
-Saludos,
-[Tu nombre]`);
-    
-    const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=marcosbaezalopez@gmail.com&su=${subject}&body=${body}`;
-    window.open(gmailUrl, '_blank');
+    try {
+      await navigator.clipboard.writeText('marcosbaezalopez@gmail.com');
+      // Opcional: mostrar una notificación de que se copió
+    } catch (err) {
+      // Fallback para navegadores que no soportan clipboard API
+      const textArea = document.createElement('textarea');
+      textArea.value = 'marcosbaezalopez@gmail.com';
+      document.body.appendChild(textArea);
+      textArea.select();
+      document.execCommand('copy');
+      document.body.removeChild(textArea);
+    }
   };
 
   const handlePhoneClick = () => {

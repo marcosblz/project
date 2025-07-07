@@ -119,14 +119,14 @@ const Projects: React.FC = () => {
         </div>
 
         {/* Projects Grid */}
-        <div className="projects-container grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 lg:gap-10">
+        <div className="projects-container grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 lg:gap-10 items-stretch">
           {projects.map((project, index) => (
             <div
               key={project.id}
               className="project-card group cursor-pointer perspective-1000"
               onClick={() => openModal(project)}
             >
-              <div className="relative bg-background/80 backdrop-blur-sm border border-border rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-700 transform-gpu hover:-translate-y-4 hover:rotate-1">
+              <div className="relative bg-background/80 backdrop-blur-sm border border-border rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-700 transform-gpu hover:-translate-y-4 hover:rotate-1 h-full flex flex-col">
                 {/* Image Container */}
                 <div className="relative overflow-hidden h-48 sm:h-56 lg:h-64">
                   <img
@@ -185,16 +185,16 @@ const Projects: React.FC = () => {
                 </div>
 
                 {/* Content */}
-                <div className="p-4 sm:p-6">
+                <div className="p-4 sm:p-6 flex-1 flex flex-col">
                   <h3 className="text-lg sm:text-xl font-bold text-foreground mb-3 group-hover:text-accent transition-colors duration-300">
                     {project.title}
                   </h3>
-                  <p className="text-muted-foreground mb-4 leading-relaxed text-sm sm:text-base">
+                  <p className="text-muted-foreground mb-4 leading-relaxed text-sm sm:text-base flex-1">
                     {project.description}
                   </p>
                   
                   {/* Technologies */}
-                  <div className="flex flex-wrap gap-2">
+                  <div className="flex flex-wrap gap-2 mt-auto">
                     {project.technologies.slice(0, 4).map((tech, techIndex) => (
                       <span
                         key={techIndex}
