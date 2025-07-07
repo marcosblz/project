@@ -26,7 +26,7 @@ const Education: React.FC = () => {
       title: "BootCamp DevOps",
       institution: "Qualentum",
       date: "Septiembre 2023 - Abril 2024",
-      description: "Formación intensiva en DevOps con enfoque práctico en automatización, implementación de metodologías ágiles (Scrum/Kanban), pipelines CI/CD y manejo de herramientas colaborativas (Git, Jenkins, Docker, Kubernetes), orientada a optimizar flujos de trabajo, mejorar la eficiencia del desarrollo y acelerar el despliegue continuo de software.",
+      description: "Programa intensivo con enfoque 100% práctico en entornos DevOps. Aprendí a diseñar, automatizar y optimizar pipelines de integración y entrega continua (CI/CD), gestionar infraestructuras con herramientas como Docker, Kubernetes, Jenkins y Ansible, y aplicar metodologías ágiles como Scrum y Kanban. Además, desarrollé habilidades clave en monitorización con Prometheus y Grafana, gestión de versiones con Git y despliegue en la nube con AWS, orientando todo el trabajo a la eficiencia, escalabilidad y estabilidad del software.",
       grade: "Sobresaliente",
       type: "education"
     },
@@ -35,7 +35,7 @@ const Education: React.FC = () => {
       title: "Desarrollo de Aplicaciones Multiplataforma",
       institution: "IES Enrique Tierno Galván",
       date: "Septiembre 2021 - Marzo 2023",
-      description: "Formación técnica en Java, especializada en programación Backend, Bases de Datos relacionales y no relacionales, diseño y arquitectura de software, así como implementación eficiente de procesos multihilo. Capacidad demostrada para adaptarme a diversos lenguajes y tecnologías, gestionar proyectos de forma integral y desarrollar soluciones escalables, robustas y optimizadas.",
+      description: "Formación especializada en desarrollo de software multiplataforma con énfasis en programación backend con Java y Python. Adquirí competencias sólidas en el diseño y manipulación de bases de datos SQL y NoSQL, construcción de interfaces, arquitectura de aplicaciones, y desarrollo de soluciones móviles y de escritorio. Realicé un proyecto final completo que integró todo el ciclo de vida del desarrollo: análisis, diseño, codificación, pruebas y documentación técnica.",
       grade: "Notable Alto",
       type: "education"
     },
@@ -44,7 +44,7 @@ const Education: React.FC = () => {
       title: "Sistemas Microinformáticos y Redes",
       institution: "Hease",
       date: "Septiembre 2019 - Marzo 2021",
-      description: "Formación enfocada en la instalación, configuración y mantenimiento de sistemas operativos, virtualización. redes y equipos informáticos. Capacidad para adaptarme a entornos tecnológicos diversos y resolver eficazmente problemas técnicos en infraestructuras tanto físicas como virtuales.",
+      description: "Ciclo formativo centrado en la instalación, mantenimiento y soporte de sistemas informáticos y redes locales. Aprendí a montar y configurar hardware, administrar sistemas operativos Windows y Linux, virtualizar entornos mediante herramientas como VirtualBox y VMWare, y aplicar protocolos de red (TCP/IP, DHCP, DNS). Desarrollé habilidades para diagnosticar y resolver incidencias técnicas, así como para optimizar el rendimiento de infraestructuras TI en entornos reales.",
       grade: "Notable Alto",
       type: "education"
     }
