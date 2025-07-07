@@ -163,26 +163,6 @@ Saludos,
           </div>
         </div>
 
-        {/* Call to Action */}
-        <div className="text-center">
-          <div className="contact-card bg-gradient-to-r from-accent/10 via-accent/5 to-accent/10 border border-accent/20 rounded-xl p-6 sm:p-8 lg:p-10 shadow-lg">
-            <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-foreground mb-3 sm:mb-4">¿Tienes un proyecto en mente?</h3>
-            <p className="text-base sm:text-lg text-muted-foreground mb-4 sm:mb-6 max-w-2xl mx-auto">
-              Estoy siempre abierto a discutir nuevas oportunidades y proyectos interesantes. 
-              No dudes en contactarme para hablar sobre cómo podemos trabajar juntos.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center">
-              <div className="flex items-center text-sm sm:text-base text-accent font-medium">
-                <Clock className="w-4 sm:w-5 h-4 sm:h-5 mr-2" />
-                Horario: 9:00 - 18:00 (CET)
-              </div>
-              <div className="hidden sm:block w-1 h-1 bg-muted-foreground rounded-full"></div>
-              <div className="text-sm sm:text-base text-muted-foreground">
-                Respuesta garantizada en 24 horas
-              </div>
-            </div>
-          </div>
-        </div>
       </div>
     </section>
   );
