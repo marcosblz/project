@@ -53,19 +53,20 @@ Saludos,
           <p className="text-base sm:text-lg lg:text-xl text-muted-foreground">¿Listo para trabajar juntos? ¡Hablemos!</p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-12">
+        {/* Main Contact Grid - 2x2 */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 lg:gap-8 mb-6 sm:mb-8">
           
           {/* Email Card */}
           <div 
             onClick={handleEmailClick}
-            className="contact-card bg-background/80 backdrop-blur-sm border border-border rounded-xl p-4 sm:p-6 lg:p-8 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 cursor-pointer group"
+            className="contact-card bg-background/80 backdrop-blur-sm border border-border rounded-xl p-4 sm:p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 cursor-pointer group"
           >
             <div className="flex items-center space-x-4">
-              <div className="w-12 sm:w-14 lg:w-16 h-12 sm:h-14 lg:h-16 bg-gradient-to-br from-accent to-accent/80 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-lg">
-                <Mail className="w-6 sm:w-7 lg:w-8 h-6 sm:h-7 lg:h-8 text-white" />
+              <div className="w-12 sm:w-14 h-12 sm:h-14 bg-gradient-to-br from-accent to-accent/80 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-lg">
+                <Mail className="w-6 sm:w-7 h-6 sm:h-7 text-white" />
               </div>
               <div className="flex-1 min-w-0">
-                <h3 className="text-lg sm:text-xl lg:text-2xl font-bold text-foreground group-hover:text-accent transition-colors duration-300 mb-1">Email</h3>
+                <h3 className="text-lg sm:text-xl font-bold text-foreground group-hover:text-accent transition-colors duration-300 mb-1">Email</h3>
                 <p className="text-sm sm:text-base text-muted-foreground truncate">marcosbaezalopez@gmail.com</p>
                 <p className="text-xs sm:text-sm text-accent font-medium mt-1">Click para enviar mensaje</p>
               </div>
@@ -75,29 +76,25 @@ Saludos,
           {/* Phone Card */}
           <div 
             onClick={handlePhoneClick}
-            className="contact-card bg-background/80 backdrop-blur-sm border border-border rounded-xl p-4 sm:p-6 lg:p-8 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 cursor-pointer group"
+            className="contact-card bg-background/80 backdrop-blur-sm border border-border rounded-xl p-4 sm:p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 cursor-pointer group"
           >
             <div className="flex items-center space-x-4">
-              <div className="w-12 sm:w-14 lg:w-16 h-12 sm:h-14 lg:h-16 bg-gradient-to-br from-green-500 to-green-600 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-lg">
-                <Phone className="w-6 sm:w-7 lg:w-8 h-6 sm:h-7 lg:h-8 text-white" />
+              <div className="w-12 sm:w-14 h-12 sm:h-14 bg-gradient-to-br from-green-500 to-green-600 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-lg">
+                <Phone className="w-6 sm:w-7 h-6 sm:h-7 text-white" />
               </div>
               <div className="flex-1 min-w-0">
-                <h3 className="text-lg sm:text-xl lg:text-2xl font-bold text-foreground group-hover:text-green-500 transition-colors duration-300 mb-1">Teléfono</h3>
+                <h3 className="text-lg sm:text-xl font-bold text-foreground group-hover:text-green-500 transition-colors duration-300 mb-1">Teléfono</h3>
                 <p className="text-sm sm:text-base text-muted-foreground">+34 717 705 991</p>
                 <p className="text-xs sm:text-sm text-green-500 font-medium mt-1">Click para llamar</p>
               </div>
             </div>
           </div>
-        </div>
 
-        {/* Second Row - Info Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mt-6 sm:mt-8">
-          
           {/* Location */}
-          <div className="contact-card bg-background/80 backdrop-blur-sm border border-border rounded-xl p-4 sm:p-6 lg:p-8 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+          <div className="contact-card bg-background/80 backdrop-blur-sm border border-border rounded-xl p-4 sm:p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
             <div className="flex items-center space-x-4">
-              <div className="w-12 sm:w-14 lg:w-16 h-12 sm:h-14 lg:h-16 bg-gradient-to-br from-purple-500 to-purple-600 rounded-xl flex items-center justify-center shadow-lg">
-                <MapPin className="w-6 sm:w-7 lg:w-8 h-6 sm:h-7 lg:h-8 text-white" />
+              <div className="w-12 sm:w-14 h-12 sm:h-14 bg-gradient-to-br from-purple-500 to-purple-600 rounded-xl flex items-center justify-center shadow-lg">
+                <MapPin className="w-6 sm:w-7 h-6 sm:h-7 text-white" />
               </div>
               <div className="flex-1">
                 <h4 className="text-lg sm:text-xl font-bold text-foreground mb-1">Ubicación</h4>
@@ -108,9 +105,9 @@ Saludos,
           </div>
 
           {/* Availability */}
-          <div className="contact-card bg-background/80 backdrop-blur-sm border border-border rounded-xl p-4 sm:p-6 lg:p-8 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+          <div className="contact-card bg-background/80 backdrop-blur-sm border border-border rounded-xl p-4 sm:p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
             <div className="flex items-center space-x-4">
-              <div className="w-12 sm:w-14 lg:w-16 h-12 sm:h-14 lg:h-16 bg-gradient-to-br from-green-500 to-emerald-500 rounded-xl flex items-center justify-center shadow-lg">
+              <div className="w-12 sm:w-14 h-12 sm:h-14 bg-gradient-to-br from-green-500 to-emerald-500 rounded-xl flex items-center justify-center shadow-lg">
                 <div className="w-3 sm:w-4 h-3 sm:h-4 bg-white rounded-full animate-pulse"></div>
               </div>
               <div className="flex-1">
@@ -120,36 +117,38 @@ Saludos,
               </div>
             </div>
           </div>
+        </div>
 
-          {/* Social */}
-          <div className="contact-card bg-background/80 backdrop-blur-sm border border-border rounded-xl p-4 sm:p-6 lg:p-8 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 md:col-span-2 lg:col-span-1">
+        {/* Social Media Row */}
+        <div className="flex justify-center mb-8 sm:mb-12">
+          <div className="contact-card bg-background/80 backdrop-blur-sm border border-border rounded-xl p-6 sm:p-8 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
             <div className="text-center">
               <h4 className="text-lg sm:text-xl font-bold text-foreground mb-2">Redes Sociales</h4>
-              <p className="text-xs sm:text-sm text-muted-foreground mb-4">Conecta conmigo</p>
-              <div className="flex justify-center space-x-4">
+              <p className="text-sm text-muted-foreground mb-6">Conecta conmigo</p>
+              <div className="flex space-x-6">
                 <a
                   href="https://github.com"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group flex flex-col items-center space-y-2 p-3 rounded-xl hover:bg-muted/50 transition-all duration-300"
+                  className="group flex flex-col items-center space-y-2 p-3 rounded-xl hover:bg-muted/30 transition-all duration-300"
                   title="GitHub"
                 >
-                  <div className="w-12 sm:w-14 h-12 sm:h-14 bg-gradient-to-br from-gray-700 to-gray-800 dark:from-gray-600 dark:to-gray-700 group-hover:from-gray-600 group-hover:to-gray-700 dark:group-hover:from-gray-500 dark:group-hover:to-gray-600 rounded-xl flex items-center justify-center text-white transition-all duration-300 group-hover:scale-110 shadow-lg">
-                    <Github className="w-6 sm:w-7 h-6 sm:h-7" />
+                  <div className="w-14 h-14 bg-gradient-to-br from-gray-700 to-gray-800 dark:from-gray-600 dark:to-gray-700 group-hover:from-gray-600 group-hover:to-gray-700 dark:group-hover:from-gray-500 dark:group-hover:to-gray-600 rounded-xl flex items-center justify-center text-white transition-all duration-300 group-hover:scale-110 shadow-lg">
+                    <Github className="w-7 h-7" />
                   </div>
-                  <span className="text-xs font-medium text-muted-foreground group-hover:text-foreground transition-colors duration-300">GitHub</span>
+                  <span className="text-sm font-medium text-muted-foreground group-hover:text-foreground transition-colors duration-300">GitHub</span>
                 </a>
                 <a
                   href="https://www.linkedin.com/in/marcosbaeza"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group flex flex-col items-center space-y-2 p-3 rounded-xl hover:bg-muted/50 transition-all duration-300"
+                  className="group flex flex-col items-center space-y-2 p-3 rounded-xl hover:bg-muted/30 transition-all duration-300"
                   title="LinkedIn"
                 >
-                  <div className="w-12 sm:w-14 h-12 sm:h-14 bg-gradient-to-br from-blue-600 to-blue-700 group-hover:from-blue-500 group-hover:to-blue-600 rounded-xl flex items-center justify-center text-white transition-all duration-300 group-hover:scale-110 shadow-lg">
-                    <Linkedin className="w-6 sm:w-7 h-6 sm:h-7" />
+                  <div className="w-14 h-14 bg-gradient-to-br from-blue-600 to-blue-700 group-hover:from-blue-500 group-hover:to-blue-600 rounded-xl flex items-center justify-center text-white transition-all duration-300 group-hover:scale-110 shadow-lg">
+                    <Linkedin className="w-7 h-7" />
                   </div>
-                  <span className="text-xs font-medium text-muted-foreground group-hover:text-foreground transition-colors duration-300">LinkedIn</span>
+                  <span className="text-sm font-medium text-muted-foreground group-hover:text-foreground transition-colors duration-300">LinkedIn</span>
                 </a>
               </div>
             </div>
@@ -157,7 +156,7 @@ Saludos,
         </div>
 
         {/* Call to Action */}
-        <div className="mt-8 sm:mt-12 lg:mt-16 text-center">
+        <div className="text-center">
           <div className="contact-card bg-gradient-to-r from-accent/10 via-accent/5 to-accent/10 border border-accent/20 rounded-xl p-6 sm:p-8 lg:p-10 shadow-lg">
             <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-foreground mb-3 sm:mb-4">¿Tienes un proyecto en mente?</h3>
             <p className="text-base sm:text-lg text-muted-foreground mb-4 sm:mb-6 max-w-2xl mx-auto">
