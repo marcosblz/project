@@ -121,34 +121,39 @@ Saludos,
 
         {/* Social Media Row */}
         <div className="mb-8 sm:mb-12">
-          <div className="contact-card bg-background/80 backdrop-blur-sm border border-border rounded-xl p-6 sm:p-8 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
-            <div className="text-center">
-              <h4 className="text-lg sm:text-xl font-bold text-foreground mb-2">Redes Sociales</h4>
-              <p className="text-sm text-muted-foreground mb-6">Conecta conmigo</p>
-              <div className="flex justify-center space-x-8 sm:space-x-12">
+          <div className="contact-card bg-background/80 backdrop-blur-sm border border-border rounded-xl p-4 sm:p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center space-x-4">
+                <div className="w-12 sm:w-14 h-12 sm:h-14 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-xl flex items-center justify-center shadow-lg">
+                  <svg className="w-6 sm:w-7 h-6 sm:h-7 text-white" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                    <circle cx="12" cy="12" r="3"/>
+                    <path d="M12 1v6l4-4-4-4z"/>
+                  </svg>
+                </div>
+                <div className="flex-1">
+                  <h4 className="text-lg sm:text-xl font-bold text-foreground mb-1">Redes Sociales</h4>
+                  <p className="text-xs sm:text-sm text-muted-foreground">Conecta conmigo en mis plataformas</p>
+                </div>
+              </div>
+              <div className="flex space-x-3 sm:space-x-4">
                 <a
                   href="https://github.com"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group flex flex-col items-center space-y-2 p-3 rounded-xl hover:bg-muted/30 transition-all duration-300"
+                  className="w-12 sm:w-14 h-12 sm:h-14 bg-gradient-to-br from-gray-700 to-gray-800 dark:from-gray-600 dark:to-gray-700 hover:from-gray-600 hover:to-gray-700 dark:hover:from-gray-500 dark:hover:to-gray-600 rounded-xl flex items-center justify-center text-white transition-all duration-300 hover:scale-110 shadow-lg group"
                   title="GitHub"
                 >
-                  <div className="w-16 sm:w-18 h-16 sm:h-18 bg-gradient-to-br from-gray-700 to-gray-800 dark:from-gray-600 dark:to-gray-700 group-hover:from-gray-600 group-hover:to-gray-700 dark:group-hover:from-gray-500 dark:group-hover:to-gray-600 rounded-xl flex items-center justify-center text-white transition-all duration-300 group-hover:scale-110 shadow-lg">
-                    <Github className="w-8 sm:w-9 h-8 sm:h-9" />
-                  </div>
-                  <span className="text-sm sm:text-base font-medium text-muted-foreground group-hover:text-foreground transition-colors duration-300">GitHub</span>
+                  <Github className="w-6 sm:w-7 h-6 sm:h-7" />
                 </a>
                 <a
                   href="https://www.linkedin.com/in/marcosbaeza"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group flex flex-col items-center space-y-2 p-3 rounded-xl hover:bg-muted/30 transition-all duration-300"
+                  className="w-12 sm:w-14 h-12 sm:h-14 bg-gradient-to-br from-blue-600 to-blue-700 hover:from-blue-500 hover:to-blue-600 rounded-xl flex items-center justify-center text-white transition-all duration-300 hover:scale-110 shadow-lg group"
                   title="LinkedIn"
                 >
-                  <div className="w-16 sm:w-18 h-16 sm:h-18 bg-gradient-to-br from-blue-600 to-blue-700 group-hover:from-blue-500 group-hover:to-blue-600 rounded-xl flex items-center justify-center text-white transition-all duration-300 group-hover:scale-110 shadow-lg">
-                    <Linkedin className="w-8 sm:w-9 h-8 sm:h-9" />
-                  </div>
-                  <span className="text-sm sm:text-base font-medium text-muted-foreground group-hover:text-foreground transition-colors duration-300">LinkedIn</span>
+                  <Linkedin className="w-6 sm:w-7 h-6 sm:h-7" />
                 </a>
               </div>
             </div>
