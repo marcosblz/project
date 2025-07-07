@@ -68,7 +68,7 @@ const Contact: React.FC = () => {
               <div className="flex-1 min-w-0">
                 <h3 className="text-lg sm:text-xl font-bold text-foreground group-hover:text-accent transition-colors duration-300 mb-1">Email</h3>
                 <p className="text-sm sm:text-base text-muted-foreground truncate">marcosbaezalopez@gmail.com</p>
-                <p className="text-xs sm:text-sm text-accent font-medium mt-1">Click para enviar mensaje</p>
+                <p className="text-xs sm:text-sm text-accent font-medium mt-1">Click para copiar correo</p>
               </div>
             </div>
           </div>
