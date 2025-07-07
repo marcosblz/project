@@ -121,42 +121,45 @@ Saludos,
 
         {/* Social Media Row */}
         <div className="mb-8 sm:mb-12">
-          <div className="contact-card bg-background/80 backdrop-blur-sm border border-border rounded-xl p-4 sm:p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
-            <div className="flex items-center justify-between">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 lg:gap-8">
+            
+            {/* GitHub Card */}
+            <a
+              href="https://github.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="contact-card bg-background/80 backdrop-blur-sm border border-border rounded-xl p-4 sm:p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 cursor-pointer group"
+            >
               <div className="flex items-center space-x-4">
-                <div className="w-12 sm:w-14 h-12 sm:h-14 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-xl flex items-center justify-center shadow-lg">
-                  <svg className="w-6 sm:w-7 h-6 sm:h-7 text-white" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
-                    <circle cx="12" cy="12" r="3"/>
-                    <path d="M12 1v6l4-4-4-4z"/>
-                  </svg>
+                <div className="w-12 sm:w-14 h-12 sm:h-14 bg-gradient-to-br from-gray-700 to-gray-800 dark:from-gray-600 dark:to-gray-700 group-hover:from-gray-600 group-hover:to-gray-700 dark:group-hover:from-gray-500 dark:group-hover:to-gray-600 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-lg">
+                  <Github className="w-6 sm:w-7 h-6 sm:h-7 text-white" />
                 </div>
-                <div className="flex-1">
-                  <h4 className="text-lg sm:text-xl font-bold text-foreground mb-1">Redes Sociales</h4>
-                  <p className="text-xs sm:text-sm text-muted-foreground">Conecta conmigo en mis plataformas</p>
+                <div className="flex-1 min-w-0">
+                  <h4 className="text-lg sm:text-xl font-bold text-foreground group-hover:text-gray-700 dark:group-hover:text-gray-300 transition-colors duration-300 mb-1">GitHub</h4>
+                  <p className="text-sm sm:text-base text-muted-foreground">Código fuente y proyectos</p>
+                  <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-400 font-medium mt-1">Ver repositorios y contribuciones</p>
                 </div>
               </div>
-              <div className="flex space-x-3 sm:space-x-4">
-                <a
-                  href="https://github.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-12 sm:w-14 h-12 sm:h-14 bg-gradient-to-br from-gray-700 to-gray-800 dark:from-gray-600 dark:to-gray-700 hover:from-gray-600 hover:to-gray-700 dark:hover:from-gray-500 dark:hover:to-gray-600 rounded-xl flex items-center justify-center text-white transition-all duration-300 hover:scale-110 shadow-lg group"
-                  title="GitHub"
-                >
-                  <Github className="w-6 sm:w-7 h-6 sm:h-7" />
-                </a>
-                <a
-                  href="https://www.linkedin.com/in/marcosbaeza"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-12 sm:w-14 h-12 sm:h-14 bg-gradient-to-br from-blue-600 to-blue-700 hover:from-blue-500 hover:to-blue-600 rounded-xl flex items-center justify-center text-white transition-all duration-300 hover:scale-110 shadow-lg group"
-                  title="LinkedIn"
-                >
-                  <Linkedin className="w-6 sm:w-7 h-6 sm:h-7" />
-                </a>
+            </a>
+
+            {/* LinkedIn Card */}
+            <a
+              href="https://www.linkedin.com/in/marcosbaeza"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="contact-card bg-background/80 backdrop-blur-sm border border-border rounded-xl p-4 sm:p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 cursor-pointer group"
+            >
+              <div className="flex items-center space-x-4">
+                <div className="w-12 sm:w-14 h-12 sm:h-14 bg-gradient-to-br from-blue-600 to-blue-700 group-hover:from-blue-500 group-hover:to-blue-600 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-lg">
+                  <Linkedin className="w-6 sm:w-7 h-6 sm:h-7 text-white" />
+                </div>
+                <div className="flex-1 min-w-0">
+                  <h4 className="text-lg sm:text-xl font-bold text-foreground group-hover:text-blue-600 transition-colors duration-300 mb-1">LinkedIn</h4>
+                  <p className="text-sm sm:text-base text-muted-foreground">Experiencia profesional</p>
+                  <p className="text-xs sm:text-sm text-blue-600 font-medium mt-1">Conectar y ver trayectoria</p>
+                </div>
               </div>
-            </div>
+            </a>
           </div>
         </div>
 
