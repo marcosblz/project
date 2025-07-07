@@ -125,7 +125,7 @@ Saludos,
             
             {/* GitHub Card */}
             <a
-              href="https://github.com"
+              href="https://github.com/marcosblz?tab=repositories"
               target="_blank"
               rel="noopener noreferrer"
               className="contact-card bg-background/80 backdrop-blur-sm border border-border rounded-xl p-4 sm:p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 cursor-pointer group"
