@@ -123,29 +123,33 @@ Saludos,
 
           {/* Social */}
           <div className="contact-card bg-background/80 backdrop-blur-sm border border-border rounded-xl p-4 sm:p-6 lg:p-8 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 md:col-span-2 lg:col-span-1">
-            <div className="flex items-center justify-between">
-              <div className="flex-1">
-                <h4 className="text-lg sm:text-xl font-bold text-foreground mb-1">Redes Sociales</h4>
-                <p className="text-xs sm:text-sm text-muted-foreground">Conecta conmigo</p>
-              </div>
-              <div className="flex space-x-3">
+            <div className="text-center">
+              <h4 className="text-lg sm:text-xl font-bold text-foreground mb-2">Redes Sociales</h4>
+              <p className="text-xs sm:text-sm text-muted-foreground mb-4">Conecta conmigo</p>
+              <div className="flex justify-center space-x-4">
                 <a
                   href="https://github.com"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-12 sm:w-14 h-12 sm:h-14 bg-gradient-to-br from-gray-700 to-gray-800 dark:from-gray-600 dark:to-gray-700 hover:from-gray-600 hover:to-gray-700 dark:hover:from-gray-500 dark:hover:to-gray-600 rounded-xl flex items-center justify-center text-white transition-all duration-300 hover:scale-110 shadow-lg"
+                  className="group flex flex-col items-center space-y-2 p-3 rounded-xl hover:bg-muted/50 transition-all duration-300"
                   title="GitHub"
                 >
-                  <Github className="w-6 sm:w-7 h-6 sm:h-7" />
+                  <div className="w-12 sm:w-14 h-12 sm:h-14 bg-gradient-to-br from-gray-700 to-gray-800 dark:from-gray-600 dark:to-gray-700 group-hover:from-gray-600 group-hover:to-gray-700 dark:group-hover:from-gray-500 dark:group-hover:to-gray-600 rounded-xl flex items-center justify-center text-white transition-all duration-300 group-hover:scale-110 shadow-lg">
+                    <Github className="w-6 sm:w-7 h-6 sm:h-7" />
+                  </div>
+                  <span className="text-xs font-medium text-muted-foreground group-hover:text-foreground transition-colors duration-300">GitHub</span>
                 </a>
                 <a
                   href="https://www.linkedin.com/in/marcosbaeza"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-12 sm:w-14 h-12 sm:h-14 bg-gradient-to-br from-blue-600 to-blue-700 hover:from-blue-500 hover:to-blue-600 rounded-xl flex items-center justify-center text-white transition-all duration-300 hover:scale-110 shadow-lg"
+                  className="group flex flex-col items-center space-y-2 p-3 rounded-xl hover:bg-muted/50 transition-all duration-300"
                   title="LinkedIn"
                 >
-                  <Linkedin className="w-6 sm:w-7 h-6 sm:h-7" />
+                  <div className="w-12 sm:w-14 h-12 sm:h-14 bg-gradient-to-br from-blue-600 to-blue-700 group-hover:from-blue-500 group-hover:to-blue-600 rounded-xl flex items-center justify-center text-white transition-all duration-300 group-hover:scale-110 shadow-lg">
+                    <Linkedin className="w-6 sm:w-7 h-6 sm:h-7" />
+                  </div>
+                  <span className="text-xs font-medium text-muted-foreground group-hover:text-foreground transition-colors duration-300">LinkedIn</span>
                 </a>
               </div>
             </div>
