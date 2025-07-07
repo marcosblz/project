@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { Mail, Phone, MapPin, Github, Linkedin, Clock } from 'lucide-react';
+import { Mail, Phone, MapPin, Github, Linkedin, Clock, Check } from 'lucide-react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
 
 const Contact: React.FC = () => {
+  const [showCopyNotification, setShowCopyNotification] = useState(false);
+
   useEffect(() => {
     gsap.fromTo('.contact-card',
       { y: 30, opacity: 0 },
@@ -27,7 +29,7 @@ const Contact: React.FC = () => {
   const handleEmailClick = async () => {
     try {
       await navigator.clipboard.writeText('marcosbaezalopez@gmail.com');
-      // Opcional: mostrar una notificación de que se copió
+      showNotification();
     } catch (err) {
       // Fallback para navegadores que no soportan clipboard API
       const textArea = document.createElement('textarea');
@@ -36,7 +38,40 @@ const Contact: React.FC = () => {
       textArea.select();
       document.execCommand('copy');
       document.body.removeChild(textArea);
+      showNotification();
     }
+  };
+
+  const showNotification = () => {
+    setShowCopyNotification(true);
+    
+    // Animar entrada
+    gsap.fromTo('.copy-notification',
+      { 
+        opacity: 0, 
+        scale: 0.8, 
+        y: 20 
+      },
+      { 
+        opacity: 1, 
+        scale: 1, 
+        y: 0, 
+        duration: 0.3, 
+        ease: 'back.out(1.7)' 
+      }
+    );
+
+    // Auto-hide después de 2.5 segundos
+    setTimeout(() => {
+      gsap.to('.copy-notification', {
+        opacity: 0,
+        scale: 0.8,
+        y: -10,
+        duration: 0.3,
+        ease: 'power2.in',
+        onComplete: () => setShowCopyNotification(false)
+      });
+    }, 2500);
   };
 
   const handlePhoneClick = () => {
@@ -164,6 +199,22 @@ const Contact: React.FC = () => {
         </div>
 
       </div>
+
+      {/* Copy Notification */}
+      {showCopyNotification && (
+        <div className="fixed top-20 left-1/2 transform -translate-x-1/2 z-50">
+          <div className="copy-notification bg-green-500 text-white px-4 sm:px-6 py-3 sm:py-4 rounded-xl shadow-2xl border border-green-400/20 backdrop-blur-sm">
+            <div className="flex items-center space-x-2 sm:space-x-3">
+              <div className="w-5 sm:w-6 h-5 sm:h-6 bg-white/20 rounded-full flex items-center justify-center">
+                <Check className="w-3 sm:w-4 h-3 sm:h-4 text-white" />
+              </div>
+              <span className="text-sm sm:text-base font-medium">
+                ¡Email copiado al portapapeles!
+              </span>
+            </div>
+          </div>
+        </div>
+      )}
     </section>
   );
 };
