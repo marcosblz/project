@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { X, ZoomIn, ZoomOut, Download, RotateCw, Home } from 'lucide-react';
+import { X, ZoomIn, ZoomOut, Download, Home } from 'lucide-react';
 import { gsap } from 'gsap';
 
 interface CVViewerProps {
@@ -134,31 +134,39 @@ const CVViewer: React.FC<CVViewerProps> = ({ isOpen, onClose }) => {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 bg-black/90 backdrop-blur-sm z-50 flex items-center justify-center">
+    <div className="fixed inset-0 bg-black/90 backdrop-blur-sm z-50 flex items-center justify-center p-4">
       <div
         ref={viewerRef}
-        className="w-[95vw] h-[95vh] max-w-6xl bg-background border border-border rounded-lg shadow-2xl overflow-hidden flex flex-col"
+        className="w-[95vw] h-[95vh] max-w-6xl bg-background/90 backdrop-blur-md border border-border rounded-2xl shadow-2xl overflow-hidden flex flex-col"
       >
         {/* Header */}
-        <div className="bg-muted/50 border-b border-border px-4 py-3 flex items-center justify-between">
-          <h3 className="text-lg font-semibold text-foreground">CV - Marcos Baeza</h3>
+        <div className="bg-card/80 backdrop-blur-sm border-b border-border px-4 sm:px-6 py-3 sm:py-4 flex items-center justify-between">
+          <div className="flex items-center space-x-3">
+            <div className="w-10 h-10 bg-gradient-to-br from-accent to-accent/80 rounded-lg flex items-center justify-center">
+              <Download className="w-5 h-5 text-white" />
+            </div>
+            <div>
+              <h3 className="text-lg sm:text-xl font-bold text-foreground">CV - Marcos Baeza</h3>
+              <p className="text-sm text-muted-foreground">Desarrollador Back-End</p>
+            </div>
+          </div>
           
           <div className="flex items-center space-x-2">
             {/* Zoom Controls */}
-            <div className="flex items-center space-x-1 bg-background rounded-lg border border-border px-2 py-1">
+            <div className="flex items-center space-x-1 bg-muted/50 rounded-lg border border-border px-3 py-2">
               <button
                 onClick={handleZoomOut}
-                className="p-1 hover:bg-muted rounded transition-colors"
+                className="p-1.5 hover:bg-accent/10 hover:text-accent rounded transition-colors duration-200"
                 title="Alejar (tecla -)"
               >
                 <ZoomOut className="w-4 h-4" />
               </button>
-              <span className="text-sm font-medium min-w-[3rem] text-center">
+              <span className="text-sm font-medium min-w-[3.5rem] text-center text-foreground">
                 {Math.round(scale * 100)}%
               </span>
               <button
                 onClick={handleZoomIn}
-                className="p-1 hover:bg-muted rounded transition-colors"
+                className="p-1.5 hover:bg-accent/10 hover:text-accent rounded transition-colors duration-200"
                 title="Acercar (tecla +)"
               >
                 <ZoomIn className="w-4 h-4" />
@@ -167,33 +175,33 @@ const CVViewer: React.FC<CVViewerProps> = ({ isOpen, onClose }) => {
 
             <button
               onClick={handleResetView}
-              className="p-2 hover:bg-muted rounded-lg transition-colors"
+              className="p-2.5 hover:bg-muted/50 rounded-lg transition-colors duration-200 border border-border"
               title="Restablecer vista (tecla R)"
             >
-              <Home className="w-4 h-4" />
+              <Home className="w-4 h-4 text-foreground" />
             </button>
 
             <button
               onClick={handleDownload}
-              className="flex items-center space-x-2 px-3 py-2 bg-accent text-white rounded-lg hover:bg-accent/90 transition-colors"
+              className="flex items-center space-x-2 px-4 py-2.5 bg-accent hover:bg-accent/90 text-white rounded-lg transition-all duration-300 hover:scale-105 shadow-lg"
             >
               <Download className="w-4 h-4" />
-              <span className="hidden sm:inline">Descargar</span>
+              <span className="hidden sm:inline font-medium">Descargar</span>
             </button>
 
             <button
               onClick={handleClose}
-              className="p-2 hover:bg-muted rounded-lg transition-colors"
+              className="p-2.5 hover:bg-muted/50 rounded-lg transition-colors duration-200 border border-border"
               title="Cerrar (Esc)"
             >
-              <X className="w-4 h-4" />
+              <X className="w-4 h-4 text-foreground" />
             </button>
           </div>
         </div>
 
         {/* CV Viewer */}
         <div
-          className="flex-1 overflow-hidden bg-gray-100 dark:bg-gray-900 relative flex items-center justify-center"
+          className="flex-1 overflow-hidden bg-muted/20 relative flex items-center justify-center"
           onMouseDown={handleMouseDown}
           onMouseMove={handleMouseMove}
           onMouseUp={handleMouseUp}
@@ -204,7 +212,7 @@ const CVViewer: React.FC<CVViewerProps> = ({ isOpen, onClose }) => {
             ref={imageRef}
             src="/CV MARCOS BAEZA.jpg"
             alt="CV Marcos Baeza"
-            className="max-w-none select-none shadow-2xl"
+            className="max-w-none select-none shadow-2xl rounded-lg border border-border/20"
             style={{
               transform: `translate(${position.x}px, ${position.y}px) scale(${scale})`,
               transition: isDragging ? 'none' : 'transform 0.2s ease-out',
@@ -214,36 +222,32 @@ const CVViewer: React.FC<CVViewerProps> = ({ isOpen, onClose }) => {
           />
 
           {/* Instructions */}
-          <div className="absolute bottom-4 left-4 bg-black/70 text-white px-3 py-2 rounded-lg text-sm">
-            Arrastra para mover • Rueda del ratón para zoom
-          </div>
-
-          {/* Zoom level indicator */}
-          <div className="absolute top-4 right-4 bg-black/70 text-white px-3 py-2 rounded-lg text-sm">
-            {Math.round(scale * 100)}%
+          <div className="absolute bottom-4 left-4 bg-card/90 backdrop-blur-sm text-foreground px-4 py-3 rounded-lg text-sm border border-border shadow-lg">
+            <div className="flex items-center space-x-2">
+              <div className="w-2 h-2 bg-accent rounded-full animate-pulse"></div>
+              <span>Arrastra para mover • Rueda del ratón para zoom</span>
+            </div>
           </div>
         </div>
 
         {/* Status Bar */}
-        <div className="bg-muted/30 border-t border-border px-4 py-2 flex items-center justify-between text-sm text-muted-foreground">
+        <div className="bg-card/50 backdrop-blur-sm border-t border-border px-4 sm:px-6 py-2 sm:py-3 flex items-center justify-between text-sm text-muted-foreground">
           <div className="flex items-center space-x-4">
+            <div className="flex items-center space-x-2">
+              <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+              <span>CV cargado</span>
+            </div>
             <span>Zoom: {Math.round(scale * 100)}%</span>
+          </div>
+          <div className="hidden sm:flex items-center space-x-4">
             <span>Posición: ({Math.round(position.x)}, {Math.round(position.y)})</span>
+            <div className="flex items-center space-x-1 text-xs">
+              <kbd className="bg-muted px-1.5 py-0.5 rounded text-foreground">+/-</kbd>
+              <span>Zoom</span>
+              <kbd className="bg-muted px-1.5 py-0.5 rounded text-foreground ml-2">R</kbd>
+              <span>Reset</span>
+            </div>
           </div>
-          <div className="flex items-center space-x-2">
-            <span className="w-2 h-2 bg-green-500 rounded-full"></span>
-            <span>CV cargado</span>
-          </div>
-        </div>
-      </div>
-
-      {/* Keyboard Shortcuts */}
-      <div className="absolute top-4 left-4 bg-black/70 text-white p-3 rounded-lg text-xs max-w-xs hidden lg:block">
-        <h4 className="font-semibold mb-2">Atajos:</h4>
-        <div className="space-y-1">
-          <div><kbd className="bg-white/20 px-1 rounded">+/-</kbd> Zoom</div>
-          <div><kbd className="bg-white/20 px-1 rounded">R</kbd> Restablecer</div>
-          <div><kbd className="bg-white/20 px-1 rounded">Esc</kbd> Cerrar</div>
         </div>
       </div>
     </div>

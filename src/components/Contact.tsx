@@ -204,27 +204,19 @@ const Contact: React.FC = () => {
         <div className="text-center">
           <button
             onClick={() => setShowCVViewer(true)}
-            className="inline-flex items-center justify-center px-6 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-accent to-accent/80 hover:from-accent/90 hover:to-accent/70 text-white text-base sm:text-lg font-semibold rounded-xl transition-all duration-300 hover:scale-105 hover:shadow-xl group relative overflow-hidden"
+            className="contact-card bg-background/80 backdrop-blur-sm border border-border rounded-xl p-4 sm:p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 cursor-pointer group max-w-md mx-auto"
           >
-            {/* Background Animation */}
-            <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700"></div>
-            
-            {/* Content */}
-            <div className="relative flex items-center space-x-3">
-              <div className="w-6 sm:w-7 h-6 sm:h-7 bg-white/20 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                <FileText className="w-4 sm:w-5 h-4 sm:h-5 text-white" />
+            <div className="flex items-center space-x-4">
+              <div className="w-12 sm:w-14 h-12 sm:h-14 bg-gradient-to-br from-accent to-accent/80 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-lg">
+                <FileText className="w-6 sm:w-7 h-6 sm:h-7 text-white" />
               </div>
-              <span>Ver CV Online</span>
-              <div className="w-2 h-2 bg-white/60 rounded-full animate-pulse"></div>
+              <div className="flex-1 min-w-0">
+                <h4 className="text-lg sm:text-xl font-bold text-foreground group-hover:text-accent transition-colors duration-300 mb-1">Ver CV Online</h4>
+                <p className="text-sm sm:text-base text-muted-foreground">Explora mi CV con zoom, descarga y más funciones interactivas</p>
+                <p className="text-xs sm:text-sm text-accent font-medium mt-1">Click para abrir visor interactivo</p>
+              </div>
             </div>
-            
-            {/* Glow Effect */}
-            <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-accent/50 to-accent/30 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10"></div>
           </button>
-          
-          <p className="text-sm sm:text-base text-muted-foreground mt-3 sm:mt-4">
-            Explora mi CV con zoom, descarga y más funciones interactivas
-          </p>
         </div>
 
       </div>
