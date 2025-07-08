@@ -303,7 +303,7 @@ const Hero: React.FC = () => {
             </h2>
 
             <p className="text-sm sm:text-base md:text-lg lg:text-xl text-muted-foreground/80 mt-2">
-              Con formación y experiencia en DevOps y en entornos fullstack
+              Con base sólida en DevOps y experiencia práctica en entornos fullstack.
             </p>
             <div className="inline-block bg-card/80 backdrop-blur-sm border border-border rounded-lg px-3 sm:px-4 lg:px-6 py-2 sm:py-3 lg:py-4 max-w-xs sm:max-w-sm lg:max-w-md mx-auto lg:mx-0">
               <p className="text-sm sm:text-base lg:text-lg text-muted-foreground italic leading-relaxed">
