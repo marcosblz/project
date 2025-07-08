@@ -85,7 +85,7 @@ const Contact: React.FC = () => {
         {/* Header */}
         <div className="text-center mb-8 sm:mb-12 lg:mb-16">
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-foreground mb-2 sm:mb-4">Contacto</h2>
-          <p className="text-base sm:text-lg lg:text-xl text-muted-foreground">¿Listo para trabajar juntos? ¡Hablemos!</p>
+          <p className="text-base sm:text-lg lg:text-xl text-muted-foreground">¿Tienes una oportunidad o proyecto en mente? Estoy abierto a ello!</p>
         </div>
 
         {/* Main Contact Grid - 2x2 */}
@@ -147,8 +147,8 @@ const Contact: React.FC = () => {
               </div>
               <div className="flex-1">
                 <h4 className="text-lg sm:text-xl font-bold text-foreground mb-1">Estado</h4>
-                <p className="text-sm sm:text-base text-green-600 dark:text-green-400 font-medium">Disponible</p>
-                <p className="text-xs sm:text-sm text-muted-foreground mt-1">Respuesta en 24h</p>
+                <p className="text-sm sm:text-base text-green-600 dark:text-green-400 font-medium">Disponible para entrevistas</p>
+                <p className="text-xs sm:text-sm text-muted-foreground mt-1">Respondo mensajes en menos de 24h</p>
               </div>
             </div>
           </div>
@@ -190,8 +190,8 @@ const Contact: React.FC = () => {
                 </div>
                 <div className="flex-1 min-w-0">
                   <h4 className="text-lg sm:text-xl font-bold text-foreground group-hover:text-blue-600 transition-colors duration-300 mb-1">LinkedIn</h4>
-                  <p className="text-sm sm:text-base text-muted-foreground">Experiencia profesional</p>
-                  <p className="text-xs sm:text-sm text-blue-600 font-medium mt-1">Conectar y ver trayectoria</p>
+                  <p className="text-sm sm:text-base text-muted-foreground">Conecta conmigo en LinkedIn</p>
+                  <p className="text-xs sm:text-sm text-blue-600 font-medium mt-1">Ir a mi perfil de LinkedIn</p>
                 </div>
               </div>
             </a>
