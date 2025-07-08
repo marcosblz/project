@@ -185,10 +185,9 @@ const Hero: React.FC = () => {
   };
 
   const downloadCV = () => {
-    // Simulate CV download
     const link = document.createElement('a');
-    link.href = '/cv.pdf';
-    link.download = 'Marcos_CV.pdf';
+    link.href = '/CV MARCOS BAEZA.jpg';
+    link.download = 'CV_Marcos_Baeza.jpg';
     link.click();
   };
 

@@ -84,8 +84,8 @@ const CVViewer: React.FC<CVViewerProps> = ({ isOpen, onClose }) => {
 
   const handleDownload = () => {
     const link = document.createElement('a');
-    link.href = '/cv.pdf';
-    link.download = 'Marcos_CV.pdf';
+    link.href = '/CV MARCOS BAEZA.jpg';
+    link.download = 'CV_Marcos_Baeza.jpg';
     link.click();
   };
 
@@ -131,7 +131,7 @@ const CVViewer: React.FC<CVViewerProps> = ({ isOpen, onClose }) => {
           <div className="flex items-center space-x-4">
             <div className="flex items-center space-x-2">
               <FileText className="w-5 h-5 text-accent" />
-              <h3 className="text-lg font-semibold text-foreground">CV - Marcos Baeza López</h3>
+              <h3 className="text-lg font-semibold text-foreground">CV - Marcos Baeza</h3>
             </div>
             
             {/* Page Navigation */}
@@ -241,12 +241,14 @@ const CVViewer: React.FC<CVViewerProps> = ({ isOpen, onClose }) => {
             }}
           >
             <div className="bg-white shadow-2xl rounded-lg overflow-hidden max-w-[210mm] max-h-[297mm] w-full h-full">
-              <iframe
-                ref={cvRef}
-                src="/cv.pdf"
-                className="w-full h-full border-none"
-                title="CV Marcos Baeza López"
-                style={{ minHeight: '800px' }}
+              <img
+                src="/CV MARCOS BAEZA.jpg"
+                alt="CV Marcos Baeza"
+                className="w-full h-full object-contain"
+                style={{ 
+                  minHeight: '800px',
+                  imageRendering: 'crisp-edges'
+                }}
               />
             </div>
           </div>
