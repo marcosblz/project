@@ -174,19 +174,11 @@ const CVViewer: React.FC<CVViewerProps> = ({ isOpen, onClose }) => {
             </div>
 
             <button
-              onClick={handleResetView}
-              className="p-2.5 hover:bg-muted/50 rounded-lg transition-colors duration-200 border border-border"
-              title="Restablecer vista (tecla R)"
-            >
-              <Home className="w-4 h-4 text-foreground" />
-            </button>
-
-            <button
               onClick={handleDownload}
-              className="flex items-center space-x-2 px-4 py-2.5 bg-accent hover:bg-accent/90 text-white rounded-lg transition-all duration-300 hover:scale-105 shadow-lg"
+              className="p-2.5 bg-muted/50 hover:bg-accent/10 hover:text-accent rounded-lg transition-colors duration-200 border border-border"
+              title="Descargar CV"
             >
               <Download className="w-4 h-4" />
-              <span className="hidden sm:inline font-medium">Descargar</span>
             </button>
 
             <button
