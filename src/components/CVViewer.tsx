@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { X, ZoomIn, ZoomOut, Download, Home } from 'lucide-react';
+import { X, ZoomIn, ZoomOut, Download, Home, FileText } from 'lucide-react';
 import { gsap } from 'gsap';
 
 interface CVViewerProps {
@@ -143,7 +143,7 @@ const CVViewer: React.FC<CVViewerProps> = ({ isOpen, onClose }) => {
         <div className="bg-card/80 backdrop-blur-sm border-b border-border px-4 sm:px-6 py-3 sm:py-4 flex items-center justify-between">
           <div className="flex items-center space-x-3">
             <div className="w-10 h-10 bg-gradient-to-br from-accent to-accent/80 rounded-lg flex items-center justify-center">
-              <Download className="w-5 h-5 text-white" />
+              <FileText className="w-5 h-5 text-white" />
             </div>
             <div>
               <h3 className="text-lg sm:text-xl font-bold text-foreground">CV - Marcos Baeza</h3>
@@ -226,26 +226,6 @@ const CVViewer: React.FC<CVViewerProps> = ({ isOpen, onClose }) => {
             <div className="flex items-center space-x-2">
               <div className="w-2 h-2 bg-accent rounded-full animate-pulse"></div>
               <span>Arrastra para mover • Rueda del ratón para zoom</span>
-            </div>
-          </div>
-        </div>
-
-        {/* Status Bar */}
-        <div className="bg-card/50 backdrop-blur-sm border-t border-border px-4 sm:px-6 py-2 sm:py-3 flex items-center justify-between text-sm text-muted-foreground">
-          <div className="flex items-center space-x-4">
-            <div className="flex items-center space-x-2">
-              <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-              <span>CV cargado</span>
-            </div>
-            <span>Zoom: {Math.round(scale * 100)}%</span>
-          </div>
-          <div className="hidden sm:flex items-center space-x-4">
-            <span>Posición: ({Math.round(position.x)}, {Math.round(position.y)})</span>
-            <div className="flex items-center space-x-1 text-xs">
-              <kbd className="bg-muted px-1.5 py-0.5 rounded text-foreground">+/-</kbd>
-              <span>Zoom</span>
-              <kbd className="bg-muted px-1.5 py-0.5 rounded text-foreground ml-2">R</kbd>
-              <span>Reset</span>
             </div>
           </div>
         </div>
