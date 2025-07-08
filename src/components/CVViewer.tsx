@@ -1,19 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { 
-  X, 
-  ZoomIn, 
-  ZoomOut, 
-  Download, 
-  RotateCw, 
-  Move, 
-  Maximize2, 
-  Minimize2,
-  ChevronLeft,
-  ChevronRight,
-  Home,
-  Search,
-  FileText
-} from 'lucide-react';
+import { X, ZoomIn, ZoomOut, Download, RotateCw, Home } from 'lucide-react';
 import { gsap } from 'gsap';
 
 interface CVViewerProps {
@@ -26,30 +12,68 @@ const CVViewer: React.FC<CVViewerProps> = ({ isOpen, onClose }) => {
   const [position, setPosition] = useState({ x: 0, y: 0 });
   const [isDragging, setIsDragging] = useState(false);
   const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
-  const [rotation, setRotation] = useState(0);
-  const [isFullscreen, setIsFullscreen] = useState(false);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [totalPages] = useState(1); // Assuming single page CV
   
   const viewerRef = useRef<HTMLDivElement>(null);
-  const containerRef = useRef<HTMLDivElement>(null);
-  const cvRef = useRef<HTMLIFrameElement>(null);
+  const imageRef = useRef<HTMLImageElement>(null);
 
   useEffect(() => {
     if (isOpen && viewerRef.current) {
-      // Animate modal entrance
       gsap.fromTo(viewerRef.current,
         { opacity: 0, scale: 0.9 },
         { opacity: 1, scale: 1, duration: 0.3, ease: 'power2.out' }
       );
-      
-      // Prevent body scroll
       document.body.style.overflow = 'hidden';
     }
 
     return () => {
       document.body.style.overflow = 'unset';
     };
+  }, [isOpen]);
+
+  // Keyboard shortcuts
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (!isOpen) return;
+      
+      switch (e.key) {
+        case 'Escape':
+          handleClose();
+          break;
+        case '+':
+        case '=':
+          e.preventDefault();
+          handleZoomIn();
+          break;
+        case '-':
+          e.preventDefault();
+          handleZoomOut();
+          break;
+        case 'r':
+        case 'R':
+          handleResetView();
+          break;
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [isOpen]);
+
+  // Mouse wheel zoom
+  useEffect(() => {
+    const handleWheel = (e: WheelEvent) => {
+      if (!isOpen) return;
+      
+      e.preventDefault();
+      const delta = e.deltaY > 0 ? -0.1 : 0.1;
+      setScale(prev => Math.max(0.5, Math.min(3, prev + delta)));
+    };
+
+    if (isOpen) {
+      window.addEventListener('wheel', handleWheel, { passive: false });
+    }
+
+    return () => window.removeEventListener('wheel', handleWheel);
   }, [isOpen]);
 
   const handleClose = () => {
@@ -75,11 +99,6 @@ const CVViewer: React.FC<CVViewerProps> = ({ isOpen, onClose }) => {
   const handleResetView = () => {
     setScale(1);
     setPosition({ x: 0, y: 0 });
-    setRotation(0);
-  };
-
-  const handleRotate = () => {
-    setRotation(prev => prev + 90);
   };
 
   const handleDownload = () => {
@@ -90,7 +109,7 @@ const CVViewer: React.FC<CVViewerProps> = ({ isOpen, onClose }) => {
   };
 
   const handleMouseDown = (e: React.MouseEvent) => {
-    if (e.button === 0) { // Left click only
+    if (e.button === 0) {
       setIsDragging(true);
       setDragStart({
         x: e.clientX - position.x,
@@ -112,58 +131,25 @@ const CVViewer: React.FC<CVViewerProps> = ({ isOpen, onClose }) => {
     setIsDragging(false);
   };
 
-  const toggleFullscreen = () => {
-    setIsFullscreen(!isFullscreen);
-  };
-
   if (!isOpen) return null;
 
   return (
     <div className="fixed inset-0 bg-black/90 backdrop-blur-sm z-50 flex items-center justify-center">
       <div
         ref={viewerRef}
-        className={`bg-background border border-border rounded-lg shadow-2xl overflow-hidden transition-all duration-300 ${
-          isFullscreen ? 'w-full h-full rounded-none' : 'w-[95vw] h-[95vh] max-w-6xl'
-        }`}
+        className="w-[95vw] h-[95vh] max-w-6xl bg-background border border-border rounded-lg shadow-2xl overflow-hidden flex flex-col"
       >
-        {/* Header Toolbar */}
+        {/* Header */}
         <div className="bg-muted/50 border-b border-border px-4 py-3 flex items-center justify-between">
-          <div className="flex items-center space-x-4">
-            <div className="flex items-center space-x-2">
-              <FileText className="w-5 h-5 text-accent" />
-              <h3 className="text-lg font-semibold text-foreground">CV - Marcos Baeza</h3>
-            </div>
-            
-            {/* Page Navigation */}
-            <div className="flex items-center space-x-2 text-sm text-muted-foreground">
-              <button
-                onClick={() => setCurrentPage(prev => Math.max(1, prev - 1))}
-                disabled={currentPage === 1}
-                className="p-1 hover:bg-muted rounded disabled:opacity-50 disabled:cursor-not-allowed"
-              >
-                <ChevronLeft className="w-4 h-4" />
-              </button>
-              <span className="px-2">
-                {currentPage} de {totalPages}
-              </span>
-              <button
-                onClick={() => setCurrentPage(prev => Math.min(totalPages, prev + 1))}
-                disabled={currentPage === totalPages}
-                className="p-1 hover:bg-muted rounded disabled:opacity-50 disabled:cursor-not-allowed"
-              >
-                <ChevronRight className="w-4 h-4" />
-              </button>
-            </div>
-          </div>
-
-          {/* Toolbar Controls */}
+          <h3 className="text-lg font-semibold text-foreground">CV - Marcos Baeza</h3>
+          
           <div className="flex items-center space-x-2">
             {/* Zoom Controls */}
             <div className="flex items-center space-x-1 bg-background rounded-lg border border-border px-2 py-1">
               <button
                 onClick={handleZoomOut}
                 className="p-1 hover:bg-muted rounded transition-colors"
-                title="Alejar"
+                title="Alejar (tecla -)"
               >
                 <ZoomOut className="w-4 h-4" />
               </button>
@@ -173,35 +159,18 @@ const CVViewer: React.FC<CVViewerProps> = ({ isOpen, onClose }) => {
               <button
                 onClick={handleZoomIn}
                 className="p-1 hover:bg-muted rounded transition-colors"
-                title="Acercar"
+                title="Acercar (tecla +)"
               >
                 <ZoomIn className="w-4 h-4" />
               </button>
             </div>
 
-            {/* Action Buttons */}
             <button
               onClick={handleResetView}
               className="p-2 hover:bg-muted rounded-lg transition-colors"
-              title="Restablecer vista"
+              title="Restablecer vista (tecla R)"
             >
               <Home className="w-4 h-4" />
-            </button>
-            
-            <button
-              onClick={handleRotate}
-              className="p-2 hover:bg-muted rounded-lg transition-colors"
-              title="Rotar"
-            >
-              <RotateCw className="w-4 h-4" />
-            </button>
-
-            <button
-              onClick={toggleFullscreen}
-              className="p-2 hover:bg-muted rounded-lg transition-colors"
-              title={isFullscreen ? "Salir de pantalla completa" : "Pantalla completa"}
-            >
-              {isFullscreen ? <Minimize2 className="w-4 h-4" /> : <Maximize2 className="w-4 h-4" />}
             </button>
 
             <button
@@ -215,55 +184,43 @@ const CVViewer: React.FC<CVViewerProps> = ({ isOpen, onClose }) => {
             <button
               onClick={handleClose}
               className="p-2 hover:bg-muted rounded-lg transition-colors"
-              title="Cerrar"
+              title="Cerrar (Esc)"
             >
               <X className="w-4 h-4" />
             </button>
           </div>
         </div>
 
-        {/* CV Viewer Container */}
+        {/* CV Viewer */}
         <div
-          ref={containerRef}
-          className="flex-1 overflow-hidden bg-gray-100 dark:bg-gray-900 relative"
+          className="flex-1 overflow-hidden bg-gray-100 dark:bg-gray-900 relative flex items-center justify-center"
           onMouseDown={handleMouseDown}
           onMouseMove={handleMouseMove}
           onMouseUp={handleMouseUp}
           onMouseLeave={handleMouseUp}
           style={{ cursor: isDragging ? 'grabbing' : 'grab' }}
         >
-          {/* CV Content */}
-          <div
-            className="absolute inset-0 flex items-center justify-center"
+          <img
+            ref={imageRef}
+            src="/CV MARCOS BAEZA.jpg"
+            alt="CV Marcos Baeza"
+            className="max-w-none select-none shadow-2xl"
             style={{
-              transform: `translate(${position.x}px, ${position.y}px) scale(${scale}) rotate(${rotation}deg)`,
-              transition: isDragging ? 'none' : 'transform 0.2s ease-out'
+              transform: `translate(${position.x}px, ${position.y}px) scale(${scale})`,
+              transition: isDragging ? 'none' : 'transform 0.2s ease-out',
+              imageRendering: 'crisp-edges'
             }}
-          >
-            <div className="bg-white shadow-2xl rounded-lg overflow-hidden max-w-[210mm] max-h-[297mm] w-full h-full">
-              <img
-                src="/CV MARCOS BAEZA.jpg"
-                alt="CV Marcos Baeza"
-                className="w-full h-full object-contain"
-                style={{ 
-                  minHeight: '800px',
-                  imageRendering: 'crisp-edges'
-                }}
-              />
-            </div>
+            draggable={false}
+          />
+
+          {/* Instructions */}
+          <div className="absolute bottom-4 left-4 bg-black/70 text-white px-3 py-2 rounded-lg text-sm">
+            Arrastra para mover • Rueda del ratón para zoom
           </div>
 
-          {/* Drag Hint */}
-          {!isDragging && scale > 1 && (
-            <div className="absolute bottom-4 left-4 bg-black/70 text-white px-3 py-2 rounded-lg text-sm flex items-center space-x-2">
-              <Move className="w-4 h-4" />
-              <span>Arrastra para mover</span>
-            </div>
-          )}
-
-          {/* Zoom Hint */}
-          <div className="absolute bottom-4 right-4 bg-black/70 text-white px-3 py-2 rounded-lg text-sm">
-            Usa Ctrl + rueda del ratón para hacer zoom
+          {/* Zoom level indicator */}
+          <div className="absolute top-4 right-4 bg-black/70 text-white px-3 py-2 rounded-lg text-sm">
+            {Math.round(scale * 100)}%
           </div>
         </div>
 
@@ -271,25 +228,21 @@ const CVViewer: React.FC<CVViewerProps> = ({ isOpen, onClose }) => {
         <div className="bg-muted/30 border-t border-border px-4 py-2 flex items-center justify-between text-sm text-muted-foreground">
           <div className="flex items-center space-x-4">
             <span>Zoom: {Math.round(scale * 100)}%</span>
-            <span>Rotación: {rotation}°</span>
             <span>Posición: ({Math.round(position.x)}, {Math.round(position.y)})</span>
           </div>
           <div className="flex items-center space-x-2">
             <span className="w-2 h-2 bg-green-500 rounded-full"></span>
-            <span>CV cargado correctamente</span>
+            <span>CV cargado</span>
           </div>
         </div>
       </div>
 
-      {/* Keyboard Shortcuts Overlay */}
-      <div className="absolute top-4 left-4 bg-black/70 text-white p-4 rounded-lg text-sm max-w-xs hidden lg:block">
-        <h4 className="font-semibold mb-2">Atajos de teclado:</h4>
-        <div className="space-y-1 text-xs">
-          <div><kbd className="bg-white/20 px-1 rounded">+</kbd> Acercar</div>
-          <div><kbd className="bg-white/20 px-1 rounded">-</kbd> Alejar</div>
-          <div><kbd className="bg-white/20 px-1 rounded">R</kbd> Rotar</div>
-          <div><kbd className="bg-white/20 px-1 rounded">H</kbd> Inicio</div>
-          <div><kbd className="bg-white/20 px-1 rounded">F</kbd> Pantalla completa</div>
+      {/* Keyboard Shortcuts */}
+      <div className="absolute top-4 left-4 bg-black/70 text-white p-3 rounded-lg text-xs max-w-xs hidden lg:block">
+        <h4 className="font-semibold mb-2">Atajos:</h4>
+        <div className="space-y-1">
+          <div><kbd className="bg-white/20 px-1 rounded">+/-</kbd> Zoom</div>
+          <div><kbd className="bg-white/20 px-1 rounded">R</kbd> Restablecer</div>
           <div><kbd className="bg-white/20 px-1 rounded">Esc</kbd> Cerrar</div>
         </div>
       </div>
