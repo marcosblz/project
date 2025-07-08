@@ -212,7 +212,6 @@ const Contact: React.FC = () => {
               </div>
               <div className="flex-1 min-w-0">
                 <h4 className="text-lg sm:text-xl font-bold text-foreground group-hover:text-accent transition-colors duration-300 mb-1">Ver CV Online</h4>
-                <p className="text-sm sm:text-base text-muted-foreground">Explora mi CV con zoom, descarga y más funciones interactivas</p>
                 <p className="text-xs sm:text-sm text-accent font-medium mt-1">Click para abrir visor interactivo</p>
               </div>
             </div>
