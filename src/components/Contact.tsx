@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { Mail, Phone, MapPin, Github, Linkedin, Clock, Check } from 'lucide-react';
+import { Mail, Phone, MapPin, Github, Linkedin, Clock, Check, FileText } from 'lucide-react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import CVViewer from './CVViewer';
 
 gsap.registerPlugin(ScrollTrigger);
 
 const Contact: React.FC = () => {
   const [showCopyNotification, setShowCopyNotification] = useState(false);
+  const [showCVViewer, setShowCVViewer] = useState(false);
 
   useEffect(() => {
     gsap.fromTo('.contact-card',
@@ -198,6 +200,33 @@ const Contact: React.FC = () => {
           </div>
         </div>
 
+        {/* CV Online Viewer Button */}
+        <div className="text-center">
+          <button
+            onClick={() => setShowCVViewer(true)}
+            className="inline-flex items-center justify-center px-6 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-accent to-accent/80 hover:from-accent/90 hover:to-accent/70 text-white text-base sm:text-lg font-semibold rounded-xl transition-all duration-300 hover:scale-105 hover:shadow-xl group relative overflow-hidden"
+          >
+            {/* Background Animation */}
+            <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700"></div>
+            
+            {/* Content */}
+            <div className="relative flex items-center space-x-3">
+              <div className="w-6 sm:w-7 h-6 sm:h-7 bg-white/20 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                <FileText className="w-4 sm:w-5 h-4 sm:h-5 text-white" />
+              </div>
+              <span>Ver CV Online</span>
+              <div className="w-2 h-2 bg-white/60 rounded-full animate-pulse"></div>
+            </div>
+            
+            {/* Glow Effect */}
+            <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-accent/50 to-accent/30 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10"></div>
+          </button>
+          
+          <p className="text-sm sm:text-base text-muted-foreground mt-3 sm:mt-4">
+            Explora mi CV con zoom, descarga y más funciones interactivas
+          </p>
+        </div>
+
       </div>
 
       {/* Copy Notification */}
@@ -215,6 +244,12 @@ const Contact: React.FC = () => {
           </div>
         </div>
       )}
+
+      {/* CV Viewer Modal */}
+      <CVViewer 
+        isOpen={showCVViewer} 
+        onClose={() => setShowCVViewer(false)} 
+      />
     </section>
   );
 };
