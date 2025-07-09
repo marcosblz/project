@@ -23,8 +23,8 @@ const Experience: React.FC = () => {
       position: "Programador Groovy",
       company: "Servinform",
       location: "Madrid, España",
-      description: "Desarrollé en un SaaS procesos internos, hechos con Groovy y JavaScript justo como el cliente necesitaba para mejorar la productividad de sus departamentos. Me encargué tanto del front-end como del back-end e incluso añadí funcionalidades de IA. ¿El resultado? Entre un 30% y un 50% de ahorro en tiempo de trabajo.",
-      technologies: ["Groovy", "JavaScript", "HTML", "CSS", "Python", "REST APIs", "IA"]
+      description: "Desarrollé procesos internos sobre un CRM corporativo utilizando Groovy y JavaScript, adaptando las soluciones exactamente a las necesidades del cliente y mejorando así la productividad de los distintos departamentos. Trabajé tanto en el front-end como en el back-end, y además incorporé funcionalidades de inteligencia artificial. ¿El resultado? Conseguí automatizar procesos que antes se gestionaban en Excel, logrando al menos un 50% de ahorro de tiempo y esfuerzo para los equipos involucrados.",
+      technologies: ["Groovy", "Web stack", "Python", "REST APIs", "IA"]
     },
     {
       id: 2,
@@ -32,8 +32,8 @@ const Experience: React.FC = () => {
       position: "Desarrollador Backend Python Django",
       company: "Zener",
       location: "Madrid, España",
-      description: "Prácticas de GFGS - DAM: Tras una formación en Django y Android, me encomendaban tareas para mejorar la página web interna.",
-      technologies: ["Python", "Django", "Webpack", "REST APIs", "Docker", "MySQL", "Android Studio"]
+      description: "Prácticas de GFGS - DAM: Tras una formación intensiva en Django y Android, colaboré en el desarrollo y mejora de la web interna de la empresa.",
+      technologies: ["Python", "Django", "Web stack", "REST APIs", "Docker", "MySQL", "Android Studio"]
     },
     {
       id: 3,
@@ -41,7 +41,7 @@ const Experience: React.FC = () => {
       position: "Gestor de contenido WEB",
       company: "SuperParts",
       location: "Madrid, España",
-      description: "Prácticas de GFGM - SMR: Comencé mi carrera profesional despienzando portátiles y equipos informáticos varios para posteriormente añadirlas a la web de venta y ubicarlas en el almacén.",
+      description: "Prácticas de GFGM - SMR: Inicié mi carrera profesional desmontando portátiles y equipos informáticos para su reutilización, catalogación y gestión en el almacén. Además, me encargué de la subida y gestión de productos en la web de ventas, incluyendo la edición de imágenes y contenido.",
       technologies: ["Hardware", "PhotoShop"]
     }
   ];
