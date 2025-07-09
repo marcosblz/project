@@ -53,10 +53,10 @@ const Education: React.FC = () => {
   const certificationItems: EducationItem[] = [
     {
       id: 4,
-      title: "Certificación React Advanced",
-      institution: "Meta (Facebook)",
-      date: "2022",
-      description: "Certificación oficial en desarrollo avanzado con React, incluyendo hooks avanzados, performance optimization y testing.",
+      title: "Curso de Inteligencia Artificial",
+      institution: "Udemy",
+      date: "2024",
+      description: "Certificación en Inteligencia Artificial aplicada al desarrollo de software y automatización de procesos.",
       grade: "Certificado",
       type: "certification"
     }
@@ -130,6 +130,19 @@ const Education: React.FC = () => {
         )}
       </div>
       <p className="text-muted-foreground leading-relaxed text-xs sm:text-sm">{item.description}</p>
+      
+      {/* Ver Certificado button for certifications */}
+      {item.type === 'certification' && (
+        <div className="mt-4">
+          <button
+            onClick={() => window.open('/certificado-udemy-cursoIA.jpg', '_blank')}
+            className="inline-flex items-center px-3 py-2 bg-accent hover:bg-accent/90 text-white rounded-lg text-xs sm:text-sm font-medium transition-all duration-300 hover:scale-105 shadow-sm"
+          >
+            <FileText className="w-3 sm:w-4 h-3 sm:h-4 mr-2" />
+            Ver Certificado
+          </button>
+        </div>
+      )}
     </div>
   );
 
