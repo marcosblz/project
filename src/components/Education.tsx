@@ -63,7 +63,7 @@ const Education: React.FC = () => {
       title: "Curso de Inteligencia Artificial",
       institution: "Udemy",
       date: "2024",
-      description: "Certificación en Inteligencia Artificial aplicada al desarrollo de software y automatización de procesos.",
+      description: "Aprendí desde cero a usar y crear modelos como ChatGPT, Midjourney y DALL-E, incluyendo fine-tuning, prompt engineering y automatización con Python. Incluye prácticas, integración en apps, generación y manipulación de imágenes, vídeo y audio.",
       grade: "Certificado",
       type: "certification"
     }
