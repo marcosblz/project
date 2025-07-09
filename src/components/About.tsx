@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { User, Clock } from 'lucide-react';
+import { User, Clock, Mail, Phone } from 'lucide-react';
 import { gsap } from 'gsap';
 
 interface Message {
@@ -139,6 +139,31 @@ const About: React.FC = () => {
         );
       });
 
+      // Check if all questions have been answered and add final message
+      const newUsedOptions = [...usedOptions, option.id];
+      if (newUsedOptions.length === availableOptions.length) {
+        setTimeout(() => {
+          const finalMessage: Message = {
+            id: Date.now() + 2,
+            text: '',
+            isBot: true,
+            timestamp: getCurrentTime()
+          };
+
+          setMessages(prev => [...prev, finalMessage]);
+
+          const finalText = "¡Genial! 🎉 Has conocido más sobre mi experiencia y forma de trabajar. Si te interesa colaborar conmigo o tienes algún proyecto en mente, ¡me encantaría escucharte!";
+          
+          typewriterEffect(finalText, (currentText) => {
+            setMessages(prev => 
+              prev.map(msg => 
+                msg.id === finalMessage.id ? { ...msg, text: currentText } : msg
+              )
+            );
+          });
+        }, 2000);
+      }
+
       // Auto scroll to bottom
       setTimeout(() => {
         const chatMessages = document.getElementById('chat-messages');
@@ -149,7 +174,36 @@ const About: React.FC = () => {
     }, 1000);
   };
 
+  const scrollToContact = () => {
+    const element = document.getElementById('contacto');
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
+  const handleEmailClick = async () => {
+    try {
+      await navigator.clipboard.writeText('marcosbaezalopez@gmail.com');
+      // Add a quick confirmation message
+      const confirmMessage: Message = {
+        id: Date.now(),
+        text: "📧 ¡Email copiado! marcosbaezalopez@gmail.com",
+        isBot: true,
+        timestamp: getCurrentTime()
+      };
+      setMessages(prev => [...prev, confirmMessage]);
+    } catch (err) {
+      // Fallback
+      const textArea = document.createElement('textarea');
+      textArea.value = 'marcosbaezalopez@gmail.com';
+      document.body.appendChild(textArea);
+      textArea.select();
+      document.execCommand('copy');
+      document.body.removeChild(textArea);
+    }
+  };
   const currentOptions = availableOptions.filter(option => !usedOptions.includes(option.id));
+  const allQuestionsAnswered = usedOptions.length === availableOptions.length;
 
   return (
     <section id="sobre-mi" className="about-section min-h-screen flex items-center py-8 sm:py-12 lg:py-20">
@@ -212,7 +266,7 @@ const About: React.FC = () => {
           </div>
 
           {/* Chat Options */}
-          {currentOptions.length > 0 && (
+          {currentOptions.length > 0 ? (
             <div className="p-3 sm:p-4 lg:p-6 border-t border-border bg-muted/20">
               <p className="text-xs sm:text-sm text-muted-foreground mb-2 sm:mb-3">Pregúntame sobre:</p>
               <div className="flex flex-wrap gap-2">
@@ -225,6 +279,26 @@ const About: React.FC = () => {
                     {option.text}
                   </button>
                 ))}
+              </div>
+            </div>
+          ) : allQuestionsAnswered && (
+            <div className="p-3 sm:p-4 lg:p-6 border-t border-border bg-gradient-to-r from-accent/10 to-green-500/10">
+              <p className="text-xs sm:text-sm text-muted-foreground mb-3 text-center">¿Listo para el siguiente paso?</p>
+              <div className="flex flex-wrap gap-2 justify-center">
+                <button
+                  onClick={handleEmailClick}
+                  className="inline-flex items-center px-3 sm:px-4 py-2 bg-accent hover:bg-accent/90 text-white rounded-lg text-xs sm:text-sm font-medium transition-all duration-300 hover:scale-105 shadow-sm"
+                >
+                  <Mail className="w-3 sm:w-4 h-3 sm:h-4 mr-1.5" />
+                  Copiar Email
+                </button>
+                <button
+                  onClick={scrollToContact}
+                  className="inline-flex items-center px-3 sm:px-4 py-2 bg-green-500 hover:bg-green-600 text-white rounded-lg text-xs sm:text-sm font-medium transition-all duration-300 hover:scale-105 shadow-sm"
+                >
+                  <Phone className="w-3 sm:w-4 h-3 sm:h-4 mr-1.5" />
+                  Ver Contacto
+                </button>
               </div>
             </div>
           )}
