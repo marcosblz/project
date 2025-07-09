@@ -153,9 +153,9 @@ const About: React.FC = () => {
           setMessages(prev => [...prev, finalMessage]);
 
           const finalText = "¡Genial! 🎉 Has conocido más sobre mi experiencia y forma de trabajar. Si te interesa colaborar conmigo o tienes algún proyecto en mente, ¡me encantaría escucharte!";
-          const finalText = "Si quieres hacerme más preguntas no dudes en contactar conmigo";
+          const finalText2 = "Si quieres hacerme más preguntas no dudes en contactar conmigo";
           
-          typewriterEffect(finalText, (currentText) => {
+          typewriterEffect(finalText2, (currentText) => {
             setMessages(prev => 
               prev.map(msg => 
                 msg.id === finalMessage.id ? { ...msg, text: currentText } : msg
