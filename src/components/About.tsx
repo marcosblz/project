@@ -153,6 +153,7 @@ const About: React.FC = () => {
           setMessages(prev => [...prev, finalMessage]);
 
           const finalText = "¡Genial! 🎉 Has conocido más sobre mi experiencia y forma de trabajar. Si te interesa colaborar conmigo o tienes algún proyecto en mente, ¡me encantaría escucharte!";
+          const finalText = "Si quieres hacerme más preguntas no dudes en contactar conmigo";
           
           typewriterEffect(finalText, (currentText) => {
             setMessages(prev => 
@@ -181,27 +182,6 @@ const About: React.FC = () => {
     }
   };
 
-  const handleEmailClick = async () => {
-    try {
-      await navigator.clipboard.writeText('marcosbaezalopez@gmail.com');
-      // Add a quick confirmation message
-      const confirmMessage: Message = {
-        id: Date.now(),
-        text: "📧 ¡Email copiado! marcosbaezalopez@gmail.com",
-        isBot: true,
-        timestamp: getCurrentTime()
-      };
-      setMessages(prev => [...prev, confirmMessage]);
-    } catch (err) {
-      // Fallback
-      const textArea = document.createElement('textarea');
-      textArea.value = 'marcosbaezalopez@gmail.com';
-      document.body.appendChild(textArea);
-      textArea.select();
-      document.execCommand('copy');
-      document.body.removeChild(textArea);
-    }
-  };
   const currentOptions = availableOptions.filter(option => !usedOptions.includes(option.id));
   const allQuestionsAnswered = usedOptions.length === availableOptions.length;
 
@@ -283,21 +263,12 @@ const About: React.FC = () => {
             </div>
           ) : allQuestionsAnswered && (
             <div className="p-3 sm:p-4 lg:p-6 border-t border-border bg-gradient-to-r from-accent/10 to-green-500/10">
-              <p className="text-xs sm:text-sm text-muted-foreground mb-3 text-center">¿Listo para el siguiente paso?</p>
               <div className="flex flex-wrap gap-2 justify-center">
                 <button
-                  onClick={handleEmailClick}
+                  onClick={scrollToContact}
                   className="inline-flex items-center px-3 sm:px-4 py-2 bg-accent hover:bg-accent/90 text-white rounded-lg text-xs sm:text-sm font-medium transition-all duration-300 hover:scale-105 shadow-sm"
                 >
-                  <Mail className="w-3 sm:w-4 h-3 sm:h-4 mr-1.5" />
-                  Copiar Email
-                </button>
-                <button
-                  onClick={scrollToContact}
-                  className="inline-flex items-center px-3 sm:px-4 py-2 bg-green-500 hover:bg-green-600 text-white rounded-lg text-xs sm:text-sm font-medium transition-all duration-300 hover:scale-105 shadow-sm"
-                >
-                  <Phone className="w-3 sm:w-4 h-3 sm:h-4 mr-1.5" />
-                  Ver Contacto
+                  Ir a Contacto
                 </button>
               </div>
             </div>
