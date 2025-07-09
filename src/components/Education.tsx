@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Calendar, Award, BookOpen, Target, GraduationCap, FileText, ChevronRight, ChevronDown } from 'lucide-react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import CertificateViewer from './CertificateViewer';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -19,6 +20,12 @@ const Education: React.FC = () => {
   const [showAllEducation, setShowAllEducation] = useState(false);
   const [showAllCertifications, setShowAllCertifications] = useState(false);
   const [showAllCompetencies, setShowAllCompetencies] = useState(false);
+  const [showCertificateViewer, setShowCertificateViewer] = useState(false);
+  const [selectedCertificate, setSelectedCertificate] = useState<{
+    url: string;
+    title: string;
+    name: string;
+  } | null>(null);
 
   const educationItems: EducationItem[] = [
     {
@@ -135,7 +142,14 @@ const Education: React.FC = () => {
       {item.type === 'certification' && (
         <div className="mt-4">
           <button
-            onClick={() => window.open('/certificado-udemy-cursoIA.jpg', '_blank')}
+            onClick={() => {
+              setSelectedCertificate({
+                url: '/certificado-udemy-cursoIA.jpg',
+                title: item.title,
+                name: 'Certificado_IA_Udemy.jpg'
+              });
+              setShowCertificateViewer(true);
+            }}
             className="inline-flex items-center px-3 py-2 bg-accent hover:bg-accent/90 text-white rounded-lg text-xs sm:text-sm font-medium transition-all duration-300 hover:scale-105 shadow-sm"
           >
             <FileText className="w-3 sm:w-4 h-3 sm:h-4 mr-2" />
@@ -154,6 +168,19 @@ const Education: React.FC = () => {
           <p className="text-base sm:text-lg lg:text-xl text-muted-foreground">Mi trayectoria educativa y crecimiento profesional</p>
         </div>
 
+        {/* Certificate Viewer Modal */}
+        {selectedCertificate && (
+          <CertificateViewer 
+            isOpen={showCertificateViewer} 
+            onClose={() => {
+              setShowCertificateViewer(false);
+              setSelectedCertificate(null);
+            }}
+            certificateUrl={selectedCertificate.url}
+            certificateTitle={selectedCertificate.title}
+            certificateName={selectedCertificate.name}
+          />
+        )}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
           {/* Education and Certifications */}
           <div className="lg:col-span-2">
