@@ -33,42 +33,42 @@ const About: React.FC = () => {
   {
     id: 1,
     text: "¿Cómo abordas un problema de programación complejo que no entiendes de inmediato?",
-    response: "Lo primero es asegurarme de entender el problema al 100 %: formulo hipótesis, reviso la documentación y dibujo diagramas de flujo o se lo explico en voz alta a un compañero para verlo con perspectiva. Luego descompongo el problema en subproblemas más pequeños, creo tests para cada uno y avanzo por etapas, validando en cada paso que la solución funcione antes de reunirlo todo."
+    response: "Cuando me enfrento a un problema complejo que no entiendo de inmediato, lo primero que hago es revisar la documentación técnica, ya que suele aportar pistas sobre la mejor forma de resolverlo. A continuación, implemento logs con herramientas como la librería 'logging' de Python para obtener información precisa del flujo de ejecución y localizar el posible origen del problema. Si sigo atascado, descompongo el problema en partes más pequeñas, hago pruebas específicas y, si lo considero útil, consulto con algún compañero para obtener otro punto de vista."
   },
   {
     id: 2,
     text: "Cuéntame de un bug especialmente difícil que resolviste. ¿Cómo lo solucionaste y cómo te sentiste?",
-    response: "En mi proyecto final de DAM, estaba creando una aplicación de Tamagotchi en JavaNo comprendía bien la concurrencia en Java, por lo que mi app se bloqueaba al abrir varias ventanas. Decidí detenerme, aprender cómo Java gestiona procesos simultáneos y, gracias a esa comprensión, abrí cada ventana de forma independiente. En cuestión de minutos el bloqueo que tanto me había frustrado se desvaneció. Esta experiencia me enseñó la importancia de detenerme a comprender bien cómo funciona la tecnología antes de lanzarme a programar, lo que me ahorra tiempo y evita bloqueos en el futuro."
+    response: "En mi TFC tuve un bug complicado con la concurrencia en Java: la app se bloqueaba al abrir varias ventanas. Lo solucioné creando un hilo nuevo para cada ventana, tras investigar en StackOverflow y foros técnicos. Nadie llegó a usar la app salvo el jurado, pero al exponerla funcionaba perfectamente. Me sentí orgulloso y satisfecho por haber sido capaz de aprender sobre la marcha y no rendirme hasta resolverlo."
   },
   {
     id: 3,
     text: "Describe una ocasión en la que cometiste un error de programación importante. ¿Cómo lo detectaste y qué aprendiste?",
-    response: "Al ejecutar un script masivo en producción colapsé la web de la empresa y tuve que esperar a que terminara la cola de ejecución porque no habia manera de pararla. Tras esa experiencia, pedí un servidor de desarrollo independiente, acordé plazos realistas y aprendí a cuestionar instrucciones."
+    response: "Una vez ejecuté un script masivo en producción y colapsé el servidor de la empresa. Me di cuenta porque el sistema se volvió muy lento, y en cuestión de minutos varios compañeros vinieron a mi mesa para ver qué estaba pasando. Desde entonces, siempre pruebo todo en un entorno de desarrollo igual al de producción antes de ejecutar nada en real, y aprendí la importancia de validar cuidadosamente las instrucciones y prever riesgos antes de lanzar cualquier cambio crítico."
   },
   {
     id: 4,
     text: "¿Cómo manejas la presión de plazos ajustados o cambios inesperados en los requisitos del proyecto?",
-    response: "Reviso las tareas críticas, establezco prioridades y aviso al equipo sobre el impacto. Propongo soluciones realistas, mantengo la calma y ajusto el plan para cumplir con la calidad esperada."
+    response: "Cuando hay plazos ajustados o cambios inesperados en el proyecto, utilizo metodologías ágiles como Scrum o Kanban, según lo que mejor se adapte al equipo. Me centro en priorizar tareas, desglosar el trabajo en entregas pequeñas y mantener una comunicación constante con el equipo para ajustar el plan y los objetivos si es necesario. Así logro mantener la calidad y cumplir con los plazos, incluso cuando hay presión."
   },
   {
     id: 5,
     text: "¿Qué haces cuando alguien critica duramente tu código en una revisión?",
-    response: "Escucho con atención, agradezco el feedback y analizo las sugerencias. Si tiene sentido, lo aplico de inmediato; si no, lo discuto para encontrar juntos la mejor solución."
+    response: "Cuando recibo críticas duras sobre mi código, escucho atentamente el feedback y agradezco la opinión. Analizo cada sugerencia y, si me convence, la aplico y documentó el cambio en el código y los commits. Si no estoy de acuerdo, lo discuto con argumentos para llegar a la mejor solución posible."
   },
   {
     id: 6,
     text: "¿Cómo decides cuándo tu código está listo para producción en lugar de seguir mejorándolo?",
-    response: "Verifico que pase los tests que he definido, evalúo posibles riesgos o conflictos y, si es estabile, lo publico."
+    response: "Considero que el código está listo para producción cuando cumple con todos los requisitos del proyecto y pasa los tests correspondientes en preproducción. Me centro en asegurar que sea estable y cumpla con lo esperado por el cliente o usuario. En ese punto, priorizo la entrega y la fiabilidad por encima de seguir puliendo detalles menores que no aportan valor inmediato."
   },
   {
     id: 7,
     text: "¿Cómo explicas conceptos técnicos complejos a alguien sin conocimientos técnicos?",
-    response: "Uso ejemplos del día a día y analogías sencillas. Si la persona lo requiere, dibujo esquemas básicos, evito jerga y confirmo que lo han entendido."
+    response: "Cuando tengo que explicar conceptos técnicos complejos a alguien sin experiencia, recurro a analogías sencillas y ejemplos del día a día. Por ejemplo, ayudé a dos compañeros de prácticas a entender cómo funciona la arquitectura backend de nuestro proyecto con esquemas y comparaciones cotidianas. Siempre me aseguro de pedir feedback para confirmar que se ha entendido y adapto la explicación si es necesario. Además, disfruto mucho este tipo de retos porque creo que la comunicación es clave en cualquier equipo."
   },
   {
     id: 8,
     text: "¿Qué haces para mantener tus conocimientos y habilidades de programación actualizadas?",
-    response: "Estudio con cursos online regularmente, realizo mis propios proyectos y practico resolviendo problemas de lógica."
+    response: "Me mantengo actualizado con cursos online en plataformas como Udemy, la lectura de libros técnicos y siguiendo a influencers del mundo de la programación en redes sociales. También me gusta practicar con proyectos personales para poner en práctica lo que aprendo y estar al día con las tendencias del sector."
   }
 ]);
 
