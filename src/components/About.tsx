@@ -153,7 +153,7 @@ const About: React.FC = () => {
           setMessages(prev => [...prev, finalMessage]);
 
           const finalText = "¡Genial! 🎉 Has conocido más sobre mi experiencia y forma de trabajar. Si te interesa colaborar conmigo o tienes algún proyecto en mente, ¡me encantaría escucharte!";
-          const finalText2 = "Si quieres hacerme más preguntas no dudes en contactar conmigo";
+          const finalText2 = "😊 Si te has quedado con alguna duda o te gustaría preguntarme algo más, pásate por la pestaña de contacto 📬. ¡Me encantará charlar contigo y responder a cualquier pregunta que tengas!";
           
           typewriterEffect(finalText2, (currentText) => {
             setMessages(prev => 
