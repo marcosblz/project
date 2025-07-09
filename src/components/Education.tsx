@@ -70,16 +70,13 @@ const Education: React.FC = () => {
   ];
 
   const skills = [
-    "Razonamiento lógico",
-    "Comprensión profunda",
-    "Rápida adaptación",
-    "Flexibilidad técnica",
-    "Comunicación clara",
-    "Trabajo en equipo",
-    "Aprendizaje autodidacta",
-    "Exigencia y calidad",
-    "Mentalidad de mejora continua",
-    "Conexión entre áreas técnicas"
+    "Excel",
+    "Comunicación",
+    "Resolución de incidencias",
+    "Figma",
+    "Adaptabilidad",
+    "Pensamiento crítico",
+    "Creatividad"
   ];
 
   const latestEducation = educationItems[0]; // Más reciente
