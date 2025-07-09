@@ -59,24 +59,6 @@ const Education: React.FC = () => {
       description: "Certificación oficial en desarrollo avanzado con React, incluyendo hooks avanzados, performance optimization y testing.",
       grade: "Certificado",
       type: "certification"
-    },
-    {
-      id: 5,
-      title: "AWS Cloud Practitioner",
-      institution: "Amazon Web Services",
-      date: "2023",
-      description: "Certificación fundamental de AWS que valida el conocimiento general de la nube de AWS.",
-      grade: "Certificado",
-      type: "certification"
-    },
-    {
-      id: 6,
-      title: "Google Analytics Certified",
-      institution: "Google",
-      date: "2021",
-      description: "Certificación en Google Analytics para análisis web y medición de rendimiento digital.",
-      grade: "Certificado",
-      type: "certification"
     }
   ];
 
