@@ -19,7 +19,6 @@ interface EducationItem {
 const Education: React.FC = () => {
   const [showAllEducation, setShowAllEducation] = useState(false);
   const [showAllCertifications, setShowAllCertifications] = useState(false);
-  const [showAllCompetencies, setShowAllCompetencies] = useState(false);
   const [showCertificateViewer, setShowCertificateViewer] = useState(false);
   const [selectedCertificate, setSelectedCertificate] = useState<{
     url: string;
@@ -258,9 +257,8 @@ const Education: React.FC = () => {
                   <h3 className="text-sm sm:text-base lg:text-lg font-bold text-foreground">Competencias Clave</h3>
                 </div>
 
-                {/* Show first 6 competencies by default */}
                 <div className="space-y-1 sm:space-y-2">
-                  {skills.slice(0, showAllCompetencies ? skills.length : 6).map((skill, index) => (
+                  {skills.map((skill, index) => (
                     <div
                       key={index}
                       className="flex items-center p-1.5 sm:p-2 rounded-lg hover:bg-accent/10 transition-colors duration-300"
@@ -270,24 +268,6 @@ const Education: React.FC = () => {
                     </div>
                   ))}
                 </div>
-
-                {/* Show/Hide button */}
-                <button
-                  onClick={() => setShowAllCompetencies(!showAllCompetencies)}
-                  className="flex items-center text-accent hover:text-accent/80 font-medium transition-colors duration-300 text-xs sm:text-sm w-full justify-center mt-3 sm:mt-4"
-                >
-                  {showAllCompetencies ? (
-                    <>
-                      Ver menos
-                      <ChevronDown className="w-3 sm:w-4 h-3 sm:h-4 ml-1" />
-                    </>
-                  ) : (
-                    <>
-                      Ver todas ({skills.length})
-                      <ChevronRight className="w-3 sm:w-4 h-3 sm:h-4 ml-1" />
-                    </>
-                  )}
-                </button>
               </div>
 
               {/* Continuous Learning */}
