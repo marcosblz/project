@@ -240,7 +240,7 @@ const Projects: React.FC = () => {
                 </button>
                 <div className="absolute bottom-4 left-4 right-4">
                   <div className="flex items-center space-x-4 text-white mb-4">
-                    <div className="flex items-center">
+                    <div className="flex items-center px-3 py-1 bg-black/60 backdrop-blur-sm rounded-full border border-white/20">
                       <Calendar className="w-5 h-5 mr-2" />
                       {selectedProject.year}
                     </div>
