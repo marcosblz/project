@@ -60,7 +60,7 @@ const Education: React.FC = () => {
     {
       id: 4,
       title: "Figma para Devs",
-      institution: "Curso Online",
+      institution: "midu.dev",
       date: "2025",
       description: "Aprendí a crear y organizar proyectos, manejar herramientas de diseño vectorial y texto, trabajar con componentes y prototipos interactivos, e integrar Figma en flujos de trabajo de desarrollo mediante Plugins y DevMode. Ahora domino Figma para colaborar eficazmente con equipos de diseño y mejorar la calidad de los proyectos como programador.",
       grade: "Certificado",
