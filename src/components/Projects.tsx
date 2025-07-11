@@ -244,7 +244,16 @@ const Projects: React.FC = () => {
                       <Calendar className="w-5 h-5 mr-2" />
                       {selectedProject.year}
                     </div>
-                    <span className="px-3 py-1 bg-accent/90 text-white rounded-full text-sm font-medium">
+                    <span className="px-3 py-1 bg-accent/90 backdrop-blur-sm text-white rounded-full text-sm font-medium border border-white/20">
+                      {selectedProject.category}
+                    </span>
+                  </div>
+                  <div className="flex items-center space-x-4 text-white mb-4">
+                    <div className="flex items-center px-3 py-1 bg-black/60 backdrop-blur-sm rounded-full text-sm font-medium border border-white/20">
+                      <Calendar className="w-4 h-4 mr-2" />
+                      {selectedProject.year}
+                    </div>
+                    <span className="px-3 py-1 bg-accent/90 backdrop-blur-sm text-white rounded-full text-sm font-medium border border-white/20">
                       {selectedProject.category}
                     </span>
                   </div>
@@ -254,7 +263,7 @@ const Projects: React.FC = () => {
                         href={selectedProject.demoUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex items-center px-4 py-2 bg-accent text-white rounded-lg hover:bg-accent/90 transition-colors duration-300"
+                        className="flex items-center px-4 py-2 bg-accent backdrop-blur-sm text-white rounded-lg hover:bg-accent/90 transition-colors duration-300 border border-white/20"
                       >
                         <ExternalLink className="w-4 h-4 mr-2" />
                         Ver Demo
@@ -265,7 +274,7 @@ const Projects: React.FC = () => {
                         href={selectedProject.githubUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex items-center px-4 py-2 bg-white/20 text-white rounded-lg hover:bg-white/30 transition-colors duration-300"
+                        className="flex items-center px-4 py-2 bg-black/60 backdrop-blur-sm text-white rounded-lg hover:bg-black/70 transition-colors duration-300 border border-white/20"
                       >
                         <Github className="w-4 h-4 mr-2" />
                         Ver Código
