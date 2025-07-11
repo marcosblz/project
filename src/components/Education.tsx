@@ -59,6 +59,15 @@ const Education: React.FC = () => {
   const certificationItems: EducationItem[] = [
     {
       id: 4,
+      title: "Figma para Devs",
+      institution: "Curso Online",
+      date: "2025",
+      description: "Curso diseñado para desarrolladores, con el objetivo de aprender al máximo Figma y mejorar la colaboración con los equipos de diseño. Aprendí conceptos básicos sobre Figma y diseño, crear y organizar proyectos, utilizar herramientas de diseño vectorial y texto, trabajar con componentes, variables y modos de diseño, prototipar interacciones y navegar entre pantallas, e integrar Figma a los flujos de trabajo en código mediante Plugins y DevMode. Este curso me permite destacar como programador dominando una de las herramientas más utilizadas en el mundo del diseño.",
+      grade: "Certificado",
+      type: "certification"
+    },
+    {
+      id: 5,
       title: "Curso de Inteligencia Artificial",
       institution: "Udemy",
       date: "2024",
@@ -140,9 +149,9 @@ const Education: React.FC = () => {
           <button
             onClick={() => {
               setSelectedCertificate({
-                url: '/certificado-udemy-cursoIA.jpg',
+                url: item.id === 4 ? '/certificado_figma.png' : '/certificado-udemy-cursoIA.jpg',
                 title: item.title,
-                name: 'Certificado_IA_Udemy.jpg'
+                name: item.id === 4 ? 'Certificado_Figma.png' : 'Certificado_IA_Udemy.jpg'
               });
               setShowCertificateViewer(true);
             }}
