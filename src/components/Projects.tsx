@@ -248,15 +248,6 @@ const Projects: React.FC = () => {
                       {selectedProject.category}
                     </span>
                   </div>
-                  <div className="flex items-center space-x-4 text-white mb-4">
-                    <div className="flex items-center px-3 py-1 bg-black/60 backdrop-blur-sm rounded-full text-sm font-medium border border-white/20">
-                      <Calendar className="w-4 h-4 mr-2" />
-                      {selectedProject.year}
-                    </div>
-                    <span className="px-3 py-1 bg-accent/90 backdrop-blur-sm text-white rounded-full text-sm font-medium border border-white/20">
-                      {selectedProject.category}
-                    </span>
-                  </div>
                   <div className="flex space-x-3">
                     {selectedProject.demoUrl && (
                       <a
