@@ -49,15 +49,14 @@ const Projects: React.FC = () => {
     },
     {
       id: 3,
-      title: "E-commerce Inventory",
-      description: "Sistema de gestión de inventario con procesamiento de imágenes y catalogación automática",
-      longDescription: "Desarrollé un sistema completo de gestión de inventario para SuperParts, incluyendo procesamiento de imágenes con PhotoShop, catalogación de productos y gestión de almacén. El sistema permitía el desmontaje de equipos informáticos, catalogación de componentes y su posterior venta online con ubicación automática en almacén.",
-      image: "https://images.pexels.com/photos/6205509/pexels-photo-6205509.jpeg?auto=compress&cs=tinysrgb&w=600",
-      technologies: ["PhotoShop", "Gestión de Inventario", "Hardware", "Catalogación"],
-      category: "Full Stack",
-      demoUrl: "#",
-      githubUrl: "#",
-      year: "2021"
+      title: "Tamagotchi",
+      description: "Proyecto final de DAM: Tamagotchi completo hecho en Java con base jugable",
+      longDescription: "Proyecto final de DAM: Tamagotchi es una aplicación hecha en Java. Los valores de la mascota se manejan con una base de datos local hecha con SQLite3 y con una API de tiempo para manejar la temperatura y lluvias del lugar del ordenador donde se ejecute. Tiene base jugable. Cada apartado tiene profundidad pero para no perderse hay un tutorial... ¡Descárgalo y juega!",
+      image: "/tamagotchi.png",
+      technologies: ["Java", "SQLite3", "API"],
+      category: "Backend",
+      githubUrl: "https://github.com/marcosblz/Tamagotchi",
+      year: "2023"
     }
   ];
 
