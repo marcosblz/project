@@ -62,7 +62,7 @@ const Education: React.FC = () => {
       title: "Figma para Devs",
       institution: "Curso Online",
       date: "2025",
-      description: "Curso diseñado para desarrolladores, con el objetivo de aprender al máximo Figma y mejorar la colaboración con los equipos de diseño. Aprendí conceptos básicos sobre Figma y diseño, crear y organizar proyectos, utilizar herramientas de diseño vectorial y texto, trabajar con componentes, variables y modos de diseño, prototipar interacciones y navegar entre pantallas, e integrar Figma a los flujos de trabajo en código mediante Plugins y DevMode. Este curso me permite destacar como programador dominando una de las herramientas más utilizadas en el mundo del diseño.",
+      description: "Aprendí a crear y organizar proyectos, manejar herramientas de diseño vectorial y texto, trabajar con componentes y prototipos interactivos, e integrar Figma en flujos de trabajo de desarrollo mediante Plugins y DevMode. Ahora domino Figma para colaborar eficazmente con equipos de diseño y mejorar la calidad de los proyectos como programador.",
       grade: "Certificado",
       type: "certification"
     },
