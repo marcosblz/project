@@ -290,7 +290,7 @@ const Education: React.FC = () => {
                 </p>
                 <div className="mt-3 sm:mt-4 p-2 sm:p-3 bg-accent/20 rounded-lg">
                   <p className="text-accent text-xs sm:text-sm font-medium">
-                    🎯 Próximo objetivo: Certificación AWS Solutions Architect
+                    🎯 Próximo objetivo: Curso Intensivo de Model Context Protocol
                   </p>
                 </div>
               </div>
