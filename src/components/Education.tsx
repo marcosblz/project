@@ -149,7 +149,7 @@ const Education: React.FC = () => {
           <button
             onClick={() => {
               setSelectedCertificate({
-                url: item.id === 4 ? '/certificado_figma.png' : '/certificado-udemy-cursoIA.jpg',
+                url: item.id === 4 ? '/Certificado_Figma.png' : '/certificado-udemy-cursoIA.jpg',
                 title: item.title,
                 name: item.id === 4 ? 'Certificado_Figma.png' : 'Certificado_IA_Udemy.jpg'
               });
