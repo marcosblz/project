@@ -116,44 +116,44 @@ const Skills: React.FC = () => {
       technologies: [
         {
           name: 'JavaScript',
-          level: 'Avanzado',
-          context: 'Ambos',
-          description: 'ES6+, DOM manipulation, async/await y programación funcional',
+          level: 'Intermedio',
+          context: 'Trabajo',
+          description: 'Desarrollo de scripts',
           icon: <Code className="w-4 h-4" />
         },
         {
           name: 'HTML5 & CSS3',
-          level: 'Avanzado',
-          context: 'Ambos',
-          description: 'Semantic HTML, Flexbox, Grid, animations y responsive design',
+          level: 'Intermedio',
+          context: 'Trabajo Proyectos',
+          description: 'Nociones de lo que es HTML y CSS pero falta desarrollo',
           icon: <Globe className="w-4 h-4" />
         },
         {
           name: 'React',
-          level: 'Intermedio',
-          context: 'Estudios',
-          description: 'Hooks, Context API, componentes funcionales y estado global',
+          level: 'Básico',
+          context: 'Proyectos',
+          description: 'Desarrollo de proyectos',
           icon: <Code className="w-4 h-4" />
         },
         {
           name: 'TypeScript',
-          level: 'Intermedio',
-          context: 'Estudios',
-          description: 'Tipado estático, interfaces, generics y desarrollo escalable',
+          level: 'Principiante',
+          context: 'Proyectos',
+          description: 'Desarrollo de proyectos y trabajo básico.',
           icon: <Code className="w-4 h-4" />
         },
         {
           name: 'Tailwind CSS',
-          level: 'Intermedio',
-          context: 'Estudios',
-          description: 'Utility-first CSS, responsive design y componentes personalizados',
+          level: 'Principiante',
+          context: 'Trabajo',
+          description: 'He usado tailwind para trabajar en componentes web y hacer páginas como este portfolio.',
           icon: <Globe className="w-4 h-4" />
         },
         {
           name: 'GSAP',
-          level: 'Intermedio',
+          level: 'Principiante',
           context: 'Estudios',
-          description: 'Animaciones complejas, ScrollTrigger y timeline avanzado',
+          description: 'Soy capaz de hacer animaciones básicas.',
           icon: <Zap className="w-4 h-4" />
         }
       ]
