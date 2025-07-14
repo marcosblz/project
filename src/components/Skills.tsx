@@ -11,7 +11,8 @@ import {
   Wrench,
   Zap,
   Star,
-  BookOpen
+  BookOpen,
+  Github
 } from 'lucide-react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -21,7 +22,7 @@ gsap.registerPlugin(ScrollTrigger);
 interface Technology {
   name: string;
   level: 'Principiante' | 'Intermedio' | 'Avanzado' | 'Experto';
-  context: 'Trabajo' | 'Estudios' | 'Ambos';
+  contexts: ('Trabajo' | 'Estudios' | 'Proyectos')[];
   description: string;
   icon?: React.ReactNode;
 }
@@ -40,7 +41,15 @@ interface SkillCategory {
 const Skills: React.FC = () => {
   const [selectedCategory, setSelectedCategory] = useState<string>('backend');
   const [showDetails, setShowDetails] = useState<{ [key: string]: boolean }>({});
+  const [hoveredLevel, setHoveredLevel] = useState<string | null>(null);
 
+  // Tooltips para cada nivel
+  const levelTooltips = {
+    'Principiante': 'Nociones básicas de la herramienta',
+    'Intermedio': 'Usado en proyectos personales o para aportar valor en empresa',
+    'Avanzado': 'Dominio sólido con experiencia práctica en entornos profesionales',
+    'Experto': 'Conocimiento profundo y capacidad de liderar proyectos complejos'
+  };
   const skillCategories: SkillCategory[] = [
     {
       id: 'backend',
@@ -59,42 +68,42 @@ const Skills: React.FC = () => {
         {
           name: 'Groovy',
           level: 'Avanzado',
-          context: 'Trabajo',
+          contexts: ['Trabajo'],
           description: 'Desarrollo de SaaS empresarial y automatización de procesos',
           icon: <Code className="w-4 h-4" />
         },
         {
           name: 'Python',
           level: 'Avanzado',
-          context: 'Ambos',
+          contexts: ['Trabajo', 'Estudios', 'Proyectos'],
           description: 'Django, FastAPI, scripts de automatización e integración con IA',
           icon: <Code className="w-4 h-4" />
         },
         {
           name: 'Java',
           level: 'Intermedio',
-          context: 'Estudios',
+          contexts: ['Estudios', 'Proyectos'],
           description: 'Spring Boot, aplicaciones empresariales y programación multihilo',
           icon: <Code className="w-4 h-4" />
         },
         {
           name: 'Node.js',
           level: 'Intermedio',
-          context: 'Estudios',
+          contexts: ['Estudios'],
           description: 'Express.js, APIs REST y desarrollo de microservicios',
           icon: <Code className="w-4 h-4" />
         },
         {
           name: 'PostgreSQL',
           level: 'Avanzado',
-          context: 'Trabajo',
+          contexts: ['Trabajo'],
           description: 'Diseño de esquemas, optimización de consultas y administración',
           icon: <Database className="w-4 h-4" />
         },
         {
           name: 'MySQL',
           level: 'Intermedio',
-          context: 'Ambos',
+          contexts: ['Trabajo', 'Estudios'],
           description: 'Bases de datos relacionales y stored procedures',
           icon: <Database className="w-4 h-4" />
         }
@@ -117,42 +126,42 @@ const Skills: React.FC = () => {
         {
           name: 'JavaScript',
           level: 'Intermedio',
-          context: 'Trabajo',
+          contexts: ['Trabajo', 'Proyectos'],
           description: 'Desarrollo de scripts',
           icon: <Code className="w-4 h-4" />
         },
         {
           name: 'HTML5 & CSS3',
           level: 'Intermedio',
-          context: 'Trabajo Proyectos',
+          contexts: ['Trabajo', 'Proyectos'],
           description: 'Nociones de lo que es HTML y CSS pero falta desarrollo',
           icon: <Globe className="w-4 h-4" />
         },
         {
           name: 'React',
-          level: 'Básico',
-          context: 'Proyectos',
+          level: 'Principiante',
+          contexts: ['Proyectos'],
           description: 'Desarrollo de proyectos',
           icon: <Code className="w-4 h-4" />
         },
         {
           name: 'TypeScript',
           level: 'Principiante',
-          context: 'Proyectos',
+          contexts: ['Trabajo', 'Proyectos'],
           description: 'Desarrollo de proyectos y trabajo básico.',
           icon: <Code className="w-4 h-4" />
         },
         {
           name: 'Tailwind CSS',
           level: 'Principiante',
-          context: 'Trabajo',
+          contexts: ['Trabajo', 'Proyectos'],
           description: 'He usado tailwind para trabajar en componentes web y hacer páginas como este portfolio.',
           icon: <Globe className="w-4 h-4" />
         },
         {
           name: 'GSAP',
           level: 'Principiante',
-          context: 'Estudios',
+          contexts: ['Proyectos'],
           description: 'Soy capaz de hacer animaciones básicas.',
           icon: <Zap className="w-4 h-4" />
         }
@@ -175,101 +184,101 @@ const Skills: React.FC = () => {
         {
           name: 'Git',
           level: 'Avanzado',
-          context: 'Ambos',
+          contexts: ['Trabajo', 'Estudios', 'Proyectos'],
           description: 'Control de versiones, branching strategies y workflows colaborativos',
           icon: <GitBranch className="w-4 h-4" />
         },
         {
           name: 'Docker',
           level: 'Intermedio',
-          context: 'Ambos',
+          contexts: ['Trabajo', 'Estudios'],
           description: 'Containerización, Docker Compose y multi-stage builds',
           icon: <Settings className="w-4 h-4" />
         },
         {
           name: 'Jenkins',
           level: 'Intermedio',
-          context: 'Estudios',
+          contexts: ['Estudios'],
           description: 'Pipelines CI/CD, automatización de despliegues y testing',
           icon: <Settings className="w-4 h-4" />
         },
         {
           name: 'Linux',
           level: 'Intermedio',
-          context: 'Ambos',
+          contexts: ['Trabajo', 'Estudios'],
           description: 'Administración de servidores, bash scripting y Ubuntu/CentOS',
           icon: <Settings className="w-4 h-4" />
         },
         {
           name: 'AWS',
           level: 'Principiante',
-          context: 'Estudios',
+          contexts: ['Estudios'],
           description: 'EC2, S3, RDS, Lambda básico - Certificación en progreso',
           icon: <Globe className="w-4 h-4" />
         },
         {
           name: 'Nginx',
           level: 'Intermedio',
-          context: 'Estudios',
+          contexts: ['Estudios'],
           description: 'Reverse proxy, load balancing, SSL y configuración avanzada',
           icon: <Settings className="w-4 h-4" />
         },
         {
-      name: 'GitHub',
-      level: 'Avanzado',
-      context: 'Ambos',
-      description: 'Repositorios remotos, pull requests y acciones CI/CD',
-      icon: <GitHub className="w-4 h-4" />
-    },
-    {
-      name: 'Maven',
-      level: 'Intermedio',
-      context: 'Trabajo',
-      description: 'Gestión de dependencias y lifecycle de proyectos Java',
-      icon: <Settings className="w-4 h-4" />
-    },
-    {
-      name: 'Gradle',
-      level: 'Intermedio',
-      context: 'Trabajo',
-      description: 'Automatización de builds y pipelines de Java/Groovy',
-      icon: <Settings className="w-4 h-4" />
-    },
-    {
-      name: 'Vagrant',
-      level: 'Intermedio',
-      context: 'Estudios',
-      description: 'Creación de entornos de desarrollo reproducibles',
-      icon: <Settings className="w-4 h-4" />
-    },
-    {
-      name: 'Kubernetes',
-      level: 'Básico',
-      context: 'Estudios',
-      description: 'Orquestación de contenedores y despliegue de clusters',
-      icon: <Settings className="w-4 h-4" />
-    },
-    {
-      name: 'Ansible',
-      level: 'Básico',
-      context: 'Estudios',
-      description: 'Automatización de configuración e infraestructura como código',
-      icon: <Settings className="w-4 h-4" />
-    },
-    {
-      name: 'Prometheus',
-      level: 'Básico',
-      context: 'Estudios',
-      description: 'Monitoreo y alertas de servicios',
-      icon: <Settings className="w-4 h-4" />
-    },
-    {
-      name: 'Grafana',
-      level: 'Básico',
-      context: 'Estudios',
-      description: 'Dashboards y visualización de métricas',
-      icon: <Settings className="w-4 h-4" />
-    }
+          name: 'GitHub',
+          level: 'Avanzado',
+          contexts: ['Trabajo', 'Estudios', 'Proyectos'],
+          description: 'Repositorios remotos, pull requests y acciones CI/CD',
+          icon: <Github className="w-4 h-4" />
+        },
+        {
+          name: 'Maven',
+          level: 'Intermedio',
+          contexts: ['Trabajo'],
+          description: 'Gestión de dependencias y lifecycle de proyectos Java',
+          icon: <Settings className="w-4 h-4" />
+        },
+        {
+          name: 'Gradle',
+          level: 'Intermedio',
+          contexts: ['Trabajo'],
+          description: 'Automatización de builds y pipelines de Java/Groovy',
+          icon: <Settings className="w-4 h-4" />
+        },
+        {
+          name: 'Vagrant',
+          level: 'Intermedio',
+          contexts: ['Estudios'],
+          description: 'Creación de entornos de desarrollo reproducibles',
+          icon: <Settings className="w-4 h-4" />
+        },
+        {
+          name: 'Kubernetes',
+          level: 'Principiante',
+          contexts: ['Estudios'],
+          description: 'Orquestación de contenedores y despliegue de clusters',
+          icon: <Settings className="w-4 h-4" />
+        },
+        {
+          name: 'Ansible',
+          level: 'Principiante',
+          contexts: ['Estudios'],
+          description: 'Automatización de configuración e infraestructura como código',
+          icon: <Settings className="w-4 h-4" />
+        },
+        {
+          name: 'Prometheus',
+          level: 'Principiante',
+          contexts: ['Estudios'],
+          description: 'Monitoreo y alertas de servicios',
+          icon: <Settings className="w-4 h-4" />
+        },
+        {
+          name: 'Grafana',
+          level: 'Principiante',
+          contexts: ['Estudios'],
+          description: 'Dashboards y visualización de métricas',
+          icon: <Settings className="w-4 h-4" />
+        }
       ]
     },
     {
@@ -289,42 +298,42 @@ const Skills: React.FC = () => {
         {
           name: 'Scrum/Kanban',
           level: 'Avanzado',
-          context: 'Trabajo',
+          contexts: ['Trabajo'],
           description: 'Metodologías ágiles, gestión de proyectos con Jira y Trello',
           icon: <Wrench className="w-4 h-4" />
         },
         {
           name: 'REST APIs',
           level: 'Avanzado',
-          context: 'Ambos',
+          contexts: ['Trabajo', 'Estudios'],
           description: 'Diseño, documentación, integración con Postman y Swagger',
           icon: <Globe className="w-4 h-4" />
         },
         {
           name: 'Photoshop',
           level: 'Intermedio',
-          context: 'Trabajo',
+          contexts: ['Trabajo'],
           description: 'Edición de imágenes, optimización web y diseño básico',
           icon: <Monitor className="w-4 h-4" />
         },
         {
           name: 'Figma',
           level: 'Principiante',
-          context: 'Estudios',
+          contexts: ['Estudios'],
           description: 'Prototipado, diseño de interfaces y colaboración en equipo',
           icon: <Monitor className="w-4 h-4" />
         },
         {
           name: 'Jest/Testing',
           level: 'Principiante',
-          context: 'Estudios',
+          contexts: ['Estudios'],
           description: 'Unit testing, integration testing y TDD básico',
           icon: <Code className="w-4 h-4" />
         },
         {
           name: 'Webpack',
           level: 'Principiante',
-          context: 'Estudios',
+          contexts: ['Estudios'],
           description: 'Bundling, optimización de assets y configuración avanzada',
           icon: <Settings className="w-4 h-4" />
         }
@@ -379,7 +388,7 @@ const Skills: React.FC = () => {
     switch (context) {
       case 'Trabajo': return 'bg-accent/10 text-accent border-accent/20';
       case 'Estudios': return 'bg-purple-500/10 text-purple-600 border-purple-500/20';
-      case 'Ambos': return 'bg-green-500/10 text-green-600 border-green-500/20';
+      case 'Proyectos': return 'bg-green-500/10 text-green-600 border-green-500/20';
       default: return 'bg-gray-500/10 text-gray-600 border-gray-500/20';
     }
   };
@@ -488,12 +497,36 @@ const Skills: React.FC = () => {
                           <div>
                             <h4 className="text-base sm:text-lg font-bold text-foreground">{tech.name}</h4>
                             <div className="flex items-center space-x-2 mt-1">
-                              <span className={`px-2 py-1 rounded-full text-xs font-medium ${getLevelColor(tech.level)}`}>
-                                {tech.level}
-                              </span>
-                              <span className={`px-2 py-1 rounded-full text-xs font-medium border ${getContextColor(tech.context)}`}>
-                                {tech.context}
-                              </span>
+                              {/* Level Badge with Tooltip */}
+                              <div className="relative">
+                                <span 
+                                  className={`px-2 py-1 rounded-full text-xs font-medium cursor-help ${getLevelColor(tech.level)}`}
+                                  onMouseEnter={() => setHoveredLevel(`${tech.name}-level`)}
+                                  onMouseLeave={() => setHoveredLevel(null)}
+                                >
+                                  {tech.level}
+                                </span>
+                                
+                                {/* Tooltip */}
+                                {hoveredLevel === `${tech.name}-level` && (
+                                  <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-2 bg-gray-900 text-white text-xs rounded-lg shadow-lg whitespace-nowrap z-50">
+                                    {levelTooltips[tech.level]}
+                                    <div className="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-gray-900"></div>
+                                  </div>
+                                )}
+                              </div>
+                              
+                              {/* Context Badges */}
+                              <div className="flex flex-wrap gap-1">
+                                {tech.contexts.map((context, contextIndex) => (
+                                  <span 
+                                    key={contextIndex}
+                                    className={`px-2 py-1 rounded-full text-xs font-medium border ${getContextColor(context)}`}
+                                  >
+                                    {context}
+                                  </span>
+                                ))}
+                              </div>
                             </div>
                           </div>
                         </div>
