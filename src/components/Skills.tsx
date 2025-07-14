@@ -213,7 +213,63 @@ const Skills: React.FC = () => {
           context: 'Estudios',
           description: 'Reverse proxy, load balancing, SSL y configuración avanzada',
           icon: <Settings className="w-4 h-4" />
-        }
+        },
+        {
+      name: 'GitHub',
+      level: 'Avanzado',
+      context: 'Ambos',
+      description: 'Repositorios remotos, pull requests y acciones CI/CD',
+      icon: <GitHub className="w-4 h-4" />
+    },
+    {
+      name: 'Maven',
+      level: 'Intermedio',
+      context: 'Trabajo',
+      description: 'Gestión de dependencias y lifecycle de proyectos Java',
+      icon: <Settings className="w-4 h-4" />
+    },
+    {
+      name: 'Gradle',
+      level: 'Intermedio',
+      context: 'Trabajo',
+      description: 'Automatización de builds y pipelines de Java/Groovy',
+      icon: <Settings className="w-4 h-4" />
+    },
+    {
+      name: 'Vagrant',
+      level: 'Intermedio',
+      context: 'Estudios',
+      description: 'Creación de entornos de desarrollo reproducibles',
+      icon: <Settings className="w-4 h-4" />
+    },
+    {
+      name: 'Kubernetes',
+      level: 'Básico',
+      context: 'Estudios',
+      description: 'Orquestación de contenedores y despliegue de clusters',
+      icon: <Settings className="w-4 h-4" />
+    },
+    {
+      name: 'Ansible',
+      level: 'Básico',
+      context: 'Estudios',
+      description: 'Automatización de configuración e infraestructura como código',
+      icon: <Settings className="w-4 h-4" />
+    },
+    {
+      name: 'Prometheus',
+      level: 'Básico',
+      context: 'Estudios',
+      description: 'Monitoreo y alertas de servicios',
+      icon: <Settings className="w-4 h-4" />
+    },
+    {
+      name: 'Grafana',
+      level: 'Básico',
+      context: 'Estudios',
+      description: 'Dashboards y visualización de métricas',
+      icon: <Settings className="w-4 h-4" />
+    }
       ]
     },
     {
