@@ -102,12 +102,24 @@ const CVViewer: React.FC<CVViewerProps> = ({ isOpen, onClose }) => {
   };
 
   const handleDownload = () => {
-    const link = document.createElement('a');
-    link.href = '/CV_Marcos_Baeza.jpg';
-    link.download = 'CV_Marcos_Baeza.jpg';
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+    // Método 1: Fetch y crear blob
+    fetch('/CV_Marcos_Baeza.jpg')
+      .then(response => response.blob())
+      .then(blob => {
+        const url = window.URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = 'CV_Marcos_Baeza.jpg';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        window.URL.revokeObjectURL(url);
+      })
+      .catch(error => {
+        console.error('Error descargando CV:', error);
+        // Fallback: abrir en nueva ventana
+        window.open('/CV_Marcos_Baeza.jpg', '_blank');
+      });
   };
 
   const handleMouseDown = (e: React.MouseEvent) => {
