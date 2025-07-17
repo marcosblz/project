@@ -103,7 +103,7 @@ const CVViewer: React.FC<CVViewerProps> = ({ isOpen, onClose }) => {
 
   const handleDownload = () => {
     const link = document.createElement('a');
-    link.href = '/CV%20Marcos%20Baeza.jpg';
+    link.href = '/CV_Marcos_Baeza.jpg';
     link.download = 'CV_Marcos_Baeza.jpg';
     link.click();
   };
@@ -202,7 +202,7 @@ const CVViewer: React.FC<CVViewerProps> = ({ isOpen, onClose }) => {
         >
           <img
             ref={imageRef}
-            src="/CV Marcos Baeza.jpg"
+            src="/CV_Marcos_Baeza.jpg"
             alt="CV Marcos Baeza"
             className="max-w-none select-none shadow-2xl rounded-lg border border-border/20"
             style={{

@@ -186,7 +186,7 @@ const Hero: React.FC = () => {
 
   const downloadCV = () => {
     const link = document.createElement('a');
-    link.href = '/CV%20Marcos%20Baeza.jpg';
+    link.href = '/CV_Marcos_Baeza.jpg';
     link.download = 'CV_Marcos_Baeza.jpg';
     link.click();
   };
