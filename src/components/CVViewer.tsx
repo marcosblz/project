@@ -202,7 +202,7 @@ const CVViewer: React.FC<CVViewerProps> = ({ isOpen, onClose }) => {
         >
           <img
             ref={imageRef}
-            src="/CV Marcos Baeza.pdf"
+            src="/CV Marcos Baeza.jpg"
             alt="CV Marcos Baeza"
             className="max-w-none select-none shadow-2xl rounded-lg border border-border/20"
             style={{
