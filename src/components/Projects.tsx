@@ -25,30 +25,17 @@ const Projects: React.FC = () => {
   const projects: Project[] = [
     {
       id: 1,
-      title: "SaaS Process Automation",
-      description: "Sistema de automatización de procesos internos con IA que mejoró la productividad entre 30-50%",
-      longDescription: "Desarrollé un sistema completo de automatización de procesos internos para Servinform, utilizando Groovy y JavaScript. El sistema incluye tanto frontend como backend, con funcionalidades de IA que mejoraron la productividad entre un 30% y 50%. Implementé APIs REST, integración con bases de datos y una interfaz intuitiva para la gestión de procesos departamentales.",
-      image: "https://images.pexels.com/photos/7688336/pexels-photo-7688336.jpeg?auto=compress&cs=tinysrgb&w=600",
-      technologies: ["Groovy", "JavaScript", "Python", "REST APIs", "IA", "HTML", "CSS"],
+      title: "Web Scraping con IA",
+      description: "Sistema inteligente de scraping web con análisis automatizado usando Python e IA",
+      longDescription: "Proyecto en desarrollo que combina técnicas avanzadas de web scraping con inteligencia artificial para extraer, procesar y analizar datos de múltiples fuentes web. Utiliza Python con bibliotecas especializadas para scraping, procesamiento de lenguaje natural y machine learning para automatizar la recopilación y análisis de información de manera inteligente.",
+      image: "https://images.pexels.com/photos/11035380/pexels-photo-11035380.jpeg?auto=compress&cs=tinysrgb&w=600",
+      technologies: ["Python", "BeautifulSoup", "Selenium", "IA", "NLP", "Machine Learning", "APIs"],
       category: "Backend",
-      demoUrl: "#",
       githubUrl: "#",
-      year: "2024"
+      year: "2025"
     },
     {
       id: 2,
-      title: "Django Web Platform",
-      description: "Mejoras y optimización de plataforma web interna con Django y tecnologías modernas",
-      longDescription: "Durante mis prácticas en Zener, trabajé en la mejora de una plataforma web interna desarrollada en Django. Implementé nuevas funcionalidades, optimicé consultas a la base de datos MySQL, y mejoré la arquitectura del sistema. También trabajé con Docker para containerización y desarrollé APIs REST para integración con aplicaciones Android.",
-      image: "https://images.pexels.com/photos/7092613/pexels-photo-7092613.jpeg?auto=compress&cs=tinysrgb&w=600",
-      technologies: ["Python", "Django", "MySQL", "Docker", "REST APIs", "Webpack"],
-      category: "Backend",
-      demoUrl: "#",
-      githubUrl: "#",
-      year: "2023"
-    },
-    {
-      id: 3,
       title: "Tamagotchi",
       description: "Proyecto final de DAM: Tamagotchi completo hecho en Java con base jugable",
       longDescription: "Proyecto final de DAM: Tamagotchi es una aplicación hecha en Java. Los valores de la mascota se manejan con una base de datos local hecha con SQLite3 y con una API de tiempo para manejar la temperatura y lluvias del lugar del ordenador donde se ejecute. Tiene base jugable. Cada apartado tiene profundidad pero para no perderse hay un tutorial... ¡Descárgalo y juega!",
@@ -139,8 +126,12 @@ const Projects: React.FC = () => {
                   
                   {/* Category Badge */}
                   <div className="absolute top-4 left-4">
-                    <span className="px-3 py-1 bg-accent/90 text-white rounded-full text-xs font-medium backdrop-blur-sm">
-                      {project.category}
+                    <span className={`px-3 py-1 rounded-full text-xs font-medium backdrop-blur-sm ${
+                      project.id === 1 
+                        ? 'bg-orange-500/90 text-white' 
+                        : 'bg-accent/90 text-white'
+                    }`}>
+                      {project.id === 1 ? 'En Desarrollo' : project.category}
                     </span>
                   </div>
 
