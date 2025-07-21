@@ -28,7 +28,7 @@ const Projects: React.FC = () => {
       title: "Web Scraping con IA",
       description: "En desarrollo",
       longDescription: "Proyecto en desarrollo",
-      image: "",
+      image: "/2022122123520979291.jpg",
       technologies: [],
       category: "Backend",
       year: "2025"
