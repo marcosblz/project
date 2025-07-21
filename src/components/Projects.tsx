@@ -26,12 +26,11 @@ const Projects: React.FC = () => {
     {
       id: 1,
       title: "Web Scraping con IA",
-      description: "Sistema inteligente de scraping web con análisis automatizado usando Python e IA",
-      longDescription: "Proyecto en desarrollo que combina técnicas avanzadas de web scraping con inteligencia artificial para extraer, procesar y analizar datos de múltiples fuentes web. Utiliza Python con bibliotecas especializadas para scraping, procesamiento de lenguaje natural y machine learning para automatizar la recopilación y análisis de información de manera inteligente.",
-      image: "https://images.pexels.com/photos/11035380/pexels-photo-11035380.jpeg?auto=compress&cs=tinysrgb&w=600",
-      technologies: ["Python", "BeautifulSoup", "Selenium", "IA", "NLP", "Machine Learning", "APIs"],
+      description: "En desarrollo",
+      longDescription: "Proyecto en desarrollo",
+      image: "",
+      technologies: [],
       category: "Backend",
-      githubUrl: "#",
       year: "2025"
     },
     {
