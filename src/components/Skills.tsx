@@ -158,10 +158,10 @@ const Skills: React.FC = () => {
       color: 'from-orange-500 to-red-500',
       tabColor: 'bg-orange-500',
       highlights: [
-        'Pipelines CI/CD automatizados',
-        'Containerización y orquestación',
+        'Repositoriores',
+        'Enfoque ágil',
         'Monitoreo y logging',
-        'Infraestructura como código'
+        'Cimientos sólidos'
       ],
       technologies: [
         {
@@ -250,12 +250,6 @@ const Skills: React.FC = () => {
       icon: <Settings className="w-4 h-4" />,
       color: 'from-green-500 to-emerald-500',
       tabColor: 'bg-green-500',
-      highlights: [
-        'Metodologías ágiles',
-        'Testing y calidad de código',
-        'Herramientas de diseño',
-        'Análisis y documentación'
-      ],
       technologies: [
         {
           name: 'Scrum/Kanban',
