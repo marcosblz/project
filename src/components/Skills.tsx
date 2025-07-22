@@ -366,7 +366,7 @@ const Skills: React.FC = () => {
             <div className="relative">
               {/* Tabs positioned above content */}
               <div className="relative -mb-px z-20">
-                <div className="grid grid-cols-2 gap-2 sm:flex sm:flex-wrap sm:gap-2 md:gap-3 sm:justify-start">
+                <div className="flex gap-2 md:gap-3 overflow-x-auto scrollbar-hide pb-2 -mb-2">
                   {skillCategories.map((category, index) => (
                     <button
                       key={category.id}
@@ -379,7 +379,7 @@ const Skills: React.FC = () => {
                     >
                       {/* Tab Background */}
                       <div className={`
-                        relative px-3 py-2 sm:px-3 md:px-4 lg:px-6 sm:py-2 md:py-3 rounded-t-lg border-t border-l border-r transition-all duration-300
+                        relative px-4 py-2 md:px-6 md:py-3 rounded-t-lg border-t border-l border-r transition-all duration-300 whitespace-nowrap
                         ${selectedCategory === category.id 
                           ? `${category.tabColor} text-white shadow-lg border-transparent border-b-0` 
                           : 'bg-muted/80 text-muted-foreground border-border hover:bg-muted hover:text-foreground'
