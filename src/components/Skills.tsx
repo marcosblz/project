@@ -414,6 +414,7 @@ const Skills: React.FC = () => {
                     })}
                   </div>
                   <div className="flex-1">
+                    <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-foreground mb-2">{selectedCategoryData.title}</h3>
                     <p className="text-sm sm:text-base text-muted-foreground mb-3">{selectedCategoryData.subtitle}</p>
                     
                     {/* Highlights */}
