@@ -245,7 +245,7 @@ const Skills: React.FC = () => {
     },
     {
       id: 'tools',
-      title: 'Tools',
+      title: 'Otros',
       icon: <Settings className="w-4 h-4" />,
       color: 'from-green-500 to-emerald-500',
       tabColor: 'bg-green-500',
