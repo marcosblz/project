@@ -154,7 +154,6 @@ const Skills: React.FC = () => {
     {
       id: 'devops',
       title: 'DevOps',
-      subtitle: 'Automatización y despliegue',
       icon: <GitBranch className="w-4 h-4" />,
       color: 'from-orange-500 to-red-500',
       tabColor: 'bg-orange-500',
