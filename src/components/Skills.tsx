@@ -404,7 +404,7 @@ const Skills: React.FC = () => {
               </div>
 
               {/* Main Content Area */}
-              <div className="bg-background/80 backdrop-blur-sm border border-border rounded-2xl rounded-tl-none p-4 sm:p-6 md:p-8 lg:p-10 shadow-xl relative z-10 -mt-px">
+              <div className="bg-background/80 backdrop-blur-sm border border-border rounded-2xl rounded-t-none p-4 sm:p-6 md:p-8 lg:p-10 shadow-xl relative z-10">
               
                 {/* Category Header */}
                 <div className="flex flex-col sm:flex-row sm:items-center mb-4 sm:mb-6 md:mb-8">
