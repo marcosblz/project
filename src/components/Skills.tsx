@@ -83,28 +83,14 @@ const Skills: React.FC = () => {
           name: 'Java',
           level: 'Intermedio',
           contexts: ['Estudios', 'Proyectos'],
-          description: 'Spring Boot, aplicaciones empresariales y programación multihilo',
+          description: 'Aplicaciones de escritorio y programación multihilo',
           icon: <Code className="w-4 h-4" />
-        },
-        {
-          name: 'Node.js',
-          level: 'Intermedio',
-          contexts: ['Estudios'],
-          description: 'Express.js, APIs REST y desarrollo de microservicios',
-          icon: <Code className="w-4 h-4" />
-        },
-        {
-          name: 'PostgreSQL',
-          level: 'Avanzado',
-          contexts: ['Trabajo'],
-          description: 'Diseño de esquemas, optimización de consultas y administración',
-          icon: <Database className="w-4 h-4" />
         },
         {
           name: 'MySQL',
           level: 'Intermedio',
           contexts: ['Trabajo', 'Estudios'],
-          description: 'Bases de datos relacionales y stored procedures',
+          description: 'Bases de datos relacionales y no relacionales',
           icon: <Database className="w-4 h-4" />
         }
       ]
@@ -185,63 +171,42 @@ const Skills: React.FC = () => {
           name: 'Git',
           level: 'Avanzado',
           contexts: ['Trabajo', 'Estudios', 'Proyectos'],
-          description: 'Control de versiones, branching strategies y workflows colaborativos',
+          description: 'Control de versiones',
           icon: <GitBranch className="w-4 h-4" />
         },
         {
           name: 'Docker',
           level: 'Intermedio',
           contexts: ['Trabajo', 'Estudios'],
-          description: 'Containerización, Docker Compose y multi-stage builds',
+          description: 'Containerización, Docker Compose',
           icon: <Settings className="w-4 h-4" />
         },
         {
           name: 'Jenkins',
           level: 'Intermedio',
           contexts: ['Estudios'],
-          description: 'Pipelines CI/CD, automatización de despliegues y testing',
+          description: 'Pipelines CI/CD',
           icon: <Settings className="w-4 h-4" />
         },
         {
           name: 'Linux',
           level: 'Intermedio',
           contexts: ['Trabajo', 'Estudios'],
-          description: 'Administración de servidores, bash scripting y Ubuntu/CentOS',
+          description: 'Terminal, conocimiento del SO',
           icon: <Settings className="w-4 h-4" />
         },
         {
           name: 'AWS',
           level: 'Principiante',
           contexts: ['Estudios'],
-          description: 'EC2, S3, RDS, Lambda básico - Certificación en progreso',
+          description: 'EC2, S3, RDS, ...',
           icon: <Globe className="w-4 h-4" />
         },
         {
           name: 'Nginx',
           level: 'Intermedio',
           contexts: ['Estudios'],
-          description: 'Reverse proxy, load balancing, SSL y configuración avanzada',
-          icon: <Settings className="w-4 h-4" />
-        },
-        {
-          name: 'GitHub',
-          level: 'Avanzado',
-          contexts: ['Trabajo', 'Estudios', 'Proyectos'],
-          description: 'Repositorios remotos, pull requests y acciones CI/CD',
-          icon: <Github className="w-4 h-4" />
-        },
-        {
-          name: 'Maven',
-          level: 'Intermedio',
-          contexts: ['Trabajo'],
-          description: 'Gestión de dependencias y lifecycle de proyectos Java',
-          icon: <Settings className="w-4 h-4" />
-        },
-        {
-          name: 'Gradle',
-          level: 'Intermedio',
-          contexts: ['Trabajo'],
-          description: 'Automatización de builds y pipelines de Java/Groovy',
+          description: 'Servidores web básicos y correo',
           icon: <Settings className="w-4 h-4" />
         },
         {
@@ -324,18 +289,11 @@ const Skills: React.FC = () => {
           icon: <Monitor className="w-4 h-4" />
         },
         {
-          name: 'Jest/Testing',
+          name: 'Testing',
           level: 'Principiante',
           contexts: ['Estudios'],
-          description: 'Unit testing, integration testing y TDD básico',
+          description: 'Unit testing, integration testing',
           icon: <Code className="w-4 h-4" />
-        },
-        {
-          name: 'Webpack',
-          level: 'Principiante',
-          contexts: ['Estudios'],
-          description: 'Bundling, optimización de assets y configuración avanzada',
-          icon: <Settings className="w-4 h-4" />
         }
       ]
     }
