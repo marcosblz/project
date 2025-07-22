@@ -366,12 +366,12 @@ const Skills: React.FC = () => {
             <div className="relative">
               {/* Tabs positioned above content */}
               <div className="relative -mb-px z-20">
-                <div className="flex flex-wrap gap-1 sm:gap-2 md:gap-3 justify-center sm:justify-start">
+                <div className="grid grid-cols-2 gap-2 sm:flex sm:flex-wrap sm:gap-2 md:gap-3 sm:justify-start">
                   {skillCategories.map((category, index) => (
                     <button
                       key={category.id}
                       onClick={() => setSelectedCategory(category.id)}
-                      className={`notebook-tab relative group transition-all duration-300 ${
+                      className={`notebook-tab relative group transition-all duration-300 w-full sm:w-auto ${
                         selectedCategory === category.id
                           ? 'z-30'
                           : 'hover:-translate-y-0.5 z-20'
@@ -379,18 +379,18 @@ const Skills: React.FC = () => {
                     >
                       {/* Tab Background */}
                       <div className={`
-                        relative px-2 sm:px-3 md:px-4 lg:px-6 py-1.5 sm:py-2 md:py-3 rounded-t-lg border-t border-l border-r transition-all duration-300
+                        relative px-3 py-2 sm:px-3 md:px-4 lg:px-6 sm:py-2 md:py-3 rounded-t-lg border-t border-l border-r transition-all duration-300
                         ${selectedCategory === category.id 
                           ? `${category.tabColor} text-white shadow-lg border-transparent border-b-0` 
                           : 'bg-muted/80 text-muted-foreground border-border hover:bg-muted hover:text-foreground'
                         }
                       `}>
                         {/* Tab Content */}
-                        <div className="flex items-center space-x-1 sm:space-x-2">
+                        <div className="flex items-center justify-center space-x-2">
                           {React.cloneElement(category.icon as React.ReactElement, {
-                            className: "w-3 h-3 sm:w-4 sm:h-4"
+                            className: "w-4 h-4"
                           })}
-                          <span className="text-xs sm:text-sm md:text-base font-medium">{category.title}</span>
+                          <span className="text-sm font-medium">{category.title}</span>
                         </div>
 
                         {/* Active Tab Connector */}
