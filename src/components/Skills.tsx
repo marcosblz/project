@@ -54,13 +54,12 @@ const Skills: React.FC = () => {
     {
       id: 'backend',
       title: 'Backend',
-      subtitle: 'Desarrollo del lado del servidor',
       icon: <Server className="w-4 h-4" />,
       color: 'from-blue-500 to-cyan-500',
       tabColor: 'bg-blue-500',
       highlights: [
-        'APIs REST y GraphQL',
-        'Bases de datos relacionales y NoSQL',
+        'Consumo e integración de APIs REST',
+        'Automatización de procesos',
         'Arquitectura de microservicios',
         'Optimización de rendimiento'
       ],
