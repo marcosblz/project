@@ -381,12 +381,9 @@ const Skills: React.FC = () => {
                       <div className={`
                         relative px-4 py-2 md:px-6 md:py-3 transition-all duration-300 whitespace-nowrap
                         ${selectedCategory === category.id 
-                          ? `${category.tabColor} text-white shadow-lg rounded-t-lg border-t border-l border-r border-transparent` 
+                          ? `${category.tabColor} text-white shadow-lg rounded-tl-lg border-t border-l border-r border-transparent` 
                           : 'bg-muted/80 text-muted-foreground border-t border-l border-r border-border hover:bg-muted hover:text-foreground rounded-t-lg'
                         }
-                        ${selectedCategory === category.id && index === 0 ? 'rounded-tl-lg' : ''}
-                        ${selectedCategory === category.id && index === skillCategories.length - 1 ? '' : ''}
-                        ${selectedCategory === category.id ? '' : ''}
                       `}>
                         {/* Tab Content */}
                         <div className="flex items-center justify-center space-x-2">
@@ -407,7 +404,7 @@ const Skills: React.FC = () => {
               </div>
 
               {/* Main Content Area */}
-              <div className="bg-background/80 backdrop-blur-sm border border-border rounded-2xl rounded-tr-none p-4 sm:p-6 md:p-8 lg:p-10 shadow-xl relative z-10">
+              <div className="bg-background/80 backdrop-blur-sm border border-border rounded-2xl rounded-tl-none p-4 sm:p-6 md:p-8 lg:p-10 shadow-xl relative z-10 -mt-px">
               
                 {/* Category Header */}
                 <div className="flex flex-col sm:flex-row sm:items-center mb-4 sm:mb-6 md:mb-8">
