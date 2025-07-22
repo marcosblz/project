@@ -366,7 +366,7 @@ const Skills: React.FC = () => {
             <div className="relative">
               {/* Tabs positioned above content */}
               <div className="relative -mb-px z-20">
-                <div className="flex flex-wrap gap-2 sm:gap-3 justify-center sm:justify-start">
+                <div className="flex flex-wrap gap-1 sm:gap-2 md:gap-3 justify-center sm:justify-start">
                   {skillCategories.map((category, index) => (
                     <button
                       key={category.id}
@@ -379,18 +379,18 @@ const Skills: React.FC = () => {
                     >
                       {/* Tab Background */}
                       <div className={`
-                        relative px-3 sm:px-4 lg:px-6 py-2 sm:py-3 rounded-t-lg border-t border-l border-r transition-all duration-300
+                        relative px-2 sm:px-3 md:px-4 lg:px-6 py-1.5 sm:py-2 md:py-3 rounded-t-lg border-t border-l border-r transition-all duration-300
                         ${selectedCategory === category.id 
                           ? `${category.tabColor} text-white shadow-lg border-transparent border-b-0` 
                           : 'bg-muted/80 text-muted-foreground border-border hover:bg-muted hover:text-foreground'
                         }
                       `}>
                         {/* Tab Content */}
-                        <div className="flex items-center space-x-2">
+                        <div className="flex items-center space-x-1 sm:space-x-2">
                           {React.cloneElement(category.icon as React.ReactElement, {
-                            className: "w-3 sm:w-4 h-3 sm:h-4"
+                            className: "w-3 h-3 sm:w-4 sm:h-4"
                           })}
-                          <span className="text-xs sm:text-sm lg:text-base font-medium">{category.title}</span>
+                          <span className="text-xs sm:text-sm md:text-base font-medium">{category.title}</span>
                         </div>
 
                         {/* Active Tab Connector */}
@@ -404,27 +404,27 @@ const Skills: React.FC = () => {
               </div>
 
               {/* Main Content Area */}
-              <div className="bg-background/80 backdrop-blur-sm border border-border rounded-2xl rounded-tl-none p-6 sm:p-8 lg:p-10 shadow-xl relative z-10">
+              <div className="bg-background/80 backdrop-blur-sm border border-border rounded-2xl rounded-tl-none p-4 sm:p-6 md:p-8 lg:p-10 shadow-xl relative z-10">
               
                 {/* Category Header */}
-                <div className="flex items-center mb-6 sm:mb-8">
-                  <div className={`w-16 sm:w-20 h-16 sm:h-20 rounded-xl bg-gradient-to-br ${selectedCategoryData.color} flex items-center justify-center mr-4 sm:mr-6 shadow-lg`}>
+                <div className="flex flex-col sm:flex-row sm:items-center mb-4 sm:mb-6 md:mb-8">
+                  <div className={`w-12 sm:w-16 md:w-20 h-12 sm:h-16 md:h-20 rounded-xl bg-gradient-to-br ${selectedCategoryData.color} flex items-center justify-center mb-3 sm:mb-0 sm:mr-4 md:mr-6 shadow-lg mx-auto sm:mx-0`}>
                     {React.cloneElement(selectedCategoryData.icon as React.ReactElement, {
-                      className: "w-8 sm:w-10 h-8 sm:h-10 text-white"
+                      className: "w-6 sm:w-8 md:w-10 h-6 sm:h-8 md:h-10 text-white"
                     })}
                   </div>
-                  <div className="flex-1">
-                    <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-foreground mb-2">{selectedCategoryData.title}</h3>
-                    <p className="text-sm sm:text-base text-muted-foreground mb-3">{selectedCategoryData.subtitle}</p>
+                  <div className="flex-1 text-center sm:text-left">
+                    <h3 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-foreground mb-2">{selectedCategoryData.title}</h3>
+                    <p className="text-sm sm:text-base text-muted-foreground mb-3 px-2 sm:px-0">{selectedCategoryData.subtitle}</p>
                     
                     {/* Highlights */}
-                    <div className="flex flex-wrap gap-2">
+                    <div className="flex flex-wrap gap-1 sm:gap-2 justify-center sm:justify-start">
                       {selectedCategoryData.highlights.map((highlight, index) => (
                         <span
                           key={index}
-                          className="inline-flex items-center px-2 sm:px-3 py-1 bg-accent/10 text-accent rounded-full text-xs sm:text-sm font-medium"
+                          className="inline-flex items-center px-2 sm:px-3 py-1 bg-accent/10 text-accent rounded-full text-xs font-medium"
                         >
-                          <Star className="w-3 h-3 mr-1" />
+                          <Star className="w-2.5 sm:w-3 h-2.5 sm:h-3 mr-1" />
                           {highlight}
                         </span>
                       ))}
@@ -433,24 +433,24 @@ const Skills: React.FC = () => {
                 </div>
 
                 {/* Technologies Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 sm:gap-4 md:gap-6">
                   {selectedCategoryData.technologies.map((tech, index) => (
                     <div
                       key={index}
-                      className="bg-card/50 border border-border rounded-xl p-4 sm:p-6 hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
+                      className="bg-card/50 border border-border rounded-xl p-3 sm:p-4 md:p-6 hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
                     >
-                      <div className="flex items-start justify-between mb-3">
-                        <div className="flex items-center space-x-3">
-                          <div className="w-10 h-10 bg-muted rounded-lg flex items-center justify-center">
+                      <div className="flex items-start justify-between mb-2 sm:mb-3">
+                        <div className="flex items-center space-x-2 sm:space-x-3 flex-1 min-w-0">
+                          <div className="w-8 sm:w-10 h-8 sm:h-10 bg-muted rounded-lg flex items-center justify-center flex-shrink-0">
                             {tech.icon}
                           </div>
-                          <div>
-                            <h4 className="text-base sm:text-lg font-bold text-foreground">{tech.name}</h4>
-                            <div className="flex items-center space-x-2 mt-1">
+                          <div className="min-w-0 flex-1">
+                            <h4 className="text-sm sm:text-base md:text-lg font-bold text-foreground truncate">{tech.name}</h4>
+                            <div className="flex flex-col sm:flex-row sm:items-center sm:space-x-2 mt-1 gap-1 sm:gap-0">
                               {/* Level Badge with Tooltip */}
                               <div className="relative">
                                 <span 
-                                  className={`px-2 py-1 rounded-full text-xs font-medium cursor-help ${getLevelColor(tech.level)}`}
+                                  className={`px-2 py-0.5 sm:py-1 rounded-full text-xs font-medium cursor-help ${getLevelColor(tech.level)}`}
                                   onMouseEnter={() => setHoveredLevel(`${tech.name}-level`)}
                                   onMouseLeave={() => setHoveredLevel(null)}
                                 >
@@ -459,7 +459,7 @@ const Skills: React.FC = () => {
                                 
                                 {/* Tooltip */}
                                 {hoveredLevel === `${tech.name}-level` && (
-                                  <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-2 bg-gray-900 text-white text-xs rounded-lg shadow-lg whitespace-nowrap z-50">
+                                  <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-2 sm:px-3 py-1 sm:py-2 bg-gray-900 text-white text-xs rounded-lg shadow-lg whitespace-nowrap z-50 max-w-xs">
                                     {levelTooltips[tech.level]}
                                     <div className="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-gray-900"></div>
                                   </div>
@@ -467,11 +467,11 @@ const Skills: React.FC = () => {
                               </div>
                               
                               {/* Context Badges */}
-                              <div className="flex flex-wrap gap-1">
+                              <div className="flex flex-wrap gap-1 mt-1 sm:mt-0">
                                 {tech.contexts.map((context, contextIndex) => (
                                   <span 
                                     key={contextIndex}
-                                    className={`px-2 py-1 rounded-full text-xs font-medium border ${getContextColor(context)}`}
+                                    className={`px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-full text-xs font-medium border ${getContextColor(context)}`}
                                   >
                                     {context}
                                   </span>
@@ -482,16 +482,16 @@ const Skills: React.FC = () => {
                         </div>
                         <button
                           onClick={() => toggleDetails(tech.name)}
-                          className="p-2 hover:bg-muted rounded-lg transition-colors duration-200"
+                          className="p-1.5 sm:p-2 hover:bg-muted rounded-lg transition-colors duration-200 flex-shrink-0"
                         >
-                          <ChevronRight className={`w-4 h-4 text-muted-foreground transition-transform duration-200 ${
+                          <ChevronRight className={`w-3 sm:w-4 h-3 sm:h-4 text-muted-foreground transition-transform duration-200 ${
                             showDetails[tech.name] ? 'rotate-90' : ''
                           }`} />
                         </button>
                       </div>
                       
                       {showDetails[tech.name] && (
-                        <div className="mt-3 pt-3 border-t border-border">
+                        <div className="mt-2 sm:mt-3 pt-2 sm:pt-3 border-t border-border">
                           <p className="text-sm text-muted-foreground leading-relaxed">
                             {tech.description}
                           </p>
