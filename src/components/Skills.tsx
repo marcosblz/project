@@ -97,15 +97,14 @@ const Skills: React.FC = () => {
     {
       id: 'frontend',
       title: 'Frontend',
-      subtitle: 'Interfaces de usuario modernas',
       icon: <Monitor className="w-4 h-4" />,
       color: 'from-purple-500 to-pink-500',
       tabColor: 'bg-purple-500',
       highlights: [
-        'Interfaces responsivas y accesibles',
-        'Componentes reutilizables',
-        'Animaciones y micro-interacciones',
-        'Optimización de rendimiento'
+        'Interfaces responsivas',
+        'Capacidad de adaptación',
+        'Diseño creativo',
+        'Cimientos sólidos'
       ],
       technologies: [
         {
