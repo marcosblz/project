@@ -408,22 +408,10 @@ const Skills: React.FC = () => {
               
                 {/* Category Header */}
                 <div className="flex flex-col sm:flex-row sm:items-center mb-4 sm:mb-6 md:mb-8">
-                  <div className="relative mb-3 sm:mb-0 sm:mr-4 md:mr-6 mx-auto sm:mx-0">
-                    {/* Profile Image - Circular */}
-                    <div className="w-12 sm:w-16 md:w-20 h-12 sm:h-16 md:h-20 rounded-full overflow-hidden border-2 border-accent/20 shadow-lg">
-                      <img
-                        src="/marcos.png"
-                        alt="Marcos"
-                        className="w-full h-full object-cover object-center"
-                      />
-                    </div>
-                    
-                    {/* Category Icon Badge */}
-                    <div className={`absolute -bottom-1 -right-1 w-6 sm:w-8 md:w-10 h-6 sm:h-8 md:h-10 rounded-full bg-gradient-to-br ${selectedCategoryData.color} flex items-center justify-center shadow-lg border-2 border-background`}>
-                      {React.cloneElement(selectedCategoryData.icon as React.ReactElement, {
-                        className: "w-3 sm:w-4 md:w-5 h-3 sm:h-4 md:h-5 text-white"
-                      })}
-                    </div>
+                  <div className={`w-12 sm:w-16 md:w-20 h-12 sm:h-16 md:h-20 rounded-xl bg-gradient-to-br ${selectedCategoryData.color} flex items-center justify-center mb-3 sm:mb-0 sm:mr-4 md:mr-6 shadow-lg mx-auto sm:mx-0`}>
+                    {React.cloneElement(selectedCategoryData.icon as React.ReactElement, {
+                      className: "w-6 sm:w-8 md:w-10 h-6 sm:h-8 md:h-10 text-white"
+                    })}
                   </div>
                   <div className="flex-1 text-center sm:text-left">
                     <h3 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-foreground mb-2">{selectedCategoryData.title}</h3>
