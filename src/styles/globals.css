@@ -265,15 +265,33 @@ html {
 
 /* Mobile Optimizations */
 @media (max-width: 768px) {
+  /* Better touch targets */
+  button, a, .clickable {
+    min-height: 48px;
+    min-width: 48px;
+  }
+  
+  /* Larger text for better readability */
+  body {
+    font-size: 16px;
+    line-height: 1.6;
+  }
+  
+  /* Better spacing */
+  .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  
   /* Hide scroll indicator on mobile and tablets */
   .scroll-indicator {
     display: none !important;
   }
   
-  /* Optimize touch targets */
-  button, a {
-    min-height: 44px;
-    min-width: 44px;
+  /* Improve modal experience */
+  .modal-content {
+    margin: 0.5rem;
+    max-height: calc(100vh - 1rem);
   }
   
   /* Better spacing for mobile */
@@ -287,35 +305,107 @@ html {
 }
 
 @media (max-width: 640px) {
-  /* Smaller text on very small screens */
+  /* Larger headings for mobile */
   h1 {
-    @apply text-2xl;
+    @apply text-3xl;
   }
   
   h2 {
-    @apply text-xl;
+    @apply text-2xl;
   }
   
   h3 {
-    @apply text-lg;
+    @apply text-xl;
+  }
+  
+  /* Smaller text on very small screens */
+  .text-xs {
+    font-size: 0.875rem;
+  }
+  
+  .text-sm {
+    font-size: 1rem;
+  }
+  
+  .text-base {
+    font-size: 1.125rem;
   }
   
   /* Reduce padding on small screens */
+  .p-3 {
+    @apply p-4;
+  }
+  
   .p-6 {
     @apply p-4;
   }
   
   .p-8 {
-    @apply p-4;
+    @apply p-5;
   }
   
   /* Optimize grid gaps */
   .gap-8 {
-    @apply gap-4;
+    @apply gap-6;
   }
   
   .gap-6 {
-    @apply gap-3;
+    @apply gap-4;
+  }
+  
+  /* Better card spacing */
+  .card {
+    margin-bottom: 1.5rem;
+  }
+  
+  /* Improve form elements */
+  input, textarea, select {
+    font-size: 16px; /* Prevents zoom on iOS */
+    padding: 0.75rem;
+  }
+}
+
+/* Touch-friendly improvements */
+@media (hover: none) and (pointer: coarse) {
+  /* Remove hover effects on touch devices */
+  .hover\:scale-105:hover {
+    transform: none;
+  }
+  
+  /* Larger touch targets */
+  button, a, .clickable {
+    min-height: 48px;
+    min-width: 48px;
+    padding: 0.75rem 1rem;
+  }
+  
+  /* Better focus states for touch */
+  button:focus, a:focus {
+    outline: 3px solid hsl(var(--accent));
+    outline-offset: 2px;
+  }
+}
+
+/* Improve pinch-to-zoom experience */
+@media screen and (max-width: 768px) {
+  .touch-pan-x {
+    touch-action: pan-x;
+  }
+  
+  .touch-pan-y {
+    touch-action: pan-y;
+  }
+  
+  .touch-none {
+    touch-action: none;
+  }
+  
+  /* Prevent text selection on touch */
+  .select-none {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
   }
 }
 
@@ -330,7 +420,7 @@ input:focus,
 textarea:focus,
 select:focus {
   outline: none;
-  box-shadow: 0 0 0 2px hsl(var(--accent)/0.5);
+  box-shadow: 0 0 0 3px hsl(var(--accent)/0.5);
 }
 
 /* Print Styles */

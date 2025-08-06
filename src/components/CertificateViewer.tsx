@@ -143,40 +143,58 @@ const CertificateViewer: React.FC<CertificateViewerProps> = ({
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 bg-black/90 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+    <div className="fixed inset-0 bg-black/95 backdrop-blur-sm z-50 flex items-center justify-center p-2 sm:p-4">
       <div
         ref={viewerRef}
-        className="w-[95vw] h-[95vh] max-w-6xl bg-background/90 backdrop-blur-md border border-border rounded-2xl shadow-2xl overflow-hidden flex flex-col"
+        className="w-[98vw] h-[98vh] sm:w-[95vw] sm:h-[95vh] max-w-6xl bg-background/95 backdrop-blur-md border border-border rounded-xl sm:rounded-2xl shadow-2xl overflow-hidden flex flex-col"
       >
         {/* Header */}
-        <div className="bg-card/80 backdrop-blur-sm border-b border-border px-4 sm:px-6 py-3 sm:py-4 flex items-center justify-between">
-          <div className="flex items-center space-x-3">
-            <div className="w-10 h-10 bg-gradient-to-br from-accent to-accent/80 rounded-lg flex items-center justify-center">
-              <FileText className="w-5 h-5 text-white" />
+        <div className="bg-card/90 backdrop-blur-sm border-b border-border px-3 sm:px-6 py-3 sm:py-4 flex items-center justify-between">
+          <div className="flex items-center space-x-2 sm:space-x-3 min-w-0 flex-1">
+            <div className="w-8 sm:w-10 h-8 sm:h-10 bg-gradient-to-br from-accent to-accent/80 rounded-lg flex items-center justify-center flex-shrink-0">
+              <FileText className="w-4 sm:w-5 h-4 sm:h-5 text-white" />
             </div>
-            <div>
-              <h3 className="text-lg sm:text-xl font-bold text-foreground">{certificateTitle}</h3>
-              <p className="text-sm text-muted-foreground">Certificado de Udemy</p>
+            <div className="min-w-0 flex-1">
+              <h3 className="text-sm sm:text-lg lg:text-xl font-bold text-foreground truncate">{certificateTitle}</h3>
+              <p className="text-xs sm:text-sm text-muted-foreground">Certificado</p>
             </div>
           </div>
           
-          <div className="flex items-center space-x-2">
+          <div className="flex items-center space-x-1 sm:space-x-2 flex-shrink-0">
             {/* Zoom Controls */}
-            <div className="flex items-center space-x-1 bg-muted/50 rounded-lg border border-border px-3 py-2">
+            <div className="hidden sm:flex items-center space-x-1 bg-muted/50 rounded-lg border border-border px-2 sm:px-3 py-1.5 sm:py-2">
               <button
                 onClick={handleZoomOut}
-                className="p-1.5 hover:bg-accent/10 hover:text-accent rounded transition-colors duration-200"
+                className="p-1 sm:p-1.5 hover:bg-accent/10 hover:text-accent rounded transition-colors duration-200"
                 title="Alejar (tecla -)"
               >
-                <ZoomOut className="w-4 h-4" />
+                <ZoomOut className="w-3 sm:w-4 h-3 sm:h-4" />
               </button>
-              <span className="text-sm font-medium min-w-[3.5rem] text-center text-foreground">
+              <span className="text-xs sm:text-sm font-medium min-w-[2.5rem] sm:min-w-[3.5rem] text-center text-foreground">
                 {Math.round(scale * 100)}%
               </span>
               <button
                 onClick={handleZoomIn}
-                className="p-1.5 hover:bg-accent/10 hover:text-accent rounded transition-colors duration-200"
+                className="p-1 sm:p-1.5 hover:bg-accent/10 hover:text-accent rounded transition-colors duration-200"
                 title="Acercar (tecla +)"
+              >
+                <ZoomIn className="w-3 sm:w-4 h-3 sm:h-4" />
+              </button>
+            </div>
+
+            {/* Mobile Zoom Controls */}
+            <div className="flex sm:hidden items-center space-x-1">
+              <button
+                onClick={handleZoomOut}
+                className="p-2 bg-muted/50 hover:bg-accent/10 hover:text-accent rounded-lg transition-colors duration-200 border border-border"
+                title="Alejar"
+              >
+                <ZoomOut className="w-4 h-4" />
+              </button>
+              <button
+                onClick={handleZoomIn}
+                className="p-2 bg-muted/50 hover:bg-accent/10 hover:text-accent rounded-lg transition-colors duration-200 border border-border"
+                title="Acercar"
               >
                 <ZoomIn className="w-4 h-4" />
               </button>
@@ -184,50 +202,85 @@ const CertificateViewer: React.FC<CertificateViewerProps> = ({
 
             <button
               onClick={handleDownload}
-              className="p-2.5 bg-muted/50 hover:bg-accent/10 hover:text-accent rounded-lg transition-colors duration-200 border border-border"
+              className="p-2 sm:p-2.5 bg-muted/50 hover:bg-accent/10 hover:text-accent rounded-lg transition-colors duration-200 border border-border"
               title="Descargar Certificado"
             >
-              <Download className="w-4 h-4" />
+              <Download className="w-4 sm:w-5 h-4 sm:h-5" />
             </button>
 
             <button
               onClick={handleClose}
-              className="p-2.5 hover:bg-muted/50 rounded-lg transition-colors duration-200 border border-border"
+              className="p-2 sm:p-2.5 hover:bg-muted/50 rounded-lg transition-colors duration-200 border border-border"
               title="Cerrar (Esc)"
             >
-              <X className="w-4 h-4 text-foreground" />
+              <X className="w-4 sm:w-5 h-4 sm:h-5 text-foreground" />
             </button>
           </div>
         </div>
 
         {/* Certificate Viewer */}
         <div
-          className="flex-1 overflow-hidden bg-muted/20 relative flex items-center justify-center"
+          className="flex-1 overflow-hidden bg-muted/20 relative flex items-center justify-center touch-pan-x touch-pan-y"
           onMouseDown={handleMouseDown}
           onMouseMove={handleMouseMove}
           onMouseUp={handleMouseUp}
           onMouseLeave={handleMouseUp}
+          onTouchStart={(e) => {
+            const touch = e.touches[0];
+            setIsDragging(true);
+            setDragStart({
+              x: touch.clientX - position.x,
+              y: touch.clientY - position.y
+            });
+          }}
+          onTouchMove={(e) => {
+            if (isDragging && e.touches[0]) {
+              e.preventDefault();
+              const touch = e.touches[0];
+              setPosition({
+                x: touch.clientX - dragStart.x,
+                y: touch.clientY - dragStart.y
+              });
+            }
+          }}
+          onTouchEnd={() => setIsDragging(false)}
           style={{ cursor: isDragging ? 'grabbing' : 'grab' }}
         >
           <img
             ref={imageRef}
             src={certificateUrl}
             alt={certificateTitle}
-            className="max-w-none select-none shadow-2xl rounded-lg border border-border/20"
+            className="max-w-none select-none shadow-2xl rounded-lg border border-border/20 touch-none"
             style={{
               transform: `translate(${position.x}px, ${position.y}px) scale(${scale})`,
               transition: isDragging ? 'none' : 'transform 0.2s ease-out',
-              imageRendering: 'crisp-edges'
+              imageRendering: 'crisp-edges',
+              maxHeight: '90vh',
+              maxWidth: '90vw'
             }}
             draggable={false}
           />
 
           {/* Instructions */}
-          <div className="absolute bottom-4 left-4 bg-card/90 backdrop-blur-sm text-foreground px-4 py-3 rounded-lg text-sm border border-border shadow-lg">
-            <div className="flex items-center space-x-2">
-              <div className="w-2 h-2 bg-accent rounded-full animate-pulse"></div>
-              <span>Arrastra para mover • Rueda del ratón para zoom</span>
+          <div className="absolute bottom-2 sm:bottom-4 left-2 sm:left-4 right-2 sm:right-auto bg-card/95 backdrop-blur-sm text-foreground px-3 sm:px-4 py-2 sm:py-3 rounded-lg text-xs sm:text-sm border border-border shadow-lg">
+            <div className="flex items-center space-x-2 justify-center sm:justify-start">
+              <div className="w-2 h-2 bg-accent rounded-full animate-pulse flex-shrink-0"></div>
+              <span className="text-center sm:text-left">
+                <span className="hidden sm:inline">Arrastra para mover • Rueda del ratón para zoom</span>
+                <span className="sm:hidden">Arrastra para mover • Pellizca para zoom</span>
+              </span>
             </div>
+          </div>
+
+          {/* Mobile Reset Button */}
+          <div className="absolute top-4 left-4 sm:hidden">
+            <button
+              onClick={handleResetView}
+              className="p-3 bg-card/90 backdrop-blur-sm text-foreground rounded-lg border border-border shadow-lg hover:bg-card transition-colors duration-200"
+              title="Restablecer vista"
+            >
+              <span className="text-xs font-medium">Reset</span>
+            </button>
           </div>
         </div>
       </div>

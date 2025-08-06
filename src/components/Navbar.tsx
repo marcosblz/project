@@ -147,10 +147,10 @@ const Navbar: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo and Name */}
-          <div className="flex items-center space-x-3">
+          <div className="flex items-center space-x-2 sm:space-x-3">
             <div className="logo-icon-wrapper group cursor-pointer">
               <Code 
-                className="logo-icon w-8 h-8 text-accent transition-all duration-300 group-hover:scale-110 group-hover:rotate-12" 
+                className="logo-icon w-7 sm:w-8 h-7 sm:h-8 text-accent transition-all duration-300 group-hover:scale-110 group-hover:rotate-12" 
               />
             </div>
             <div className="flex items-center">
@@ -160,7 +160,7 @@ const Navbar: React.FC = () => {
                   className="letter-wrap"
                 >
                   <span
-                    className="logo-letter text-xl font-bold text-foreground hover:text-accent transition-colors duration-300 cursor-pointer select-none block"
+                    className="logo-letter text-lg sm:text-xl font-bold text-foreground hover:text-accent transition-colors duration-300 cursor-pointer select-none block"
                   >
                     {letter}
                   </span>
@@ -224,13 +224,13 @@ const Navbar: React.FC = () => {
 
         {/* Mobile Menu */}
         {isMenuOpen && (
-          <div className="md:hidden absolute top-16 left-0 right-0 bg-background/95 backdrop-blur-md border-b border-border">
-            <div className="px-4 py-4 space-y-3">
+          <div className="md:hidden absolute top-16 left-0 right-0 bg-background/98 backdrop-blur-md border-b border-border shadow-xl">
+            <div className="px-4 py-6 space-y-4">
               {navLinks.map((link) => (
                 <button
                   key={link.href}
                   onClick={() => scrollToSection(link.href)}
-                  className="block w-full text-left px-4 py-2 text-muted-foreground hover:text-accent hover:bg-accent/10 transition-colors duration-300 rounded-lg"
+                  className="block w-full text-left px-4 py-3 text-base font-medium text-muted-foreground hover:text-accent hover:bg-accent/10 transition-colors duration-300 rounded-xl"
                 >
                   {link.label}
                 </button>
