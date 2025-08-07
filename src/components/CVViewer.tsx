@@ -286,7 +286,6 @@ const CVViewer: React.FC<CVViewerProps> = ({ isOpen, onClose }) => {
             >
               <span className="text-xs font-medium">Reset</span>
             </button>
-            </div>
           </div>
         </div>
       </div>
