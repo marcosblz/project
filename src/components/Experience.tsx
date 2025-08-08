@@ -85,51 +85,51 @@ const Experience: React.FC = () => {
     <section id="experiencia" className="experience-section py-8 sm:py-12 lg:py-20">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-8 sm:mb-12 lg:mb-16">
-          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-foreground mb-2 sm:mb-4">Experiencia Profesional</h2>
-          <p className="text-base sm:text-lg lg:text-xl text-muted-foreground">Mi trayectoria en el desarrollo de software</p>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground mb-4 sm:mb-6">Experiencia Profesional</h2>
+          <p className="text-lg sm:text-xl lg:text-2xl text-muted-foreground">Mi trayectoria en el desarrollo de software</p>
         </div>
 
         <div className="experience-grid relative">
           {/* Timeline Line - Responsive positioning */}
           <div className="absolute left-4 sm:left-6 lg:left-8 top-0 w-0.5 bg-accent/30 timeline-line" style={{ height: 0 }}></div>
 
-          <div className="space-y-6 sm:space-y-8 lg:space-y-12">
+          <div className="space-y-8 sm:space-y-10 lg:space-y-14">
             {experiences.map((exp, index) => (
-              <div key={exp.id} className="experience-item relative flex items-start space-x-4 sm:space-x-6 lg:space-x-8">
+              <div key={exp.id} className="experience-item relative flex items-start space-x-6 sm:space-x-8 lg:space-x-10">
                 {/* Timeline Dot - Responsive positioning */}
-                <div className="experience-dot relative z-10 flex-shrink-0 ml-2 sm:ml-4 lg:ml-6">
-                  <div className="w-3 sm:w-4 h-3 sm:h-4 bg-accent rounded-full border-2 sm:border-4 border-background shadow-lg transition-all duration-300 hover:scale-125"></div>
+                <div className="experience-dot relative z-10 flex-shrink-0 ml-3 sm:ml-5 lg:ml-7">
+                  <div className="w-4 sm:w-5 h-4 sm:h-5 bg-accent rounded-full border-3 sm:border-4 border-background shadow-lg transition-all duration-300 hover:scale-125"></div>
                 </div>
 
                 {/* Content Card */}
-                <div className="experience-card flex-1 bg-card/80 backdrop-blur-sm border border-border rounded-xl p-3 sm:p-4 lg:p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
-                  <div className="flex flex-col space-y-2 sm:space-y-3 lg:space-y-4">
+                <div className="experience-card flex-1 bg-card/80 backdrop-blur-sm border border-border rounded-xl p-5 sm:p-6 lg:p-8 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+                  <div className="flex flex-col space-y-3 sm:space-y-4 lg:space-y-5">
                     <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between">
                       <div className="flex-1">
-                        <h3 className="text-base sm:text-lg lg:text-xl font-bold text-foreground mb-1">{exp.position}</h3>
-                        <p className="text-accent font-semibold text-sm sm:text-base">{exp.company}</p>
+                        <h3 className="text-lg sm:text-xl lg:text-2xl font-bold text-foreground mb-2">{exp.position}</h3>
+                        <p className="text-accent font-semibold text-base sm:text-lg">{exp.company}</p>
                       </div>
-                      <div className="flex flex-col sm:text-right text-xs sm:text-sm text-muted-foreground mt-2 sm:mt-0 space-y-1">
+                      <div className="flex flex-col sm:text-right text-sm sm:text-base text-muted-foreground mt-3 sm:mt-0 space-y-1">
                         <div className="flex items-center sm:justify-end">
-                          <Calendar className="w-3 sm:w-4 h-3 sm:h-4 mr-1" />
+                          <Calendar className="w-4 sm:w-5 h-4 sm:h-5 mr-2" />
                           {exp.date}
                         </div>
                         <div className="flex items-center sm:justify-end">
-                          <MapPin className="w-3 sm:w-4 h-3 sm:h-4 mr-1" />
+                          <MapPin className="w-4 sm:w-5 h-4 sm:h-5 mr-2" />
                           {exp.location}
                         </div>
                       </div>
                     </div>
                     
-                    <p className="text-muted-foreground text-xs sm:text-sm lg:text-base leading-relaxed">
+                    <p className="text-muted-foreground text-sm sm:text-base lg:text-lg leading-relaxed">
                       {exp.description}
                     </p>
                     
-                    <div className="flex flex-wrap gap-1 sm:gap-2">
+                    <div className="flex flex-wrap gap-2 sm:gap-3">
                       {exp.technologies.map((tech, techIndex) => (
                         <span
                           key={techIndex}
-                          className="px-2 sm:px-3 py-1 bg-accent/10 text-accent rounded-full text-xs sm:text-sm font-medium hover:bg-accent hover:text-white transition-colors duration-300"
+                          className="px-3 sm:px-4 py-1.5 sm:py-2 bg-accent/10 text-accent rounded-full text-sm sm:text-base font-medium hover:bg-accent hover:text-white transition-colors duration-300"
                         >
                           {tech}
                         </span>

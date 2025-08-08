@@ -189,40 +189,40 @@ const About: React.FC = () => {
     <section id="sobre-mi" className="about-section min-h-screen flex items-center py-8 sm:py-12 lg:py-20">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
         <div className="text-center mb-6 sm:mb-8 lg:mb-12">
-          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-foreground mb-2 sm:mb-4">Sobre Mí</h2>
-          <p className="text-base sm:text-lg lg:text-xl text-muted-foreground">Conoce más sobre mi experiencia y pasión por el desarrollo</p>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground mb-4 sm:mb-6">Sobre Mí</h2>
+          <p className="text-lg sm:text-xl lg:text-2xl text-muted-foreground">Conoce más sobre mi experiencia y pasión por el desarrollo</p>
         </div>
 
         <div className="chat-container bg-background/80 backdrop-blur-md rounded-2xl border border-border shadow-2xl overflow-hidden" 
-             style={{ height: 'min(calc(100vh - 4rem), 600px)' }}>
+             style={{ height: 'min(calc(100vh - 4rem), 700px)' }}>
           {/* Chat Header */}
-          <div className="bg-accent/10 px-4 sm:px-6 lg:px-8 py-4 sm:py-5 border-b border-border">
+          <div className="bg-accent/10 px-6 sm:px-8 lg:px-10 py-5 sm:py-6 border-b border-border">
             <div className="flex items-center justify-between">
-              <div className="flex items-center space-x-3 sm:space-x-4">
+              <div className="flex items-center space-x-4 sm:space-x-5">
                 <div className="relative">
                   <img
                     src="./marcos.png"
                     alt="Marcos"
-                    className="w-10 sm:w-12 lg:w-14 h-10 sm:h-12 lg:h-14 rounded-full border-2 border-accent/20"
+                    className="w-12 sm:w-14 lg:w-16 h-12 sm:h-14 lg:h-16 rounded-full border-2 border-accent/20"
                   />
                 </div>
                 <div>
-                  <h3 className="font-semibold text-foreground text-base sm:text-lg lg:text-xl">Marcos</h3>
-                  <p className="text-sm sm:text-base text-green-500 flex items-center font-medium">
-                    <span className="w-2 sm:w-2.5 h-2 sm:h-2.5 bg-green-500 rounded-full mr-2 sm:mr-3 animate-pulse"></span>
+                  <h3 className="font-semibold text-foreground text-lg sm:text-xl lg:text-2xl">Marcos</h3>
+                  <p className="text-base sm:text-lg text-green-500 flex items-center font-medium">
+                    <span className="w-3 sm:w-3.5 h-3 sm:h-3.5 bg-green-500 rounded-full mr-3 sm:mr-4 animate-pulse"></span>
                     Disponible para nuevos proyectos
                   </p>
                 </div>
               </div>
               <div className="text-right hidden md:block">
-                <p className="text-sm text-muted-foreground">Desarrollador Back-End</p>
-                <p className="text-sm text-muted-foreground">Madrid, España</p>
+                <p className="text-base text-muted-foreground">Desarrollador Back-End</p>
+                <p className="text-base text-muted-foreground">Madrid, España</p>
               </div>
             </div>
           </div>
 
           {/* Chat Messages */}
-          <div id="chat-messages" className="flex-1 overflow-y-auto p-4 sm:p-6 lg:p-8 space-y-4 sm:space-y-5" 
+          <div id="chat-messages" className="flex-1 overflow-y-auto p-6 sm:p-8 lg:p-10 space-y-5 sm:space-y-6" 
                style={{ height: 'calc(100% - 8rem)' }}>
             {messages.map((message) => (
               <div
@@ -236,8 +236,8 @@ const About: React.FC = () => {
                       : 'bg-accent text-white'
                   }`}
                 >
-                  <p className="text-sm sm:text-base leading-relaxed">{message.text}</p>
-                  <p className={`text-xs sm:text-sm mt-2 sm:mt-3 ${message.isBot ? 'text-muted-foreground' : 'text-white/70'}`}>
+                  <p className="text-base sm:text-lg leading-relaxed">{message.text}</p>
+                  <p className={`text-sm sm:text-base mt-3 sm:mt-4 ${message.isBot ? 'text-muted-foreground' : 'text-white/70'}`}>
                     {message.timestamp}
                   </p>
                 </div>
@@ -247,14 +247,14 @@ const About: React.FC = () => {
 
           {/* Chat Options */}
           {currentOptions.length > 0 ? (
-            <div className="p-3 sm:p-4 lg:p-6 border-t border-border bg-muted/20">
-              <p className="text-xs sm:text-sm text-muted-foreground mb-2 sm:mb-3">Pregúntame sobre:</p>
-              <div className="flex flex-wrap gap-2">
+            <div className="p-4 sm:p-6 lg:p-8 border-t border-border bg-muted/20">
+              <p className="text-sm sm:text-base text-muted-foreground mb-3 sm:mb-4">Pregúntame sobre:</p>
+              <div className="flex flex-wrap gap-3">
                 {currentOptions.slice(0, 3).map((option) => (
                   <button
                     key={option.id}
                     onClick={() => handleOptionClick(option)}
-                    className="chat-option inline-flex items-center px-2 sm:px-3 lg:px-4 py-1.5 sm:py-2 bg-accent/10 hover:bg-accent hover:text-white text-accent rounded-full text-xs sm:text-sm font-medium transition-all duration-300 hover:scale-105 border border-accent/20"
+                    className="chat-option inline-flex items-center px-4 sm:px-5 lg:px-6 py-2 sm:py-3 bg-accent/10 hover:bg-accent hover:text-white text-accent rounded-full text-sm sm:text-base font-medium transition-all duration-300 hover:scale-105 border border-accent/20"
                   >
                     {option.text}
                   </button>
@@ -262,11 +262,11 @@ const About: React.FC = () => {
               </div>
             </div>
           ) : allQuestionsAnswered && (
-            <div className="p-3 sm:p-4 lg:p-6 border-t border-border bg-gradient-to-r from-accent/10 to-green-500/10">
-              <div className="flex flex-wrap gap-2 justify-center">
+            <div className="p-4 sm:p-6 lg:p-8 border-t border-border bg-gradient-to-r from-accent/10 to-green-500/10">
+              <div className="flex flex-wrap gap-3 justify-center">
                 <button
                   onClick={scrollToContact}
-                  className="inline-flex items-center px-3 sm:px-4 py-2 bg-accent hover:bg-accent/90 text-white rounded-lg text-xs sm:text-sm font-medium transition-all duration-300 hover:scale-105 shadow-sm"
+                  className="inline-flex items-center px-5 sm:px-6 py-3 bg-accent hover:bg-accent/90 text-white rounded-lg text-sm sm:text-base font-medium transition-all duration-300 hover:scale-105 shadow-sm"
                 >
                   Ir a Contacto
                 </button>

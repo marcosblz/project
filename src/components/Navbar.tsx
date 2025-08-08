@@ -150,7 +150,7 @@ const Navbar: React.FC = () => {
           <div className="flex items-center space-x-2 sm:space-x-3">
             <div className="logo-icon-wrapper group cursor-pointer">
               <Code 
-                className="logo-icon w-7 sm:w-8 h-7 sm:h-8 text-accent transition-all duration-300 group-hover:scale-110 group-hover:rotate-12" 
+                className="logo-icon w-8 sm:w-9 h-8 sm:h-9 text-accent transition-all duration-300 group-hover:scale-110 group-hover:rotate-12" 
               />
             </div>
             <div className="flex items-center">
@@ -170,12 +170,12 @@ const Navbar: React.FC = () => {
           </div>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
+          <div className="hidden md:flex items-center space-x-10">
             {navLinks.map((link) => (
               <button
                 key={link.href}
                 onClick={() => scrollToSection(link.href)}
-                className="text-muted-foreground hover:text-accent transition-colors duration-300 font-medium relative group"
+                className="text-muted-foreground hover:text-accent transition-colors duration-300 font-medium relative group text-base"
               >
                 {link.label}
                 <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-accent transition-all duration-300 group-hover:w-full"></span>
@@ -185,38 +185,38 @@ const Navbar: React.FC = () => {
             {/* Theme Toggle */}
             <button
               onClick={toggleTheme}
-              className="p-2 rounded-lg hover:bg-accent/10 transition-colors duration-300"
+              className="p-2.5 rounded-lg hover:bg-accent/10 transition-colors duration-300"
               aria-label="Toggle theme"
             >
               {isDarkMode ? (
-                <Sun className="w-5 h-5 text-foreground" />
+                <Sun className="w-6 h-6 text-foreground" />
               ) : (
-                <Moon className="w-5 h-5 text-foreground" />
+                <Moon className="w-6 h-6 text-foreground" />
               )}
             </button>
           </div>
 
           {/* Mobile Menu Button */}
-          <div className="md:hidden flex items-center space-x-2">
+          <div className="md:hidden flex items-center space-x-3">
             <button
               onClick={toggleTheme}
-              className="p-2 rounded-lg hover:bg-accent/10 transition-colors duration-300"
+              className="p-2.5 rounded-lg hover:bg-accent/10 transition-colors duration-300"
               aria-label="Toggle theme"
             >
               {isDarkMode ? (
-                <Sun className="w-5 h-5 text-foreground" />
+                <Sun className="w-6 h-6 text-foreground" />
               ) : (
-                <Moon className="w-5 h-5 text-foreground" />
+                <Moon className="w-6 h-6 text-foreground" />
               )}
             </button>
             <button
-              className="p-2 rounded-lg hover:bg-accent/10 transition-colors duration-300"
+              className="p-2.5 rounded-lg hover:bg-accent/10 transition-colors duration-300"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
             >
               {isMenuOpen ? (
-                <X className="w-6 h-6 text-foreground" />
+                <X className="w-7 h-7 text-foreground" />
               ) : (
-                <Menu className="w-6 h-6 text-foreground" />
+                <Menu className="w-7 h-7 text-foreground" />
               )}
             </button>
           </div>
@@ -225,12 +225,12 @@ const Navbar: React.FC = () => {
         {/* Mobile Menu */}
         {isMenuOpen && (
           <div className="md:hidden absolute top-16 left-0 right-0 bg-background/98 backdrop-blur-md border-b border-border shadow-xl">
-            <div className="px-4 py-6 space-y-4">
+            <div className="px-6 py-8 space-y-5">
               {navLinks.map((link) => (
                 <button
                   key={link.href}
                   onClick={() => scrollToSection(link.href)}
-                  className="block w-full text-left px-4 py-3 text-base font-medium text-muted-foreground hover:text-accent hover:bg-accent/10 transition-colors duration-300 rounded-xl"
+                  className="block w-full text-left px-5 py-4 text-lg font-medium text-muted-foreground hover:text-accent hover:bg-accent/10 transition-colors duration-300 rounded-xl"
                 >
                   {link.label}
                 </button>

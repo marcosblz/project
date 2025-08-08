@@ -304,43 +304,43 @@ const Hero: React.FC = () => {
 
           {/* Content */}
           <div className="text-center lg:text-left space-y-3 sm:space-y-4 lg:space-y-6 hero-content order-2 lg:order-2">
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl 2xl:text-8xl font-bold text-foreground leading-tight">
+            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold text-foreground leading-tight">
               Hola, soy
               <span className="block text-accent font-bold mt-2">
                 Marcos
               </span>
             </h1>
 
-            <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl text-muted-foreground font-medium">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-muted-foreground font-medium">
               Desarrollador Back-End
             </h2>
 
-            <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-muted-foreground/80 mt-3 px-2 sm:px-0">
+            <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl text-muted-foreground/80 mt-4 px-2 sm:px-0">
               Con base sólida en DevOps y experiencia práctica en entornos fullstack.
             </p>
-            <div className="inline-block bg-card/80 backdrop-blur-sm border border-border rounded-xl px-4 sm:px-6 lg:px-8 py-3 sm:py-4 lg:py-6 max-w-sm sm:max-w-md lg:max-w-lg mx-auto lg:mx-0 mt-4">
-              <p className="text-base sm:text-lg lg:text-xl text-muted-foreground italic leading-relaxed">
+            <div className="inline-block bg-card/80 backdrop-blur-sm border border-border rounded-xl px-6 sm:px-8 lg:px-10 py-4 sm:py-6 lg:py-8 max-w-md sm:max-w-lg lg:max-w-xl mx-auto lg:mx-0 mt-6">
+              <p className="text-lg sm:text-xl lg:text-2xl text-muted-foreground italic leading-relaxed">
                 "Escribo código que no solo funciona hoy, sino que otros puedan entender, mantener y mejorar mañana."
               </p>
             </div>
 
-            <div className="flex flex-col sm:flex-row gap-4 lg:gap-6 justify-center lg:justify-start pt-4 sm:pt-6 px-4 sm:px-0">
+            <div className="flex flex-col sm:flex-row gap-6 lg:gap-8 justify-center lg:justify-start pt-6 sm:pt-8 px-4 sm:px-0">
               <button
                 onClick={downloadCV}
-                className="inline-flex items-center justify-center px-6 sm:px-8 lg:px-10 py-4 sm:py-5 lg:py-6 bg-accent hover:bg-accent/90 text-white text-base sm:text-lg lg:text-xl 
-                   font-semibold rounded-xl transition-all duration-300 hover:scale-105 hover:shadow-xl group min-h-[56px]"
+                className="inline-flex items-center justify-center px-8 sm:px-10 lg:px-12 py-5 sm:py-6 lg:py-7 bg-accent hover:bg-accent/90 text-white text-lg sm:text-xl lg:text-2xl 
+                   font-semibold rounded-xl transition-all duration-300 hover:scale-105 hover:shadow-xl group min-h-[64px]"
               >
-                <Download className="w-5 sm:w-6 lg:w-7 h-5 sm:h-6 lg:h-7 mr-3 group-hover:animate-bounce" />
+                <Download className="w-6 sm:w-7 lg:w-8 h-6 sm:h-7 lg:h-8 mr-4 group-hover:animate-bounce" />
                 Descargar CV
               </button>
 
               <button
                 onClick={scrollToProjects}
-                className="inline-flex items-center justify-center px-6 sm:px-8 lg:px-10 py-4 sm:py-5 lg:py-6 bg-secondary hover:bg-secondary/90 text-secondary-foreground text-base sm:text-lg lg:text-xl 
-                   font-semibold rounded-xl transition-all duration-300 hover:scale-105 hover:shadow-xl group border-2 border-accent/20 min-h-[56px]"
+                className="inline-flex items-center justify-center px-8 sm:px-10 lg:px-12 py-5 sm:py-6 lg:py-7 bg-secondary hover:bg-secondary/90 text-secondary-foreground text-lg sm:text-xl lg:text-2xl 
+                   font-semibold rounded-xl transition-all duration-300 hover:scale-105 hover:shadow-xl group border-2 border-accent/20 min-h-[64px]"
               >
                 Ver Proyectos
-                <ArrowDown className="w-5 sm:w-6 lg:w-7 h-5 sm:h-6 lg:h-7 ml-3 group-hover:animate-bounce" />
+                <ArrowDown className="w-6 sm:w-7 lg:w-8 h-6 sm:h-7 lg:h-8 ml-4 group-hover:animate-bounce" />
               </button>
             </div>
           </div>
