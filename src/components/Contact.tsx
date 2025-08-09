@@ -204,15 +204,16 @@ const Contact: React.FC = () => {
         <div className="text-center">
           <button
             onClick={() => setShowCVViewer(true)}
-            className="contact-card bg-background/80 backdrop-blur-sm border border-border rounded-xl p-6 sm:p-8 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 cursor-pointer group max-w-lg mx-auto"
+            className="contact-card bg-background/80 backdrop-blur-sm border border-border rounded-xl p-8 sm:p-8 lg:p-10 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 cursor-pointer group max-w-lg mx-auto w-full"
           >
-            <div className="flex items-center space-x-5">
-              <div className="w-14 sm:w-16 h-14 sm:h-16 bg-gradient-to-br from-accent to-accent/80 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-lg">
-                <FileText className="w-7 sm:w-8 h-7 sm:h-8 text-white" />
+            <div className="flex items-center space-x-6 sm:space-x-6">
+              <div className="w-16 sm:w-18 lg:w-20 h-16 sm:h-18 lg:h-20 bg-gradient-to-br from-accent to-accent/80 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-lg">
+                <FileText className="w-8 sm:w-9 lg:w-10 h-8 sm:h-9 lg:h-10 text-white" />
               </div>
               <div className="flex-1 min-w-0">
-                <h4 className="text-xl sm:text-2xl font-bold text-foreground group-hover:text-accent transition-colors duration-300 mb-2">Ver CV Online</h4>
-                <p className="text-sm sm:text-base text-accent font-medium mt-2">Click para abrir visor interactivo</p>
+                <h4 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-foreground group-hover:text-accent transition-colors duration-300 mb-3">Ver CV Online</h4>
+                <p className="text-lg sm:text-xl text-muted-foreground">Visualizar curriculum completo</p>
+                <p className="text-base sm:text-lg text-accent font-medium mt-3">Click para abrir visor interactivo</p>
               </div>
             </div>
           </button>
