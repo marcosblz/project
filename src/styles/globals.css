@@ -336,10 +336,6 @@ html {
     @apply p-5;
   }
   
-  .p-6 {
-    @apply p-6;
-  }
-  
   .p-8 {
     @apply p-7;
   }
