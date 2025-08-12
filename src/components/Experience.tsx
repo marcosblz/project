@@ -47,22 +47,6 @@ const Experience: React.FC = () => {
   ];
 
   useEffect(() => {
-    // Animate timeline line
-    gsap.fromTo('.timeline-line',
-      { height: 0 },
-      {
-        height: '100%',
-        duration: 2,
-        ease: 'power2.out',
-        scrollTrigger: {
-          trigger: '.experience-section',
-          start: 'top 60%',
-          end: 'bottom 40%',
-          toggleActions: 'play none none reverse'
-        }
-      }
-    );
-
     // Animate experience cards
     gsap.fromTo('.experience-card',
       { x: -30, opacity: 0 },
@@ -90,19 +74,11 @@ const Experience: React.FC = () => {
         </div>
 
         <div className="experience-grid relative">
-          {/* Timeline Line - Responsive positioning */}
-          <div className="absolute left-4 sm:left-6 lg:left-8 top-0 w-0.5 bg-accent/30 timeline-line" style={{ height: 0 }}></div>
-
           <div className="space-y-8 sm:space-y-10 lg:space-y-14">
             {experiences.map((exp, index) => (
-              <div key={exp.id} className="experience-item relative flex items-start space-x-6 sm:space-x-8 lg:space-x-10">
-                {/* Timeline Dot - Responsive positioning */}
-                <div className="experience-dot relative z-10 flex-shrink-0 ml-3 sm:ml-5 lg:ml-7">
-                  <div className="w-4 sm:w-5 h-4 sm:h-5 bg-accent rounded-full border-3 sm:border-4 border-background shadow-lg transition-all duration-300 hover:scale-125"></div>
-                </div>
-
+              <div key={exp.id} className="experience-item">
                 {/* Content Card */}
-                <div className="experience-card flex-1 bg-card/80 backdrop-blur-sm border border-border rounded-xl p-5 sm:p-6 lg:p-8 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+                <div className="experience-card bg-card/80 backdrop-blur-sm border border-border rounded-xl p-5 sm:p-6 lg:p-8 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
                   <div className="flex flex-col space-y-3 sm:space-y-4 lg:space-y-5">
                     <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between">
                       <div className="flex-1">
