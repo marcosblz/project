@@ -202,11 +202,11 @@ const Contact: React.FC = () => {
 
         {/* CV Online Viewer Button */}
         <div className="text-center">
-          <div 
+          <button
             onClick={() => setShowCVViewer(true)}
-            className="contact-card bg-background/80 backdrop-blur-sm border border-border rounded-xl p-6 sm:p-8 lg:p-10 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 cursor-pointer group"
+            className="contact-card bg-background/80 backdrop-blur-sm border border-border rounded-xl p-8 sm:p-8 lg:p-10 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 cursor-pointer group max-w-lg mx-auto w-full"
           >
-            <div className="flex items-center space-x-5 sm:space-x-6">
+            <div className="flex items-center space-x-6 sm:space-x-6">
               <div className="w-16 sm:w-18 lg:w-20 h-16 sm:h-18 lg:h-20 bg-gradient-to-br from-accent to-accent/80 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-lg">
                 <FileText className="w-8 sm:w-9 lg:w-10 h-8 sm:h-9 lg:h-10 text-white" />
               </div>
@@ -216,7 +216,7 @@ const Contact: React.FC = () => {
                 <p className="text-base sm:text-lg text-accent font-medium mt-3">Click para abrir visor interactivo</p>
               </div>
             </div>
-          </div>
+          </button>
         </div>
 
       </div>
