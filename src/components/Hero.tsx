@@ -221,7 +221,7 @@ const Hero: React.FC = () => {
               {/* Main Card Container */}
               <div
                 ref={cardRef}
-                className="relative w-64 sm:w-72 md:w-80 lg:w-88 xl:w-96 h-80 sm:h-88 md:h-96 lg:h-[28rem] xl:h-[32rem] rounded-2xl overflow-hidden cursor-pointer"
+                className="relative w-64 sm:w-72 md:w-80 lg:w-88 xl:w-96 h-80 sm:h-88 md:h-96 lg:h-[22rem] xl:h-[24rem] rounded-2xl overflow-hidden cursor-pointer"
                 style={{
                   transformStyle: 'preserve-3d',
                   transition: 'transform 0.1s ease-out'
