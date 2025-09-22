@@ -104,7 +104,7 @@ const Projects: React.FC = () => {
         </div>
 
         {/* Projects Grid */}
-        <div className="projects-container grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-10 lg:gap-12 items-stretch">
+        <div className="projects-container grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-10 lg:gap-12 items-stretch max-w-5xl mx-auto">
           {projects.map((project, index) => (
             <div
               key={project.id}
@@ -113,7 +113,7 @@ const Projects: React.FC = () => {
             >
               <div className="relative bg-background/80 backdrop-blur-sm border border-border rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-700 transform-gpu hover:-translate-y-6 hover:rotate-1 h-full flex flex-col">
                 {/* Image Container */}
-                <div className="relative overflow-hidden h-56 sm:h-64 lg:h-72">
+                <div className="relative overflow-hidden h-64 sm:h-72 lg:h-80">
                   <img
                     src={project.image}
                     alt={project.title}
@@ -174,7 +174,7 @@ const Projects: React.FC = () => {
                 </div>
 
                 {/* Content */}
-                <div className="p-6 sm:p-8 flex-1 flex flex-col">
+                <div className="p-8 sm:p-10 flex-1 flex flex-col">
                   <h3 className="text-xl sm:text-2xl font-bold text-foreground mb-4 group-hover:text-accent transition-colors duration-300">
                     {project.title}
                   </h3>

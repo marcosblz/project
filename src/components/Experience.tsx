@@ -74,38 +74,38 @@ const Experience: React.FC = () => {
         </div>
 
         <div className="experience-grid relative">
-          <div className="space-y-8 sm:space-y-10 lg:space-y-14">
+          <div className="space-y-6 sm:space-y-8 lg:space-y-10">
             {experiences.map((exp, index) => (
               <div key={exp.id} className="experience-item">
                 {/* Content Card */}
-                <div className="experience-card bg-card/80 backdrop-blur-sm border border-border rounded-xl p-5 sm:p-6 lg:p-8 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+                <div className="experience-card bg-card/80 backdrop-blur-sm border border-border rounded-xl p-6 sm:p-8 lg:p-10 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
                   <div className="flex flex-col space-y-3 sm:space-y-4 lg:space-y-5">
                     <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between">
                       <div className="flex-1">
-                        <h3 className="text-lg sm:text-xl lg:text-2xl font-bold text-foreground mb-2">{exp.position}</h3>
-                        <p className="text-accent font-semibold text-base sm:text-lg">{exp.company}</p>
+                        <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-foreground mb-3">{exp.position}</h3>
+                        <p className="text-accent font-semibold text-lg sm:text-xl">{exp.company}</p>
                       </div>
-                      <div className="flex flex-col sm:text-right text-sm sm:text-base text-muted-foreground mt-3 sm:mt-0 space-y-1">
+                      <div className="flex flex-col sm:text-right text-base sm:text-lg text-muted-foreground mt-3 sm:mt-0 space-y-2">
                         <div className="flex items-center sm:justify-end">
-                          <Calendar className="w-4 sm:w-5 h-4 sm:h-5 mr-2" />
+                          <Calendar className="w-5 sm:w-6 h-5 sm:h-6 mr-3" />
                           {exp.date}
                         </div>
                         <div className="flex items-center sm:justify-end">
-                          <MapPin className="w-4 sm:w-5 h-4 sm:h-5 mr-2" />
+                          <MapPin className="w-5 sm:w-6 h-5 sm:h-6 mr-3" />
                           {exp.location}
                         </div>
                       </div>
                     </div>
                     
-                    <p className="text-muted-foreground text-sm sm:text-base lg:text-lg leading-relaxed">
+                    <p className="text-muted-foreground text-base sm:text-lg lg:text-xl leading-relaxed">
                       {exp.description}
                     </p>
                     
-                    <div className="flex flex-wrap gap-2 sm:gap-3">
+                    <div className="flex flex-wrap gap-3 sm:gap-4">
                       {exp.technologies.map((tech, techIndex) => (
                         <span
                           key={techIndex}
-                          className="px-3 sm:px-4 py-1.5 sm:py-2 bg-accent/10 text-accent rounded-full text-sm sm:text-base font-medium hover:bg-accent hover:text-white transition-colors duration-300"
+                          className="px-4 sm:px-5 py-2 sm:py-2.5 bg-accent/10 text-accent rounded-full text-base sm:text-lg font-medium hover:bg-accent hover:text-white transition-colors duration-300"
                         >
                           {tech}
                         </span>

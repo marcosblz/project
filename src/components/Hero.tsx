@@ -303,7 +303,8 @@ const Hero: React.FC = () => {
           </div>
 
           {/* Content */}
-          <div className="text-center lg:text-left space-y-3 sm:space-y-4 lg:space-y-6 hero-content order-2 lg:order-2">
+          <div className="text-center lg:text-left hero-content order-2 lg:order-2 flex flex-col justify-center h-full lg:min-h-[32rem]">
+            <div className="space-y-4 sm:space-y-6 lg:space-y-8">
             <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold text-foreground leading-tight">
               Hola, soy
               <span className="block text-accent font-bold mt-2">
@@ -318,7 +319,7 @@ const Hero: React.FC = () => {
             <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl text-muted-foreground/80 mt-4 px-2 sm:px-0">
               Con base sólida en DevOps y experiencia práctica en entornos fullstack.
             </p>
-            <div className="inline-block bg-card/80 backdrop-blur-sm border border-border rounded-xl px-6 sm:px-8 lg:px-10 py-4 sm:py-6 lg:py-8 max-w-md sm:max-w-lg lg:max-w-xl mx-auto lg:mx-0 mt-6">
+            <div className="inline-block bg-card/80 backdrop-blur-sm border border-border rounded-xl px-6 sm:px-8 lg:px-10 py-4 sm:py-6 lg:py-8 max-w-md sm:max-w-lg lg:max-w-2xl mx-auto lg:mx-0 mt-6">
               <p className="text-lg sm:text-xl lg:text-2xl text-muted-foreground italic leading-relaxed">
                 "Escribo código que no solo funciona hoy, sino que otros puedan entender, mantener y mejorar mañana."
               </p>
@@ -344,14 +345,10 @@ const Hero: React.FC = () => {
               </button>
             </div>
           </div>
-        </div>
-
-        {/* Scroll Indicator - Only in Hero section and hidden on mobile */}
-        <div className="scroll-indicator absolute bottom-6 sm:bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce hidden lg:block">
-          <div className="w-5 sm:w-6 h-8 sm:h-10 border-2 border-accent rounded-full flex justify-center">
-            <div className="w-1 h-2 sm:h-3 bg-accent rounded-full mt-2 animate-pulse"></div>
           </div>
         </div>
+        </div>
+
       </div>
     </section>
   );

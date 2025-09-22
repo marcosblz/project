@@ -91,21 +91,21 @@ const Contact: React.FC = () => {
         </div>
 
         {/* Main Contact Grid - 2x2 */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 lg:gap-10 mb-8 sm:mb-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-10 lg:gap-12 mb-10 sm:mb-12">
           
           {/* Email Card */}
           <div 
             onClick={handleEmailClick}
-            className="contact-card bg-background/80 backdrop-blur-sm border border-border rounded-xl p-6 sm:p-8 lg:p-10 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 cursor-pointer group"
+            className="contact-card bg-background/80 backdrop-blur-sm border border-border rounded-xl p-8 sm:p-10 lg:p-12 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 cursor-pointer group"
           >
-            <div className="flex items-center space-x-5 sm:space-x-6">
-              <div className="w-16 sm:w-18 lg:w-20 h-16 sm:h-18 lg:h-20 bg-gradient-to-br from-accent to-accent/80 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-lg">
-                <Mail className="w-8 sm:w-9 lg:w-10 h-8 sm:h-9 lg:h-10 text-white" />
+            <div className="flex items-center space-x-6 sm:space-x-8">
+              <div className="w-20 sm:w-22 lg:w-24 h-20 sm:h-22 lg:h-24 bg-gradient-to-br from-accent to-accent/80 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-lg">
+                <Mail className="w-10 sm:w-11 lg:w-12 h-10 sm:h-11 lg:h-12 text-white" />
               </div>
               <div className="flex-1 min-w-0">
-                <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-foreground group-hover:text-accent transition-colors duration-300 mb-3">Email</h3>
-                <p className="text-lg sm:text-xl text-muted-foreground truncate">marcosbaezalopez@gmail.com</p>
-                <p className="text-base sm:text-lg text-accent font-medium mt-3">Click para copiar correo</p>
+                <h3 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground group-hover:text-accent transition-colors duration-300 mb-4">Email</h3>
+                <p className="text-xl sm:text-2xl text-muted-foreground truncate">marcosbaezalopez@gmail.com</p>
+                <p className="text-lg sm:text-xl text-accent font-medium mt-4">Click para copiar correo</p>
               </div>
             </div>
           </div>

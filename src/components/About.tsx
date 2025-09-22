@@ -188,7 +188,7 @@ const About: React.FC = () => {
   return (
     <section id="sobre-mi" className="about-section min-h-screen flex items-center py-8 sm:py-12 lg:py-20">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-        <div className="text-center mb-6 sm:mb-8 lg:mb-12">
+        <div className="text-center mb-8 sm:mb-12 lg:mb-16">
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground mb-4 sm:mb-6">Sobre Mí</h2>
           <p className="text-lg sm:text-xl lg:text-2xl text-muted-foreground">Conoce más sobre mi experiencia y pasión por el desarrollo</p>
         </div>

@@ -124,28 +124,28 @@ const Education: React.FC = () => {
   }, []);
 
   const EducationCard = ({ item, isPreview = false }: { item: EducationItem; isPreview?: boolean }) => (
-    <div className={`education-card bg-background/80 backdrop-blur-sm border border-border rounded-xl p-4 sm:p-6 lg:p-8 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 ${isPreview ? 'border-accent/20' : ''}`}>
+    <div className={`education-card bg-background/80 backdrop-blur-sm border border-border rounded-xl p-6 sm:p-8 lg:p-10 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 ${isPreview ? 'border-accent/20' : ''}`}>
       <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between mb-4 sm:mb-5">
         <div className="flex-1">
-          <h4 className={`${isPreview ? 'text-lg sm:text-xl' : 'text-xl sm:text-2xl'} font-bold text-foreground mb-2 sm:mb-3`}>{item.title}</h4>
-          <p className="text-accent font-semibold mb-2 sm:mb-3 text-base sm:text-lg">{item.institution}</p>
+          <h4 className={`${isPreview ? 'text-xl sm:text-2xl' : 'text-2xl sm:text-3xl'} font-bold text-foreground mb-3 sm:mb-4`}>{item.title}</h4>
+          <p className="text-accent font-semibold mb-3 sm:mb-4 text-lg sm:text-xl">{item.institution}</p>
           <div className="flex items-center text-muted-foreground mb-3 sm:mb-4">
-            <Calendar className="w-4 sm:w-5 h-4 sm:h-5 mr-2 sm:mr-3" />
-            <span className="text-sm sm:text-base">{item.date}</span>
+            <Calendar className="w-5 sm:w-6 h-5 sm:h-6 mr-3 sm:mr-4" />
+            <span className="text-base sm:text-lg">{item.date}</span>
           </div>
         </div>
         {item.grade && (
-          <div className="flex items-center bg-accent/10 text-accent px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-sm sm:text-base font-medium mt-3 sm:mt-0 w-fit">
-            <Award className="w-4 sm:w-5 h-4 sm:h-5 mr-2" />
+          <div className="flex items-center bg-accent/10 text-accent px-4 sm:px-5 py-2 sm:py-2.5 rounded-full text-base sm:text-lg font-medium mt-3 sm:mt-0 w-fit">
+            <Award className="w-5 sm:w-6 h-5 sm:h-6 mr-2" />
             {item.grade}
           </div>
         )}
       </div>
-      <p className="text-muted-foreground leading-relaxed text-sm sm:text-base">{item.description}</p>
+      <p className="text-muted-foreground leading-relaxed text-base sm:text-lg">{item.description}</p>
       
       {/* Ver Certificado button for certifications */}
       {item.type === 'certification' && (
-        <div className="mt-5">
+        <div className="mt-6">
           <button
             onClick={() => {
               setSelectedCertificate({
@@ -155,9 +155,9 @@ const Education: React.FC = () => {
               });
               setShowCertificateViewer(true);
             }}
-            className="inline-flex items-center px-4 py-2.5 bg-accent hover:bg-accent/90 text-white rounded-lg text-sm sm:text-base font-medium transition-all duration-300 hover:scale-105 shadow-sm"
+            className="inline-flex items-center px-5 py-3 bg-accent hover:bg-accent/90 text-white rounded-lg text-base sm:text-lg font-medium transition-all duration-300 hover:scale-105 shadow-sm"
           >
-            <FileText className="w-4 sm:w-5 h-4 sm:h-5 mr-2" />
+            <FileText className="w-5 sm:w-6 h-5 sm:h-6 mr-3" />
             Ver Certificado
           </button>
         </div>
