@@ -290,7 +290,7 @@ const Education: React.FC = () => {
                 </p>
                 <div className="mt-4 sm:mt-5 p-3 sm:p-4 bg-accent/20 rounded-lg">
                   <p className="text-accent text-sm sm:text-base font-medium">
-                    🎯 Próximo objetivo: Curso Intensivo de Model Context Protocol
+                    🎯 Próximo objetivo: English for Developers & IT Professionals
                   </p>
                 </div>
               </div>
