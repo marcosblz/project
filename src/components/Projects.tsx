@@ -25,16 +25,6 @@ const Projects: React.FC = () => {
   const projects: Project[] = [
     {
       id: 1,
-      title: "Web Scraping con IA",
-      description: "En desarrollo",
-      longDescription: "Proyecto en desarrollo",
-      image: "/2022122123520979291.jpg",
-      technologies: [],
-      category: "Backend",
-      year: "2025"
-    },
-    {
-      id: 2,
       title: "Tamagotchi",
       description: "Proyecto final de DAM: Tamagotchi completo hecho en Java con base jugable",
       longDescription: "Proyecto final de DAM: Tamagotchi es una aplicación hecha en Java. Los valores de la mascota se manejan con una base de datos local hecha con SQLite3 y con una API de tiempo para manejar la temperatura y lluvias del lugar del ordenador donde se ejecute. Tiene base jugable. Cada apartado tiene profundidad pero para no perderse hay un tutorial... ¡Descárgalo y juega!",
