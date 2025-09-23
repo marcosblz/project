@@ -96,16 +96,16 @@ const Contact: React.FC = () => {
           {/* Email Card */}
           <div 
             onClick={handleEmailClick}
-            className="contact-card bg-background/80 backdrop-blur-sm border border-border rounded-xl p-8 sm:p-10 lg:p-12 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 cursor-pointer group"
+            className="contact-card bg-background/80 backdrop-blur-sm border border-border rounded-xl p-6 sm:p-8 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 cursor-pointer group"
           >
-            <div className="flex items-center space-x-6 sm:space-x-8">
-              <div className="w-20 sm:w-22 lg:w-24 h-20 sm:h-22 lg:h-24 bg-gradient-to-br from-accent to-accent/80 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-lg">
-                <Mail className="w-10 sm:w-11 lg:w-12 h-10 sm:h-11 lg:h-12 text-white" />
+            <div className="flex items-center space-x-5">
+              <div className="w-14 sm:w-16 h-14 sm:h-16 bg-gradient-to-br from-accent to-accent/80 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-lg">
+                <Mail className="w-7 sm:w-8 h-7 sm:h-8 text-white" />
               </div>
               <div className="flex-1 min-w-0">
-                <h3 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground group-hover:text-accent transition-colors duration-300 mb-4">Email</h3>
-                <p className="text-xl sm:text-2xl text-muted-foreground truncate">marcosbaezalopez@gmail.com</p>
-                <p className="text-lg sm:text-xl text-accent font-medium mt-4">Click para copiar correo</p>
+                <h3 className="text-xl sm:text-2xl font-bold text-foreground group-hover:text-accent transition-colors duration-300 mb-2">Email</h3>
+                <p className="text-base sm:text-lg text-muted-foreground truncate">marcosbaezalopez@gmail.com</p>
+                <p className="text-sm sm:text-base text-accent font-medium mt-2">Click para copiar correo</p>
               </div>
             </div>
           </div>
@@ -113,44 +113,44 @@ const Contact: React.FC = () => {
           {/* Phone Card */}
           <div 
             onClick={handlePhoneClick}
-            className="contact-card bg-background/80 backdrop-blur-sm border border-border rounded-xl p-6 sm:p-8 lg:p-10 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 cursor-pointer group"
+            className="contact-card bg-background/80 backdrop-blur-sm border border-border rounded-xl p-6 sm:p-8 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 cursor-pointer group"
           >
-            <div className="flex items-center space-x-5 sm:space-x-6">
-              <div className="w-16 sm:w-18 lg:w-20 h-16 sm:h-18 lg:h-20 bg-gradient-to-br from-green-500 to-green-600 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-lg">
-                <Phone className="w-8 sm:w-9 lg:w-10 h-8 sm:h-9 lg:h-10 text-white" />
+            <div className="flex items-center space-x-5">
+              <div className="w-14 sm:w-16 h-14 sm:h-16 bg-gradient-to-br from-green-500 to-green-600 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-lg">
+                <Phone className="w-7 sm:w-8 h-7 sm:h-8 text-white" />
               </div>
               <div className="flex-1 min-w-0">
-                <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-foreground group-hover:text-green-500 transition-colors duration-300 mb-3">Teléfono</h3>
-                <p className="text-lg sm:text-xl text-muted-foreground">+34 717 705 991</p>
-                <p className="text-base sm:text-lg text-green-500 font-medium mt-3">Click para llamar</p>
+                <h3 className="text-xl sm:text-2xl font-bold text-foreground group-hover:text-green-500 transition-colors duration-300 mb-2">Teléfono</h3>
+                <p className="text-base sm:text-lg text-muted-foreground">+34 717 705 991</p>
+                <p className="text-sm sm:text-base text-green-500 font-medium mt-2">Click para llamar</p>
               </div>
             </div>
           </div>
 
           {/* Location */}
-          <div className="contact-card bg-background/80 backdrop-blur-sm border border-border rounded-xl p-6 sm:p-8 lg:p-10 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
-            <div className="flex items-center space-x-5 sm:space-x-6">
-              <div className="w-16 sm:w-18 lg:w-20 h-16 sm:h-18 lg:h-20 bg-gradient-to-br from-purple-500 to-purple-600 rounded-xl flex items-center justify-center shadow-lg">
-                <MapPin className="w-8 sm:w-9 lg:w-10 h-8 sm:h-9 lg:h-10 text-white" />
+          <div className="contact-card bg-background/80 backdrop-blur-sm border border-border rounded-xl p-6 sm:p-8 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+            <div className="flex items-center space-x-5">
+              <div className="w-14 sm:w-16 h-14 sm:h-16 bg-gradient-to-br from-purple-500 to-purple-600 rounded-xl flex items-center justify-center shadow-lg">
+                <MapPin className="w-7 sm:w-8 h-7 sm:h-8 text-white" />
               </div>
               <div className="flex-1">
-                <h4 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-foreground mb-3">Ubicación</h4>
-                <p className="text-lg sm:text-xl text-muted-foreground">Madrid, España</p>
-                <p className="text-base sm:text-lg text-purple-500 font-medium mt-3">Disponible para remoto</p>
+                <h4 className="text-xl sm:text-2xl font-bold text-foreground mb-2">Ubicación</h4>
+                <p className="text-base sm:text-lg text-muted-foreground">Madrid, España</p>
+                <p className="text-sm sm:text-base text-purple-500 font-medium mt-2">Disponible para remoto</p>
               </div>
             </div>
           </div>
 
           {/* Availability */}
-          <div className="contact-card bg-background/80 backdrop-blur-sm border border-border rounded-xl p-6 sm:p-8 lg:p-10 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
-            <div className="flex items-center space-x-5 sm:space-x-6">
-              <div className="w-16 sm:w-18 lg:w-20 h-16 sm:h-18 lg:h-20 bg-gradient-to-br from-green-500 to-emerald-500 rounded-xl flex items-center justify-center shadow-lg">
-                <div className="w-5 sm:w-6 h-5 sm:h-6 bg-white rounded-full animate-pulse"></div>
+          <div className="contact-card bg-background/80 backdrop-blur-sm border border-border rounded-xl p-6 sm:p-8 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+            <div className="flex items-center space-x-5">
+              <div className="w-14 sm:w-16 h-14 sm:h-16 bg-gradient-to-br from-green-500 to-emerald-500 rounded-xl flex items-center justify-center shadow-lg">
+                <div className="w-4 sm:w-5 h-4 sm:h-5 bg-white rounded-full animate-pulse"></div>
               </div>
               <div className="flex-1">
-                <h4 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-foreground mb-3">Estado</h4>
-                <p className="text-lg sm:text-xl text-green-600 dark:text-green-400 font-medium">Disponible para entrevistas</p>
-                <p className="text-base sm:text-lg text-muted-foreground mt-3">Respondo mensajes en menos de 24h</p>
+                <h4 className="text-xl sm:text-2xl font-bold text-foreground mb-2">Estado</h4>
+                <p className="text-base sm:text-lg text-green-600 dark:text-green-400 font-medium">Disponible para entrevistas</p>
+                <p className="text-sm sm:text-base text-muted-foreground mt-2">Respondo mensajes en menos de 24h</p>
               </div>
             </div>
           </div>
@@ -204,16 +204,16 @@ const Contact: React.FC = () => {
         <div className="text-center">
           <div 
             onClick={() => setShowCVViewer(true)}
-            className="contact-card bg-background/80 backdrop-blur-sm border border-border rounded-xl p-6 sm:p-8 lg:p-10 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 cursor-pointer group"
+            className="contact-card bg-background/80 backdrop-blur-sm border border-border rounded-xl p-6 sm:p-8 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 cursor-pointer group"
           >
-            <div className="flex items-center space-x-5 sm:space-x-6">
-              <div className="w-16 sm:w-18 lg:w-20 h-16 sm:h-18 lg:h-20 bg-gradient-to-br from-accent to-accent/80 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-lg">
-                <FileText className="w-8 sm:w-9 lg:w-10 h-8 sm:h-9 lg:h-10 text-white" />
+            <div className="flex items-center space-x-5">
+              <div className="w-14 sm:w-16 h-14 sm:h-16 bg-gradient-to-br from-accent to-accent/80 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-lg">
+                <FileText className="w-7 sm:w-8 h-7 sm:h-8 text-white" />
               </div>
               <div className="flex-1 min-w-0">
-                <h4 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-foreground group-hover:text-accent transition-colors duration-300 mb-3">Ver CV Online</h4>
-                <p className="text-lg sm:text-xl text-muted-foreground">Visualizar curriculum completo</p>
-                <p className="text-base sm:text-lg text-accent font-medium mt-3">Click para abrir visor interactivo</p>
+                <h4 className="text-xl sm:text-2xl font-bold text-foreground group-hover:text-accent transition-colors duration-300 mb-2">Ver CV Online</h4>
+                <p className="text-base sm:text-lg text-muted-foreground">Visualizar curriculum completo</p>
+                <p className="text-sm sm:text-base text-accent font-medium mt-2">Click para abrir visor interactivo</p>
               </div>
             </div>
           </div>
