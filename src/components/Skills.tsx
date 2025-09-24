@@ -208,7 +208,7 @@ const Skills: React.FC = () => {
         },
         {
           name: 'Vagrant',
-          level: 'Intermedio',
+          level: 'Principiante',
           contexts: ['Estudios'],
           description: 'Creación de entornos de desarrollo reproducibles',
           icon: <Settings className="w-4 h-4" />
