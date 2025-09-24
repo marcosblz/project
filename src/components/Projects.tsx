@@ -94,11 +94,11 @@ const Projects: React.FC = () => {
         </div>
 
         {/* Projects Grid */}
-        <div className="projects-container grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-10 lg:gap-12 items-stretch max-w-5xl mx-auto">
+        <div className="projects-container flex justify-center max-w-5xl mx-auto">
           {projects.map((project, index) => (
             <div
               key={project.id}
-              className="project-card group cursor-pointer perspective-1000"
+              className="project-card group cursor-pointer perspective-1000 max-w-md w-full"
               onClick={() => openModal(project)}
             >
               <div className="relative bg-background/80 backdrop-blur-sm border border-border rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-700 transform-gpu hover:-translate-y-6 hover:rotate-1 h-full flex flex-col">
