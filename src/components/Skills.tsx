@@ -158,7 +158,7 @@ const Skills: React.FC = () => {
       color: 'from-orange-500 to-red-500',
       tabColor: 'bg-orange-500',
       highlights: [
-        'Repositoriores',
+        'Repositorios',
         'Enfoque ágil',
         'Monitoreo y logging',
         'Cimientos sólidos'
