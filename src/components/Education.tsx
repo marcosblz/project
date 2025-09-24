@@ -81,7 +81,6 @@ const Education: React.FC = () => {
     "Excel",
     "Comunicación",
     "Resolución de incidencias",
-    "Figma",
     "Adaptabilidad",
     "Pensamiento crítico",
     "Creatividad"
