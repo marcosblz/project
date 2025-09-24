@@ -353,11 +353,11 @@ const Skills: React.FC = () => {
   const selectedCategoryData = skillCategories.find(cat => cat.id === selectedCategory);
 
   return (
-    <section id="habilidades" className="skills-section py-8 sm:py-12 lg:py-20">
+    <section id="habilidades" className="skills-section py-12 sm:py-16 lg:py-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-8 sm:mb-12 lg:mb-16">
+        <div className="text-center mb-6 sm:mb-12 lg:mb-16">
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground mb-4 sm:mb-6">Stack Tecnológico</h2>
-          <p className="text-lg sm:text-xl lg:text-2xl text-muted-foreground">Mis habilidades técnicas organizadas por especialización</p>
+          <p className="text-base sm:text-xl lg:text-2xl text-muted-foreground px-4 sm:px-0">Mis habilidades técnicas organizadas por especialización</p>
         </div>
 
         <div className="skills-container">
@@ -366,7 +366,7 @@ const Skills: React.FC = () => {
             <div className="relative">
               {/* Tabs positioned above content */}
               <div className="relative z-20">
-                <div className="flex gap-2 md:gap-3 overflow-x-auto scrollbar-hide">
+                <div className="flex gap-1 sm:gap-2 md:gap-3 overflow-x-auto scrollbar-hide px-1">
                   {skillCategories.map((category, index) => (
                     <button
                       key={category.id}
@@ -379,18 +379,20 @@ const Skills: React.FC = () => {
                     >
                       {/* Tab Background */}
                       <div className={`
-                        relative px-4 py-2 md:px-6 md:py-3 transition-all duration-300 whitespace-nowrap
+                        relative px-3 py-2 sm:px-4 sm:py-2 md:px-6 md:py-3 transition-all duration-300 whitespace-nowrap
                         ${selectedCategory === category.id 
                           ? `${category.tabColor} text-white shadow-lg rounded-t-lg border-t border-l border-r border-transparent` 
                           : 'bg-muted/80 text-muted-foreground border-t border-l border-r border-border hover:bg-muted hover:text-foreground rounded-t-lg'
                         }
                       `}>
                         {/* Tab Content */}
-                        <div className="flex items-center justify-center space-x-2">
-                          {React.cloneElement(category.icon as React.ReactElement, {
-                            className: "w-4 h-4"
-                          })}
-                          <span className="text-sm font-medium">{category.title}</span>
+                        <div className="flex items-center justify-center space-x-1 sm:space-x-2">
+                          <span className="hidden sm:inline">
+                            {React.cloneElement(category.icon as React.ReactElement, {
+                              className: "w-3 sm:w-4 h-3 sm:h-4"
+                            })}
+                          </span>
+                          <span className="text-xs sm:text-sm font-medium">{category.title}</span>
                         </div>
 
                         {/* Active Tab Connector */}
@@ -404,27 +406,27 @@ const Skills: React.FC = () => {
               </div>
 
               {/* Main Content Area */}
-              <div className="bg-background/80 backdrop-blur-sm border border-border rounded-2xl rounded-t-none p-6 sm:p-8 md:p-10 lg:p-12 shadow-xl relative z-10 -mt-px">
+              <div className="bg-background/80 backdrop-blur-sm border border-border rounded-2xl rounded-t-none p-4 sm:p-8 md:p-10 lg:p-12 shadow-xl relative z-10 -mt-px">
               
                 {/* Category Header */}
-                <div className="flex flex-col sm:flex-row sm:items-center mb-6 sm:mb-8 md:mb-10">
-                  <div className={`w-16 sm:w-20 md:w-24 h-16 sm:h-20 md:h-24 rounded-xl bg-gradient-to-br ${selectedCategoryData.color} flex items-center justify-center mb-4 sm:mb-0 sm:mr-6 md:mr-8 shadow-lg mx-auto sm:mx-0`}>
+                <div className="flex flex-col sm:flex-row sm:items-center mb-4 sm:mb-8 md:mb-10">
+                  <div className={`w-12 sm:w-20 md:w-24 h-12 sm:h-20 md:h-24 rounded-xl bg-gradient-to-br ${selectedCategoryData.color} flex items-center justify-center mb-3 sm:mb-0 sm:mr-6 md:mr-8 shadow-lg mx-auto sm:mx-0`}>
                     {React.cloneElement(selectedCategoryData.icon as React.ReactElement, {
-                      className: "w-8 sm:w-10 md:w-12 h-8 sm:h-10 md:h-12 text-white"
+                      className: "w-6 sm:w-10 md:w-12 h-6 sm:h-10 md:h-12 text-white"
                     })}
                   </div>
                   <div className="flex-1 text-center sm:text-left">
-                    <h3 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-3">{selectedCategoryData.title}</h3>
-                    <p className="text-base sm:text-lg text-muted-foreground mb-4 px-2 sm:px-0">{selectedCategoryData.subtitle}</p>
+                    <h3 className="text-xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-2 sm:mb-3">{selectedCategoryData.title}</h3>
+                    <p className="text-sm sm:text-lg text-muted-foreground mb-3 sm:mb-4 px-2 sm:px-0">{selectedCategoryData.subtitle}</p>
                     
                     {/* Highlights */}
-                    <div className="flex flex-wrap gap-2 sm:gap-3 justify-center sm:justify-start">
+                    <div className="flex flex-wrap gap-1.5 sm:gap-3 justify-center sm:justify-start">
                       {selectedCategoryData.highlights.map((highlight, index) => (
                         <span
                           key={index}
-                          className="inline-flex items-center px-3 sm:px-4 py-2 bg-accent/10 text-accent rounded-full text-sm sm:text-base font-medium"
+                          className="inline-flex items-center px-2 sm:px-4 py-1 sm:py-2 bg-accent/10 text-accent rounded-full text-xs sm:text-base font-medium"
                         >
-                          <Star className="w-3 sm:w-4 h-3 sm:h-4 mr-2" />
+                          <Star className="w-2.5 sm:w-4 h-2.5 sm:h-4 mr-1 sm:mr-2" />
                           {highlight}
                         </span>
                       ))}
@@ -433,24 +435,24 @@ const Skills: React.FC = () => {
                 </div>
 
                 {/* Technologies Grid */}
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 md:gap-8">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 sm:gap-6 md:gap-8">
                   {selectedCategoryData.technologies.map((tech, index) => (
                     <div
                       key={index}
-                      className="bg-card/50 border border-border rounded-xl p-4 sm:p-6 md:p-8 hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
+                      className="bg-card/50 border border-border rounded-xl p-3 sm:p-6 md:p-8 hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
                     >
-                      <div className="flex items-start justify-between mb-3 sm:mb-4">
-                        <div className="flex items-center space-x-3 sm:space-x-4 flex-1 min-w-0">
-                          <div className="w-10 sm:w-12 h-10 sm:h-12 bg-muted rounded-lg flex items-center justify-center flex-shrink-0">
+                      <div className="flex items-start justify-between mb-2 sm:mb-4">
+                        <div className="flex items-center space-x-2 sm:space-x-4 flex-1 min-w-0">
+                          <div className="w-8 sm:w-12 h-8 sm:h-12 bg-muted rounded-lg flex items-center justify-center flex-shrink-0">
                             {tech.icon}
                           </div>
                           <div className="min-w-0 flex-1">
-                            <h4 className="text-base sm:text-lg md:text-xl font-bold text-foreground truncate">{tech.name}</h4>
-                            <div className="flex flex-col sm:flex-row sm:items-center sm:space-x-3 mt-2 gap-2 sm:gap-0">
+                            <h4 className="text-sm sm:text-lg md:text-xl font-bold text-foreground truncate">{tech.name}</h4>
+                            <div className="flex flex-col sm:flex-row sm:items-center sm:space-x-3 mt-1 sm:mt-2 gap-1 sm:gap-0">
                               {/* Level Badge with Tooltip */}
                               <div className="relative">
                                 <span 
-                                  className={`px-3 py-1 sm:py-1.5 rounded-full text-sm font-medium cursor-help ${getLevelColor(tech.level)}`}
+                                  className={`px-2 sm:px-3 py-0.5 sm:py-1.5 rounded-full text-xs sm:text-sm font-medium cursor-help ${getLevelColor(tech.level)}`}
                                   onMouseEnter={() => setHoveredLevel(`${tech.name}-level`)}
                                   onMouseLeave={() => setHoveredLevel(null)}
                                 >
@@ -467,11 +469,11 @@ const Skills: React.FC = () => {
                               </div>
                               
                               {/* Context Badges */}
-                              <div className="flex flex-wrap gap-2 mt-2 sm:mt-0">
+                              <div className="flex flex-wrap gap-1 sm:gap-2 mt-1 sm:mt-0">
                                 {tech.contexts.map((context, contextIndex) => (
                                   <span 
                                     key={contextIndex}
-                                    className={`px-2 sm:px-3 py-1 sm:py-1.5 rounded-full text-xs sm:text-sm font-medium border ${getContextColor(context)}`}
+                                    className={`px-1.5 sm:px-3 py-0.5 sm:py-1.5 rounded-full text-xs font-medium border ${getContextColor(context)}`}
                                   >
                                     {context}
                                   </span>
@@ -482,17 +484,17 @@ const Skills: React.FC = () => {
                         </div>
                         <button
                           onClick={() => toggleDetails(tech.name)}
-                          className="p-2 sm:p-3 hover:bg-muted rounded-lg transition-colors duration-200 flex-shrink-0"
+                          className="p-1.5 sm:p-3 hover:bg-muted rounded-lg transition-colors duration-200 flex-shrink-0"
                         >
-                          <ChevronRight className={`w-4 sm:w-5 h-4 sm:h-5 text-muted-foreground transition-transform duration-200 ${
+                          <ChevronRight className={`w-3 sm:w-5 h-3 sm:h-5 text-muted-foreground transition-transform duration-200 ${
                             showDetails[tech.name] ? 'rotate-90' : ''
                           }`} />
                         </button>
                       </div>
                       
                       {showDetails[tech.name] && (
-                        <div className="mt-3 sm:mt-4 pt-3 sm:pt-4 border-t border-border">
-                          <p className="text-sm sm:text-base text-muted-foreground leading-relaxed">
+                        <div className="mt-2 sm:mt-4 pt-2 sm:pt-4 border-t border-border">
+                          <p className="text-xs sm:text-base text-muted-foreground leading-relaxed">
                             {tech.description}
                           </p>
                         </div>

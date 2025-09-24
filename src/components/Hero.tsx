@@ -206,7 +206,7 @@ const Hero: React.FC = () => {
   };
 
   return (
-    <section id="inicio" className="hero-section min-h-screen flex items-center justify-center pt-16 px-4 relative">
+    <section id="inicio" className="hero-section min-h-screen flex items-center justify-center pt-16 pb-8 sm:pb-12 lg:pb-20 px-4 relative">
       <div className="max-w-7xl mx-auto w-full">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-16 items-center">
           {/* Profile Image with 3D Tilt Effect */}
@@ -328,20 +328,20 @@ const Hero: React.FC = () => {
             <div className="flex flex-col sm:flex-row gap-4 lg:gap-6 justify-center lg:justify-start pt-4 sm:pt-5 px-4 sm:px-0">
               <button
                 onClick={downloadCV}
-                className="inline-flex items-center justify-center px-6 sm:px-8 lg:px-10 py-4 sm:py-5 lg:py-6 bg-accent hover:bg-accent/90 text-white text-base sm:text-lg lg:text-xl 
-                   font-semibold rounded-xl transition-all duration-300 hover:scale-105 hover:shadow-xl group min-h-[64px]"
+                className="inline-flex items-center justify-center px-5 sm:px-8 lg:px-10 py-3 sm:py-5 lg:py-6 bg-accent hover:bg-accent/90 text-white text-sm sm:text-lg lg:text-xl 
+                   font-semibold rounded-xl transition-all duration-300 hover:scale-105 hover:shadow-xl group min-h-[56px] sm:min-h-[64px]"
               >
-                <Download className="w-5 sm:w-6 lg:w-7 h-5 sm:h-6 lg:h-7 mr-3 group-hover:animate-bounce" />
+                <Download className="w-4 sm:w-6 lg:w-7 h-4 sm:h-6 lg:h-7 mr-2 sm:mr-3 group-hover:animate-bounce" />
                 Descargar CV
               </button>
 
               <button
                 onClick={scrollToProjects}
-                className="inline-flex items-center justify-center px-6 sm:px-8 lg:px-10 py-4 sm:py-5 lg:py-6 bg-secondary hover:bg-secondary/90 text-secondary-foreground text-base sm:text-lg lg:text-xl 
-                   font-semibold rounded-xl transition-all duration-300 hover:scale-105 hover:shadow-xl group border-2 border-accent/20 min-h-[64px]"
+                className="inline-flex items-center justify-center px-5 sm:px-8 lg:px-10 py-3 sm:py-5 lg:py-6 bg-secondary hover:bg-secondary/90 text-secondary-foreground text-sm sm:text-lg lg:text-xl 
+                   font-semibold rounded-xl transition-all duration-300 hover:scale-105 hover:shadow-xl group border-2 border-accent/20 min-h-[56px] sm:min-h-[64px]"
               >
                 Ver Proyectos
-                <ArrowDown className="w-5 sm:w-6 lg:w-7 h-5 sm:h-6 lg:h-7 ml-3 group-hover:animate-bounce" />
+                <ArrowDown className="w-4 sm:w-6 lg:w-7 h-4 sm:h-6 lg:h-7 ml-2 sm:ml-3 group-hover:animate-bounce" />
               </button>
             </div>
           </div>

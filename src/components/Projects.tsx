@@ -86,11 +86,11 @@ const Projects: React.FC = () => {
   };
 
   return (
-    <section id="proyectos" className="projects-section py-8 sm:py-12 lg:py-20">
+    <section id="proyectos" className="projects-section py-12 sm:py-16 lg:py-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-8 sm:mb-12 lg:mb-16">
+        <div className="text-center mb-6 sm:mb-12 lg:mb-16">
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground mb-4 sm:mb-6">Proyectos</h2>
-          <p className="text-lg sm:text-xl lg:text-2xl text-muted-foreground">Experiencia práctica en desarrollo backend y soluciones empresariales</p>
+          <p className="text-base sm:text-xl lg:text-2xl text-muted-foreground px-4 sm:px-0">Experiencia práctica en desarrollo backend y soluciones empresariales</p>
         </div>
 
         {/* Projects Grid */}
@@ -164,26 +164,26 @@ const Projects: React.FC = () => {
                 </div>
 
                 {/* Content */}
-                <div className="p-8 sm:p-10 flex-1 flex flex-col">
-                  <h3 className="text-xl sm:text-2xl font-bold text-foreground mb-4 group-hover:text-accent transition-colors duration-300">
+                <div className="p-5 sm:p-10 flex-1 flex flex-col">
+                  <h3 className="text-lg sm:text-2xl font-bold text-foreground mb-3 sm:mb-4 group-hover:text-accent transition-colors duration-300">
                     {project.title}
                   </h3>
-                  <p className="text-muted-foreground mb-5 leading-relaxed text-base sm:text-lg flex-1">
+                  <p className="text-muted-foreground mb-4 sm:mb-5 leading-relaxed text-sm sm:text-lg flex-1">
                     {project.description}
                   </p>
                   
                   {/* Technologies */}
-                  <div className="flex flex-wrap gap-3 mt-auto">
+                  <div className="flex flex-wrap gap-2 sm:gap-3 mt-auto">
                     {project.technologies.slice(0, 4).map((tech, techIndex) => (
                       <span
                         key={techIndex}
-                        className="px-3 py-1.5 bg-accent/10 text-accent rounded-full text-sm font-medium hover:bg-accent hover:text-white transition-colors duration-300"
+                        className="px-2.5 sm:px-3 py-1 sm:py-1.5 bg-accent/10 text-accent rounded-full text-xs sm:text-sm font-medium hover:bg-accent hover:text-white transition-colors duration-300"
                       >
                         {tech}
                       </span>
                     ))}
                     {project.technologies.length > 4 && (
-                      <span className="px-3 py-1.5 bg-muted text-muted-foreground rounded-full text-sm">
+                      <span className="px-2.5 sm:px-3 py-1 sm:py-1.5 bg-muted text-muted-foreground rounded-full text-xs sm:text-sm">
                         +{project.technologies.length - 4}
                       </span>
                     )}

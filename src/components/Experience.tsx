@@ -66,46 +66,46 @@ const Experience: React.FC = () => {
   }, []);
 
   return (
-    <section id="experiencia" className="experience-section py-8 sm:py-12 lg:py-20">
+    <section id="experiencia" className="experience-section py-12 sm:py-16 lg:py-20">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-8 sm:mb-12 lg:mb-16">
+        <div className="text-center mb-6 sm:mb-12 lg:mb-16">
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground mb-4 sm:mb-6">Experiencia Profesional</h2>
-          <p className="text-lg sm:text-xl lg:text-2xl text-muted-foreground">Mi trayectoria en el desarrollo de software</p>
+          <p className="text-base sm:text-xl lg:text-2xl text-muted-foreground px-4 sm:px-0">Mi trayectoria en el desarrollo de software</p>
         </div>
 
         <div className="experience-grid relative">
-          <div className="space-y-6 sm:space-y-8 lg:space-y-10">
+          <div className="space-y-5 sm:space-y-8 lg:space-y-10">
             {experiences.map((exp, index) => (
               <div key={exp.id} className="experience-item">
                 {/* Content Card */}
-                <div className="experience-card bg-card/80 backdrop-blur-sm border border-border rounded-xl p-6 sm:p-8 lg:p-10 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+                <div className="experience-card bg-card/80 backdrop-blur-sm border border-border rounded-xl p-5 sm:p-8 lg:p-10 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
                   <div className="flex flex-col space-y-3 sm:space-y-4 lg:space-y-5">
                     <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between">
                       <div className="flex-1">
-                        <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-foreground mb-3">{exp.position}</h3>
-                        <p className="text-accent font-semibold text-lg sm:text-xl">{exp.company}</p>
+                        <h3 className="text-lg sm:text-2xl lg:text-3xl font-bold text-foreground mb-2 sm:mb-3">{exp.position}</h3>
+                        <p className="text-accent font-semibold text-base sm:text-xl">{exp.company}</p>
                       </div>
-                      <div className="flex flex-col sm:text-right text-base sm:text-lg text-muted-foreground mt-3 sm:mt-0 space-y-2">
+                      <div className="flex flex-col sm:text-right text-sm sm:text-lg text-muted-foreground mt-2 sm:mt-0 space-y-1 sm:space-y-2">
                         <div className="flex items-center sm:justify-end">
-                          <Calendar className="w-5 sm:w-6 h-5 sm:h-6 mr-3" />
+                          <Calendar className="w-4 sm:w-6 h-4 sm:h-6 mr-2 sm:mr-3" />
                           {exp.date}
                         </div>
                         <div className="flex items-center sm:justify-end">
-                          <MapPin className="w-5 sm:w-6 h-5 sm:h-6 mr-3" />
+                          <MapPin className="w-4 sm:w-6 h-4 sm:h-6 mr-2 sm:mr-3" />
                           {exp.location}
                         </div>
                       </div>
                     </div>
                     
-                    <p className="text-muted-foreground text-base sm:text-lg lg:text-xl leading-relaxed">
+                    <p className="text-muted-foreground text-sm sm:text-lg lg:text-xl leading-relaxed">
                       {exp.description}
                     </p>
                     
-                    <div className="flex flex-wrap gap-3 sm:gap-4">
+                    <div className="flex flex-wrap gap-2 sm:gap-4">
                       {exp.technologies.map((tech, techIndex) => (
                         <span
                           key={techIndex}
-                          className="px-4 sm:px-5 py-2 sm:py-2.5 bg-accent/10 text-accent rounded-full text-base sm:text-lg font-medium hover:bg-accent hover:text-white transition-colors duration-300"
+                          className="px-3 sm:px-5 py-1.5 sm:py-2.5 bg-accent/10 text-accent rounded-full text-xs sm:text-lg font-medium hover:bg-accent hover:text-white transition-colors duration-300"
                         >
                           {tech}
                         </span>
