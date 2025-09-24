@@ -254,14 +254,14 @@ const Skills: React.FC = () => {
       technologies: [
         {
           name: 'Scrum/Kanban',
-          level: 'Avanzado',
+          level: 'Intermedio',
           contexts: ['Trabajo'],
           description: 'Metodologías ágiles, gestión de proyectos con Jira y Trello',
           icon: <Wrench className="w-4 h-4" />
         },
         {
           name: 'REST APIs',
-          level: 'Avanzado',
+          level: 'Intermedio',
           contexts: ['Trabajo', 'Estudios'],
           description: 'Diseño, documentación, integración con Postman y Swagger',
           icon: <Globe className="w-4 h-4" />
