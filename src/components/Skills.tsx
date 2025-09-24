@@ -187,7 +187,7 @@ const Skills: React.FC = () => {
         },
         {
           name: 'Linux',
-          level: 'Intermedio',
+          level: 'Avanzado',
           contexts: ['Trabajo', 'Estudios'],
           description: 'Terminal, conocimiento del SO',
           icon: <Settings className="w-4 h-4" />
