@@ -201,7 +201,7 @@ const Skills: React.FC = () => {
         },
         {
           name: 'Nginx',
-          level: 'Intermedio',
+          level: 'Principiante',
           contexts: ['Estudios'],
           description: 'Servidores web básicos y correo',
           icon: <Settings className="w-4 h-4" />
