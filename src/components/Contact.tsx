@@ -91,7 +91,7 @@ const Contact: React.FC = () => {
         </div>
 
         {/* Main Contact Grid - 2x2 */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-10 lg:gap-12 mb-8 sm:mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-10 lg:gap-12 mb-8 sm:mb-12">
           
           {/* Email Card */}
           <div 
@@ -157,8 +157,8 @@ const Contact: React.FC = () => {
         </div>
 
         {/* Social Media Row */}
-        <div className="mb-8 sm:mb-14">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-8 lg:gap-10">
+        <div className="mb-6 sm:mb-14">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 lg:gap-10">
             
             {/* GitHub Card */}
             <a
@@ -201,19 +201,19 @@ const Contact: React.FC = () => {
         </div>
 
         {/* CV Online Viewer Button */}
-        <div className="text-center">
+        <div>
           <div 
             onClick={() => setShowCVViewer(true)}
-            className="contact-card bg-background/80 backdrop-blur-sm border border-border rounded-xl p-5 sm:p-8 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 cursor-pointer group"
+            className="contact-card bg-background/80 backdrop-blur-sm border border-border rounded-xl p-6 sm:p-8 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 cursor-pointer group"
           >
-            <div className="flex items-center space-x-3 sm:space-x-5">
+            <div className="flex items-center space-x-5">
               <div className="w-14 sm:w-16 h-14 sm:h-16 bg-gradient-to-br from-accent to-accent/80 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-lg">
                 <FileText className="w-7 sm:w-8 h-7 sm:h-8 text-white" />
               </div>
               <div className="flex-1 min-w-0">
-                <h4 className="text-lg sm:text-2xl font-bold text-foreground group-hover:text-accent transition-colors duration-300 mb-1 sm:mb-2">Ver CV Online</h4>
-                <p className="text-sm sm:text-lg text-muted-foreground">Visualizar curriculum completo</p>
-                <p className="text-xs sm:text-base text-accent font-medium mt-1 sm:mt-2">Click para abrir visor interactivo</p>
+                <h4 className="text-xl sm:text-2xl font-bold text-foreground group-hover:text-accent transition-colors duration-300 mb-2">Ver CV Online</h4>
+                <p className="text-base sm:text-lg text-muted-foreground">Visualizar curriculum completo</p>
+                <p className="text-sm sm:text-base text-accent font-medium mt-2">Click para abrir visor interactivo</p>
               </div>
             </div>
           </div>
