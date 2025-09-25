@@ -120,7 +120,7 @@ const Projects: React.FC = () => {
                         ? 'bg-orange-500/90 text-white' 
                         : 'bg-accent/90 text-white'
                     }`}>
-                      {project.id === 1 ? 'En Desarrollo' : project.category}
+                      {project.id === 1 ? 'Terminado' : project.category}
                     </span>
                   </div>
 
