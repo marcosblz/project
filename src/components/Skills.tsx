@@ -395,10 +395,7 @@ const Skills: React.FC = () => {
                           <span className="text-xs sm:text-sm font-medium">{category.title}</span>
                         </div>
 
-                        {/* Active Tab Connector */}
-                        {selectedCategory === category.id && (
-                          <div className="absolute bottom-0 left-0 right-0 h-px bg-background z-40"></div>
-                        )}
+                        
                       </div>
                     </button>
                   ))}
@@ -406,7 +403,7 @@ const Skills: React.FC = () => {
               </div>
 
               {/* Main Content Area */}
-              <div className="bg-background/80 backdrop-blur-sm border border-border rounded-b-2xl rounded-t-none p-4 sm:p-8 md:p-10 lg:p-12 shadow-xl relative z-10">
+              <div className="bg-background/80 backdrop-blur-sm border border-border border-t-transparent rounded-b-2xl rounded-t-none p-4 sm:p-8 md:p-10 lg:p-12 shadow-xl relative z-10">
               
                 {/* Category Header */}
                 <div className="flex flex-col sm:flex-row sm:items-center mb-4 sm:mb-8 md:mb-10">
