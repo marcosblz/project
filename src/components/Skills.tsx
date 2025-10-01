@@ -368,8 +368,9 @@ const Skills: React.FC = () => {
 <div className="relative z-20 mb-0 sm:mb-0">
   <div
     className="flex items-stretch overflow-x-auto scrollbar-hide
-               border border-red-500
-               [&>*]:h-full [&_*]:border [&_*]:border-red-500"
+               border border-red-500 border-b-0  /* <- quitamos borde inferior */
+               [&>*]:h-full
+               [&_*]:border [&_*]:border-red-500"
   >
     {skillCategories.map((category) => (
       <button
@@ -381,7 +382,7 @@ const Skills: React.FC = () => {
       >
         {/* Tab Background */}
         <div className={`
-          relative h-full flex items-center -mb-px
+          relative h-full flex items-center
           px-3 pt-2 pb-0 sm:px-4 sm:pt-2 sm:pb-0 md:px-6 md:pt-3 md:pb-0
           transition-all duration-300 whitespace-nowrap
           ${selectedCategory === category.id 
@@ -389,7 +390,6 @@ const Skills: React.FC = () => {
             : 'bg-muted/80 text-muted-foreground border hover:bg-muted hover:text-foreground rounded-t-lg'
           }
         `}>
-          {/* Tab Content */}
           <div className="flex items-center justify-center space-x-1 sm:space-x-2">
             <span className="hidden sm:inline">
               {React.cloneElement(category.icon as React.ReactElement, {
@@ -401,13 +401,13 @@ const Skills: React.FC = () => {
             </span>
           </div>
 
-          {/* ⛔️ Conector eliminado para quitar la línea de 1px */}
-          {/* (antes: absolute bottom-0 ... h-px bg-background) */}
+          {/* conector eliminado */}
         </div>
       </button>
     ))}
   </div>
 </div>
+
 
 
 
