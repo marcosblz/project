@@ -10,9 +10,7 @@ import {
   Globe, 
   Wrench,
   Zap,
-  Star,
-  BookOpen,
-  Github
+  Star
 } from 'lucide-react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -43,17 +41,22 @@ const Skills: React.FC = () => {
   const [showDetails, setShowDetails] = useState<{ [key: string]: boolean }>({});
   const [hoveredLevel, setHoveredLevel] = useState<string | null>(null);
 
-  // Tooltips para cada nivel
+  // ---- DEBUG MODE (activar para ver cajas) ----
+  const DEBUG = false; // pon true para ver outlines
+  const dbg = DEBUG ? 'outline outline-1 outline-red-500/80' : '';
+
   const levelTooltips = {
     'Principiante': 'Nociones básicas de la herramienta',
     'Intermedio': 'Usado en proyectos personales o para aportar valor en empresa',
     'Avanzado': 'Dominio sólido con experiencia práctica en entornos profesionales',
     'Experto': 'Conocimiento profundo y capacidad de liderar proyectos complejos'
   };
+
   const skillCategories: SkillCategory[] = [
     {
       id: 'backend',
       title: 'Backend',
+      subtitle: '',
       icon: <Server className="w-4 h-4" />,
       color: 'from-blue-500 to-cyan-500',
       tabColor: 'bg-blue-500',
@@ -97,6 +100,7 @@ const Skills: React.FC = () => {
     {
       id: 'frontend',
       title: 'Frontend',
+      subtitle: '',
       icon: <Monitor className="w-4 h-4" />,
       color: 'from-purple-500 to-pink-500',
       tabColor: 'bg-purple-500',
@@ -154,6 +158,7 @@ const Skills: React.FC = () => {
     {
       id: 'devops',
       title: 'DevOps',
+      subtitle: '',
       icon: <GitBranch className="w-4 h-4" />,
       color: 'from-orange-500 to-red-500',
       tabColor: 'bg-orange-500',
@@ -246,11 +251,11 @@ const Skills: React.FC = () => {
     {
       id: 'tools',
       title: 'Otros',
+      subtitle: '',
       icon: <Settings className="w-4 h-4" />,
       color: 'from-green-500 to-emerald-500',
       tabColor: 'bg-green-500',
-      highlights: [
-      ],
+      highlights: [],
       technologies: [
         {
           name: 'Scrum/Kanban',
@@ -360,24 +365,20 @@ const Skills: React.FC = () => {
           <p className="text-base sm:text-xl lg:text-2xl text-muted-foreground px-4 sm:px-0">Mis habilidades técnicas organizadas por especialización</p>
         </div>
 
-        <div className="skills-container">
-          {/* Selected Category Details */}
+        <div className={`skills-container ${dbg}`}>
           {selectedCategoryData && (
             <div className="relative">
-              {/* Tabs positioned above content */}
-              <div className="relative z-20 -mb-px">
+              {/* Tabs */}
+              <div className={`relative z-20 -mb-px ${dbg}`}>
                 <div className="flex overflow-x-auto scrollbar-hide">
-                  {skillCategories.map((category, index) => (
+                  {skillCategories.map((category) => (
                     <button
                       key={category.id}
                       onClick={() => setSelectedCategory(category.id)}
                       className={`notebook-tab relative group transition-all duration-300 w-full sm:w-auto ${
-                        selectedCategory === category.id
-                          ? 'z-30'
-                          : 'hover:-translate-y-0.5 z-20'
+                        selectedCategory === category.id ? 'z-30' : 'hover:-translate-y-0.5 z-20'
                       }`}
                     >
-                      {/* Tab Background */}
                       <div className={`
                         relative px-3 pb-0 pt-2 sm:px-4 sm:py-2 md:px-6 md:py-3 transition-all duration-300 whitespace-nowrap
                         ${selectedCategory === category.id 
@@ -385,38 +386,35 @@ const Skills: React.FC = () => {
                           : 'bg-muted/80 text-muted-foreground border-t border-l border-r border-border hover:bg-muted hover:text-foreground rounded-t-lg'
                         }
                       `}>
-                        {/* Tab Content */}
                         <div className="flex items-center justify-center space-x-1 sm:space-x-2">
                           <span className="hidden sm:inline">
                             {React.cloneElement(category.icon as React.ReactElement, {
-                              className: "w-3 sm:w-4 h-3 sm:h-4"
+                              className: 'w-3 sm:w-4 h-3 sm:h-4'
                             })}
                           </span>
                           <span className="text-xs sm:text-sm font-medium">{category.title}</span>
                         </div>
 
-                        
+                        {/* Eliminado el conector de 1px */}
                       </div>
                     </button>
                   ))}
                 </div>
               </div>
 
-              {/* Main Content Area */}
-              <div className="bg-background/80 backdrop-blur-sm border border-border border-t-transparent rounded-b-2xl rounded-t-none p-4 sm:p-8 md:p-10 lg:p-12 shadow-xl relative z-10">
-              
-                {/* Category Header */}
+              {/* Panel */}
+              <div className={`bg-background border-x border-b border-border border-t-0 rounded-b-2xl rounded-t-none p-4 sm:p-8 md:p-10 lg:p-12 shadow-xl relative z-10 ${dbg}`}>
+                {/* Header */}
                 <div className="flex flex-col sm:flex-row sm:items-center mb-4 sm:mb-8 md:mb-10">
                   <div className={`w-12 sm:w-20 md:w-24 h-12 sm:h-20 md:h-24 rounded-xl bg-gradient-to-br ${selectedCategoryData.color} flex items-center justify-center mb-3 sm:mb-0 sm:mr-6 md:mr-8 shadow-lg mx-auto sm:mx-0`}>
                     {React.cloneElement(selectedCategoryData.icon as React.ReactElement, {
-                      className: "w-6 sm:w-10 md:w-12 h-6 sm:h-10 md:h-12 text-white"
+                      className: 'w-6 sm:w-10 md:w-12 h-6 sm:h-10 md:h-12 text-white'
                     })}
                   </div>
                   <div className="flex-1 text-center sm:text-left">
                     <h3 className="text-xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-2 sm:mb-3">{selectedCategoryData.title}</h3>
                     <p className="text-sm sm:text-lg text-muted-foreground mb-3 sm:mb-4 px-2 sm:px-0">{selectedCategoryData.subtitle}</p>
-                    
-                    {/* Highlights */}
+
                     <div className="flex flex-wrap gap-1.5 sm:gap-3 justify-center sm:justify-start">
                       {selectedCategoryData.highlights.map((highlight, index) => (
                         <span
@@ -431,7 +429,7 @@ const Skills: React.FC = () => {
                   </div>
                 </div>
 
-                {/* Technologies Grid */}
+                {/* Tech grid */}
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 sm:gap-6 md:gap-8">
                   {selectedCategoryData.technologies.map((tech, index) => (
                     <div
@@ -446,7 +444,6 @@ const Skills: React.FC = () => {
                           <div className="min-w-0 flex-1">
                             <h4 className="text-sm sm:text-lg md:text-xl font-bold text-foreground truncate">{tech.name}</h4>
                             <div className="flex flex-col sm:flex-row sm:items-center sm:space-x-3 mt-1 sm:mt-2 gap-1 sm:gap-0">
-                              {/* Level Badge with Tooltip */}
                               <div className="relative">
                                 <span 
                                   className={`px-2 sm:px-3 py-0.5 sm:py-1.5 rounded-full text-xs sm:text-sm font-medium cursor-help ${getLevelColor(tech.level)}`}
@@ -455,8 +452,6 @@ const Skills: React.FC = () => {
                                 >
                                   {tech.level}
                                 </span>
-                                
-                                {/* Tooltip */}
                                 {hoveredLevel === `${tech.name}-level` && (
                                   <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-2 sm:px-3 py-1 sm:py-2 bg-gray-900 text-white text-xs rounded-lg shadow-lg whitespace-nowrap z-50 max-w-xs">
                                     {levelTooltips[tech.level]}
@@ -464,8 +459,7 @@ const Skills: React.FC = () => {
                                   </div>
                                 )}
                               </div>
-                              
-                              {/* Context Badges */}
+
                               <div className="flex flex-wrap gap-1 sm:gap-2 mt-1 sm:mt-0">
                                 {tech.contexts.map((context, contextIndex) => (
                                   <span 
@@ -483,12 +477,10 @@ const Skills: React.FC = () => {
                           onClick={() => toggleDetails(tech.name)}
                           className="p-1.5 sm:p-3 hover:bg-muted rounded-lg transition-colors duration-200 flex-shrink-0"
                         >
-                          <ChevronRight className={`w-3 sm:w-5 h-3 sm:h-5 text-muted-foreground transition-transform duration-200 ${
-                            showDetails[tech.name] ? 'rotate-90' : ''
-                          }`} />
+                          <ChevronRight className={`w-3 sm:w-5 h-3 sm:h-5 text-muted-foreground transition-transform duration-200 ${showDetails[tech.name] ? 'rotate-90' : ''}`} />
                         </button>
                       </div>
-                      
+
                       {showDetails[tech.name] && (
                         <div className="mt-2 sm:mt-4 pt-2 sm:pt-4 border-t border-border">
                           <p className="text-xs sm:text-base text-muted-foreground leading-relaxed">
