@@ -367,8 +367,10 @@ const Skills: React.FC = () => {
              {/* Tabs positioned above content */}
 <div className="relative z-20 mb-0 sm:mb-0">
   <div
-    className="flex items-stretch overflow-x-auto scrollbar-hide border border-red-500
-               [&>*]:border [&>*]:border-red-500 [&>*]:h-full"
+    className="flex items-stretch overflow-x-auto scrollbar-hide
+               border border-red-500
+               [&>*]:border [&>*]:border-red-500 [&>*]:h-full
+               [&_*]:border [&_*]:border-red-500"
   >
     {skillCategories.map((category) => (
       <button
@@ -384,7 +386,7 @@ const Skills: React.FC = () => {
           px-3 pt-2 pb-0 sm:px-4 sm:pt-2 sm:pb-0 md:px-6 md:pt-3 md:pb-0
           transition-all duration-300 whitespace-nowrap
           ${selectedCategory === category.id 
-            ? `${category.tabColor} text-white shadow-lg rounded-t-lg border` 
+            ? `${category.tabColor} text-white shadow-lg rounded-t-lg border`
             : 'bg-muted/80 text-muted-foreground border hover:bg-muted hover:text-foreground rounded-t-lg'
           }
         `}>
@@ -400,7 +402,7 @@ const Skills: React.FC = () => {
             </span>
           </div>
 
-          {/* Active Tab Connector (opcional, puedes quitarlo) */}
+          {/* Conector (opcional) */}
           {selectedCategory === category.id && (
             <div className="absolute bottom-0 left-0 right-0 h-px bg-background z-40" />
           )}
@@ -409,6 +411,7 @@ const Skills: React.FC = () => {
     ))}
   </div>
 </div>
+
 
 
               {/* Main Content Area */}
