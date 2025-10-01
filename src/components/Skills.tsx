@@ -1,16 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { 
-  Server, 
-  Monitor, 
-  GitBranch, 
-  Settings, 
-  ChevronRight, 
-  Code, 
-  Database, 
-  Globe, 
-  Wrench,
-  Zap,
-  Star
+import {
+  Server, Monitor, GitBranch, Settings, ChevronRight, Code, Database, Globe, Wrench, Zap, Star
 } from 'lucide-react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -41,15 +31,17 @@ const Skills: React.FC = () => {
   const [showDetails, setShowDetails] = useState<{ [key: string]: boolean }>({});
   const [hoveredLevel, setHoveredLevel] = useState<string | null>(null);
 
-  // ---- DEBUG MODE (activar para ver cajas) ----
-  const DEBUG = false; // pon true para ver outlines
-  const dbg = DEBUG ? 'outline outline-1 outline-red-500/80' : '';
+  // ---- DEBUG: fuerza bordes y fondos visibles, imposible que “no se vea” ----
+  const DEBUG = true; // <-- ponlo en false al terminar
+  const dbgTabsStyle = DEBUG ? { border: '2px solid red', background: 'rgba(255,0,0,0.06)' } : undefined;
+  const dbgPanelStyle = DEBUG ? { border: '2px solid lime', background: 'rgba(0,255,0,0.04)' } : undefined;
+  const dbgClass = DEBUG ? 'bg-red-500/5' : '';
 
   const levelTooltips = {
-    'Principiante': 'Nociones básicas de la herramienta',
-    'Intermedio': 'Usado en proyectos personales o para aportar valor en empresa',
-    'Avanzado': 'Dominio sólido con experiencia práctica en entornos profesionales',
-    'Experto': 'Conocimiento profundo y capacidad de liderar proyectos complejos'
+    Principiante: 'Nociones básicas de la herramienta',
+    Intermedio: 'Usado en proyectos personales o para aportar valor en empresa',
+    Avanzado: 'Dominio sólido con experiencia práctica en entornos profesionales',
+    Experto: 'Conocimiento profundo y capacidad de liderar proyectos complejos'
   };
 
   const skillCategories: SkillCategory[] = [
@@ -67,34 +59,10 @@ const Skills: React.FC = () => {
         'Optimización de rendimiento'
       ],
       technologies: [
-        {
-          name: 'Groovy',
-          level: 'Avanzado',
-          contexts: ['Trabajo'],
-          description: 'Desarrollo de SaaS empresarial y automatización de procesos',
-          icon: <Code className="w-4 h-4" />
-        },
-        {
-          name: 'Python',
-          level: 'Avanzado',
-          contexts: ['Trabajo', 'Estudios', 'Proyectos'],
-          description: 'Django, FastAPI, scripts de automatización e integración con IA',
-          icon: <Code className="w-4 h-4" />
-        },
-        {
-          name: 'Java',
-          level: 'Intermedio',
-          contexts: ['Estudios', 'Proyectos'],
-          description: 'Aplicaciones de escritorio y programación multihilo',
-          icon: <Code className="w-4 h-4" />
-        },
-        {
-          name: 'MySQL',
-          level: 'Intermedio',
-          contexts: ['Trabajo', 'Estudios'],
-          description: 'Bases de datos relacionales y no relacionales',
-          icon: <Database className="w-4 h-4" />
-        }
+        { name: 'Groovy', level: 'Avanzado', contexts: ['Trabajo'], description: 'Desarrollo de SaaS empresarial y automatización de procesos', icon: <Code className="w-4 h-4" /> },
+        { name: 'Python', level: 'Avanzado', contexts: ['Trabajo', 'Estudios', 'Proyectos'], description: 'Django, FastAPI, scripts de automatización e integración con IA', icon: <Code className="w-4 h-4" /> },
+        { name: 'Java', level: 'Intermedio', contexts: ['Estudios', 'Proyectos'], description: 'Aplicaciones de escritorio y programación multihilo', icon: <Code className="w-4 h-4" /> },
+        { name: 'MySQL', level: 'Intermedio', contexts: ['Trabajo', 'Estudios'], description: 'Bases de datos relacionales y no relacionales', icon: <Database className="w-4 h-4" /> }
       ]
     },
     {
@@ -104,55 +72,14 @@ const Skills: React.FC = () => {
       icon: <Monitor className="w-4 h-4" />,
       color: 'from-purple-500 to-pink-500',
       tabColor: 'bg-purple-500',
-      highlights: [
-        'Interfaces responsivas',
-        'Capacidad de adaptación',
-        'Diseño creativo',
-        'Cimientos sólidos'
-      ],
+      highlights: ['Interfaces responsivas', 'Capacidad de adaptación', 'Diseño creativo', 'Cimientos sólidos'],
       technologies: [
-        {
-          name: 'JavaScript',
-          level: 'Intermedio',
-          contexts: ['Trabajo', 'Proyectos'],
-          description: 'Desarrollo de scripts',
-          icon: <Code className="w-4 h-4" />
-        },
-        {
-          name: 'HTML5 & CSS3',
-          level: 'Intermedio',
-          contexts: ['Trabajo', 'Proyectos'],
-          description: 'Nociones de lo que es HTML y CSS pero falta desarrollo',
-          icon: <Globe className="w-4 h-4" />
-        },
-        {
-          name: 'React',
-          level: 'Principiante',
-          contexts: ['Proyectos'],
-          description: 'Desarrollo de proyectos',
-          icon: <Code className="w-4 h-4" />
-        },
-        {
-          name: 'TypeScript',
-          level: 'Principiante',
-          contexts: ['Trabajo', 'Proyectos'],
-          description: 'Desarrollo de proyectos y trabajo básico.',
-          icon: <Code className="w-4 h-4" />
-        },
-        {
-          name: 'Tailwind CSS',
-          level: 'Principiante',
-          contexts: ['Trabajo', 'Proyectos'],
-          description: 'He usado tailwind para trabajar en componentes web y hacer páginas como este portfolio.',
-          icon: <Globe className="w-4 h-4" />
-        },
-        {
-          name: 'GSAP',
-          level: 'Principiante',
-          contexts: ['Proyectos'],
-          description: 'Soy capaz de hacer animaciones básicas.',
-          icon: <Zap className="w-4 h-4" />
-        }
+        { name: 'JavaScript', level: 'Intermedio', contexts: ['Trabajo', 'Proyectos'], description: 'Desarrollo de scripts', icon: <Code className="w-4 h-4" /> },
+        { name: 'HTML5 & CSS3', level: 'Intermedio', contexts: ['Trabajo', 'Proyectos'], description: 'Nociones de lo que es HTML y CSS pero falta desarrollo', icon: <Globe className="w-4 h-4" /> },
+        { name: 'React', level: 'Principiante', contexts: ['Proyectos'], description: 'Desarrollo de proyectos', icon: <Code className="w-4 h-4" /> },
+        { name: 'TypeScript', level: 'Principiante', contexts: ['Trabajo', 'Proyectos'], description: 'Desarrollo de proyectos y trabajo básico.', icon: <Code className="w-4 h-4" /> },
+        { name: 'Tailwind CSS', level: 'Principiante', contexts: ['Trabajo', 'Proyectos'], description: 'He usado tailwind para componentes y páginas como este portfolio.', icon: <Globe className="w-4 h-4" /> },
+        { name: 'GSAP', level: 'Principiante', contexts: ['Proyectos'], description: 'Animaciones básicas.', icon: <Zap className="w-4 h-4" /> }
       ]
     },
     {
@@ -162,90 +89,19 @@ const Skills: React.FC = () => {
       icon: <GitBranch className="w-4 h-4" />,
       color: 'from-orange-500 to-red-500',
       tabColor: 'bg-orange-500',
-      highlights: [
-        'Repositorios',
-        'Enfoque ágil',
-        'Monitoreo y logging',
-        'Cimientos sólidos'
-      ],
+      highlights: ['Repositorios', 'Enfoque ágil', 'Monitoreo y logging', 'Cimientos sólidos'],
       technologies: [
-        {
-          name: 'Git',
-          level: 'Avanzado',
-          contexts: ['Trabajo', 'Estudios', 'Proyectos'],
-          description: 'Control de versiones',
-          icon: <GitBranch className="w-4 h-4" />
-        },
-        {
-          name: 'Docker',
-          level: 'Intermedio',
-          contexts: ['Trabajo', 'Estudios'],
-          description: 'Containerización, Docker Compose',
-          icon: <Settings className="w-4 h-4" />
-        },
-        {
-          name: 'Jenkins',
-          level: 'Intermedio',
-          contexts: ['Estudios'],
-          description: 'Pipelines CI/CD',
-          icon: <Settings className="w-4 h-4" />
-        },
-        {
-          name: 'Linux',
-          level: 'Avanzado',
-          contexts: ['Trabajo', 'Estudios'],
-          description: 'Terminal, conocimiento del SO',
-          icon: <Settings className="w-4 h-4" />
-        },
-        {
-          name: 'AWS',
-          level: 'Principiante',
-          contexts: ['Estudios'],
-          description: 'EC2, S3, RDS, ...',
-          icon: <Globe className="w-4 h-4" />
-        },
-        {
-          name: 'Nginx',
-          level: 'Principiante',
-          contexts: ['Estudios'],
-          description: 'Servidores web básicos y correo',
-          icon: <Settings className="w-4 h-4" />
-        },
-        {
-          name: 'Vagrant',
-          level: 'Principiante',
-          contexts: ['Estudios'],
-          description: 'Creación de entornos de desarrollo reproducibles',
-          icon: <Settings className="w-4 h-4" />
-        },
-        {
-          name: 'Kubernetes',
-          level: 'Principiante',
-          contexts: ['Estudios'],
-          description: 'Orquestación de contenedores y despliegue de clusters',
-          icon: <Settings className="w-4 h-4" />
-        },
-        {
-          name: 'Ansible',
-          level: 'Principiante',
-          contexts: ['Estudios'],
-          description: 'Automatización de configuración e infraestructura como código',
-          icon: <Settings className="w-4 h-4" />
-        },
-        {
-          name: 'Prometheus',
-          level: 'Principiante',
-          contexts: ['Estudios'],
-          description: 'Monitoreo y alertas de servicios',
-          icon: <Settings className="w-4 h-4" />
-        },
-        {
-          name: 'Grafana',
-          level: 'Principiante',
-          contexts: ['Estudios'],
-          description: 'Dashboards y visualización de métricas',
-          icon: <Settings className="w-4 h-4" />
-        }
+        { name: 'Git', level: 'Avanzado', contexts: ['Trabajo', 'Estudios', 'Proyectos'], description: 'Control de versiones', icon: <GitBranch className="w-4 h-4" /> },
+        { name: 'Docker', level: 'Intermedio', contexts: ['Trabajo', 'Estudios'], description: 'Containerización, Compose', icon: <Settings className="w-4 h-4" /> },
+        { name: 'Jenkins', level: 'Intermedio', contexts: ['Estudios'], description: 'Pipelines CI/CD', icon: <Settings className="w-4 h-4" /> },
+        { name: 'Linux', level: 'Avanzado', contexts: ['Trabajo', 'Estudios'], description: 'Terminal, SO', icon: <Settings className="w-4 h-4" /> },
+        { name: 'AWS', level: 'Principiante', contexts: ['Estudios'], description: 'EC2, S3, RDS…', icon: <Globe className="w-4 h-4" /> },
+        { name: 'Nginx', level: 'Principiante', contexts: ['Estudios'], description: 'Web y correo básicos', icon: <Settings className="w-4 h-4" /> },
+        { name: 'Vagrant', level: 'Principiante', contexts: ['Estudios'], description: 'Entornos reproducibles', icon: <Settings className="w-4 h-4" /> },
+        { name: 'Kubernetes', level: 'Principiante', contexts: ['Estudios'], description: 'Orquestación de contenedores', icon: <Settings className="w-4 h-4" /> },
+        { name: 'Ansible', level: 'Principiante', contexts: ['Estudios'], description: 'Infra como código', icon: <Settings className="w-4 h-4" /> },
+        { name: 'Prometheus', level: 'Principiante', contexts: ['Estudios'], description: 'Monitoreo y alertas', icon: <Settings className="w-4 h-4" /> },
+        { name: 'Grafana', level: 'Principiante', contexts: ['Estudios'], description: 'Dashboards', icon: <Settings className="w-4 h-4" /> }
       ]
     },
     {
@@ -257,76 +113,25 @@ const Skills: React.FC = () => {
       tabColor: 'bg-green-500',
       highlights: [],
       technologies: [
-        {
-          name: 'Scrum/Kanban',
-          level: 'Intermedio',
-          contexts: ['Trabajo'],
-          description: 'Metodologías ágiles, gestión de proyectos con Jira y Trello',
-          icon: <Wrench className="w-4 h-4" />
-        },
-        {
-          name: 'REST APIs',
-          level: 'Intermedio',
-          contexts: ['Trabajo', 'Estudios'],
-          description: 'Diseño, documentación, integración con Postman y Swagger',
-          icon: <Globe className="w-4 h-4" />
-        },
-        {
-          name: 'Photoshop',
-          level: 'Intermedio',
-          contexts: ['Trabajo'],
-          description: 'Edición de imágenes, optimización web y diseño básico',
-          icon: <Monitor className="w-4 h-4" />
-        },
-        {
-          name: 'Figma',
-          level: 'Principiante',
-          contexts: ['Estudios'],
-          description: 'Prototipado, diseño de interfaces y colaboración en equipo',
-          icon: <Monitor className="w-4 h-4" />
-        },
-        {
-          name: 'Testing',
-          level: 'Principiante',
-          contexts: ['Estudios'],
-          description: 'Unit testing, integration testing',
-          icon: <Code className="w-4 h-4" />
-        }
+        { name: 'Scrum/Kanban', level: 'Intermedio', contexts: ['Trabajo'], description: 'Agile, Jira, Trello', icon: <Wrench className="w-4 h-4" /> },
+        { name: 'REST APIs', level: 'Intermedio', contexts: ['Trabajo', 'Estudios'], description: 'Diseño, Postman, Swagger', icon: <Globe className="w-4 h-4" /> },
+        { name: 'Photoshop', level: 'Intermedio', contexts: ['Trabajo'], description: 'Edición y optimización', icon: <Monitor className="w-4 h-4" /> },
+        { name: 'Figma', level: 'Principiante', contexts: ['Estudios'], description: 'Prototipado e interfaces', icon: <Monitor className="w-4 h-4" /> },
+        { name: 'Testing', level: 'Principiante', contexts: ['Estudios'], description: 'Unit e integración', icon: <Code className="w-4 h-4" /> }
       ]
     }
   ];
 
   useEffect(() => {
-    gsap.fromTo('.skills-container',
-      { opacity: 0, y: 30 },
-      {
-        opacity: 1,
-        y: 0,
-        duration: 0.6,
-        ease: 'power3.out',
-        scrollTrigger: {
-          trigger: '.skills-section',
-          start: 'top 80%',
-          toggleActions: 'play none none reverse'
-        }
-      }
-    );
+    gsap.fromTo('.skills-container', { opacity: 0, y: 30 }, {
+      opacity: 1, y: 0, duration: 0.6, ease: 'power3.out',
+      scrollTrigger: { trigger: '.skills-section', start: 'top 80%', toggleActions: 'play none none reverse' }
+    });
 
-    gsap.fromTo('.notebook-tab',
-      { opacity: 0, x: -20 },
-      {
-        opacity: 1,
-        x: 0,
-        duration: 0.4,
-        stagger: 0.1,
-        ease: 'back.out(1.7)',
-        scrollTrigger: {
-          trigger: '.notebook-container',
-          start: 'top 85%',
-          toggleActions: 'play none none reverse'
-        }
-      }
-    );
+    gsap.fromTo('.notebook-tab', { opacity: 0, x: -20 }, {
+      opacity: 1, x: 0, duration: 0.4, stagger: 0.1, ease: 'back.out(1.7)',
+      scrollTrigger: { trigger: '.notebook-container', start: 'top 85%', toggleActions: 'play none none reverse' }
+    });
   }, []);
 
   const getLevelColor = (level: string) => {
@@ -349,10 +154,7 @@ const Skills: React.FC = () => {
   };
 
   const toggleDetails = (techName: string) => {
-    setShowDetails(prev => ({
-      ...prev,
-      [techName]: !prev[techName]
-    }));
+    setShowDetails(prev => ({ ...prev, [techName]: !prev[techName] }));
   };
 
   const selectedCategoryData = skillCategories.find(cat => cat.id === selectedCategory);
@@ -365,51 +167,47 @@ const Skills: React.FC = () => {
           <p className="text-base sm:text-xl lg:text-2xl text-muted-foreground px-4 sm:px-0">Mis habilidades técnicas organizadas por especialización</p>
         </div>
 
-        <div className={`skills-container ${dbg}`}>
+        <div className={`skills-container ${dbgClass}`}>
           {selectedCategoryData && (
             <div className="relative">
-              {/* Tabs */}
-              <div className={`relative z-20 -mb-px ${dbg}`}>
+              {/* TABS */}
+              <div className="relative z-20 -mb-px" style={dbgTabsStyle}>
                 <div className="flex overflow-x-auto scrollbar-hide">
                   {skillCategories.map((category) => (
                     <button
                       key={category.id}
                       onClick={() => setSelectedCategory(category.id)}
-                      className={`notebook-tab relative group transition-all duration-300 w-full sm:w-auto ${
-                        selectedCategory === category.id ? 'z-30' : 'hover:-translate-y-0.5 z-20'
-                      }`}
+                      className={`notebook-tab relative group transition-all duration-300 w-full sm:w-auto ${selectedCategory === category.id ? 'z-30' : 'hover:-translate-y-0.5 z-20'}`}
                     >
                       <div className={`
                         relative px-3 pb-0 pt-2 sm:px-4 sm:py-2 md:px-6 md:py-3 transition-all duration-300 whitespace-nowrap
-                        ${selectedCategory === category.id 
-                          ? `${category.tabColor} text-white shadow-lg rounded-t-lg border-t border-l border-r border-b-0 border-transparent` 
+                        ${selectedCategory === category.id
+                          ? `${category.tabColor} text-white shadow-lg rounded-t-lg border-t border-l border-r border-b-0 border-transparent`
                           : 'bg-muted/80 text-muted-foreground border-t border-l border-r border-border hover:bg-muted hover:text-foreground rounded-t-lg'
                         }
                       `}>
                         <div className="flex items-center justify-center space-x-1 sm:space-x-2">
                           <span className="hidden sm:inline">
-                            {React.cloneElement(category.icon as React.ReactElement, {
-                              className: 'w-3 sm:w-4 h-3 sm:h-4'
-                            })}
+                            {React.cloneElement(category.icon as React.ReactElement, { className: 'w-3 sm:w-4 h-3 sm:h-4' })}
                           </span>
                           <span className="text-xs sm:text-sm font-medium">{category.title}</span>
                         </div>
-
-                        {/* Eliminado el conector de 1px */}
+                        {/* IMPORTANTE: sin “conector” de 1px */}
                       </div>
                     </button>
                   ))}
                 </div>
               </div>
 
-              {/* Panel */}
-              <div className={`bg-background border-x border-b border-border border-t-0 rounded-b-2xl rounded-t-none p-4 sm:p-8 md:p-10 lg:p-12 shadow-xl relative z-10 ${dbg}`}>
-                {/* Header */}
+              {/* PANEL (fix: sin borde arriba y desplazado -1px en móvil por transform) */}
+              <div
+                className={`bg-background border-x border-b border-border border-t-0 rounded-b-2xl rounded-t-none p-4 sm:p-8 md:p-10 lg:p-12 shadow-xl relative z-10 transform -translate-y-[1px] sm:translate-y-0`}
+                style={dbgPanelStyle}
+              >
+                {/* HEADER */}
                 <div className="flex flex-col sm:flex-row sm:items-center mb-4 sm:mb-8 md:mb-10">
                   <div className={`w-12 sm:w-20 md:w-24 h-12 sm:h-20 md:h-24 rounded-xl bg-gradient-to-br ${selectedCategoryData.color} flex items-center justify-center mb-3 sm:mb-0 sm:mr-6 md:mr-8 shadow-lg mx-auto sm:mx-0`}>
-                    {React.cloneElement(selectedCategoryData.icon as React.ReactElement, {
-                      className: 'w-6 sm:w-10 md:w-12 h-6 sm:h-10 md:h-12 text-white'
-                    })}
+                    {React.cloneElement(selectedCategoryData.icon as React.ReactElement, { className: 'w-6 sm:w-10 md:w-12 h-6 sm:h-10 md:h-12 text-white' })}
                   </div>
                   <div className="flex-1 text-center sm:text-left">
                     <h3 className="text-xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-2 sm:mb-3">{selectedCategoryData.title}</h3>
@@ -417,25 +215,18 @@ const Skills: React.FC = () => {
 
                     <div className="flex flex-wrap gap-1.5 sm:gap-3 justify-center sm:justify-start">
                       {selectedCategoryData.highlights.map((highlight, index) => (
-                        <span
-                          key={index}
-                          className="inline-flex items-center px-2 sm:px-4 py-1 sm:py-2 bg-accent/10 text-accent rounded-full text-xs sm:text-base font-medium"
-                        >
-                          <Star className="w-2.5 sm:w-4 h-2.5 sm:h-4 mr-1 sm:mr-2" />
-                          {highlight}
+                        <span key={index} className="inline-flex items-center px-2 sm:px-4 py-1 sm:py-2 bg-accent/10 text-accent rounded-full text-xs sm:text-base font-medium">
+                          <Star className="w-2.5 sm:w-4 h-2.5 sm:h-4 mr-1 sm:mr-2" /> {highlight}
                         </span>
                       ))}
                     </div>
                   </div>
                 </div>
 
-                {/* Tech grid */}
+                {/* GRID */}
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 sm:gap-6 md:gap-8">
                   {selectedCategoryData.technologies.map((tech, index) => (
-                    <div
-                      key={index}
-                      className="bg-card/50 border border-border rounded-xl p-3 sm:p-6 md:p-8 hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
-                    >
+                    <div key={index} className="bg-card/50 border border-border rounded-xl p-3 sm:p-6 md:p-8 hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
                       <div className="flex items-start justify-between mb-2 sm:mb-4">
                         <div className="flex items-center space-x-2 sm:space-x-4 flex-1 min-w-0">
                           <div className="w-8 sm:w-12 h-8 sm:h-12 bg-muted rounded-lg flex items-center justify-center flex-shrink-0">
@@ -445,7 +236,7 @@ const Skills: React.FC = () => {
                             <h4 className="text-sm sm:text-lg md:text-xl font-bold text-foreground truncate">{tech.name}</h4>
                             <div className="flex flex-col sm:flex-row sm:items-center sm:space-x-3 mt-1 sm:mt-2 gap-1 sm:gap-0">
                               <div className="relative">
-                                <span 
+                                <span
                                   className={`px-2 sm:px-3 py-0.5 sm:py-1.5 rounded-full text-xs sm:text-sm font-medium cursor-help ${getLevelColor(tech.level)}`}
                                   onMouseEnter={() => setHoveredLevel(`${tech.name}-level`)}
                                   onMouseLeave={() => setHoveredLevel(null)}
@@ -462,10 +253,7 @@ const Skills: React.FC = () => {
 
                               <div className="flex flex-wrap gap-1 sm:gap-2 mt-1 sm:mt-0">
                                 {tech.contexts.map((context, contextIndex) => (
-                                  <span 
-                                    key={contextIndex}
-                                    className={`px-1.5 sm:px-3 py-0.5 sm:py-1.5 rounded-full text-xs font-medium border ${getContextColor(context)}`}
-                                  >
+                                  <span key={contextIndex} className={`px-1.5 sm:px-3 py-0.5 sm:py-1.5 rounded-full text-xs font-medium border ${getContextColor(context)}`}>
                                     {context}
                                   </span>
                                 ))}
@@ -473,19 +261,14 @@ const Skills: React.FC = () => {
                             </div>
                           </div>
                         </div>
-                        <button
-                          onClick={() => toggleDetails(tech.name)}
-                          className="p-1.5 sm:p-3 hover:bg-muted rounded-lg transition-colors duration-200 flex-shrink-0"
-                        >
+                        <button onClick={() => toggleDetails(tech.name)} className="p-1.5 sm:p-3 hover:bg-muted rounded-lg transition-colors duration-200 flex-shrink-0">
                           <ChevronRight className={`w-3 sm:w-5 h-3 sm:h-5 text-muted-foreground transition-transform duration-200 ${showDetails[tech.name] ? 'rotate-90' : ''}`} />
                         </button>
                       </div>
 
                       {showDetails[tech.name] && (
                         <div className="mt-2 sm:mt-4 pt-2 sm:pt-4 border-t border-border">
-                          <p className="text-xs sm:text-base text-muted-foreground leading-relaxed">
-                            {tech.description}
-                          </p>
+                          <p className="text-xs sm:text-base text-muted-foreground leading-relaxed">{tech.description}</p>
                         </div>
                       )}
                     </div>
