@@ -365,7 +365,7 @@ const Skills: React.FC = () => {
           {selectedCategoryData && (
             <div className="relative">
               {/* Tabs positioned above content */}
-              <div className="relative z-20">
+              <div className="relative z-20 mb-0">
                 <div className="flex overflow-x-auto scrollbar-hide">
                   {skillCategories.map((category, index) => (
                     <button
@@ -406,7 +406,7 @@ const Skills: React.FC = () => {
               </div>
 
               {/* Main Content Area */}
-              <div className="bg-background/80 backdrop-blur-sm border border-border rounded-b-2xl rounded-t-none p-4 sm:p-8 md:p-10 lg:p-12 shadow-xl relative z-10 -mt-px">
+              <div className="bg-background/80 backdrop-blur-sm border border-border rounded-b-2xl sm:rounded-t-none p-4 sm:p-8 md:p-10 lg:p-12 shadow-xl relative z-10 -mt-0 sm:-mt-px">
               
                 {/* Category Header */}
                 <div className="flex flex-col sm:flex-row sm:items-center mb-4 sm:mb-8 md:mb-10">
