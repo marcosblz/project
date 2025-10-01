@@ -364,50 +364,52 @@ const Skills: React.FC = () => {
           {/* Selected Category Details */}
           {selectedCategoryData && (
             <div className="relative">
-              {/* Tabs positioned above content */}
-              <div className="relative z-20 mb-0 sm:mb-0">
-                <div
-                  className="flex items-stretch overflow-x-auto scrollbar-hide border border-red-500
-                             [&>*]:border [&>*]:border-red-500 [&>*]:h-full"
-                >
-                  {skillCategories.map((category, index) => (
-                    <button
-                      key={category.id}
-                      onClick={() => setSelectedCategory(category.id)}
-                      className={`notebook-tab relative group transition-all duration-300 h-full p-0 w-full border border-red-500 sm:w-auto ${
-                        selectedCategory === category.id
-                          ? 'z-30'
-                          : 'hover:-translate-y-0.5 z-20 border border-red-500'
-                      }`}
-                    >
-                      {/* Tab Background */}
-                      <div className={`
-                        relative h-full flex items-center
-                        px-3 py-2 sm:px-4 sm:py-2 md:px-6 md:py-3 transition-all duration-300 whitespace-nowrap border border-red-500
-                        ${selectedCategory === category.id 
-                          ? `${category.tabColor} text-white shadow-lg rounded-t-lg border-t border-l border-r border-transparent` 
-                          : 'bg-muted/80 text-muted-foreground border-t border-l border-r border-border hover:bg-muted hover:text-foreground rounded-t-lg'
-                        }
-                      `}>
-                        {/* Tab Content */}
-                        <div className="flex items-center justify-center space-x-1 sm:space-x-2">
-                          <span className="hidden sm:inline">
-                            {React.cloneElement(category.icon as React.ReactElement, {
-                              className: "w-3 sm:w-4 h-3 sm:h-4"
-                            })}
-                          </span>
-                          <span className="text-xs sm:text-sm font-medium leading-none">{category.title}</span>
-                        </div>
+             {/* Tabs positioned above content */}
+<div className="relative z-20 mb-0 sm:mb-0">
+  <div
+    className="flex items-stretch overflow-x-auto scrollbar-hide border border-red-500
+               [&>*]:border [&>*]:border-red-500 [&>*]:h-full"
+  >
+    {skillCategories.map((category) => (
+      <button
+        key={category.id}
+        onClick={() => setSelectedCategory(category.id)}
+        className={`notebook-tab relative group transition-all duration-300 h-full p-0 w-full sm:w-auto ${
+          selectedCategory === category.id ? 'z-30' : 'hover:-translate-y-0.5 z-20'
+        }`}
+      >
+        {/* Tab Background */}
+        <div className={`
+          relative h-full flex items-center
+          px-3 pt-2 pb-0 sm:px-4 sm:pt-2 sm:pb-0 md:px-6 md:pt-3 md:pb-0
+          transition-all duration-300 whitespace-nowrap
+          ${selectedCategory === category.id 
+            ? `${category.tabColor} text-white shadow-lg rounded-t-lg border` 
+            : 'bg-muted/80 text-muted-foreground border hover:bg-muted hover:text-foreground rounded-t-lg'
+          }
+        `}>
+          {/* Tab Content */}
+          <div className="flex items-center justify-center space-x-1 sm:space-x-2">
+            <span className="hidden sm:inline">
+              {React.cloneElement(category.icon as React.ReactElement, {
+                className: "w-3 sm:w-4 h-3 sm:h-4"
+              })}
+            </span>
+            <span className="text-xs sm:text-sm font-medium leading-none">
+              {category.title}
+            </span>
+          </div>
 
-                        {/* Active Tab Connector */}
-                        {selectedCategory === category.id && (
-                          <div className="absolute bottom-0 left-0 right-0 h-px bg-background z-40"></div>
-                        )}
-                      </div>
-                    </button>
-                  ))}
-                </div>
-              </div>
+          {/* Active Tab Connector (opcional, puedes quitarlo) */}
+          {selectedCategory === category.id && (
+            <div className="absolute bottom-0 left-0 right-0 h-px bg-background z-40" />
+          )}
+        </div>
+      </button>
+    ))}
+  </div>
+</div>
+
 
               {/* Main Content Area */}
               <div className="bg-background/80 backdrop-blur-sm border border-border rounded-b-2xl rounded-t-none p-4 sm:p-8 md:p-10 lg:p-12 shadow-xl relative z-10 -mt-px">
