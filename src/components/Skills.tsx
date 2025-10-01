@@ -195,45 +195,44 @@ const Skills: React.FC = () => {
           {selectedCategoryData && (
             <div className="relative">
               {/* Tabs positioned above content */}
-              <div className="relative z-20 mb-0 sm:mb-0">
-                <div className="flex items-stretch overflow-x-auto scrollbar-hide h-10 sm:h-auto">
-                  {skillCategories.map((category) => (
-                    <button
-                      key={category.id}
-                      onClick={() => setSelectedCategory(category.id)}
-                      className={`notebook-tab relative group transition-all duration-300 h-full p-0 w-full sm:w-auto ${
-                        selectedCategory === category.id ? 'z-30' : 'hover:-translate-y-0.5 z-20'
-                      }`}
-                    >
-                      {/* Tab Background (misma estética) */}
-                      <div className={`
-                        relative h-full flex items-center -mb-px
-                        px-3 pb-0 pt-2 sm:px-4 sm:py-2 md:px-6 md:py-3
-                        transition-all duration-300 whitespace-nowrap
-                        ${selectedCategory === category.id
-                          ? `${category.tabColor} text-white shadow-lg rounded-t-lg border-t border-l border-r border-transparent`
-                          : 'bg-muted/80 text-muted-foreground border-t border-l border-r border-border hover:bg-muted hover:text-foreground rounded-t-lg'
-                        }
-                      `}>
-                        {/* Tab Content */}
-                        <div className="flex items-center justify-center space-x-1 sm:space-x-2">
-                          <span className="hidden sm:inline">
-                            {React.cloneElement(category.icon as React.ReactElement, {
-                              className: "w-3 sm:w-4 h-3 sm:h-4"
-                            })}
-                          </span>
-                          <span className="text-xs sm:text-sm font-medium">{category.title}</span>
-                        </div>
+<div className="relative z-20 mb-0 sm:mb-0">
+  <div className="flex items-stretch overflow-x-auto scrollbar-hide h-10 sm:h-auto">
+    {skillCategories.map((category) => (
+      <button
+        key={category.id}
+        onClick={() => setSelectedCategory(category.id)}
+        className={`notebook-tab relative group transition-all duration-300 h-full p-0 w-auto ${
+          selectedCategory === category.id ? 'z-30' : 'hover:-translate-y-0.5 z-20'
+        }`}
+      >
+        {/* Tab Background (estética original + fix sin hueco) */}
+        <div className={`
+          relative h-full flex items-center justify-center -mb-px
+          px-3 sm:px-4 md:px-6 py-0 sm:py-2 md:py-3
+          transition-all duration-300 whitespace-nowrap
+          ${selectedCategory === category.id 
+            ? `${category.tabColor} text-white shadow-lg rounded-t-lg border-t border-l border-r border-transparent` 
+            : 'bg-muted/80 text-muted-foreground border-t border-l border-r border-border hover:bg-muted hover:text-foreground rounded-t-lg'
+          }
+        `}>
+          {/* Contenido centrado + icono visible también en móvil */}
+          <div className="flex items-center justify-center gap-2">
+            {React.cloneElement(category.icon as React.ReactElement, {
+              className: "w-4 h-4" // icono siempre visible
+            })}
+            <span className="text-xs sm:text-sm font-medium leading-none">{category.title}</span>
+          </div>
 
-                        {/* Conector activo (no deja hueco por el -mb-px) */}
-                        {selectedCategory === category.id && (
-                          <div className="absolute bottom-0 left-0 right-0 h-px bg-background z-40"></div>
-                        )}
-                      </div>
-                    </button>
-                  ))}
-                </div>
-              </div>
+          {/* Conector activo (no crea rendija por -mb-px) */}
+          {selectedCategory === category.id && (
+            <div className="absolute bottom-0 left-0 right-0 h-px bg-background z-40"></div>
+          )}
+        </div>
+      </button>
+    ))}
+  </div>
+</div>
+
 
               {/* Main Content Area */}
               <div className="bg-background/80 backdrop-blur-sm border border-border rounded-b-2xl rounded-t-none p-4 sm:pexport default Skills;8 md:p-10 lg:p-12 shadow-xl relative z-10 -mt-px">
