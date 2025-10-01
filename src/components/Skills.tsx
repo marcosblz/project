@@ -366,7 +366,7 @@ const Skills: React.FC = () => {
             <div className="relative">
               {/* Tabs positioned above content */}
               <div className="relative z-20 mb-0 sm:mb-0">
-                <div className="flex overflow-x-auto scrollbar-hide">
+                <div className="flex overflow-x-auto scrollbar-hide border border-red-500 [&>*]:border [&>*]:border-red-500">
                   {skillCategories.map((category, index) => (
                     <button
                       key={category.id}
