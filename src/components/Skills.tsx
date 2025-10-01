@@ -366,7 +366,7 @@ const Skills: React.FC = () => {
             <div className="relative">
               {/* Tabs positioned above content */}
               <div className="relative z-20">
-                <div className="flex overflow-x-auto scrollbar-hide mb-0">
+                <div className="flex overflow-x-auto scrollbar-hide">
                   {skillCategories.map((category, index) => (
                     <button
                       key={category.id}
@@ -379,10 +379,10 @@ const Skills: React.FC = () => {
                     >
                       {/* Tab Background */}
                       <div className={`
-                        relative px-3 py-2 sm:px-4 sm:py-2 md:px-6 md:py-3 transition-all duration-300 whitespace-nowrap border-b-0
+                        relative px-3 py-2 sm:px-4 sm:py-2 md:px-6 md:py-3 transition-all duration-300 whitespace-nowrap
                         ${selectedCategory === category.id 
-                          ? `${category.tabColor} text-white shadow-lg rounded-t-lg border-t border-l border-r border-transparent border-b-0` 
-                          : 'bg-muted/80 text-muted-foreground border-t border-l border-r border-border hover:bg-muted hover:text-foreground rounded-t-lg border-b-0'
+                          ? `${category.tabColor} text-white shadow-lg rounded-t-lg border-t border-l border-r border-transparent` 
+                          : 'bg-muted/80 text-muted-foreground border-t border-l border-r border-border hover:bg-muted hover:text-foreground rounded-t-lg'
                         }
                       `}>
                         {/* Tab Content */}
@@ -397,7 +397,7 @@ const Skills: React.FC = () => {
 
                         {/* Active Tab Connector */}
                         {selectedCategory === category.id && (
-                          <div className="absolute -bottom-px left-0 right-0 h-px bg-background z-40"></div>
+                          <div className="absolute bottom-0 left-0 right-0 h-px bg-background z-40"></div>
                         )}
                       </div>
                     </button>
@@ -406,7 +406,7 @@ const Skills: React.FC = () => {
               </div>
 
               {/* Main Content Area */}
-              <div className="bg-background/80 backdrop-blur-sm border border-border rounded-b-2xl rounded-tl-none rounded-tr-none p-4 sm:p-8 md:p-10 lg:p-12 shadow-xl relative z-10 -mt-px">
+              <div className="bg-background/80 backdrop-blur-sm border border-border rounded-b-2xl rounded-t-none p-4 sm:p-8 md:p-10 lg:p-12 shadow-xl relative z-10 -mt-px">
               
                 {/* Category Header */}
                 <div className="flex flex-col sm:flex-row sm:items-center mb-4 sm:mb-8 md:mb-10">
