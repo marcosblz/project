@@ -369,8 +369,10 @@ const Skills: React.FC = () => {
   <div
     className="
       flex items-stretch overflow-x-auto scrollbar-hide
-      border border-red-500 bg-red-500/10          /* ⬅️ PADRE (rojo) */
-      [&>*]:h-full
+      h-12 sm:h-auto                 /* ⬅️ altura fija en móvil */
+      border border-red-500 border-b-0
+      bg-red-500/20                  /* ⬅️ PADRE (rojo) */
+      p-0
     "
   >
     {skillCategories.map((category) => (
@@ -378,26 +380,28 @@ const Skills: React.FC = () => {
         key={category.id}
         onClick={() => setSelectedCategory(category.id)}
         className={`
-          notebook-tab relative group transition-all duration-300 h-full p-0
-          w-full sm:w-auto bg-blue-500/10            /* ⬅️ BUTTON (azul) */
+          notebook-tab relative group transition-all duration-300
+          h-full p-0 w-full sm:w-auto /* ⬅️ el botón llena la altura */
+          bg-blue-500/20              /* ⬅️ BUTTON (azul) */
           ${selectedCategory === category.id ? 'z-30' : 'hover:-translate-y-0.5 z-20'}
         `}
       >
         {/* Tab Background */}
         <div
           className={`
-            relative h-full flex items-center -mb-px
-            px-3 pt-2 pb-0 sm:px-4 sm:pt-2 sm:pb-0 md:px-6 md:pt-3 md:pb-0
-            transition-all duration-300 whitespace-nowrap
-            bg-green-500/10                          /* ⬅️ DIV INTERNO DEL TAB (verde) */
+            relative h-full flex items-center
+            px-3 sm:px-4 md:px-6       /* ⬅️ sin padding vertical */
+            whitespace-nowrap
+            bg-green-500/20            /* ⬅️ DIV INTERNO (verde) */
             ${selectedCategory === category.id 
-              ? `${category.tabColor} text-white shadow-lg rounded-t-lg border`
-              : 'bg-muted/80 text-muted-foreground border hover:bg-muted hover:text-foreground rounded-t-lg'
+              ? `${category.tabColor} text-white shadow-lg rounded-t-lg border-t border-x`
+              : 'bg-muted/80 text-muted-foreground rounded-t-lg border-t border-x hover:bg-muted hover:text-foreground'
             }
           `}
+          /* ⬅️ sin border-bottom para que no cree línea */
         >
           {/* Tab Content */}
-          <div className="flex items-center justify-center space-x-1 sm:space-x-2 bg-yellow-500/10 rounded /* ⬅️ CONTENIDO (amarillo) */">
+          <div className="flex items-center justify-center space-x-1 sm:space-x-2 bg-yellow-500/20 rounded /* ⬅️ CONTENIDO (amarillo) */">
             <span className="hidden sm:inline">
               {React.cloneElement(category.icon as React.ReactElement, {
                 className: "w-3 sm:w-4 h-3 sm:h-4"
@@ -408,10 +412,7 @@ const Skills: React.FC = () => {
             </span>
           </div>
 
-          {/* conector desactivado para depurar el hueco */}
-          {/* {selectedCategory === category.id && (
-            <div className="absolute bottom-0 left-0 right-0 h-px bg-background z-40" />
-          )} */}
+          {/* ⛔ conector eliminado */}
         </div>
       </button>
     ))}
