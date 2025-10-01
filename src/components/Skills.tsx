@@ -371,7 +371,7 @@ const Skills: React.FC = () => {
                     <button
                       key={category.id}
                       onClick={() => setSelectedCategory(category.id)}
-                      className={`notebook-tab relative group transition-all duration-300 w-full sm:w-auto ${
+                      className={`notebook-tab relative group transition-all duration-300 border border-red-500 [&>*]:border [&>*]:border-red-500 w-full sm:w-auto ${
                         selectedCategory === category.id
                           ? 'z-30'
                           : 'hover:-translate-y-0.5 z-20 border border-red-500 [&>*]:border [&>*]:border-red-500'
