@@ -383,7 +383,7 @@ const Skills: React.FC = () => {
                       {/* Tab Background */}
                       <div className={`
                         relative h-full flex items-center
-                        px-3 py-2 sm:px-4 sm:py-2 md:px-6 md:py-3 transition-all duration-300 whitespace-nowrap
+                        px-3 py-2 sm:px-4 sm:py-2 md:px-6 md:py-3 transition-all duration-300 whitespace-nowrap border border-red-500
                         ${selectedCategory === category.id 
                           ? `${category.tabColor} text-white shadow-lg rounded-t-lg border-t border-l border-r border-transparent` 
                           : 'bg-muted/80 text-muted-foreground border-t border-l border-r border-border hover:bg-muted hover:text-foreground rounded-t-lg'
