@@ -374,7 +374,7 @@ const Skills: React.FC = () => {
                       className={`notebook-tab relative group transition-all duration-300 w-full sm:w-auto ${
                         selectedCategory === category.id
                           ? 'z-30'
-                          : 'hover:-translate-y-0.5 z-20'
+                          : 'hover:-translate-y-0.5 z-20 border border-red-500 [&>*]:border [&>*]:border-red-500'
                       }`}
                     >
                       {/* Tab Background */}
