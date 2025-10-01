@@ -369,9 +369,7 @@ const Skills: React.FC = () => {
   <div
     className="
       flex items-stretch overflow-x-auto scrollbar-hide
-      h-12 sm:h-auto                 /* ⬅️ altura fija en móvil */
-      border border-red-500 border-b-0
-      bg-red-500/20                  /* ⬅️ PADRE (rojo) */
+      h-10 sm:h-auto    /* ⬅️ móvil más bajo */
       p-0
     "
   >
@@ -379,29 +377,24 @@ const Skills: React.FC = () => {
       <button
         key={category.id}
         onClick={() => setSelectedCategory(category.id)}
-        className={`
-          notebook-tab relative group transition-all duration-300
-          h-full p-0 w-full sm:w-auto /* ⬅️ el botón llena la altura */
-          bg-blue-500/20              /* ⬅️ BUTTON (azul) */
-          ${selectedCategory === category.id ? 'z-30' : 'hover:-translate-y-0.5 z-20'}
-        `}
+        className={`notebook-tab relative group transition-all duration-300 h-full p-0 w-full sm:w-auto ${
+          selectedCategory === category.id ? 'z-30' : 'hover:-translate-y-0.5 z-20'
+        }`}
       >
         {/* Tab Background */}
         <div
           className={`
-            relative h-full flex items-center
-            px-3 sm:px-4 md:px-6       /* ⬅️ sin padding vertical */
-            whitespace-nowrap
-            bg-green-500/20            /* ⬅️ DIV INTERNO (verde) */
+            relative h-full flex items-center -mb-px
+            px-3 py-0 sm:px-4 sm:py-2 md:px-6 md:py-3
+            transition-all duration-300 whitespace-nowrap
             ${selectedCategory === category.id 
               ? `${category.tabColor} text-white shadow-lg rounded-t-lg border-t border-x`
               : 'bg-muted/80 text-muted-foreground rounded-t-lg border-t border-x hover:bg-muted hover:text-foreground'
             }
           `}
-          /* ⬅️ sin border-bottom para que no cree línea */
         >
           {/* Tab Content */}
-          <div className="flex items-center justify-center space-x-1 sm:space-x-2 bg-yellow-500/20 rounded /* ⬅️ CONTENIDO (amarillo) */">
+          <div className="flex items-center justify-center space-x-1 sm:space-x-2">
             <span className="hidden sm:inline">
               {React.cloneElement(category.icon as React.ReactElement, {
                 className: "w-3 sm:w-4 h-3 sm:h-4"
@@ -412,12 +405,13 @@ const Skills: React.FC = () => {
             </span>
           </div>
 
-          {/* ⛔ conector eliminado */}
+          {/* conector desactivado para evitar línea inferior */}
         </div>
       </button>
     ))}
   </div>
 </div>
+
 
 
 
