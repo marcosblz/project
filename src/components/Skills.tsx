@@ -369,8 +369,7 @@ const Skills: React.FC = () => {
   <div
     className="flex items-stretch overflow-x-auto scrollbar-hide
                border border-red-500
-               [&>*]:border [&>*]:border-red-500 [&>*]:h-full
-               [&_*]:border [&_*]:border-red-500"
+               [&>*]:h-full [&_*]:border [&_*]:border-red-500"
   >
     {skillCategories.map((category) => (
       <button
@@ -382,7 +381,7 @@ const Skills: React.FC = () => {
       >
         {/* Tab Background */}
         <div className={`
-          relative h-full flex items-center
+          relative h-full flex items-center -mb-px
           px-3 pt-2 pb-0 sm:px-4 sm:pt-2 sm:pb-0 md:px-6 md:pt-3 md:pb-0
           transition-all duration-300 whitespace-nowrap
           ${selectedCategory === category.id 
@@ -402,15 +401,14 @@ const Skills: React.FC = () => {
             </span>
           </div>
 
-          {/* Conector (opcional) */}
-          {selectedCategory === category.id && (
-            <div className="absolute bottom-0 left-0 right-0 h-px bg-background z-40" />
-          )}
+          {/* ⛔️ Conector eliminado para quitar la línea de 1px */}
+          {/* (antes: absolute bottom-0 ... h-px bg-background) */}
         </div>
       </button>
     ))}
   </div>
 </div>
+
 
 
 
