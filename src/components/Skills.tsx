@@ -366,20 +366,24 @@ const Skills: React.FC = () => {
             <div className="relative">
               {/* Tabs positioned above content */}
               <div className="relative z-20 mb-0 sm:mb-0">
-                <div className="flex overflow-x-auto scrollbar-hide border border-red-500 [&>*]:border [&>*]:border-red-500">
+                <div
+                  className="flex items-stretch overflow-x-auto scrollbar-hide border border-red-500
+                             [&>*]:border [&>*]:border-red-500 [&>*]:h-full"
+                >
                   {skillCategories.map((category, index) => (
                     <button
                       key={category.id}
                       onClick={() => setSelectedCategory(category.id)}
-                      className={`notebook-tab relative group transition-all duration-300 border border-red-500 [&>*]:border [&>*]:border-red-500 w-full sm:w-auto ${
+                      className={`notebook-tab relative group transition-all duration-300 h-full p-0 w-full sm:w-auto ${
                         selectedCategory === category.id
                           ? 'z-30'
-                          : 'hover:-translate-y-0.5 z-20 border border-red-500 [&>*]:border [&>*]:border-red-500'
+                          : 'hover:-translate-y-0.5 z-20'
                       }`}
                     >
                       {/* Tab Background */}
                       <div className={`
-                        relative px-3 py-2 sm:px-4 sm:py-2 md:px-6 md:py-3 transition-all duration-300 whitespace-nowrap
+                        relative h-full flex items-center
+                        px-3 py-2 sm:px-4 sm:py-2 md:px-6 md:py-3 transition-all duration-300 whitespace-nowrap
                         ${selectedCategory === category.id 
                           ? `${category.tabColor} text-white shadow-lg rounded-t-lg border-t border-l border-r border-transparent` 
                           : 'bg-muted/80 text-muted-foreground border-t border-l border-r border-border hover:bg-muted hover:text-foreground rounded-t-lg'
@@ -392,7 +396,7 @@ const Skills: React.FC = () => {
                               className: "w-3 sm:w-4 h-3 sm:h-4"
                             })}
                           </span>
-                          <span className="text-xs sm:text-sm font-medium">{category.title}</span>
+                          <span className="text-xs sm:text-sm font-medium leading-none">{category.title}</span>
                         </div>
 
                         {/* Active Tab Connector */}
